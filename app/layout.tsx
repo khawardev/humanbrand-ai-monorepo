@@ -4,7 +4,6 @@ import "./globals.css";
 import DesktopHeader from "@/components/header/desktop-header";
 import { Toaster } from "@/components/ui/sonner";
 import { ThemeProvider } from "next-themes";
-import Componentheader from "@/components/comp-584";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -36,8 +35,7 @@ export default function RootLayout({
           enableSystem
         >
 
-          <Componentheader/>
-          {/* <DesktopHeader /> */}
+          <DesktopHeader />
           {children}
           <Toaster />
         </ThemeProvider>

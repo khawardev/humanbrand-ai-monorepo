@@ -5,10 +5,9 @@ import { Drawer } from 'vaul';
 import { Button } from '../ui/button';
 import Link from 'next/link';
 import { cn } from '@/lib/utils';
-import { RepuraiConfig } from '@/config/repurai-config';
+import { AIAGConfig } from '@/config/aiag-config';
 import { usePathname } from 'next/navigation';
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { navigationLinks } from '../comp-584';
 
 export default function MobileHeader() {
     const pathname = usePathname()
@@ -51,16 +50,16 @@ export default function MobileHeader() {
                     <div className="w-full">
                         <ScrollArea className="h-[calc(42vh-8rem)] ">
                             <div className="flex flex-col space-y-2">
-                                {navigationLinks?.map((item: any, index: any) => (
+                                {AIAGConfig.mainNav.map((link: any, index: any) => (
                                     <Link
                                         key={index}
-                                        href={item.href ?? ""}
+                                        href={link.href ?? ""}
                                         className={cn(
                                             "transition-colors py-1 px-3 text-foreground hover:bg-accent rounded-md hover:text-accent-foreground ",
-                                            pathname === item.href ? "text-foreground border bg-accent/80 py-1 px-3 rounded-md" : "text-foreground/60"
+                                            pathname === link.href ? "text-foreground border bg-accent/80 py-1 px-3 rounded-md" : "text-foreground/60"
                                         )}
                                     >
-                                        {item.title}
+                                        {link.title}
                                     </Link>
                                 ))}
                             </div>
