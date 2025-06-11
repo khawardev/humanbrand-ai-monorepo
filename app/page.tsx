@@ -4,10 +4,17 @@ import { CheckboxCard } from "@/components/home/checkbox-card"
 import { FormSection } from "@/components/home/form-section"
 import { Generate } from "@/components/home/generate"
 import { ModelsTabs } from "@/components/home/models-tabs"
-import { audiences, contentTypes, ctas, modelTabs, socialPlatforms, subjects } from "@/config/form-data"
+import { adjustToneAndCreativityData, audiences, contentTypes, ctas, modelTabs, socialPlatforms, subjects } from "@/config/form-data"
 import { Hero } from "@/components/home/hero"
-import { useState, useEffect } from "react"
+import React, { useState, useEffect } from "react"
 import { RadioCard } from "@/components/home/radio-card"
+import { Card, CardContent } from "@/components/ui/card"
+import { FileText, UploadCloud, X } from "lucide-react"
+import { Button } from "@/components/ui/button"
+import { Textarea } from "@/components/ui/textarea"
+import { Label } from "@radix-ui/react-dropdown-menu"
+import { Slider } from "@/components/ui/slider"
+import { PdfFileDropzone } from "@/components/home/PdfFileDropzone"
 
 export default function Home() {
   const [selectedModel, setSelectedModel] = useState<number>(modelTabs[0].id)
@@ -16,6 +23,7 @@ export default function Home() {
   const [selectedContentTypes, setSelectedContentTypes] = useState<number[]>([])
   const [selectedCtas, setSelectedCtas] = useState<number[]>([])
   const [selectedSocialPlatform, setSelectedSocialPlatform] = useState<number | null>(null)
+  const [uploadedPdfs, setUploadedPdfs] = useState<File[]>([]);
 
   const socialPostContentTypeId = contentTypes.find(
     (type) => type.label === "Social Media Post"
@@ -69,6 +77,11 @@ export default function Home() {
     console.log("Draft saved!")
   }
 
+  const handleSubmit = () => {
+    // You can now access the files for submission, e.g., to a form or API
+    console.log("Files to submit:", uploadedPdfs);
+    // Here you would typically use FormData to send files to a server
+  };
   return (
     <main className="overflow-hidden">
       <Hero />
@@ -121,6 +134,39 @@ export default function Home() {
             selectedValues={selectedCtas}
             onSelectionChange={setSelectedCtas}
           />
+        </FormSection>
+
+
+        <FormSection title="Reference Materials (optional)">
+          <PdfFileDropzone
+            files={uploadedPdfs}
+            setFiles={setUploadedPdfs}
+            maxFiles={5} 
+          />
+        </FormSection>
+
+        <FormSection title="Additional Instructions (optional)">
+          <Textarea placeholder="Enter any specific requirements or instructions..." rows={14} />
+        </FormSection>
+
+        <FormSection title="Contextual Awareness (optional)">
+          <Textarea placeholder="Provide relevant background information or context..." rows={49} />
+        </FormSection>
+
+        <FormSection title="Adjust Tone and Creativity">
+          <div className="space-y-8 mt-3">
+            {Object.entries(adjustToneAndCreativityData).map(([key, setting]) => (
+              <div key={key}>
+                <Label className="text-base font-medium">{setting.label}</Label>
+                <Slider defaultValue={[setting.defaultValue]} className="my-4" />
+                <div className="flex justify-between text-xs text-muted-foreground px-1">
+                  {setting.options.map((option, index) => (
+                    <span key={index}>{option}</span>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
         </FormSection>
 
         <Generate onSaveDraft={handleSaveDraft} onGenerate={handleGenerate} />

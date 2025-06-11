@@ -31,7 +31,7 @@ import {
     Check,
     UploadCloud,
     X,
-    RefreshCw, 
+    RefreshCw,
     Linkedin,
     Facebook,
     Youtube,
@@ -100,3 +100,16 @@ export const socialPlatforms = [
     { id: 5, label: "Instagram", Icon: FaInstagram },
     { id: 6, label: "TikTok", Icon: FaTiktok },
 ]
+
+export const adjustToneAndCreativityData = {
+    tone: {
+        label: "Tone",
+        defaultValue: 50,
+        options: ["Casual", "Conversational", "Professional", "Formal", "Academic"],
+    },
+    creativity: {
+        label: "Creativity",
+        defaultValue: 60,
+        options: ["Conservative", "Practical", "Balanced", "Creative", "Innovative"],
+    },
+};
