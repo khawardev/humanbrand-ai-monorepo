@@ -48,7 +48,7 @@ export default function MobileHeader() {
                 <Drawer.Content className="bg-gradient-to-tr from-background/80 to-card/40 p-4 z-50 flex flex-col backdrop-blur-xl dark:from-background/90 dark:to-card/30 border rounded-t-[20px] h-fit fixed bottom-0 left-0 right-0 outline-none">
                     <div aria-hidden className="mx-auto w-12 h-2 flex-shrink-0 rounded-full bg-gray-300 mb-8" />
                     <div className="w-full">
-                        <ScrollArea className="h-[calc(42vh-8rem)] ">
+                        <ScrollArea className="h-[calc(52vh-8rem)] ">
                             <div className="flex flex-col space-y-2">
                                 {AIAGConfig.mainNav.map((link: any, index: any) => (
                                     <Link
@@ -65,7 +65,7 @@ export default function MobileHeader() {
                             </div>
                         </ScrollArea>
                     </div>
-                    <div className=' flex flex-col space-y-2' >
+                    {/* <div className=' flex flex-col space-y-2' >
                         <Link href="/signin">
                             <Button className=' w-full' size={'sm'} variant={'ghost'}>
                                 Sign In
@@ -76,7 +76,7 @@ export default function MobileHeader() {
                                 Register
                             </Button>
                         </Link>
-                    </div>
+                    </div> */}
                 </Drawer.Content>
             </Drawer.Portal>
         </Drawer.Root>

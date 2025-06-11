@@ -62,9 +62,9 @@ export default function page() {
     }
   };
   return (
-    <div className="pb-20" >
+    <div>
       <div className="mb-10">
-        <h1 className="text-4xl font-bold">Sign in to your account</h1>
+        <h1 className="text-4xl font-bold">Sign in to your <br /> account</h1>
       </div>
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>

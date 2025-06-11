@@ -37,12 +37,11 @@ export default function DesktopHeader() {
                         Humanbrand AI
                     </span>
                 </Link>
+                {/* <NavigationMenuList className=" bg-card border text-muted-foreground inline-flex h-9 w-fit items-center justify-center rounded-full p-[3px]"> */}
 
-
-                {/* Middle area */}
-                <div className=' sm:block hidden   ' >
-                    <NavigationMenu>
-                        <NavigationMenuList className=" bg-card border text-muted-foreground inline-flex h-9 w-fit items-center justify-center rounded-full p-[3px]">
+                <div className=' sm:inline-block hidden' >
+                    <NavigationMenu >
+                        <NavigationMenuList className=" bg-transparent border-none text-muted-foreground inline-flex h-9 w-fit items-center justify-center rounded-full p-[3px]">
                             {AIAGConfig.mainNav.map((link: any, index: any) => (
                                 <NavigationMenuItem key={index}>
                                     <NavigationMenuLink

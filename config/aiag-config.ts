@@ -12,6 +12,14 @@ export const AIAGConfig: any = {
       title: "Campaign",
       href: "/campaign",
     },
+    {
+      title: "Sign in",
+      href: "/signin",
+    },
+    {
+      title: "Sign up",
+      href: "/signup",
+    },
   ],
 };
 
