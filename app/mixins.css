@@ -1,0 +1,75 @@
+
+.flex-center {
+  @apply flex justify-center items-center;
+}
+.flex-start {
+  @apply flex justify-start items-start;
+}
+.flex-end {
+  @apply flex justify-end items-center;
+}
+.flex-between {
+  @apply flex justify-between items-center;
+}
+.md-flex-center {
+  @apply md:flex md:justify-center md:items-center;
+}
+.md-flex-between {
+  @apply md:flex md:justify-between md:items-center;
+}
+
+.large-text {
+  @apply md:text-[40px]  text-[50px]  md:leading-[100px] leading-[70px] font-bold;
+}
+
+::-webkit-scrollbar {
+  width: 11px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: hsl(var(--background));
+  border-radius: 20px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--foreground));
+  border-radius: 120px;
+  border: 3px solid hsl(var(--background));
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--foreground));
+}
+
+::-webkit-scrollbar-corner {
+  background: hsl(var(--background));
+}
+
+.space-y10 {
+  @apply md:space-y-0 space-y-10;
+}
+.space-y9 {
+  @apply md:space-y-0 space-y-9;
+}
+.space-y8 {
+  @apply md:space-y-0 space-y-8;
+}
+.space-y7 {
+  @apply md:space-y-0 space-y-7;
+}
+.space-y6 {
+  @apply md:space-y-0 space-y-6;
+}
+.space-y5 {
+  @apply md:space-y-0 space-y-5;
+}
+.space-y4 {
+  @apply md:space-y-0 space-y-4;
+}
+.space-y3 {
+  @apply md:space-y-0 space-y-3;
+}
+.space-y2 {
+  @apply md:space-y-0 space-y-2;
+}
