@@ -8,10 +8,10 @@ export const AIAGConfig: any = {
       title: "Existing",
       href: "/existing",
     },
-    {
-      title: "Campaign",
-      href: "/campaign",
-    },
+    // {
+    //   title: "Campaign",
+    //   href: "/campaign",
+    // },
     {
       title: "Sign in",
       href: "/signin",

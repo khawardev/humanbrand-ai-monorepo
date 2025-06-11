@@ -6,11 +6,8 @@ import { Generate } from "@/components/home/generate"
 import { ModelsTabs } from "@/components/home/models-tabs"
 import { adjustToneAndCreativityData, audiences, contentTypes, ctas, modelTabs, socialPlatforms, subjects } from "@/config/form-data"
 import { Hero } from "@/components/home/hero"
-import React, { useState, useEffect } from "react"
+import React, { useState, useEffect, useRef } from "react"
 import { RadioCard } from "@/components/home/radio-card"
-import { Card, CardContent } from "@/components/ui/card"
-import { FileText, UploadCloud, X } from "lucide-react"
-import { Button } from "@/components/ui/button"
 import { Textarea } from "@/components/ui/textarea"
 import { Label } from "@radix-ui/react-dropdown-menu"
 import { Slider } from "@/components/ui/slider"
@@ -77,22 +74,24 @@ export default function Home() {
     console.log("Draft saved!")
   }
 
-  const handleSubmit = () => {
-    // You can now access the files for submission, e.g., to a form or API
-    console.log("Files to submit:", uploadedPdfs);
-    // Here you would typically use FormData to send files to a server
+  const formRef = useRef<HTMLDivElement>(null);
+
+  const handleScrollToForm = () => {
+    formRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
   return (
     <main className="overflow-hidden">
-      <Hero />
-      <section id="form-start" className="md:px-12 px-4 space-y-10 md:py-22 py-10">
-        <FormSection title="HBAI Models">
-          <ModelsTabs
-            options={modelTabs}
-            selectedValue={selectedModel}
-            onValueChange={setSelectedModel}
-          />
-        </FormSection>
+      <Hero onExploreClick={handleScrollToForm} />
+      <section className="md:px-12 px-4 space-y-10 md:py-22 py-10">
+        <div id="form-start" ref={formRef}>
+          <FormSection title="HBAI Models">
+            <ModelsTabs
+              options={modelTabs}
+              selectedValue={selectedModel}
+              onValueChange={setSelectedModel}
+            />
+          </FormSection>
+        </div>
 
         <FormSection title="Audience(s)">
           <CheckboxCard
@@ -141,7 +140,7 @@ export default function Home() {
           <PdfFileDropzone
             files={uploadedPdfs}
             setFiles={setUploadedPdfs}
-            maxFiles={5} 
+            maxFiles={5}
           />
         </FormSection>
 
