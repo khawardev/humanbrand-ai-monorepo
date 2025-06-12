@@ -29,16 +29,16 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning={true}>
       <body className={`${inter?.className} relative  antialiased`} suppressHydrationWarning={true}>
-        <ThemeProvider
+        {/* <ThemeProvider
           attribute="class"
           defaultTheme="light"
           enableSystem={false}
-        >
+        > */}
 
           <DesktopHeader />
           {children}
           <Toaster />
-        </ThemeProvider>
+        {/* </ThemeProvider> */}
       </body>
     </html>
   );
