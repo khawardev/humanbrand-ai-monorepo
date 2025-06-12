@@ -13,8 +13,8 @@ export const HalfLogo = () => {
 
 export const FullLogo = () => {
     return (
-        <div className={`flex size-20 items-center  justify-center`}>
-            <img src={'https://i.postimg.cc/7h9wfsw1/HB-logo-name-mark-side-black.png'} width={1000} alt={`Logo`}
+        <div className={`flex size-36 items-center  justify-center`}>
+            <img src={'https://i.postimg.cc/yY06gqFK/HB-logo-name-mark-side-black-1.png'} width={1000} alt={`Logo`}
                 className=' cursor-pointer  dark:brightness-0 dark:invert '
             />
         </div>
