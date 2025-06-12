@@ -67,12 +67,12 @@ export default function MobileHeader() {
                         </ScrollArea>
                     </div>
                     <div className=' flex flex-col space-y-2' >
-                        <Link href="/signup">
+                        <Link onClick={() => setOpen(false)} href="/signup">
                             <Button className=' w-full' size={'sm'}>
                                 Register
                             </Button>
                         </Link>
-                        <Link href="/signin">
+                        <Link onClick={() => setOpen(false)} href="/signin">
                             <Button className=' w-full' size={'sm'} variant={'outline'}>
                                 Sign In
                             </Button>
