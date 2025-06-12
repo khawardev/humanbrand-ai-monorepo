@@ -40,8 +40,10 @@ import {
     Rocket,
     GraduationCap,
     TrendingUp,
+    ShoppingBag,
 } from "lucide-react"
-import { FaFacebook, FaInstagram, FaLinkedin, FaTiktok, FaTwitter, FaYoutube } from "react-icons/fa6"
+import { FaBlog, FaFacebook, FaInstagram, FaLinkedin, FaTiktok, FaTwitter, FaYoutube } from "react-icons/fa6"
+import { HiOutlineSpeakerphone } from "react-icons/hi"
 
 export const modelTabs = [
     { id: 1, label: 'Recommended', title: "Recommended " },
@@ -67,12 +69,13 @@ export const subjects = [
 
 export const contentTypes = [
     { id: 1, label: "Social Media Post", Icon: Share2 },
-    { id: 2, label: "Employee Email", Icon: Mail },
-    { id: 3, label: "Newsletter Article", Icon: Newspaper },
-    { id: 4, label: "Press Release", Icon: Newspaper },
-    { id: 5, label: "Video Script", Icon: Clapperboard },
-    { id: 6, label: "Member Event", Icon: CalendarDays },
+    { id: 2, label: "Promotional Email", Icon: Mail },
+    { id: 31, label: "Newsletter Article", Icon: FaBlog },
+    { id: 51, label: "Video Script", Icon: Clapperboard },
+    { id: 61, label: "Member Event", Icon: CalendarDays },
     { id: 7, label: "Whitepaper", Icon: FileText },
+    { id: 3, label: "Employee Email", Icon: Mail },
+    { id: 4, label: "Press Release", Icon: HiOutlineSpeakerphone },
     { id: 8, label: "Executive Speech", Icon: Mic },
     { id: 9, label: "Thought Leadership Article", Icon: Lightbulb },
     { id: 10, label: "Advertising Copy", Icon: BadgeDollarSign },
@@ -87,7 +90,7 @@ export const ctas = [
     { id: 5, label: "Contact AIAG Support", Icon: Headset },
     { id: 6, label: "Schedule Training", Icon: CalendarClock },
     { id: 7, label: "Access AI (AVA)", Icon: Bot },
-    { id: 8, label: "Purchase Standard", Icon: ShoppingBasket },
+    { id: 8, label: "Purchase Standard", Icon: ShoppingBag },
     { id: 9, label: "Follow on Social Media", Icon: Share2 },
     { id: 10, label: "Subscribe to Newsletter", Icon: Rss },
 ]
