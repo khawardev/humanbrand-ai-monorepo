@@ -8,10 +8,13 @@ export const AIAGConfig: any = {
       title: "Existing",
       href: "/existing",
     },
-    // {
-    //   title: "Campaign",
-    //   href: "/campaign",
-    // },
+    {
+      title: "Campaign",
+      href: "/campaign",
+    },
+   
+  ],
+  authNav: [
     {
       title: "Sign in",
       href: "/signin",
@@ -20,6 +23,6 @@ export const AIAGConfig: any = {
       title: "Sign up",
       href: "/signup",
     },
-  ],
+  ]
 };
 

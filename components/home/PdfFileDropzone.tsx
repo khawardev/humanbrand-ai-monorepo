@@ -62,7 +62,7 @@ export function PdfFileDropzone({ files, setFiles, maxFiles = 4 }: PdfFileDropzo
             <div
                 {...getRootProps()}
                 className={`flex flex-col items-center justify-center w-full h-64 border-2 border-dashed hover:border-primary hover:bg-primary/5 rounded-lg cursor-pointer 
-                ${isDragActive ? "border-primary bg-primary/10" : "border-muted hover:border-muted-foreground/50 transition-all ease-in"}`}
+                ${isDragActive ? "border-primary bg-primary/10" : "border hover:border-muted-foreground/50 transition-all ease-in"}`}
             >
                 <input {...getInputProps()} />
                 <MdOutlineFileUpload className="w-12 h-12 text-muted-foreground" />

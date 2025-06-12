@@ -36,7 +36,7 @@ const page = () => {
         <main className="overflow-hidden">
             <Hero onExploreClick={handleScrollToForm} />
 
-            <div className="md:px-12 px-4 space-y-10 md:py-22 py-10">
+            <div className="md:px-42 px-4 space-y-10 md:py-22 py-10">
                 <div id="form-start" ref={formRef}>
                     <FormSection title="HBAI Models">
                         <ModelsTabs

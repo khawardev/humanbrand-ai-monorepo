@@ -30,18 +30,18 @@ export default function DesktopHeader() {
 
     return (
         <header className="border-b ">
-            <div className="flex h-16 items-center justify-between gap-4 px-4 md:px-12">
+            <div className="flex h-16 items-center justify-between gap-4 px-4 md:px-32">
                 <Link href="/" className="flex items-center space-x-1">
-                    <span className=" md:inline-block hidden"><FullLogo /></span> <span className=" md:hidden inline-block "><HalfLogo /></span>
+                    <span className=" md:inline-block hidden"><HalfLogo /></span> <span className=" md:hidden inline-block "><HalfLogo /></span>
                     {/* <span className=" text-[22px]  tracking-tighter   font-extrabold md:inline-block  hidden">
                         Humanbrand AI
                     </span> */}
                 </Link>
                 {/* <NavigationMenuList className=" bg-card border text-muted-foreground inline-flex h-9 w-fit items-center justify-center rounded-full p-[3px]"> */}
-
+                {/* <NavigationMenuList className="bg-transparent border-none text-muted-foreground inline-flex h-9 w-fit items-center justify-center rounded-full p-[3px]"> */}
                 <div className='sm:inline-block hidden'>
                     <NavigationMenu>
-                        <NavigationMenuList className="bg-transparent border-none text-muted-foreground inline-flex h-9 w-fit items-center justify-center rounded-full p-[3px]">
+                        <NavigationMenuList className=" bg-accent border text-muted-foreground inline-flex h-9 w-fit items-center justify-center rounded-full p-[3px]">
                             {AIAGConfig.mainNav.map((link: any, index: number) => (
                                 <NavigationMenuItem key={index}>
                                     <Link href={link.href} passHref>
@@ -57,13 +57,31 @@ export default function DesktopHeader() {
                         </NavigationMenuList>
                     </NavigationMenu>
                 </div>
+
+
+
                 {/* Right side */}
                 <div className="flex  items-center justify-end gap-2">
+
+                    <li className="md:inline-block hidden ">
+                        <Link href="/signin">
+                            <Button size={'sm'} variant={'ghost'}>
+                                Sign In
+                            </Button>
+                        </Link>
+                    </li>
+                    <li className="md:inline-block hidden md:border-r pr-2">
+                        <Link href="/signup">
+                            <Button size={'sm'}>
+                                Register
+                            </Button>
+                        </Link>
+                    </li> 
+
                     <DropdownMenu>
                         <DropdownMenuTrigger asChild>
-                            <Button variant="outline" size={'sm'} className=" ring-0">
+                            <Button variant="outline" size={'icon'} className="ml-2 ring-0">
                                 <Bookmark />
-                                Sessions
                             </Button>
                         </DropdownMenuTrigger>
                         <DropdownMenuContent className="max-w-64" align="end">
@@ -107,6 +125,7 @@ export default function DesktopHeader() {
                             </DropdownMenuItem>
                         </DropdownMenuContent>
                     </DropdownMenu>
+                    
                     <UserMenu />
                     {/* <div className=" pr-2  flex items-center"><UserMenu /></div>
                     <div className=" pl-2 border-l"><ThemeSwitcher /></div> */}

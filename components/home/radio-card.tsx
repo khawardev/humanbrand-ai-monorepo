@@ -8,6 +8,8 @@ type Option = {
     id: number;
     label: string;
     Icon: React.ElementType;
+    color?: string
+
 }
 
 type RadioCardGroupProps = {
@@ -32,20 +34,22 @@ export const RadioCard = ({ options, selectedValue, onSelectionChange, className
         <RadioGroup
             value={selectedValue?.toString() ?? ""}
             onValueChange={(value) => onSelectionChange(value ? parseInt(value, 10) : null)}
-            className={cn("grid md:grid-cols-7 sm:grid-cols-4 grid-cols-2 gap-3", className)}
+            className={cn("grid md:grid-cols-5 sm:grid-cols-4 grid-cols-2 gap-3", className)}
         >
             {options.map((item: Option) => {
                 const elementId = `${idPrefix}-${item.id}`;
                 const isSelected = item.id === selectedValue;
                 const hasSelection = selectedValue !== null;
+                const isprimary = item.color === 'bg-primary/15 border border-primary/50'
 
                 return (
                     <div
                         key={item.id}
                         onClick={() => handleCardClick(item.id)}
                         className={cn(
-                            "border-input has-data-[state=checked]:bg-primary/15 has-data-[state=checked]:border-primary/50 relative flex cursor-pointer flex-col gap-4 rounded-lg border p-4 shadow-xs outline-none transition-opacity",
-                            hasSelection && !isSelected ? "opacity-40" : "opacity-100"
+                            "border-input relative flex cursor-pointer  flex-col gap-4 rounded-lg border p-4 shadow-xs outline-none transition-opacity",
+                            hasSelection && !isSelected ? "opacity-40" : "opacity-100",
+                            isSelected && (isprimary ? item.color : item.color)
                         )}
                     >
                         <div className="flex justify-between gap-2">
@@ -54,7 +58,9 @@ export const RadioCard = ({ options, selectedValue, onSelectionChange, className
                                 value={item.id.toString()}
                                 className="order-1 after:absolute after:inset-0"
                             />
-                            <item.Icon className="opacity-60" size={16} aria-hidden="true" />
+                            <div className={cn("h-9 w-9 rounded-full flex items-center justify-center border-0 border-none ", isprimary ? 'text-primary bg-primary/15' : 'text-pink-600 bg-pink-400/15')}>
+                                <item.Icon className="opacity-60" size={16} aria-hidden="true" />
+                            </div>
                         </div>
                         <Label htmlFor={elementId}>{item.label}</Label>
                     </div>

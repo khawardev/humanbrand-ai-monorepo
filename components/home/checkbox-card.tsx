@@ -8,6 +8,7 @@ type Option = {
     id: number;
     label: string;
     Icon: React.ElementType;
+    color ?:string
 }
 
 type CheckboxCardGroupProps = {
@@ -28,17 +29,18 @@ export const CheckboxCard = ({ options, selectedValues, onSelectionChange }: Che
     }
 
     return (
-        <div className="grid md:grid-cols-7 sm:grid-cols-4 grid-cols-2 gap-3">
+        <div className="grid  sm:grid-cols-4 grid-cols-2 gap-3">
             {options.map((item: Option) => {
                 const isChecked = selectedValues.includes(item.id)
                 const dimOthers = selectedValues.length > 0 && !isChecked
-
+                const isprimary = item.color === 'bg-primary/15 border border-primary/50'
                 return (
                     <div
                         key={`${id}-${item.id}`}
                         className={cn(
-                            "border-input has-data-[state=checked]:bg-primary/15 has-data-[state=checked]:border-primary/50 relative flex cursor-pointer flex-col gap-4 rounded-lg border p-4 shadow-xs outline-none transition-opacity",
-                            dimOthers ? "opacity-40" : "opacity-100"
+                            "border-input relative flex cursor-pointer  flex-col gap-4 rounded-lg border p-4 shadow-xs outline-none transition-opacity",
+                            dimOthers ? "opacity-40" : "opacity-100",
+                            isChecked && (isprimary ? item.color : item.color)
                         )}
                     >
                         <div className="flex justify-between gap-2">
@@ -50,7 +52,10 @@ export const CheckboxCard = ({ options, selectedValues, onSelectionChange }: Che
                                     handleCheckedChange(checked, item.id)
                                 }}
                             />
-                            <item.Icon className="opacity-60" size={16} aria-hidden="true" />
+                            <div className={cn("h-9 w-9 rounded-full flex items-center justify-center border-0 border-none ", isprimary ? 'text-primary bg-primary/15' : 'text-pink-600 bg-pink-400/15')}>
+                                <item.Icon className="opacity-60" size={16} aria-hidden="true" />
+                            </div>
+                            
                         </div>
                         <Label htmlFor={`${id}-${item.id}`}>{item.label}</Label>
                     </div>

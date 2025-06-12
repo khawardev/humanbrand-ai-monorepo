@@ -48,8 +48,8 @@ export default function MobileHeader() {
                 <Drawer.Content className="bg-gradient-to-tr from-background/80 to-card/40 p-4 z-50 flex flex-col backdrop-blur-xl dark:from-background/90 dark:to-card/30 border rounded-t-[20px] h-fit fixed bottom-0 left-0 right-0 outline-none">
                     <div aria-hidden className="mx-auto w-12 h-2 flex-shrink-0 rounded-full bg-gray-300 mb-8" />
                     <div className="w-full">
-                        <ScrollArea className="h-[calc(52vh-8rem)] ">
-                            <div className="flex flex-col space-y-2">
+                        <ScrollArea className="h-[calc(42vh-8rem)] ">
+                            <div className="flex flex-col space-y-2" >
                                 {AIAGConfig.mainNav.map((link: any, index: any) => (
                                     <Link
                                         key={index}
@@ -58,6 +58,7 @@ export default function MobileHeader() {
                                             "transition-colors py-1 px-3 text-foreground hover:bg-accent rounded-md hover:text-accent-foreground ",
                                             pathname === link.href ? "text-foreground border bg-accent/80 py-1 px-3 rounded-md" : "text-foreground/60"
                                         )}
+                                        onClick={() => setOpen(false)}
                                     >
                                         {link.title}
                                     </Link>
@@ -65,18 +66,18 @@ export default function MobileHeader() {
                             </div>
                         </ScrollArea>
                     </div>
-                    {/* <div className=' flex flex-col space-y-2' >
-                        <Link href="/signin">
-                            <Button className=' w-full' size={'sm'} variant={'ghost'}>
-                                Sign In
-                            </Button>
-                        </Link>
+                    <div className=' flex flex-col space-y-2' >
                         <Link href="/signup">
                             <Button className=' w-full' size={'sm'}>
                                 Register
                             </Button>
                         </Link>
-                    </div> */}
+                        <Link href="/signin">
+                            <Button className=' w-full' size={'sm'} variant={'outline'}>
+                                Sign In
+                            </Button>
+                        </Link>
+                    </div> 
                 </Drawer.Content>
             </Drawer.Portal>
         </Drawer.Root>

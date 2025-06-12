@@ -29,7 +29,7 @@ export default function UserMenu() {
         <Button variant="ghost" size={'icon'} className="p-0" >
           <Avatar>
             <AvatarImage src="https://originui.com/avatar.jpg" alt="Profile image" />
-            <AvatarFallback>KK</AvatarFallback>
+            <AvatarFallback>CW</AvatarFallback>
           </Avatar>
         </Button>
       </DropdownMenuTrigger>
@@ -38,10 +38,10 @@ export default function UserMenu() {
           <img src="https://originui.com/avatar.jpg" className=" size-8 rounded-md " alt="" />
           <div className=" flex flex-col" >
             <span className="text-foreground truncate text-sm font-medium">
-              Keith Kennedy
+              Carrie Wright
             </span>
             <span className="text-muted-foreground truncate text-xs font-normal">
-              k.kennedy@originui.com
+              cwright@aiag.org
             </span>
           </div>
         </DropdownMenuLabel>
