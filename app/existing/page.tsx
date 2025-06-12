@@ -33,7 +33,7 @@ const page = () => {
         formRef.current?.scrollIntoView({ behavior: 'smooth' });
     };
     return (
-        <>
+        <main className="overflow-hidden">
             <Hero onExploreClick={handleScrollToForm} />
 
             <div className="md:px-12 px-4 space-y-10 md:py-22 py-10">
@@ -82,7 +82,7 @@ const page = () => {
                 <Generate onSaveDraft={handleSaveDraft} onGenerate={handleGenerate} />
 
             </div>
-        </>
+        </main>
 
     )
 }

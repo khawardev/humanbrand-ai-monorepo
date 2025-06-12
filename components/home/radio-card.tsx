@@ -32,7 +32,7 @@ export const RadioCard = ({ options, selectedValue, onSelectionChange, className
         <RadioGroup
             value={selectedValue?.toString() ?? ""}
             onValueChange={(value) => onSelectionChange(value ? parseInt(value, 10) : null)}
-            className={cn("grid md:grid-cols-6 sm:grid-cols-3 grid-cols-2 gap-3", className)}
+            className={cn("grid md:grid-cols-7 sm:grid-cols-4 grid-cols-2 gap-3", className)}
         >
             {options.map((item: Option) => {
                 const elementId = `${idPrefix}-${item.id}`;
@@ -44,7 +44,7 @@ export const RadioCard = ({ options, selectedValue, onSelectionChange, className
                         key={item.id}
                         onClick={() => handleCardClick(item.id)}
                         className={cn(
-                            "border-input has-data-[state=checked]:bg-accent has-data-[state=checked]:border-primary/50 relative flex cursor-pointer flex-col gap-4 rounded-lg border p-4 shadow-xs outline-none transition-opacity",
+                            "border-input has-data-[state=checked]:bg-primary/15 has-data-[state=checked]:border-primary/50 relative flex cursor-pointer flex-col gap-4 rounded-lg border p-4 shadow-xs outline-none transition-opacity",
                             hasSelection && !isSelected ? "opacity-40" : "opacity-100"
                         )}
                     >

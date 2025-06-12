@@ -31,7 +31,7 @@ export default function RootLayout({
       <body className={`${inter?.className} relative  antialiased`} suppressHydrationWarning={true}>
         <ThemeProvider
           attribute="class"
-          defaultTheme="dark"
+          defaultTheme="light"
           enableSystem
         >
 

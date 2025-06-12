@@ -28,7 +28,7 @@ export const CheckboxCard = ({ options, selectedValues, onSelectionChange }: Che
     }
 
     return (
-        <div className="grid md:grid-cols-6 sm:grid-cols-3 grid-cols-2 gap-3">
+        <div className="grid md:grid-cols-7 sm:grid-cols-4 grid-cols-2 gap-3">
             {options.map((item: Option) => {
                 const isChecked = selectedValues.includes(item.id)
                 const dimOthers = selectedValues.length > 0 && !isChecked
@@ -37,7 +37,7 @@ export const CheckboxCard = ({ options, selectedValues, onSelectionChange }: Che
                     <div
                         key={`${id}-${item.id}`}
                         className={cn(
-                            "border-input has-data-[state=checked]:bg-accent has-data-[state=checked]:border-primary/50 relative flex cursor-pointer flex-col gap-4 rounded-lg border p-4 shadow-xs outline-none transition-opacity",
+                            "border-input has-data-[state=checked]:bg-primary/15 has-data-[state=checked]:border-primary/50 relative flex cursor-pointer flex-col gap-4 rounded-lg border p-4 shadow-xs outline-none transition-opacity",
                             dimOthers ? "opacity-40" : "opacity-100"
                         )}
                     >

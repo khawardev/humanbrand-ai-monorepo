@@ -23,7 +23,7 @@ import {
 import { ThemeSwitcher } from "../ui/theme-switcher"
 import MobileHeader from "./mobile-header"
 import { AIAGConfig } from "@/config/aiag-config"
-import Logo from "@/shared/logo"
+import { FullLogo, HalfLogo } from "@/shared/logo"
 export default function DesktopHeader() {
     const id = useId()
     const pathname = usePathname()
@@ -32,25 +32,26 @@ export default function DesktopHeader() {
         <header className="border-b ">
             <div className="flex h-16 items-center justify-between gap-4 px-4 md:px-12">
                 <Link href="/" className="flex items-center space-x-1">
-                    <Logo />
-                    <span className=" text-[22px]  tracking-tighter   font-extrabold md:inline-block  hidden">
+                    <span className=" md:inline-block hidden"><FullLogo /></span> <span className=" md:hidden inline-block "><HalfLogo /></span>
+                    {/* <span className=" text-[22px]  tracking-tighter   font-extrabold md:inline-block  hidden">
                         Humanbrand AI
-                    </span>
+                    </span> */}
                 </Link>
                 {/* <NavigationMenuList className=" bg-card border text-muted-foreground inline-flex h-9 w-fit items-center justify-center rounded-full p-[3px]"> */}
 
-                <div className=' sm:inline-block hidden' >
-                    <NavigationMenu >
-                        <NavigationMenuList className=" bg-transparent border-none text-muted-foreground inline-flex h-9 w-fit items-center justify-center rounded-full p-[3px]">
-                            {AIAGConfig.mainNav.map((link: any, index: any) => (
+                <div className='sm:inline-block hidden'>
+                    <NavigationMenu>
+                        <NavigationMenuList className="bg-transparent border-none text-muted-foreground inline-flex h-9 w-fit items-center justify-center rounded-full p-[3px]">
+                            {AIAGConfig.mainNav.map((link: any, index: number) => (
                                 <NavigationMenuItem key={index}>
-                                    <NavigationMenuLink
-                                        active={pathname === link.href}
-                                        href={link.href}
-                                        className="text-muted-foreground px-4  rounded-full hover:text-primary py-1 font-medium"
-                                    >
-                                        {link.title}
-                                    </NavigationMenuLink>
+                                    <Link href={link.href} passHref>
+                                        <NavigationMenuLink
+                                            active={pathname === link.href}
+                                            className="text-muted-foreground px-4 rounded-full hover:text-primary py-1 font-medium"
+                                        >
+                                            {link.title}
+                                        </NavigationMenuLink>
+                                    </Link>
                                 </NavigationMenuItem>
                             ))}
                         </NavigationMenuList>
@@ -106,8 +107,9 @@ export default function DesktopHeader() {
                             </DropdownMenuItem>
                         </DropdownMenuContent>
                     </DropdownMenu>
-                    <div className=" pr-2  flex items-center"><UserMenu /></div>
-                    <div className=" pl-2 border-l"><ThemeSwitcher /></div>
+                    <UserMenu />
+                    {/* <div className=" pr-2  flex items-center"><UserMenu /></div>
+                    <div className=" pl-2 border-l"><ThemeSwitcher /></div> */}
                     <div className="sm:hidden block"><MobileHeader /></div>
                 </div>
             </div>

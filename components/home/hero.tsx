@@ -28,7 +28,25 @@ export const Hero = ({ onExploreClick }: { onExploreClick: () => void }) => {
                     </div>
                 </div>
 
-                <div className="perspective-near mt-24 translate-x-12 md:absolute md:-right-6 md:bottom-16 md:left-1/2 md:top-40 md:mt-0 md:translate-x-0">
+                <div className="perspective-near mt-24 translate-x-12 md:absolute md:-right-10 md:bottom-16 md:left-1/2 md:top-40 md:mt-0 md:translate-x-0">
+                        <div className="bg-background border  rounded-lg shadow-foreground/10 ring-foreground/5 relative h-full -translate-y-12 skew-x-6 overflow-hidden  shadow-md ring-1">
+                            {theme.resolvedTheme === 'dark' ? <Image
+                                src="https://i.postimg.cc/jq6nwvYt/Screenshot-6.png"
+                                alt="app screen"
+                                width="2880"
+                                height="1842"
+                                className="object-top-left size-full object-cover"
+                            /> : <Image
+                                src="https://i.postimg.cc/rmwnCfkF/Screenshot-8.png"
+                                alt="app screen"
+                                width="2880"
+                                height="1842"
+                                className="object-top-left size-full object-cover"
+                            />
+                            }
+                        </div>
+                </div>
+                {/* <div className="perspective-near mt-24 translate-x-12 md:absolute md:-right-6 md:bottom-16 md:left-1/2 md:top-40 md:mt-0 md:translate-x-0">
                     <div className="before:border-foreground/5 before:bg-foreground/5 relative h-full before:absolute before:-inset-x-4 before:bottom-7 before:top-0 before:skew-x-6 before:rounded-[calc(var(--radius)+0.5rem)] before:border">
                         <div className="bg-background rounded-2xl shadow-foreground/10 ring-foreground/5 relative h-full -translate-y-12 skew-x-6 overflow-hidden border border-transparent shadow-md ring-1">
 
@@ -46,11 +64,9 @@ export const Hero = ({ onExploreClick }: { onExploreClick: () => void }) => {
                                 className="object-top-left size-full object-cover"
                             />
                             }
-
-
                         </div>
                     </div>
-                </div>
+                </div> */}
             </div>
             <div className="absolute bottom-0 left-0 z-40 w-full h-[30%] bg-gradient-to-b from-transparent to-background"></div>
         </section>

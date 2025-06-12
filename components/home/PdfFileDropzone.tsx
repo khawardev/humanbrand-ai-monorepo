@@ -61,7 +61,7 @@ export function PdfFileDropzone({ files, setFiles, maxFiles = 4 }: PdfFileDropzo
         <div className="flex flex-col items-center w-full">
             <div
                 {...getRootProps()}
-                className={`flex flex-col items-center justify-center w-full h-64 border-2 border-dashed rounded-lg cursor-pointer 
+                className={`flex flex-col items-center justify-center w-full h-64 border-2 border-dashed hover:border-primary hover:bg-primary/5 rounded-lg cursor-pointer 
                 ${isDragActive ? "border-primary bg-primary/10" : "border-muted hover:border-muted-foreground/50 transition-all ease-in"}`}
             >
                 <input {...getInputProps()} />
@@ -77,7 +77,7 @@ export function PdfFileDropzone({ files, setFiles, maxFiles = 4 }: PdfFileDropzo
                 {files.map((file, index) => (
                     <div
                         key={file.name + index}
-                        className="relative flex items-center justify-between p-2 pl-4 border rounded-lg bg-muted/50"
+                        className="relative flex items-center justify-between p-2 pl-4 border rounded-md bg-muted/50"
                     >
                         <div className="flex items-center gap-4 flex-grow min-w-0">
                             <FileText className="h-6 w-6 text-muted-foreground flex-shrink-0" />
