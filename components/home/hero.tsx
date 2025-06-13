@@ -17,7 +17,7 @@ export const Hero = ({ onExploreClick }: { onExploreClick: () => void }) => {
                 <div className="div-center-md">
                     <div className="md:w-1/2">
                         <div>
-                            <h1 className="max-w-md text-balance text-5xl font-medium md:text-6xl">AIAG Content Action Model 3.3</h1>
+                            <h1 className="max-w-md text-balance text-5xl font-medium md:text-6xl">AIAG Content Action Model 25.1</h1>
                             <h5 className="text-muted-foreground my-6 max-w-2xl text-balance text-xl">Select the options needed in each section for the desired content.</h5>
                             {/* <div className="flex items-center gap-3">
                                 <Button onClick={onExploreClick} className="pr-4.5">

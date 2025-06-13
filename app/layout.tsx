@@ -17,7 +17,7 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.repurai.com/"),
-  title: "AIAG content action model 3.3",
+  title: "AIAG content action model 25.1",
   description: "AI that Repurpose Content in Revenue Ready Assets",
 };
 
