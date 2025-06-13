@@ -82,7 +82,7 @@ export default function Home() {
   return (
     <main className="overflow-hidden">
       <Hero onExploreClick={handleScrollToForm} />
-      <section className="md:px-52 px-4 space-y-10 md:py-22 py-10">
+      <section className="div-center-md">
         <div id="form-start" ref={formRef}>
           <FormSection title="HBAI Models">
             <ModelsTabs

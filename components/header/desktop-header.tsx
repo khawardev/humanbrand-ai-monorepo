@@ -30,106 +30,108 @@ export default function DesktopHeader() {
 
     return (
         <header className="border-b ">
-            <div className="flex h-16 items-center justify-between gap-4 px-4 md:px-32">
-                <Link href="/" className="flex items-center space-x-1">
-                    <span className=" md:inline-block hidden"><FullLogo /></span> <span className=" md:hidden inline-block "><FullLogo /></span>
-                    {/* <span className=" text-[22px]  tracking-tighter   font-extrabold md:inline-block  hidden">
+            <div className="sm:w-8/12 w-full mx-auto sm:px-0 px-4">
+                <div className="flex h-16 items-center justify-between gap-4 ">
+                    <Link href="/" className="flex items-center space-x-1">
+                        <span className=" md:inline-block hidden"><FullLogo /></span> <span className=" md:hidden inline-block "><FullLogo /></span>
+                        {/* <span className=" text-[22px]  tracking-tighter   font-extrabold md:inline-block  hidden">
                         Humanbrand AI
                     </span> */}
-                </Link>
-                {/* <NavigationMenuList className=" bg-card border text-muted-foreground inline-flex h-9 w-fit items-center justify-center rounded-full p-[3px]"> */}
-                {/* <NavigationMenuList className="bg-transparent border-none text-muted-foreground inline-flex h-9 w-fit items-center justify-center rounded-full p-[3px]"> */}
-                <div className='sm:inline-block hidden'>
-                    <NavigationMenu>
-                        <NavigationMenuList className=" bg-accent border text-muted-foreground inline-flex h-9 w-fit items-center justify-center rounded-full p-[3px]">
-                            {AIAGConfig.mainNav.map((link: any, index: number) => (
-                                <NavigationMenuItem key={index}>
-                                    <Link href={link.href} passHref>
-                                        <NavigationMenuLink
-                                            active={pathname === link.href}
-                                            className="text-muted-foreground px-4 rounded-full hover:text-primary py-1 font-medium"
-                                        >
-                                            {link.title}
-                                        </NavigationMenuLink>
-                                    </Link>
-                                </NavigationMenuItem>
-                            ))}
-                        </NavigationMenuList>
-                    </NavigationMenu>
-                </div>
+                    </Link>
+                    {/* <NavigationMenuList className=" bg-card border text-muted-foreground inline-flex h-9 w-fit items-center justify-center rounded-full p-[3px]"> */}
+                    {/* <NavigationMenuList className="bg-transparent border-none text-muted-foreground inline-flex h-9 w-fit items-center justify-center rounded-full p-[3px]"> */}
+                    <div className='sm:inline-block hidden'>
+                        <NavigationMenu>
+                            <NavigationMenuList className=" bg-accent border text-muted-foreground inline-flex h-9 w-fit items-center justify-center rounded-full p-[3px]">
+                                {AIAGConfig.mainNav.map((link: any, index: number) => (
+                                    <NavigationMenuItem key={index}>
+                                        <Link href={link.href} passHref>
+                                            <NavigationMenuLink
+                                                active={pathname === link.href}
+                                                className="text-muted-foreground px-4 rounded-full hover:text-primary py-1 font-medium"
+                                            >
+                                                {link.title}
+                                            </NavigationMenuLink>
+                                        </Link>
+                                    </NavigationMenuItem>
+                                ))}
+                            </NavigationMenuList>
+                        </NavigationMenu>
+                    </div>
 
 
 
-                {/* Right side */}
-                <div className="flex  items-center justify-end gap-2">
+                    {/* Right side */}
+                    <div className="flex  items-center justify-end gap-2">
 
-                    <li className="md:inline-block hidden ">
-                        <Link href="/signin">
-                            <Button size={'sm'} variant={'ghost'}>
-                                Sign In
-                            </Button>
-                        </Link>
-                    </li>
-                    <li className="md:inline-block hidden md:border-r pr-2">
-                        <Link href="/signup">
-                            <Button size={'sm'}>
-                                Register
-                            </Button>
-                        </Link>
-                    </li> 
+                        <li className="md:inline-block hidden ">
+                            <Link href="/signin">
+                                <Button size={'sm'} variant={'ghost'}>
+                                    Sign In
+                                </Button>
+                            </Link>
+                        </li>
+                        <li className="md:inline-block hidden md:border-r pr-2">
+                            <Link href="/signup">
+                                <Button size={'sm'}>
+                                    Register
+                                </Button>
+                            </Link>
+                        </li>
 
-                    <DropdownMenu>
-                        <DropdownMenuTrigger asChild>
-                            <Button variant="outline" size={'icon'} className="ml-2 ring-0">
-                                <Bookmark />
-                            </Button>
-                        </DropdownMenuTrigger>
-                        <DropdownMenuContent className="max-w-64" align="end">
-                            <DropdownMenuLabel className="flex gap-2 items-center min-w-0 ">
-                                <div className=" flex flex-col" >
-                                    <span className="text-foreground truncate text-sm font-medium">
-                                        Saved Sessions
-                                    </span>
-                                    <span className="text-muted-foreground truncate text-xs font-normal">
-                                        Your previously saved content sessions.
-                                    </span>
-                                </div>
-                            </DropdownMenuLabel>
-                            <DropdownMenuSeparator />
-                            <DropdownMenuItem>
-                                <div className="flex items-center justify-between  w-full">
-                                    <div className="flex items-center space-x-2">
-                                        <FileText size={16} className="opacity-60" aria-hidden="true" />
-                                        <span>Social Media Post</span>
+                        <DropdownMenu>
+                            <DropdownMenuTrigger asChild>
+                                <Button variant="outline" size={'icon'} className="ml-2 ring-0">
+                                    <Bookmark />
+                                </Button>
+                            </DropdownMenuTrigger>
+                            <DropdownMenuContent className="max-w-64" align="end">
+                                <DropdownMenuLabel className="flex gap-2 items-center min-w-0 ">
+                                    <div className=" flex flex-col" >
+                                        <span className="text-foreground truncate text-sm font-medium">
+                                            Saved Sessions
+                                        </span>
+                                        <span className="text-muted-foreground truncate text-xs font-normal">
+                                            Your previously saved content sessions.
+                                        </span>
                                     </div>
-                                    <span className="text-xs text-muted-foreground">Now</span>
-                                </div>
-                            </DropdownMenuItem>
-                            <DropdownMenuItem>
-                                <div className="flex items-center justify-between w-full">
-                                    <div className="flex items-center space-x-2">
-                                        <FileText size={16} className="opacity-60" aria-hidden="true" />
-                                        <span>Member Email Draft</span>
+                                </DropdownMenuLabel>
+                                <DropdownMenuSeparator />
+                                <DropdownMenuItem>
+                                    <div className="flex items-center justify-between  w-full">
+                                        <div className="flex items-center space-x-2">
+                                            <FileText size={16} className="opacity-60" aria-hidden="true" />
+                                            <span>Social Media Post</span>
+                                        </div>
+                                        <span className="text-xs text-muted-foreground">Now</span>
                                     </div>
-                                    <span className="text-xs text-muted-foreground">2h ago</span>
-                                </div>
-                            </DropdownMenuItem>
-                            <DropdownMenuItem>
-                                <div className="flex items-center justify-between  w-full">
-                                    <div className="flex items-center space-x-2">
-                                        <FileText size={16} className="opacity-60" aria-hidden="true" />
-                                        <span>Press Release</span>
+                                </DropdownMenuItem>
+                                <DropdownMenuItem>
+                                    <div className="flex items-center justify-between w-full">
+                                        <div className="flex items-center space-x-2">
+                                            <FileText size={16} className="opacity-60" aria-hidden="true" />
+                                            <span>Member Email Draft</span>
+                                        </div>
+                                        <span className="text-xs text-muted-foreground">2h ago</span>
                                     </div>
-                                    <span className="text-xs text-muted-foreground">Yesterday</span>
-                                </div>
-                            </DropdownMenuItem>
-                        </DropdownMenuContent>
-                    </DropdownMenu>
-                    
-                    <UserMenu />
-                    {/* <div className=" pr-2  flex items-center"><UserMenu /></div>
+                                </DropdownMenuItem>
+                                <DropdownMenuItem>
+                                    <div className="flex items-center justify-between  w-full">
+                                        <div className="flex items-center space-x-2">
+                                            <FileText size={16} className="opacity-60" aria-hidden="true" />
+                                            <span>Press Release</span>
+                                        </div>
+                                        <span className="text-xs text-muted-foreground">Yesterday</span>
+                                    </div>
+                                </DropdownMenuItem>
+                            </DropdownMenuContent>
+                        </DropdownMenu>
+
+                        <UserMenu />
+                        {/* <div className=" pr-2  flex items-center"><UserMenu /></div>
                     <div className=" pl-2 border-l"><ThemeSwitcher /></div> */}
-                    <div className="sm:hidden block"><MobileHeader /></div>
+                        <div className="sm:hidden block"><MobileHeader /></div>
+                    </div>
                 </div>
             </div>
         </header>

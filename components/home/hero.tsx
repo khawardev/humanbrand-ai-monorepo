@@ -13,8 +13,8 @@ export const Hero = ({ onExploreClick }: { onExploreClick: () => void }) => {
         // <section className="bg-linear-to-b relative to-muted from-background">
 
         <section >
-            <div className=" md:pt-32 pt-22 pb-12">
-                <div className="mx-auto w-full max-w-5xl md:px-12 px-4">
+            <div className="  md:pt-18 pt-10 md:pb-12">
+                <div className="div-center-md">
                     <div className="md:w-1/2">
                         <div>
                             <h1 className="max-w-md text-balance text-5xl font-medium md:text-6xl">AIAG Content Action Model 3.3</h1>
