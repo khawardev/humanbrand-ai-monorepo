@@ -28,14 +28,14 @@ export default function UserMenu() {
       <DropdownMenuTrigger asChild>
         <Button variant="ghost" size={'icon'} className="p-0" >
           <Avatar>
-            <AvatarImage src="https://originui.com/avatar.jpg" alt="Profile image" />
+            <AvatarImage src="https://i.postimg.cc/pX4gQSWX/1721851062033.jpg" alt="Profile image" />
             <AvatarFallback>CW</AvatarFallback>
           </Avatar>
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="max-w-64" align="end">
         <DropdownMenuLabel className="flex gap-2 items-center min-w-0 ">
-          <img src="https://originui.com/avatar.jpg" className=" size-8 rounded-md " alt="" />
+          <img src="https://i.postimg.cc/pX4gQSWX/1721851062033.jpg" className=" size-8 rounded-md " alt="" />
           <div className=" flex flex-col" >
             <span className="text-foreground truncate text-sm font-medium">
               Carrie Wright
