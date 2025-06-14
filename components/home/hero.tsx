@@ -4,6 +4,7 @@ import Link from "next/link"
 import { ChevronDown } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { useTheme } from "next-themes"
+import { AIAG_VERSION } from "@/lib/ai/constants"
 
 export const Hero = () => {
     const theme = useTheme()
@@ -13,16 +14,13 @@ export const Hero = () => {
         // <section className="bg-linear-to-b relative to-muted from-background">
 
         <section >
-            <div className="  md:pt-18 pt-10 md:pb-12">
+            <div className=" md:pb-12">
                 <div className="div-center-md">
                     <div className="md:w-2/3">
                         <div>
                             <h1 className="text-balance  font-extrabold">
-
-                                <span className=" md:flex hidden items-start gap-8"> <Image className=" rounded-full" src={'https://i.postimg.cc/ZYDgZQyF/aiag-logo.jpg'} alt="" width={90} height={90} /> AIAG Content Action Model 25.1</span>
-                                <span className=" md:hidden flex items-start gap-8"> <Image className=" rounded-full" src={'https://i.postimg.cc/ZYDgZQyF/aiag-logo.jpg'} alt="" width={70} height={70} /> AIAG CAM 25.1</span>
-
-                                
+                                <span className=" md:flex hidden items-start gap-8"> <Image className=" rounded-full" src={'https://i.postimg.cc/ZYDgZQyF/aiag-logo.jpg'} alt="" width={90} height={90} /> AIAG Content Action Model {AIAG_VERSION}</span>
+                                <span className=" md:hidden flex items-start gap-8"> <Image className=" rounded-full" src={'https://i.postimg.cc/ZYDgZQyF/aiag-logo.jpg'} alt="" width={70} height={70} /> AIAG CAM {AIAG_VERSION}</span>
                             </h1>
                             <h5 className="text-muted-foreground my-6 max-w-2xl text-balance text-xl">Select the options needed in each section for the desired content.</h5>
                             {/* <div className="flex items-center gap-3">

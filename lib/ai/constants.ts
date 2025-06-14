@@ -1,6 +1,6 @@
 
 
-export const APP_VERSION = "25.1";
+export const AIAG_VERSION = "25.1";
 export const MAX_CHAT_HISTORY_MESSAGES = 20;
 
 // Model Names (User-specified - DO NOT CHANGE PER USER REQUEST)
