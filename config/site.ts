@@ -1,11 +1,7 @@
 export const siteConfig = {
-  name: "Repurai",
-  url: "https://www.repurai.com",
-  description:
-    "All in one platform to build your Personalized YouTube, Twitter and Newletters space, gain valuable insights, and collect realtime data on daily basis.",
-  links: {
-    twitter: "https://twitter.com/repurai",
-  },
+  name: "AIAG Content Action Model 25.1",
+  url: "https://aiag-content-action-model-3-3.vercel.app/",
+  description: "plateform that turn ideas into reality",
 };
 
 export type SiteConfig = typeof siteConfig;

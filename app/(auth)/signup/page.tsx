@@ -4,7 +4,7 @@ import { Alert, AlertTitle } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { signUp } from "@/lib/auth-client";
-import Spinner from "@/shared/spinner";
+import  { ButtonSpinner } from "@/shared/spinner";
 import { AlertCircleIcon } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -122,7 +122,7 @@ export default function page() {
         }
         <div className="flex flex-col gap-3 mt-6">
           <Button disabled={loading} type="submit" className="w-full">
-            {loading ? <Spinner>Signing up...</Spinner> : 'Sign Up'}
+            {loading ? <ButtonSpinner>Signing up...</ButtonSpinner> : 'Sign Up'}
           </Button>
           <Button disabled={loading} variant="outline" className="w-full">
             Signup with Google

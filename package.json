@@ -14,6 +14,8 @@
     "auth:generate": "better-auth generate"
   },
   "dependencies": {
+    "@ai-sdk/google": "^1.2.19",
+    "@ai-sdk/openai": "^1.3.22",
     "@radix-ui/react-alert-dialog": "^1.1.14",
     "@radix-ui/react-avatar": "^1.1.10",
     "@radix-ui/react-checkbox": "^1.3.2",
@@ -38,7 +40,9 @@
     "@radix-ui/react-toggle-group": "^1.1.10",
     "@radix-ui/react-tooltip": "^1.2.7",
     "@radix-ui/themes": "^3.2.1",
+    "ai": "^4.3.16",
     "better-auth": "^1.2.9",
+    "buffer": "^6.0.3",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "dotenv": "^16.5.0",
@@ -48,6 +52,8 @@
     "lucide-react": "^0.514.0",
     "next": "15.3.3",
     "next-themes": "^0.4.6",
+    "pdf2json": "^3.1.6",
+    "pdfjs-dist": "^5.3.31",
     "postgres": "^3.4.7",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",

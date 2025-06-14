@@ -5,7 +5,7 @@ import { ChevronDown } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { useTheme } from "next-themes"
 
-export const Hero = ({ onExploreClick }: { onExploreClick: () => void }) => {
+export const Hero = () => {
     const theme = useTheme()
 
     return (

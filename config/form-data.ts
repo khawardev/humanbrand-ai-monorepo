@@ -1,4 +1,3 @@
-import { CalendarDays, GraduationCap, Rocket, TrendingUp } from "lucide-react";
 import {
     FaAward,
     FaBlog,
@@ -43,8 +42,8 @@ import {
 import { MdRocketLaunch, MdEvent, MdSchool, MdTrendingUp } from "react-icons/md";
 
 export const modelTabs = [
-    { id: 1, label: 'Recommended', title: "Recommended " },
-    { id: 2, label: 'Deeper Thinking', title: "Deep Think " },
+    { id: 1, label: 'recomended', title: "Recommended " },
+    { id: 2, label: 'deepthink', title: "Deep Think " },
 ];
 
 export const audiences = [
@@ -193,22 +192,19 @@ export const campaignElementsData = [
 
 
 
-
-
-
-
-
-
-
 export const adjustToneAndCreativityData = {
     tone: {
         label: "Tone",
-        defaultValue: 50,
+        defaultValue: 3,
+        maxValue: 5,
+        minValue: 0,
         options: ["Casual", "Conversational", "Professional", "Formal", "Academic"],
     },
     creativity: {
         label: "Creativity",
-        defaultValue: 60,
-        options: ["Conservative", "Practical", "Balanced", "Creative", "Innovative"],
+        defaultValue: 0.5,
+        maxValue:1,
+        minValue:0,
+        options: ["Conservative", "Practical", "Balanced", "Creative", "Authoritative"],
     },
 };
