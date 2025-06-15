@@ -27,6 +27,8 @@ export function getNewGenerationPrompts(
                           * Messaging Framework: Draw inspiration from AIAG Messaging Framework (the KB Section 2) for structure and key messages where applicable (e.g., Brand Narrative 2.1, Member Benefits 2.8).
                           * Personas: Consider the 'AIAG PERSONA DEFINITIONS' section in the Knowledge Base. If a defined persona aligns with the 'Target Audience(s)' specified, tailor the content to their characteristics, needs, and goals as described in the KB, particularly using hints from the KB Section 3.11 (Persona-Specific Language).
                           * Output: Output ONLY the final content, directly. Do not include preambles like "Here is the content:" or "Begin Generated Content".`;
+    
+    
 
     const userPrompt = `  ---------------------------------
                           PARAMETERS FOR THIS SPECIFIC TASK
@@ -61,6 +63,26 @@ export function getNewGenerationPrompts(
 
     return { systemPrompt, userPrompt };
 }
+
+
+
+
+export function getImageGenerationPrompt(
+    data: any
+): any {
+    const finalImagePrompt = `Genrate an to the point Prompt for An image representing ${data.selectedSubject || "general AIAG theme"} for ${data.selectedAudiences?.join(', ')}, in a professional and modern style, related to: ${data.contentGenerated}... Please do not include anything extra in the prompt , just genrate the to the point prompt according to the content provided`;
+    return { finalImagePrompt };
+}
+
+
+
+
+
+
+
+
+
+
 
 
 export function getRevisionPrompts(

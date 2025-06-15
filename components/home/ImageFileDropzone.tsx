@@ -1,3 +1,5 @@
+// components/home/ImageFileDropzone.tsx
+
 "use client";
 
 import { useCallback, useEffect } from "react";
@@ -39,13 +41,11 @@ export function ImageFileDropzone({
                 return;
             }
 
-            // Check if adding the new files would exceed the total limit
             if (files.length + acceptedFiles.length > maxFiles) {
                 toast.error(`You can only upload a total of ${maxFiles} files.`);
                 return;
             }
 
-            // Create preview URLs for accepted files
             const newFilesWithPreview = acceptedFiles.map((file) =>
                 Object.assign(file, {
                     preview: URL.createObjectURL(file),
@@ -58,13 +58,11 @@ export function ImageFileDropzone({
     );
 
     const removeFile = (indexToRemove: number) => {
-        // Revoke the object URL to prevent memory leaks
         URL.revokeObjectURL(files[indexToRemove].preview);
         const updatedFiles = files.filter((_, index) => index !== indexToRemove);
         setFiles(updatedFiles);
     };
 
-    // Clean up preview URLs when the component unmounts
     useEffect(() => {
         return () => {
             files.forEach((file) => URL.revokeObjectURL(file.preview));
@@ -86,23 +84,23 @@ export function ImageFileDropzone({
         <div className="flex flex-col items-center w-full gap-4">
             <div
                 {...getRootProps()}
-                className={`flex flex-col items-center justify-center w-full h-64 border-2 border-dashed rounded-lg cursor-pointer transition-colors
+                className={`flex flex-col items-center justify-center w-full h-32 border-2 border-dashed rounded-lg cursor-pointer transition-colors
                           ${isDragActive
                         ? "border-primary bg-primary/10"
                         : "border-border hover:border-primary/50 hover:bg-muted/50"
                     }`}
             >
                 <input {...getInputProps()} />
-                <MdOutlineFileUpload className="w-12 h-12 text-muted-foreground" />
+                <MdOutlineFileUpload className="w-10 h-10 text-muted-foreground" />
                 <p className="mt-2 px-10 text-sm text-center text-muted-foreground">
                     {isDragActive
-                        ? "Drop the images here..."
-                        : `Drag & drop images here, or click to select (Max: ${maxFiles})`}
+                        ? "Drop the image here..."
+                        : `Drag & drop an image, or click to select (Max: ${maxFiles})`}
                 </p>
             </div>
 
             {files.length > 0 && (
-                <div className="flex flex-col gap-4  w-full">
+                <div className="flex flex-col gap-4 w-full">
                     {files.map((file, index) => (
                         <div
                             key={file.name + index}
@@ -113,7 +111,7 @@ export function ImageFileDropzone({
                                     src={file.preview}
                                     alt={file.name}
                                     className="h-12 w-12 object-cover rounded-md flex-shrink-0"
-                                    onLoad={() => URL.revokeObjectURL(file.preview)}
+                                    onLoad={(e) => URL.revokeObjectURL(e.currentTarget.src)}
                                 />
                                 <div className="flex flex-col min-w-0">
                                     <span className="text-sm font-medium text-foreground truncate">
@@ -134,7 +132,6 @@ export function ImageFileDropzone({
                                 <IoClose className="h-4 w-4" />
                             </Button>
                         </div>
-
                     ))}
                 </div>
             )}

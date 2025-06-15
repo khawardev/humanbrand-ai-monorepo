@@ -40,7 +40,7 @@ export function PdfFileDropzone({
             setPdfLoading(true);
             const formData = new FormData();
             formData.append("file", file);
-            const response = await fetch("/api/upload-pdf", {
+            const response = await fetch("/api/parse-pdf", {
                 method: "POST",
                 body: formData,
             });
@@ -91,10 +91,10 @@ export function PdfFileDropzone({
     });
 
     return (
-        <div className="flex flex-col items-center w-full">
+        <div className="w-full">
             <div
                 {...getRootProps()}
-                className={`flex flex-col items-center justify-center w-full h-64 border-2 border-dashed rounded-lg cursor-pointer transition-colors
+                className={`flex flex-col items-center justify-center w-full h-32 border-2 border-dashed rounded-lg cursor-pointer transition-colors
                           ${isDragActive
                         ? "border-primary bg-primary/10"
                         : "border-border hover:border-primary/50 hover:bg-muted/50"

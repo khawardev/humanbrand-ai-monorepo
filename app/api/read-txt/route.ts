@@ -1,10 +1,13 @@
-// pages/api/read-txt.ts
+import { NextResponse } from 'next/server';
 import fs from 'fs';
 import path from 'path';
-import type { NextApiRequest, NextApiResponse } from 'next';
 
-export default function handler(req: NextApiRequest, res: NextApiResponse) {
-  const filePath = path.join(process.cwd(), '../../../knowledge_base.txt');
-  const content = fs.readFileSync(filePath, 'utf-8');
-  res.status(200).send(content);
+export async function GET() {
+  try {
+    const filePath = path.join(process.cwd(), 'knowledge_base.txt');
+    const content = fs.readFileSync(filePath, 'utf-8');
+    return new NextResponse(content, { status: 200 });
+  } catch (error: any) {
+    return new NextResponse('Error reading file: ' + error.message, { status: 500 });
+  }
 }

@@ -1,19 +1,21 @@
 'use client'
 
 import { FormSection } from "@/components/home/form-section"
-import { Generate } from "@/components/home/generate"
 import { adjustToneAndCreativityData, modelTabs } from "@/config/form-data"
 import React, { useRef, useState } from "react"
 import { Textarea } from "@/components/ui/textarea"
 import { Label } from "@radix-ui/react-dropdown-menu"
 import { Slider } from "@/components/ui/slider"
-import { PdfFileDropzone } from "@/components/home/PdfFileDropzone"
 import { Hero } from "@/components/home/hero"
 import { ModelsTabs } from "@/components/home/models-tabs"
+import { Generate } from "@/components/home/generate"
+import { PdfFileDropzone } from "@/components/home/PdfFileDropzone"
 
 const page = () => {
     const [selectedModel, setSelectedModel] = useState<number>(modelTabs[0].id)
     const [uploadedPdfs, setUploadedPdfs] = useState<File[]>([]);
+    const [referenceMaterial, setReferenceMaterial] = useState<string>()
+    const [generatingContent, setgeneratingContent] = useState(false);
 
     const handleGenerate = () => {
         const selectedModelObj = modelTabs.find((tab) => tab.id === selectedModel)
@@ -34,7 +36,7 @@ const page = () => {
     };
     return (
         <main className="overflow-hidden">
-            <Hero onExploreClick={handleScrollToForm} />
+            <Hero />
 
             <div className="div-center-md">
                 <div id="form-start" ref={formRef}>
@@ -47,14 +49,15 @@ const page = () => {
                     </FormSection>
                 </div>
 
+               
                 <FormSection title="Existing Content">
                     <PdfFileDropzone
                         files={uploadedPdfs}
                         setFiles={setUploadedPdfs}
-                        maxFiles={5}
+                        setReferenceMaterial={setReferenceMaterial}
+                        maxFiles={1}
                     />
                 </FormSection>
-
                 <FormSection title="Additional Instructions (optional)">
                     <Textarea placeholder="Enter any specific requirements or instructions..." rows={14} />
                 </FormSection>
@@ -78,9 +81,7 @@ const page = () => {
                         ))}
                     </div>
                 </FormSection>
-
-                <Generate onSaveDraft={handleSaveDraft} onGenerate={handleGenerate} />
-
+                <Generate generatingContent={generatingContent} onSaveDraft={handleSaveDraft} onGenerate={handleGenerate} />
             </div>
         </main>
 

@@ -1,3 +1,4 @@
+@import url("./markdown.css");
 @import url("https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap");
 @import url("./typography.css");
 @import url("./mixins.css");
@@ -133,6 +134,7 @@
 
   body {
     @apply bg-background text-foreground;
+    /* font-size: 1.95em; */
   }
 
   .div-center {

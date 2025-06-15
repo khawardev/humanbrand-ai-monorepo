@@ -24,6 +24,8 @@ export default function Home() {
     const [selectedCtas, setSelectedCtas] = useState<number[]>([])
     const [selectedSocialPlatform, setSelectedSocialPlatform] = useState<number | null>(null)
     const [uploadedPdfs, setUploadedPdfs] = useState<File[]>([]);
+    const [generatingContent, setgeneratingContent] = useState(false);
+    const [referenceMaterial, setReferenceMaterial] = useState<string>()
 
     const socialPostContentTypeId = contentTypes.find(
         (type) => type.label === "Social Media Post"
@@ -84,7 +86,7 @@ export default function Home() {
     };
     return (
         <main className="overflow-hidden">
-            <Hero onExploreClick={handleScrollToForm} />
+            <Hero />
             <section className="div-center-md">
                 <div id="form-start" ref={formRef}>
                     <FormSection title="HBAI Models">
@@ -143,14 +145,15 @@ export default function Home() {
                 </FormSection>
               
 
+             
                 <FormSection title="Reference Materials (optional)">
                     <PdfFileDropzone
                         files={uploadedPdfs}
                         setFiles={setUploadedPdfs}
-                        maxFiles={5}
+                        setReferenceMaterial={setReferenceMaterial}
+                        maxFiles={1}
                     />
                 </FormSection>
-
                 <FormSection title="Additional Instructions (optional)">
                     <Textarea placeholder="Enter any specific requirements or instructions..." rows={14} />
                 </FormSection>
@@ -174,8 +177,8 @@ export default function Home() {
                         ))}
                     </div>
                 </FormSection>
+                <Generate generatingContent={generatingContent} onSaveDraft={handleSaveDraft} onGenerate={handleGenerate} />
 
-                <Generate onSaveDraft={handleSaveDraft} onGenerate={handleGenerate} />
             </section>
         </main>
     )

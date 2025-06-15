@@ -4,6 +4,8 @@ import { CheckboxCard } from "@/components/home/checkbox-card"
 import { FormSection } from "@/components/home/form-section"
 import { Generate } from "@/components/home/generate"
 import { ModelsTabs } from "@/components/home/models-tabs"
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 import { adjustToneAndCreativityData, audiences, contentTypes, ctas, modelTabs, socialPlatforms, subjects } from "@/config/form-data"
 import { Hero } from "@/components/home/hero"
 import React, { useState, useEffect, useRef } from "react"
@@ -12,7 +14,7 @@ import { Textarea } from "@/components/ui/textarea"
 import { Label } from "@radix-ui/react-dropdown-menu"
 import { Slider } from "@/components/ui/slider"
 import { PdfFileDropzone } from "@/components/home/PdfFileDropzone"
-import { getNewGenerationPrompts } from "@/lib/ai/prompts"
+import { getImageGenerationPrompt, getNewGenerationPrompts } from "@/lib/ai/prompts"
 import { knowledgeBaseContent } from "@/lib/ai/knowledge_base"
 import { generateNewContent } from "@/actions/generate-new-content"
 import { Separator } from "@/components/ui/separator"
@@ -41,6 +43,15 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog"
 import { DialogClose, DialogDescription } from "@radix-ui/react-dialog"
+import { cleanAndFixMarkdown, cleanAndFlattenBullets, cleanAndFlattenBulletsGoogle, cleanMarkdown } from "@/lib/cleanMarkdown"
+import { SampleMarkdown } from "@/config/sample-markdown"
+import { PiFilePdfFill } from "react-icons/pi"
+import { TbPdf } from "react-icons/tb"
+import { BiSolidFilePdf } from "react-icons/bi";
+import { FaImage } from "react-icons/fa6"
+import { RiImageAiFill } from "react-icons/ri";
+import { RiChatSmileAiFill } from "react-icons/ri";
+
 export default function Home() {
   const [selectedModel, setSelectedModel] = useState<number>(modelTabs[0].id)
   const [selectedAudiences, setSelectedAudiences] = useState<number[]>([])
@@ -55,10 +66,8 @@ export default function Home() {
   const [toneValue, setToneValue] = useState<number>(adjustToneAndCreativityData.tone.defaultValue);
   const [creativityValue, setCreativityValue] = useState<number>(adjustToneAndCreativityData.creativity.defaultValue);
   const [generatingContent, setgeneratingContent] = useState(false);
-  const [contentGenerated, setcontentGenerated] = useState(false);
-  const [imagePrompt, setImagePrompt] = useState(
-    'An image representing Supply Chain for Members, Prospective Members, in a professional and modern style, related to: Ready to streamline supply chain complexity and drive measurable results? Join peers across the industry—register now for our upcoming AIAG supply chain event or webinar....'
-  )
+  const [contentGenerated, setcontentGenerated] = useState<string>("");
+  const [imagePrompt, setImagePrompt] = useState('')
   const socialPostContentTypeId = contentTypes.find(
     (type) => type.label === "Social Media Post"
   )?.id
@@ -109,7 +118,6 @@ export default function Home() {
     }
 
 
-    console.log(promptdata, '===== promptdata');
 
 
     const { systemPrompt, userPrompt } = getNewGenerationPrompts(promptdata);
@@ -123,16 +131,31 @@ export default function Home() {
     }
 
 
-    console.log(generatedata, '===== promptdata');
-
 
     const contentGenerated = await generateNewContent(generatedata)
-    setcontentGenerated(contentGenerated.generatedText);
+
+  
+    const imagePromptdata = {
+      selectedAudiences: selectedAudienceLabels,
+      selectedSubject: selectedSubjectObj?.label || "",
+      contentGenerated: contentGenerated,
+    }
+  
+    const { finalImagePrompt } = getImageGenerationPrompt(imagePromptdata);
+
+    const generateimagepromptdata = {
+      modelAlias: selectedModelObj?.label,
+      temperature: creativityValue,
+      userPrompt: finalImagePrompt
+    }
+
+    const imagepromptGenerated = await generateNewContent(generateimagepromptdata)
+    const cleanedMarkdown = cleanAndFlattenBulletsGoogle(contentGenerated.generatedText);
+
+    setImagePrompt(imagepromptGenerated.generatedText);
+    setcontentGenerated(cleanedMarkdown);
     setgeneratingContent(false)
 
-
-
-    console.log(contentGenerated, '===== contentGenerated');
   }
 
   const handleSaveDraft = () => {
@@ -265,8 +288,7 @@ export default function Home() {
         </FormSection>
 
         <Generate generatingContent={generatingContent} onSaveDraft={handleSaveDraft} onGenerate={handleGenerate} />
-
-
+        
         {generatingContent ? <>
           <Separator />
           <LineSpinner>Generating Content..</LineSpinner>
@@ -275,7 +297,7 @@ export default function Home() {
             <Separator />
             <main className=" space-y-10">
               <section>
-                <h4 className=" text-muted-foreground">Generated Content</h4>
+                <h4 >Generated Content</h4>
                 <div className=" md:flex items-center justify-between">
                   <h3 className=" mb-4">AIAG - Content Generation Details ({AIAG_VERSION})</h3>
                   <div className=" flex justify-end">
@@ -294,8 +316,7 @@ export default function Home() {
                           <Download size={16} className="opacity-60" aria-hidden="true" />
                           <span>Download .txt</span>
                         </DropdownMenuItem>
-
-
+                       
                         <Dialog>
                           <DialogTrigger asChild>
                             <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
@@ -316,13 +337,15 @@ export default function Home() {
                                 />
                               </div>
                             </section>
-
                             <DialogFooter>
                               <Button size={'sm'}>Submit</Button>
                             </DialogFooter>
                           </DialogContent>
                         </Dialog>
-
+                        <DropdownMenuItem>
+                          <BiSolidFilePdf size={16} className="opacity-60" aria-hidden="true" />
+                          <span>Download .pdf</span>
+                        </DropdownMenuItem>
                         <Dialog>
                           <DialogTrigger asChild>
                             <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
@@ -361,13 +384,17 @@ export default function Home() {
                   </div>
                 </div>
                 <Separator className="mb-4" />
-                {contentGenerated}
+                <div className="prose prose-neutral  max-w-none markdown-body space-y-3  dark:prose-invert">
+                  <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                    {contentGenerated}  
+                  </ReactMarkdown>
+                </div>
                 <Separator className="mt-4" />
               </section>
               <section className="space-y-4 flex flex-col">
                 <div >
-                  <h4>Generate Accompanying Image</h4>
-                  <Label className=" text-sm text-muted-foreground mt-4 ml-1 mb-2">Image Prompt:</Label>
+                  <h4 className=" flex  items-center gap-2"> <span className="bg-primary/15 border border-primary/50 p-2.5 rounded-full text-primary"><RiImageAiFill size={30} /></span>Generate <br /> Accompanying Image</h4>
+                  <Label className=" text-sm text-muted-foreground mt-4  mb-2">Image Prompt:</Label>
                   <Textarea
                     value={imagePrompt}
                     onChange={(e) => setImagePrompt(e.target.value)}
@@ -375,7 +402,7 @@ export default function Home() {
                     rows={6}
                   />
                 </div>
-                <Label className=" text-sm text-muted-foreground mt-4 ml-1 mb-2">Upload Reference Image(s) (Optional):</Label>
+                <Label className=" text-sm text-muted-foreground mt-4  mb-2">Upload Reference Image(s) (Optional):</Label>
                 <ImageFileDropzone
                   files={uploadedFiles}
                   setFiles={setUploadedFiles}
@@ -386,8 +413,8 @@ export default function Home() {
               <Separator />
 
               <section className="space-y-4 flex flex-col">
-                <h4>Chat About The Original Generated Content</h4>
-                <Label className=" text-sm text-muted-foreground ml-1 mb-2">Upload docs for chat (Optional)</Label>
+                <h4 className=" flex  items-center gap-2"> <span className="bg-primary/15 border border-primary/50 p-2.5 rounded-full text-primary"><RiChatSmileAiFill size={30} /></span> Chat with <br /> Generated Content</h4>
+                <Label className=" text-sm text-muted-foreground  mb-2">Upload docs for chat (Optional)</Label>
                 <PdfFileDropzone
                   files={uploadedPdfs}
                   setFiles={setUploadedPdfs}
