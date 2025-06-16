@@ -1,273 +1,72 @@
 'use client'
 
-import React, { useState, useEffect } from "react"
+import React from "react"
 import { Hero } from "@/components/home/hero"
 import { Generate } from "@/components/home/generate"
 import { Separator } from "@/components/ui/separator"
 import { LineSpinner } from "@/shared/spinner"
-import { modelTabs, contentTypes, subjects, audiences, ctas, socialPlatforms, adjustToneAndCreativityData } from "@/config/form-data"
-import { getNewGenerationPrompts, getImageGenerationPrompt, getRevisionPrompts, getHyperRelevancePrompts } from "@/lib/ai/prompts"
-import { knowledgeBaseContent } from "@/lib/ai/knowledge_base"
-import { generateNewContent } from "@/actions/generate-new-content"
-import { cleanAndFlattenBulletsGoogle } from "@/lib/cleanMarkdown"
-import { FormContainer } from "@/components/GenrationComponents/form-container"
 import { GeneratedContent } from "@/components/GenrationComponents/generated-content"
+import { useNewContentGenerator } from "@/hooks/useNewContentGenerator"
 
-export default function Home() {
-  const [selectedModel, setSelectedModel] = useState<number>(modelTabs[0].id)
-  const [selectedAudiences, setSelectedAudiences] = useState<number[]>([])
-  const [selectedSubjects, setSelectedSubjects] = useState<number | null>(null)
-  const [selectedContentTypes, setSelectedContentTypes] = useState<number[]>([])
-  const [selectedCtas, setSelectedCtas] = useState<number[]>([])
-  const [selectedSocialPlatform, setSelectedSocialPlatform] = useState<number | null>(null)
-  const [uploadedPdfs, setUploadedPdfs] = useState<File[]>([])
-  const [referenceMaterial, setReferenceMaterial] = useState<string>()
-  const [additionalInstructions, setAdditionalInstructions] = useState("")
-  const [contextualAwareness, setContextualAwareness] = useState("")
-  const [toneValue, setToneValue] = useState<number>(adjustToneAndCreativityData.tone.defaultValue)
-  const [creativityValue, setCreativityValue] = useState<number>(adjustToneAndCreativityData.creativity.defaultValue)
+import { ModelsSection } from "@/components/GeminiStudioComponents/ModelsSection"
+import { AudienceSection } from "@/components/GeminiStudioComponents/AudienceSection"
+import { SubjectSection } from "@/components/GeminiStudioComponents/SubjectSection"
+import { ContentTypeSection } from "@/components/GeminiStudioComponents/ContentTypeSection"
+import { SocialPlatformSection } from "@/components/GeminiStudioComponents/SocialPlatformSection"
+import { CtaSection } from "@/components/GeminiStudioComponents/CtaSection"
+import { ReferenceMaterialSection } from "@/components/GeminiStudioComponents/ReferenceMaterialSection"
+import { AdditionalInstructionsSection } from "@/components/GeminiStudioComponents/AdditionalInstructionsSection"
+import { ContextualAwarenessSection } from "@/components/GeminiStudioComponents/ContextualAwarenessSection"
+import { ToneAndCreativitySection } from "@/components/GeminiStudioComponents/ToneAndCreativitySection"
 
-  const [generatingContent, setGeneratingContent] = useState(false)
-  const [contentGenerated, setContentGenerated] = useState<string>("")
-  const [imagePrompt, setImagePrompt] = useState('')
-  const [feedback, setFeedback] = useState('');
+export default function HomePage() {
+  const {
+    selectedModel, setSelectedModel,
+    selectedAudiences, setSelectedAudiences,
+    selectedSubjects, setSelectedSubjects,
+    selectedContentTypes, setSelectedContentTypes,
+    isSocialPostSelected,
+    selectedSocialPlatform, setSelectedSocialPlatform,
+    selectedCtas, setSelectedCtas,
+    uploadedPdfs, setUploadedPdfs,
+    setReferenceMaterial,
+    additionalInstructions, setAdditionalInstructions,
+    contextualAwareness, setContextualAwareness,
+    toneValue, setToneValue,
+    creativityValue, setCreativityValue,
+    generatingContent,
+    contentGenerated,
+    imagePrompt,
+    feedback, setFeedback,
+    generatingPersona,
+    personaGeneratedContent,
+    personasText, setpersonasText,
+    setuploadedPersonaFileData,
+    handleAdaptPersona,
+    isGenerateDisabled,
+    selectedModelObj,
+    handleGenerate,
+    handleRevise
+  } = useNewContentGenerator()
 
-  const [generatingPersona, setgeneratingPersona] = useState(false)
-  const [personaGeneratedContent, setPersonaGeneratedContent] = useState<string>("")
-  const [personasText, setpersonasText] = useState("")
-  const [uploadedPersonaFileData, setuploadedPersonaFileData] = useState(false)
-
-
-  const socialPostContentTypeId = contentTypes.find(
-    (type) => type.label === "Social Media Post"
-  )?.id
-
-  const isSocialPostSelected =
-    socialPostContentTypeId !== undefined &&
-    selectedContentTypes.includes(socialPostContentTypeId)
-
-  useEffect(() => {
-    if (!isSocialPostSelected) {
-      setSelectedSocialPlatform(null)
-    }
-  }, [isSocialPostSelected, selectedContentTypes])
-
-  const isGenerateDisabled =
-    selectedAudiences.length === 0 ||
-    selectedSubjects === null ||
-    selectedContentTypes.length === 0 ||
-    selectedCtas.length === 0 ||
-    (isSocialPostSelected && selectedSocialPlatform === null);
-  const selectedModelObj = modelTabs.find((tab) => tab.id === selectedModel)
-
-
-  const handleGenerate = async () => {
-    if (isGenerateDisabled) return;
-
-    setGeneratingContent(true)
-    setContentGenerated("")
-    setImagePrompt("")
-
-    const selectedModelObj = modelTabs.find((tab) => tab.id === selectedModel)
-    const selectedAudienceLabels = audiences.filter((a) => selectedAudiences.includes(a.id)).map((a) => a.label)
-    const selectedSubjectObj = subjects.find((s) => s.id === selectedSubjects)
-    const selectedContentTypeLabels = contentTypes.filter((c) => selectedContentTypes.includes(c.id)).map((c) => c.label)
-    const selectedCtaLabels = ctas.filter((c) => selectedCtas.includes(c.id)).map((c) => c.label)
-    const selectedSocialPlatformObj = socialPlatforms.find((p) => p.id === selectedSocialPlatform)
-
-    const promptData = {
-      selectedAudiences: selectedAudienceLabels,
-      selectedSubject: selectedSubjectObj?.label || "",
-      selectedContentTypes: selectedContentTypeLabels,
-      selectedCtas: selectedCtaLabels,
-      selectedSocialPlatform: selectedSocialPlatformObj?.label || "",
-      userUploadedContent: referenceMaterial || '',
-      additionalInstructions: additionalInstructions || '',
-      contextualAwareness: contextualAwareness || '',
-      knowledgeBaseContent: knowledgeBaseContent,
-      selectedtone: toneValue,
-    }
-
-    const { systemPrompt, userPrompt } = getNewGenerationPrompts(promptData)
-
-    const generateData = {
-      modelAlias: selectedModelObj?.label,
-      temperature: creativityValue,
-      systemPrompt,
-      userPrompt,
-    }
-
-    const generatedResult = await generateNewContent(generateData)
-    const cleanedMarkdown = cleanAndFlattenBulletsGoogle(generatedResult.generatedText)
-    setContentGenerated(cleanedMarkdown)
-
-    const imagePromptData = {
-      selectedAudiences: selectedAudienceLabels,
-      selectedSubject: selectedSubjectObj?.label || "",
-      contentGenerated: cleanedMarkdown,
-    }
-
-    const { finalImagePrompt } = getImageGenerationPrompt(imagePromptData)
-    const imagePromptGenerated = await generateNewContent({
-      modelAlias: selectedModelObj?.label,
-      temperature: creativityValue,
-      userPrompt: finalImagePrompt,
-    })
-
-    setImagePrompt(imagePromptGenerated.generatedText)
-    setGeneratingContent(false)
-  }
-
-  const handleRevise = async () => {
-    if (isGenerateDisabled) return;
-
-    setGeneratingContent(true)
-    setContentGenerated("")
-    setPersonaGeneratedContent("")
-    setImagePrompt("")
-
-    const selectedModelObj = modelTabs.find((tab) => tab.id === selectedModel)
-    const selectedAudienceLabels = audiences.filter((a) => selectedAudiences.includes(a.id)).map((a) => a.label)
-    const selectedSubjectObj = subjects.find((s) => s.id === selectedSubjects)
-    const selectedContentTypeLabels = contentTypes.filter((c) => selectedContentTypes.includes(c.id)).map((c) => c.label)
-    const selectedCtaLabels = ctas.filter((c) => selectedCtas.includes(c.id)).map((c) => c.label)
-    const selectedSocialPlatformObj = socialPlatforms.find((p) => p.id === selectedSocialPlatform)
-
-    const revisepromptData = {
-      selectedAudiences: selectedAudienceLabels,
-      selectedSubject: selectedSubjectObj?.label || "",
-      selectedContentTypes: selectedContentTypeLabels,
-      selectedCtas: selectedCtaLabels,
-      selectedSocialPlatform: selectedSocialPlatformObj?.label || "",
-      additionalInstructions: additionalInstructions || '',
-      knowledgeBaseContent: knowledgeBaseContent,
-      revisionInstructions: feedback,
-      originalContent: contentGenerated,
-    }
-
-    const { systemPrompt, userPrompt } = getRevisionPrompts(revisepromptData)
-
-    const generateRevisedData = {
-      modelAlias: selectedModelObj?.label,
-      temperature: creativityValue,
-      systemPrompt,
-      userPrompt,
-    }
-
-    const generatedRevisedResult = await generateNewContent(generateRevisedData)
-    const cleanedMarkdown = cleanAndFlattenBulletsGoogle(generatedRevisedResult.generatedText)
-    setContentGenerated(cleanedMarkdown)
-
-    const imagePromptData = {
-      selectedAudiences: selectedAudienceLabels,
-      selectedSubject: selectedSubjectObj?.label || "",
-      contentGenerated: cleanedMarkdown,
-    }
-
-    const { finalImagePrompt } = getImageGenerationPrompt(imagePromptData)
-    const imagePromptGenerated = await generateNewContent({
-      modelAlias: selectedModelObj?.label,
-      temperature: creativityValue,
-      userPrompt: finalImagePrompt,
-    })
-
-    setImagePrompt(imagePromptGenerated.generatedText)
-    setFeedback('');
-    setGeneratingContent(false)
-  }
-
-  const handleAdaptPersona = async () => {
-    if (isGenerateDisabled) return;
-    setgeneratingPersona(true)
-
-    const selectedModelObj = modelTabs.find((tab) => tab.id === selectedModel)
-    const personapromptData = {
-      originalContent: contentGenerated,
-      personasText: personasText,
-      uploadedFilesData: uploadedPersonaFileData,
-      knowledgeBaseContent: knowledgeBaseContent,
-
-    }
-
-    const { systemPrompt, userPrompt } = getHyperRelevancePrompts(personapromptData)
-
-    const generatePersonaData = {
-      modelAlias: selectedModelObj?.label,
-      temperature: creativityValue,
-      systemPrompt,
-      userPrompt,
-    }
-
-    const generatedPersonaResult = await generateNewContent(generatePersonaData)
-    const cleanedMarkdown = cleanAndFlattenBulletsGoogle(generatedPersonaResult.generatedText)
-    setPersonaGeneratedContent(cleanedMarkdown)
-    setgeneratingPersona(false)
-  }
-
-
-
-  const handleGenerateChat = async () => {
-    if (isGenerateDisabled) return;
-    setgeneratingPersona(true)
-
-    const selectedModelObj = modelTabs.find((tab) => tab.id === selectedModel)
-    const personapromptData = {
-      originalContent: contentGenerated,
-      personasText: personasText,
-      uploadedFilesData: uploadedPersonaFileData,
-      knowledgeBaseContent: knowledgeBaseContent,
-
-    }
-
-    const { systemPrompt, userPrompt } = getHyperRelevancePrompts(personapromptData)
-
-    const generatePersonaData = {
-      modelAlias: selectedModelObj?.label,
-      temperature: creativityValue,
-      systemPrompt,
-      userPrompt,
-    }
-
-    const generatedPersonaResult = await generateNewContent(generatePersonaData)
-    const cleanedMarkdown = cleanAndFlattenBulletsGoogle(generatedPersonaResult.generatedText)
-    setPersonaGeneratedContent(cleanedMarkdown)
-    setgeneratingPersona(false)
-  }
-
-  const handleSaveDraft = () => {
-    console.log("Draft saved!")
-  }
+  const handleSaveDraft = () => console.log("Draft saved!")
 
   return (
     <main className="overflow-hidden pt-14">
       <Hero />
       <section className="div-center-md">
-        <FormContainer
-          selectedModel={selectedModel}
-          setSelectedModel={setSelectedModel}
-          selectedAudiences={selectedAudiences}
-          setSelectedAudiences={setSelectedAudiences}
-          selectedSubjects={selectedSubjects}
-          setSelectedSubjects={setSelectedSubjects}
-          selectedContentTypes={selectedContentTypes}
-          setSelectedContentTypes={setSelectedContentTypes}
-          isSocialPostSelected={isSocialPostSelected}
-          selectedSocialPlatform={selectedSocialPlatform}
-          setSelectedSocialPlatform={setSelectedSocialPlatform}
-          selectedCtas={selectedCtas}
-          setSelectedCtas={setSelectedCtas}
-          uploadedPdfs={uploadedPdfs}
-          setUploadedPdfs={setUploadedPdfs}
-          setReferenceMaterial={setReferenceMaterial}
-          additionalInstructions={additionalInstructions}
-          setAdditionalInstructions={setAdditionalInstructions}
-          contextualAwareness={contextualAwareness}
-          setContextualAwareness={setContextualAwareness}
-          toneValue={toneValue}
-          setToneValue={setToneValue}
-          creativityValue={creativityValue}
-          setCreativityValue={setCreativityValue}
-        />
+        <ModelsSection title={'HBAI Models'} selectedValue={selectedModel} onValueChange={setSelectedModel} />
+        <AudienceSection title={'Audience(s)'} selectedValues={selectedAudiences} onSelectionChange={setSelectedAudiences} />
+        <SubjectSection title={'Subject focus'} selectedValue={selectedSubjects} onSelectionChange={setSelectedSubjects} />
+        <ContentTypeSection title={'Content Type(s)'} selectedValues={selectedContentTypes} onSelectionChange={setSelectedContentTypes} />
+        {isSocialPostSelected && (
+          <SocialPlatformSection title={'Social Platform'} selectedValue={selectedSocialPlatform} onSelectionChange={setSelectedSocialPlatform} />
+        )}
+        <CtaSection title={'Call to Action(s)'} selectedValues={selectedCtas} onSelectionChange={setSelectedCtas} />
+        <ReferenceMaterialSection title={'Reference Materials (optional)'} files={uploadedPdfs} setFiles={setUploadedPdfs} setReferenceMaterial={setReferenceMaterial} />
+        <AdditionalInstructionsSection title={'Additional Instructions (optional)'} value={additionalInstructions} onChange={setAdditionalInstructions} />
+        <ContextualAwarenessSection title={'Contextual Awareness (optional)'} value={contextualAwareness} onChange={setContextualAwareness} />
+        <ToneAndCreativitySection title={'Adjust Tone and Creativity'} toneValue={toneValue} setToneValue={setToneValue} creativityValue={creativityValue} setCreativityValue={setCreativityValue} />
 
         <Generate
           generatingContent={generatingContent}
@@ -284,26 +83,21 @@ export default function Home() {
         )}
 
         {!generatingContent && contentGenerated && (
-          <>
-            <GeneratedContent
-              handleRevise={handleRevise}
-              feedback={feedback}
-              setFeedback={setFeedback}
-              content={contentGenerated}
-              imagePrompt={imagePrompt}
-
-              generatingPersona={generatingPersona}
-              personaGeneratedContent={personaGeneratedContent}
-
-              setpersonasText={setpersonasText}
-              setuploadedPersonaFileData={setuploadedPersonaFileData}
-              handleAdaptPersona={handleAdaptPersona}
-              personasText={personasText}
-
-              modelAlias={selectedModelObj?.label}
-              temperature={creativityValue}
-            />
-          </>
+          <GeneratedContent
+            handleRevise={handleRevise}
+            feedback={feedback}
+            setFeedback={setFeedback}
+            content={contentGenerated}
+            imagePrompt={imagePrompt}
+            generatingPersona={generatingPersona}
+            personaGeneratedContent={personaGeneratedContent}
+            setpersonasText={setpersonasText}
+            setuploadedPersonaFileData={setuploadedPersonaFileData}
+            handleAdaptPersona={handleAdaptPersona}
+            personasText={personasText}
+            modelAlias={selectedModelObj?.label}
+            temperature={creativityValue}
+          />
         )}
       </section>
     </main>

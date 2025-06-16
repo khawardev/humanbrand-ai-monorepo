@@ -184,6 +184,53 @@ export function getChatSystemPrompt({
 }
 
 
+export function getExistingContentPrompts(
+    data: any
+): { systemPrompt: string; userPrompt: string } {
+    const tone = `User selected tone level: ${data.selectedtone} (1=Casual, 2=Conversational, 3=Professional, 4=Formal, 5=Academic). Use this to guide your choice and application of a suitable tone from the KB Section 3.3.`;
+    const contextualAwareness = data.contextualAwareness ? `**Contextual Awareness Input (User-provided):**\n${data.contextualAwareness}\n\n` : "**Contextual Awareness Input (User-provided):**\n*(User did not provide specific context input for this revision.)*\n\n";
+
+    const systemPrompt = `**Act as a sophisticated AIAG content strategist and editor, adhering strictly to the provided AIAG Knowledge Base & Content Generation Guide (hereafter "the KB").**
+                          Your Goal: Revise, enhance, or repurpose the provided existing content to be insightful, engaging, high-quality, and 100% aligned with AIAG's brand identity, voice, and strategic objectives as defined in the KB.
+                          ------------------------------
+                          AIAG KNOWLEDGE BASE (THE KB) CONTEXT & MANDATORY INSTRUCTIONS
+                          ------------------------------
+                          * Foundation: Ground ALL revised content in AIAG's Brand Platform (the KB Section 1: especially Purpose 1.1, Vision 1.2, Mission 1.3, and Core Values 1.4).
+                          * AIAG Core Voice (Mandatory): Your writing MUST consistently embody all four voice characteristics: ${AIAG_CORE_VOICE} (the KB Section 3.2).
+                          * Tone Adaptation: Apply an appropriate adaptive tone from the KB Section 3.3 based on the user's instructions and tone selection.
+                          * ${tone}
+                          * Critical Constraints (Non-Negotiable): ${AIAG_CRITICAL_CONSTRAINTS}
+                          * Lexicon & Style: Naturally integrate language and narrative devices described in the KB Section 3 (e.g., Sections 3.8, 3.9, 3.11).
+                          * Messaging Framework: Draw inspiration from AIAG Messaging Framework (the KB Section 2) for structure and key messages where applicable.
+                          * Output: Output ONLY the final, revised content, directly. Do not include preambles like "Here is the revised content:" or "Begin Generated Content".`;
+
+    const userPrompt = `  ---------------------------------
+                          PARAMETERS FOR THIS REVISION TASK
+                          ---------------------------------
+                          * Additional User Instructions: ${data.additionalInstructions || 'None. Rely on the KB and the existing content.'}
+                          ${contextualAwareness}
+                          ------------------------------------------------------
+                          REQUIREMENTS CHECKLIST (Mandatory for Output Generation)
+                          ------------------------------------------------------
+                          * [ ] KB Alignment: The revised content is fully aligned with the KB Sections 1 & 2.
+                          * [ ] Voice Injected: All AIAG Core Voice characteristics (the KB Section 3.2) are now present in the revision.
+                          * [ ] Tone Applied: The requested tone has been correctly applied to the content.
+                          * [ ] Constraints Met: All Critical Constraints have been upheld.
+                          * [ ] Instructions Followed: The revision directly addresses the user's instructions.
+                          * [ ] Quality Improved: The output is clearer, more insightful, and better organized than the original.
+                          ------------------------------
+                          PROVIDED MATERIALS
+                          ------------------------------
+                          ### Full AIAG Knowledge Base (Primary Reference):
+                          ${data.knowledgeBaseContent || KNOWLEDGE_BASE_FALLBACK}
+                          
+                          ### User-Uploaded Reference Documents (Secondary Context, if provided by user for this generation):
+                          ${data.userUploadedContent || USER_UPLOADED_FALLBACK}
+                          ---
+                           Generate the content now based on all instructions.`;
+
+    return { systemPrompt, userPrompt };
+}
 
 
 

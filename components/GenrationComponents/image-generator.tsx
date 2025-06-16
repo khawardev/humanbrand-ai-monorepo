@@ -131,12 +131,16 @@ export function ImageGenerator({ imagePrompt }: ImageGeneratorProps) {
                             </DropdownMenuContent>
                         </DropdownMenu>
                     </div>
-                    <img
-                        src={generatedImageUrl}
-                        alt={hasUploadedImage ? "AI edited image" : "AI generated image"}
-                        className="w-full max-w-xl border rounded-2xl shadow-lg"
-                        style={{ aspectRatio: 'auto', objectFit: 'contain' }}
-                    />
+                    <section className="flex flex-col md:flex-row items-center p-1 gap-8 justify-between">
+                        <div className="w-full md:w-1/2  flex justify-center items-center">
+                            <img
+                                src={generatedImageUrl}
+                                alt={hasUploadedImage ? "AI edited image" : "AI generated image"}
+                                className="max-w-full max-h-[80vh] rounded-2xl shadow-lg border border-border ring-border ring-offset-background/80 ring-1 ring-offset-4 object-contain"
+                            />
+                        </div>
+                    </section>
+
                 </div>
             )}
         </section>
