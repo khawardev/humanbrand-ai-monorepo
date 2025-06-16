@@ -15,19 +15,16 @@ import { BiSolidFilePdf } from "react-icons/bi";
 // import jsPDF from "jspdf";
 // import html2canvas from "html2canvas";
 import { ReviseDialog } from "./revise-dialog";
-import { AdaptDialog } from "./adapt-dialog";
+import { toast } from "sonner";
+import { PersonaDialog } from "./persona/persona-dialog";
 
-interface ContentActionsProps {
-    content: string;
-    contentRef: React.RefObject<HTMLDivElement>;
-}
-
-export function ContentActions({ content, contentRef }: ContentActionsProps) {
+export function ContentActions({ content, handleRevise, feedback, setFeedback, setpersonasText, personasText , setuploadedPersonaFileData, handleAdaptPersona }: any) {
     const [isReviseOpen, setReviseOpen] = useState(false);
     const [isAdaptOpen, setAdaptOpen] = useState(false);
 
     const handleCopy = () => {
         navigator.clipboard.writeText(content);
+        toast.success("Content copied to clipboard!");
     };
 
     const handleDownloadTxt = () => {
@@ -72,8 +69,22 @@ export function ContentActions({ content, contentRef }: ContentActionsProps) {
                 </DropdownMenuContent>
             </DropdownMenu>
 
-            <ReviseDialog isOpen={isReviseOpen} onOpenChange={setReviseOpen} />
-            <AdaptDialog isOpen={isAdaptOpen} onOpenChange={setAdaptOpen} />
+            <ReviseDialog
+                handleRevise={handleRevise}
+                feedback={feedback}
+                setFeedback={setFeedback}
+                isOpen={isReviseOpen}
+                onOpenChange={setReviseOpen}
+            />
+            
+            <PersonaDialog
+                isOpen={isAdaptOpen}
+                onOpenChange={setAdaptOpen}
+                setpersonasText={setpersonasText}
+                personasText={personasText}
+                setuploadedPersonaFileData={setuploadedPersonaFileData}
+                handleAdaptPersona={handleAdaptPersona}
+            />
         </>
     );
 }

@@ -18,19 +18,15 @@ interface AdaptDialogProps {
     onOpenChange: (isOpen: boolean) => void;
 }
 
-export function AdaptDialog({ isOpen, onOpenChange }: AdaptDialogProps) {
-    const [personaDescription, setPersonaDescription] = useState('');
+export function PersonaDialog({ isOpen, onOpenChange, setpersonasText, setuploadedPersonaFileData, handleAdaptPersona, personasText  }: any) {
     const [uploadedPdfs, setUploadedPdfs] = useState<File[]>([]);
     const [referenceMaterial, setReferenceMaterial] = useState<string>();
 
     const handleSubmit = () => {
-        console.log("Adaptation submitted:", {
-            personaDescription,
-            referenceMaterial: referenceMaterial ? 'PDF material provided' : 'No PDF material'
-        });
-        // Here you would trigger the adaptation API call
+        handleAdaptPersona()
+
+        setpersonasText("")
         onOpenChange(false);
-        setPersonaDescription('');
         setUploadedPdfs([]);
         setReferenceMaterial(undefined);
     };
@@ -38,12 +34,13 @@ export function AdaptDialog({ isOpen, onOpenChange }: AdaptDialogProps) {
     return (
         <Dialog open={isOpen} onOpenChange={onOpenChange}>
             <DialogContent className="sm:max-w-3xl">
-                <section >
+                <section>
                     <span className=" font-semibold text-accent-foreground tracking-tight">Adapt Content for Hyper Relevance</span>
-                    <Label className=" text-sm text-muted-foreground  mb-2">Describe Target Persona(s):</Label>                        <Textarea
+                    <Label className=" text-sm text-muted-foreground  mb-2">Describe Target Persona(s):</Label>
+                    <Textarea
                         id="persona-description"
-                        value={personaDescription}
-                        onChange={(e) => setPersonaDescription(e.target.value)}
+                        value={personasText}
+                        onChange={(e) => setpersonasText(e.target.value)}
                         placeholder="e.g. Quality Manager at a Tier 1 automotive supplier..."
                         rows={6}
                     />
@@ -51,12 +48,12 @@ export function AdaptDialog({ isOpen, onOpenChange }: AdaptDialogProps) {
                     <PdfFileDropzone
                         files={uploadedPdfs}
                         setFiles={setUploadedPdfs}
-                        setReferenceMaterial={setReferenceMaterial}
+                        setReferenceMaterial={setuploadedPersonaFileData}
                         maxFiles={1}
                     />
                 </section>
                 <DialogFooter>
-                    <Button size={'sm'} onClick={handleSubmit} disabled={!personaDescription.trim()}>Submit</Button>
+                    <Button size={'sm'} onClick={handleSubmit} disabled={!personasText.trim()}>Generate</Button>
                 </DialogFooter>
             </DialogContent>
         </Dialog>

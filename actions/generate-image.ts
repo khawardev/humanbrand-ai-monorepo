@@ -8,9 +8,20 @@ const openai = new OpenAI({
     apiKey: process.env.OPENAI_API_KEY,
 });
 
+interface ImageGenerationResult {
+    success: boolean;
+    imageUrl?: string;
+    error?: string;
+}
+
+// Helper function to convert base64 to data URL
+function base64ToDataUrl(base64: string, format: string = 'png'): string {
+    return `data:image/${format};base64,${base64}`;
+}
+
 export async function generateImageAction(
     formData: FormData
-): Promise<{ success: boolean; imageUrl?: string; error?: string }> {
+): Promise<ImageGenerationResult> {
     const prompt = formData.get('prompt') as string;
     const imageFile = formData.get('image') as File | null;
 
@@ -20,37 +31,46 @@ export async function generateImageAction(
 
     try {
         if (imageFile) {
-            // Case 1: Generate a variation of an uploaded image
-            const response:any = await openai.images.createVariation({
+            // Case 1: Edit existing image with prompt using gpt-image-1
+            const response:any = await openai.images.edit({
+                model: "gpt-image-1",
                 image: imageFile,
-                n: 1,
-                size: '1024x1024',
-                model: 'dall-e-2',
-            });
-
-            const imageUrl = response && response?.data[0]?.url;
-            if (!imageUrl) {
-                throw new Error('Image variation generation failed to return a URL.');
-            }
-            return { success: true, imageUrl };
-        } else {
-            // Case 2: Generate a new image from a text prompt
-            const response: any = await openai.images.generate({
-                model: "dall-e-3",
                 prompt: prompt,
-                size: '1024x1024',
-                quality: 'standard',
                 n: 1,
+                size: '1024x1024',
+                quality: 'high'
             });
 
-            const imageUrl = response?.data[0]?.url;
-            if (!imageUrl) {
-                throw new Error('Image generation failed to return a URL.');
+            const base64Image = response.data[0]?.b64_json;
+            if (!base64Image) {
+                throw new Error('Image editing failed to return base64 data.');
             }
+
+            // Convert base64 to data URL since gpt-image-1 returns base64
+            const imageUrl = base64ToDataUrl(base64Image, 'png');
+            return { success: true, imageUrl };
+
+        } else {
+            // Case 2: Generate new image from text prompt using gpt-image-1
+            const response: any = await openai.images.generate({
+                model: "gpt-image-1",
+                prompt: prompt,
+                n: 1,
+                size: '1024x1024',
+                quality: 'high'
+            });
+
+            const base64Image = response.data[0]?.b64_json;
+            if (!base64Image) {
+                throw new Error('Image generation failed to return base64 data.');
+            }
+
+            // Convert base64 to data URL since gpt-image-1 returns base64
+            const imageUrl = base64ToDataUrl(base64Image, 'png');
             return { success: true, imageUrl };
         }
     } catch (error) {
-        console.error('Image generation failed:', error);
+        console.error('GPT-Image-1 generation failed:', error);
         const errorMessage = error instanceof Error ? error.message : String(error);
         return {
             success: false,

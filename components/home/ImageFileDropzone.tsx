@@ -14,7 +14,7 @@ interface FileWithPreview extends File {
 }
 
 type ImageFileDropzoneProps = {
-    files: FileWithPreview[];
+    files: any[];
     setFiles: (files: FileWithPreview[]) => void;
     maxFiles?: number;
 };

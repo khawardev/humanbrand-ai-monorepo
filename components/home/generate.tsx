@@ -10,11 +10,11 @@ type FormActionsProps = {
 
 export const Generate = ({ onSaveDraft, onGenerate, generatingContent, isDisabled }: FormActionsProps) => {
     return (
-        <div className="flex justify-end space-x-3">
-            <Button variant="ghost" size="sm" disabled={generatingContent || isDisabled} onClick={onSaveDraft}>
+        <div className="flex justify-end space-x-3 mb-12">
+            {/* <Button variant="ghost" size="sm" disabled={generatingContent || isDisabled} onClick={onSaveDraft}>
                 Save Draft
-            </Button>
-            <Button size="sm" disabled={generatingContent || isDisabled} onClick={onGenerate}>
+            </Button> */}
+            <Button size="sm"  disabled={generatingContent || isDisabled} onClick={onGenerate}>
                 {generatingContent ? <ButtonSpinner>Generating</ButtonSpinner> : 'Generate'}
             </Button>
         </div>
