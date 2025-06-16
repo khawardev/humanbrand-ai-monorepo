@@ -20,7 +20,7 @@ export const Spinner = () => {
 export const LineSpinner = ({ children }: { children: ReactNode }) => {
   return (
     <div className='flex items-center gap-2 text-muted-foreground text-sm '>
-      <LuLoaderCircle className="size-3 animate-spin" /> {children}
+      <LuLoaderCircle className="size-3 inline-block animate-spin" /> {children}
     </div>
   )
 }

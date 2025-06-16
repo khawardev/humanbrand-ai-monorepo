@@ -67,8 +67,8 @@ export function ImageGenerator({ imagePrompt }: ImageGeneratorProps) {
                     className="min-h-[80px]"
                     maxLength={32000}
                 />
-                <div className="flex justify-between  mt-2 text-xs text-muted-foreground">
-                    <span>
+                <div className="flex justify-end  mt-2 text-xs text-muted-foreground">
+                    <span className=" hidden">
                         <Badge variant={'secondary'} className=" rounded-full"> {hasUploadedImage ? "Image editing mode" : "Image generation mode"}</Badge>
                     </span>
                     <span>{prompt.length}/32,000 characters</span>

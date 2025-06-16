@@ -1,56 +1,17 @@
 'use client'
 
-import { CheckboxCard } from "@/components/home/checkbox-card"
-import { FormSection } from "@/components/home/form-section"
-import { Generate } from "@/components/home/generate"
-import { ModelsTabs } from "@/components/home/models-tabs"
-import ReactMarkdown from "react-markdown";
-import remarkGfm from "remark-gfm";
-import { adjustToneAndCreativityData, audiences, contentTypes, ctas, modelTabs, socialPlatforms, subjects } from "@/config/form-data"
+import React, { useState, useEffect } from "react"
 import { Hero } from "@/components/home/hero"
-import React, { useState, useEffect, useRef } from "react"
-import { RadioCard } from "@/components/home/radio-card"
-import { Textarea } from "@/components/ui/textarea"
-import { Label } from "@radix-ui/react-dropdown-menu"
-import { Slider } from "@/components/ui/slider"
-import { PdfFileDropzone } from "@/components/home/PdfFileDropzone"
-import { getImageGenerationPrompt, getNewGenerationPrompts } from "@/lib/ai/prompts"
-import { knowledgeBaseContent } from "@/lib/ai/knowledge_base"
-import { generateNewContent } from "@/actions/generate-new-content"
+import { Generate } from "@/components/home/generate"
 import { Separator } from "@/components/ui/separator"
 import { LineSpinner } from "@/shared/spinner"
-import { AIAG_VERSION } from "@/lib/ai/constants"
-import { Card, CardContent } from '@/components/ui/card';
-import { Button } from "@/components/ui/button"
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
-import { Copy, Download, PersonStanding, Stars } from "lucide-react"
-import { TfiLoop } from "react-icons/tfi";
-import { IoIosArrowDown } from "react-icons/io";
-import { ImageFileDropzone } from "@/components/home/ImageFileDropzone"
-import {
-  Dialog,
-  DialogContent,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog"
-import { DialogClose, DialogDescription } from "@radix-ui/react-dialog"
-import { cleanAndFixMarkdown, cleanAndFlattenBullets, cleanAndFlattenBulletsGoogle, cleanMarkdown } from "@/lib/cleanMarkdown"
-import { SampleMarkdown } from "@/config/sample-markdown"
-import { PiFilePdfFill } from "react-icons/pi"
-import { TbPdf } from "react-icons/tb"
-import { BiSolidFilePdf } from "react-icons/bi";
-import { FaImage } from "react-icons/fa6"
-import { RiImageAiFill } from "react-icons/ri";
-import { RiChatSmileAiFill } from "react-icons/ri";
+import { modelTabs, contentTypes, subjects, audiences, ctas, socialPlatforms, adjustToneAndCreativityData } from "@/config/form-data"
+import { getNewGenerationPrompts, getImageGenerationPrompt, getRevisionPrompts, getHyperRelevancePrompts } from "@/lib/ai/prompts"
+import { knowledgeBaseContent } from "@/lib/ai/knowledge_base"
+import { generateNewContent } from "@/actions/generate-new-content"
+import { cleanAndFlattenBulletsGoogle } from "@/lib/cleanMarkdown"
+import { FormContainer } from "@/components/GenrationComponents/form-container"
+import { GeneratedContent } from "@/components/GenrationComponents/generated-content"
 
 export default function Home() {
   const [selectedModel, setSelectedModel] = useState<number>(modelTabs[0].id)
@@ -59,15 +20,24 @@ export default function Home() {
   const [selectedContentTypes, setSelectedContentTypes] = useState<number[]>([])
   const [selectedCtas, setSelectedCtas] = useState<number[]>([])
   const [selectedSocialPlatform, setSelectedSocialPlatform] = useState<number | null>(null)
-  const [uploadedPdfs, setUploadedPdfs] = useState<File[]>([]);
+  const [uploadedPdfs, setUploadedPdfs] = useState<File[]>([])
   const [referenceMaterial, setReferenceMaterial] = useState<string>()
-  const [additionalInstructions, setAdditionalInstructions] = useState("");
-  const [contextualAwareness, setContextualAwareness] = useState("");
-  const [toneValue, setToneValue] = useState<number>(adjustToneAndCreativityData.tone.defaultValue);
-  const [creativityValue, setCreativityValue] = useState<number>(adjustToneAndCreativityData.creativity.defaultValue);
-  const [generatingContent, setgeneratingContent] = useState(false);
-  const [contentGenerated, setcontentGenerated] = useState<string>("");
+  const [additionalInstructions, setAdditionalInstructions] = useState("")
+  const [contextualAwareness, setContextualAwareness] = useState("")
+  const [toneValue, setToneValue] = useState<number>(adjustToneAndCreativityData.tone.defaultValue)
+  const [creativityValue, setCreativityValue] = useState<number>(adjustToneAndCreativityData.creativity.defaultValue)
+
+  const [generatingContent, setGeneratingContent] = useState(false)
+  const [contentGenerated, setContentGenerated] = useState<string>("")
   const [imagePrompt, setImagePrompt] = useState('')
+  const [feedback, setFeedback] = useState('');
+
+  const [generatingPersona, setgeneratingPersona] = useState(false)
+  const [personaGeneratedContent, setPersonaGeneratedContent] = useState<string>("")
+  const [personasText, setpersonasText] = useState("")
+  const [uploadedPersonaFileData, setuploadedPersonaFileData] = useState(false)
+
+
   const socialPostContentTypeId = contentTypes.find(
     (type) => type.label === "Social Media Post"
   )?.id
@@ -80,31 +50,32 @@ export default function Home() {
     if (!isSocialPostSelected) {
       setSelectedSocialPlatform(null)
     }
-  }, [isSocialPostSelected])
+  }, [isSocialPostSelected, selectedContentTypes])
+
+  const isGenerateDisabled =
+    selectedAudiences.length === 0 ||
+    selectedSubjects === null ||
+    selectedContentTypes.length === 0 ||
+    selectedCtas.length === 0 ||
+    (isSocialPostSelected && selectedSocialPlatform === null);
+  const selectedModelObj = modelTabs.find((tab) => tab.id === selectedModel)
+
 
   const handleGenerate = async () => {
-    setgeneratingContent(true)
+    if (isGenerateDisabled) return;
+
+    setGeneratingContent(true)
+    setContentGenerated("")
+    setImagePrompt("")
+
     const selectedModelObj = modelTabs.find((tab) => tab.id === selectedModel)
+    const selectedAudienceLabels = audiences.filter((a) => selectedAudiences.includes(a.id)).map((a) => a.label)
+    const selectedSubjectObj = subjects.find((s) => s.id === selectedSubjects)
+    const selectedContentTypeLabels = contentTypes.filter((c) => selectedContentTypes.includes(c.id)).map((c) => c.label)
+    const selectedCtaLabels = ctas.filter((c) => selectedCtas.includes(c.id)).map((c) => c.label)
+    const selectedSocialPlatformObj = socialPlatforms.find((p) => p.id === selectedSocialPlatform)
 
-    const selectedAudienceLabels = audiences
-      .filter((audience: any) => selectedAudiences.includes(audience.id))
-      .map((audience: any) => audience.label)
-
-    const selectedSubjectObj = subjects.find((subject) => subject.id === selectedSubjects)
-
-    const selectedContentTypeLabels = contentTypes
-      .filter((contentType) => selectedContentTypes.includes(contentType.id))
-      .map((contentType) => contentType.label)
-
-    const selectedCtaLabels = ctas
-      .filter((cta) => selectedCtas.includes(cta.id))
-      .map((cta) => cta.label)
-
-    const selectedSocialPlatformObj = socialPlatforms.find(
-      (platform) => platform.id === selectedSocialPlatform
-    )
-
-    const promptdata = {
+    const promptData = {
       selectedAudiences: selectedAudienceLabels,
       selectedSubject: selectedSubjectObj?.label || "",
       selectedContentTypes: selectedContentTypeLabels,
@@ -117,316 +88,223 @@ export default function Home() {
       selectedtone: toneValue,
     }
 
+    const { systemPrompt, userPrompt } = getNewGenerationPrompts(promptData)
 
-
-
-    const { systemPrompt, userPrompt } = getNewGenerationPrompts(promptdata);
-
-
-    const generatedata = {
+    const generateData = {
       modelAlias: selectedModelObj?.label,
       temperature: creativityValue,
       systemPrompt,
-      userPrompt
+      userPrompt,
     }
 
+    const generatedResult = await generateNewContent(generateData)
+    const cleanedMarkdown = cleanAndFlattenBulletsGoogle(generatedResult.generatedText)
+    setContentGenerated(cleanedMarkdown)
 
-
-    const contentGenerated = await generateNewContent(generatedata)
-
-  
-    const imagePromptdata = {
+    const imagePromptData = {
       selectedAudiences: selectedAudienceLabels,
       selectedSubject: selectedSubjectObj?.label || "",
-      contentGenerated: contentGenerated,
+      contentGenerated: cleanedMarkdown,
     }
-  
-    const { finalImagePrompt } = getImageGenerationPrompt(imagePromptdata);
 
-    const generateimagepromptdata = {
+    const { finalImagePrompt } = getImageGenerationPrompt(imagePromptData)
+    const imagePromptGenerated = await generateNewContent({
       modelAlias: selectedModelObj?.label,
       temperature: creativityValue,
-      userPrompt: finalImagePrompt
+      userPrompt: finalImagePrompt,
+    })
+
+    setImagePrompt(imagePromptGenerated.generatedText)
+    setGeneratingContent(false)
+  }
+
+  const handleRevise = async () => {
+    if (isGenerateDisabled) return;
+
+    setGeneratingContent(true)
+    setContentGenerated("")
+    setPersonaGeneratedContent("")
+    setImagePrompt("")
+
+    const selectedModelObj = modelTabs.find((tab) => tab.id === selectedModel)
+    const selectedAudienceLabels = audiences.filter((a) => selectedAudiences.includes(a.id)).map((a) => a.label)
+    const selectedSubjectObj = subjects.find((s) => s.id === selectedSubjects)
+    const selectedContentTypeLabels = contentTypes.filter((c) => selectedContentTypes.includes(c.id)).map((c) => c.label)
+    const selectedCtaLabels = ctas.filter((c) => selectedCtas.includes(c.id)).map((c) => c.label)
+    const selectedSocialPlatformObj = socialPlatforms.find((p) => p.id === selectedSocialPlatform)
+
+    const revisepromptData = {
+      selectedAudiences: selectedAudienceLabels,
+      selectedSubject: selectedSubjectObj?.label || "",
+      selectedContentTypes: selectedContentTypeLabels,
+      selectedCtas: selectedCtaLabels,
+      selectedSocialPlatform: selectedSocialPlatformObj?.label || "",
+      additionalInstructions: additionalInstructions || '',
+      knowledgeBaseContent: knowledgeBaseContent,
+      revisionInstructions: feedback,
+      originalContent: contentGenerated,
     }
 
-    const imagepromptGenerated = await generateNewContent(generateimagepromptdata)
-    const cleanedMarkdown = cleanAndFlattenBulletsGoogle(contentGenerated.generatedText);
+    const { systemPrompt, userPrompt } = getRevisionPrompts(revisepromptData)
 
-    setImagePrompt(imagepromptGenerated.generatedText);
-    setcontentGenerated(cleanedMarkdown);
-    setgeneratingContent(false)
+    const generateRevisedData = {
+      modelAlias: selectedModelObj?.label,
+      temperature: creativityValue,
+      systemPrompt,
+      userPrompt,
+    }
 
+    const generatedRevisedResult = await generateNewContent(generateRevisedData)
+    const cleanedMarkdown = cleanAndFlattenBulletsGoogle(generatedRevisedResult.generatedText)
+    setContentGenerated(cleanedMarkdown)
+
+    const imagePromptData = {
+      selectedAudiences: selectedAudienceLabels,
+      selectedSubject: selectedSubjectObj?.label || "",
+      contentGenerated: cleanedMarkdown,
+    }
+
+    const { finalImagePrompt } = getImageGenerationPrompt(imagePromptData)
+    const imagePromptGenerated = await generateNewContent({
+      modelAlias: selectedModelObj?.label,
+      temperature: creativityValue,
+      userPrompt: finalImagePrompt,
+    })
+
+    setImagePrompt(imagePromptGenerated.generatedText)
+    setFeedback('');
+    setGeneratingContent(false)
+  }
+
+  const handleAdaptPersona = async () => {
+    if (isGenerateDisabled) return;
+    setgeneratingPersona(true)
+
+    const selectedModelObj = modelTabs.find((tab) => tab.id === selectedModel)
+    const personapromptData = {
+      originalContent: contentGenerated,
+      personasText: personasText,
+      uploadedFilesData: uploadedPersonaFileData,
+      knowledgeBaseContent: knowledgeBaseContent,
+
+    }
+
+    const { systemPrompt, userPrompt } = getHyperRelevancePrompts(personapromptData)
+
+    const generatePersonaData = {
+      modelAlias: selectedModelObj?.label,
+      temperature: creativityValue,
+      systemPrompt,
+      userPrompt,
+    }
+
+    const generatedPersonaResult = await generateNewContent(generatePersonaData)
+    const cleanedMarkdown = cleanAndFlattenBulletsGoogle(generatedPersonaResult.generatedText)
+    setPersonaGeneratedContent(cleanedMarkdown)
+    setgeneratingPersona(false)
+  }
+
+
+
+  const handleGenerateChat = async () => {
+    if (isGenerateDisabled) return;
+    setgeneratingPersona(true)
+
+    const selectedModelObj = modelTabs.find((tab) => tab.id === selectedModel)
+    const personapromptData = {
+      originalContent: contentGenerated,
+      personasText: personasText,
+      uploadedFilesData: uploadedPersonaFileData,
+      knowledgeBaseContent: knowledgeBaseContent,
+
+    }
+
+    const { systemPrompt, userPrompt } = getHyperRelevancePrompts(personapromptData)
+
+    const generatePersonaData = {
+      modelAlias: selectedModelObj?.label,
+      temperature: creativityValue,
+      systemPrompt,
+      userPrompt,
+    }
+
+    const generatedPersonaResult = await generateNewContent(generatePersonaData)
+    const cleanedMarkdown = cleanAndFlattenBulletsGoogle(generatedPersonaResult.generatedText)
+    setPersonaGeneratedContent(cleanedMarkdown)
+    setgeneratingPersona(false)
   }
 
   const handleSaveDraft = () => {
     console.log("Draft saved!")
   }
 
-
-  const [uploadedFiles, setUploadedFiles] = useState<any[]>([]);
-
-  // Example function to handle form submission
-  const handleSubmit = (event: React.FormEvent) => {
-    event.preventDefault();
-    console.log("Submitting files:", uploadedFiles);
-    const formData = new FormData();
-    uploadedFiles.forEach(file => {
-      formData.append('images', file);
-    });
-    alert(`You have ${uploadedFiles.length} files ready to be submitted! Check the console.`);
-  };
   return (
-    <main className="overflow-hidden py-14">
+    <main className="overflow-hidden pt-14">
       <Hero />
       <section className="div-center-md">
-        <FormSection title="HBAI Models">
-          <ModelsTabs
-            options={modelTabs}
-            selectedValue={selectedModel}
-            onValueChange={setSelectedModel}
-          />
-        </FormSection>
+        <FormContainer
+          selectedModel={selectedModel}
+          setSelectedModel={setSelectedModel}
+          selectedAudiences={selectedAudiences}
+          setSelectedAudiences={setSelectedAudiences}
+          selectedSubjects={selectedSubjects}
+          setSelectedSubjects={setSelectedSubjects}
+          selectedContentTypes={selectedContentTypes}
+          setSelectedContentTypes={setSelectedContentTypes}
+          isSocialPostSelected={isSocialPostSelected}
+          selectedSocialPlatform={selectedSocialPlatform}
+          setSelectedSocialPlatform={setSelectedSocialPlatform}
+          selectedCtas={selectedCtas}
+          setSelectedCtas={setSelectedCtas}
+          uploadedPdfs={uploadedPdfs}
+          setUploadedPdfs={setUploadedPdfs}
+          setReferenceMaterial={setReferenceMaterial}
+          additionalInstructions={additionalInstructions}
+          setAdditionalInstructions={setAdditionalInstructions}
+          contextualAwareness={contextualAwareness}
+          setContextualAwareness={setContextualAwareness}
+          toneValue={toneValue}
+          setToneValue={setToneValue}
+          creativityValue={creativityValue}
+          setCreativityValue={setCreativityValue}
+        />
 
-        <FormSection title="Audience(s)">
-          <CheckboxCard
-            options={audiences}
-            selectedValues={selectedAudiences}
-            onSelectionChange={setSelectedAudiences}
-          />
-        </FormSection>
+        <Generate
+          generatingContent={generatingContent}
+          onSaveDraft={handleSaveDraft}
+          onGenerate={handleGenerate}
+          isDisabled={isGenerateDisabled}
+        />
 
-        <FormSection title="Subject focus">
-          <RadioCard
-            options={subjects}
-            selectedValue={selectedSubjects}
-            onSelectionChange={setSelectedSubjects}
-          />
-        </FormSection>
-
-        <FormSection title="Content Type(s)">
-          <CheckboxCard
-            options={contentTypes}
-            selectedValues={selectedContentTypes}
-            onSelectionChange={setSelectedContentTypes}
-          />
-        </FormSection>
-
-        {isSocialPostSelected && (
-          <FormSection title="Social Platform">
-            <RadioCard
-              options={socialPlatforms}
-              selectedValue={selectedSocialPlatform}
-              onSelectionChange={setSelectedSocialPlatform}
-            />
-          </FormSection>
+        {generatingContent && (
+          <>
+            <Separator />
+            <LineSpinner>Generating Content..</LineSpinner>
+          </>
         )}
 
-        <FormSection title="Call to Action(s)">
-          <CheckboxCard
-            options={ctas}
-            selectedValues={selectedCtas}
-            onSelectionChange={setSelectedCtas}
-          />
-        </FormSection>
+        {!generatingContent && contentGenerated && (
+          <>
+            <GeneratedContent
+              handleRevise={handleRevise}
+              feedback={feedback}
+              setFeedback={setFeedback}
+              content={contentGenerated}
+              imagePrompt={imagePrompt}
 
+              generatingPersona={generatingPersona}
+              personaGeneratedContent={personaGeneratedContent}
 
-        <FormSection title="Reference Materials (optional)">
-          <PdfFileDropzone
-            files={uploadedPdfs}
-            setFiles={setUploadedPdfs}
-            setReferenceMaterial={setReferenceMaterial}
-            maxFiles={1}
-          />
-        </FormSection>
+              setpersonasText={setpersonasText}
+              setuploadedPersonaFileData={setuploadedPersonaFileData}
+              handleAdaptPersona={handleAdaptPersona}
+              personasText={personasText}
 
-        <FormSection title="Additional Instructions (optional)">
-          <Textarea
-            placeholder="Enter any specific requirements or instructions..."
-            rows={14}
-            value={additionalInstructions}
-            onChange={(e) => setAdditionalInstructions(e.target.value)}
-          />
-        </FormSection>
-
-        <FormSection title="Contextual Awareness (optional)">
-          <Textarea
-            placeholder="Provide relevant background information or context..."
-            rows={49}
-            value={contextualAwareness}
-            onChange={(e) => setContextualAwareness(e.target.value)}
-          />
-        </FormSection>
-
-        <FormSection title="Adjust Tone and Creativity">
-          <div className="space-y-8 mt-3">
-            {Object.entries(adjustToneAndCreativityData).map(([key, setting]) => (
-              <div key={key}>
-                <Label className="text-base font-medium">{setting.label}</Label>
-                <Slider
-                  value={key === "tone" ? [toneValue] : [creativityValue]}
-                  onValueChange={(value) => {
-                    if (key === "tone") {
-                      setToneValue(value[0]);
-                    } else {
-                      setCreativityValue(value[0]);
-                    }
-                  }}
-                  min={setting.minValue}
-                  max={setting.maxValue}
-                  step={0.1}
-                  className="my-4"
-                />
-
-                <div className="flex justify-between text-xs text-muted-foreground px-1">
-                  {setting.options.map((option, index) => (
-                    <span key={index}>{option}</span>
-                  ))}
-                </div>
-              </div>
-            ))}
-          </div>
-        </FormSection>
-
-        <Generate generatingContent={generatingContent} onSaveDraft={handleSaveDraft} onGenerate={handleGenerate} />
-        
-        {generatingContent ? <>
-          <Separator />
-          <LineSpinner>Generating Content..</LineSpinner>
-        </>
-          : contentGenerated && <>
-            <Separator />
-            <main className=" space-y-10">
-              <section>
-                <h4 >Generated Content</h4>
-                <div className=" md:flex items-center justify-between">
-                  <h3 className=" mb-4">AIAG - Content Generation Details ({AIAG_VERSION})</h3>
-                  <div className=" flex justify-end">
-                    <DropdownMenu>
-                      <DropdownMenuTrigger asChild>
-                        <Button variant="ghost" size={'sm'}  >
-                          Actions <IoIosArrowDown />
-                        </Button>
-                      </DropdownMenuTrigger>
-                      <DropdownMenuContent className="max-w-64" align="end">
-                        <DropdownMenuItem>
-                          <Copy size={16} className="opacity-60" aria-hidden="true" />
-                          <span>Copy</span>
-                        </DropdownMenuItem>
-                        <DropdownMenuItem>
-                          <Download size={16} className="opacity-60" aria-hidden="true" />
-                          <span>Download .txt</span>
-                        </DropdownMenuItem>
-                       
-                        <Dialog>
-                          <DialogTrigger asChild>
-                            <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
-                              <TfiLoop size={16} className="opacity-60" aria-hidden="true" />
-                              <span>Revise</span>
-                            </DropdownMenuItem>
-                          </DialogTrigger>
-                          <DialogContent className="sm:max-w-3xl">
-                            <section className="space-y-4 flex flex-col">
-                              <div>
-                                <span className=" font-semibold text-accent-foreground tracking-tight">Provide Feedback for Revision</span>
-                                <Label className=" text-sm text-muted-foreground  mb-2">Changes requested:</Label>
-                                <Textarea
-                                  value={''}
-                                  onChange={(e) => setImagePrompt(e.target.value)}
-                                  placeholder="e.g Make tone more formal ..."
-                                  rows={6}
-                                />
-                              </div>
-                            </section>
-                            <DialogFooter>
-                              <Button size={'sm'}>Submit</Button>
-                            </DialogFooter>
-                          </DialogContent>
-                        </Dialog>
-                        <DropdownMenuItem>
-                          <BiSolidFilePdf size={16} className="opacity-60" aria-hidden="true" />
-                          <span>Download .pdf</span>
-                        </DropdownMenuItem>
-                        <Dialog>
-                          <DialogTrigger asChild>
-                            <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
-                              <Stars size={16} className="opacity-60" aria-hidden="true" />
-                              <span>Adapt for persona</span>
-                            </DropdownMenuItem>
-                          </DialogTrigger>
-                          <DialogContent className="sm:max-w-3xl">
-                            <section className="space-y-4 flex flex-col">
-                              <div>
-                                <span className=" font-semibold text-accent-foreground tracking-tight">Adapt Content for Hyper Relevance</span>
-                                <Label className=" text-sm text-muted-foreground  mb-2">Describe Target Persona(s):</Label>
-                                <Textarea
-                                  value={''}
-                                  onChange={(e) => setImagePrompt(e.target.value)}
-                                  placeholder="e.g Quality Manager at Tier 1 Supplier ..."
-                                  rows={6}
-                                />
-                              </div>
-                              <Label className=" text-sm text-muted-foreground mt-4 mb-2">Upload Persona Details (Optional):</Label>
-                              <PdfFileDropzone
-                                files={uploadedPdfs}
-                                setFiles={setUploadedPdfs}
-                                setReferenceMaterial={setReferenceMaterial}
-                                maxFiles={1}
-                              />
-                            </section>
-
-                            <DialogFooter>
-                              <Button size={'sm'}>Submit</Button>
-                            </DialogFooter>
-                          </DialogContent>
-                        </Dialog>
-                      </DropdownMenuContent>
-                    </DropdownMenu>
-                  </div>
-                </div>
-                <Separator className="mb-4" />
-                <div className="prose prose-neutral  max-w-none markdown-body space-y-3  dark:prose-invert">
-                  <ReactMarkdown remarkPlugins={[remarkGfm]}>
-                    {contentGenerated}  
-                  </ReactMarkdown>
-                </div>
-                <Separator className="mt-4" />
-              </section>
-              <section className="space-y-4 flex flex-col">
-                <div >
-                  <h4 className=" flex  items-center gap-2"> <span className="bg-primary/15 border border-primary/50 p-2.5 rounded-full text-primary"><RiImageAiFill size={30} /></span>Generate <br /> Accompanying Image</h4>
-                  <Label className=" text-sm text-muted-foreground mt-4  mb-2">Image Prompt:</Label>
-                  <Textarea
-                    value={imagePrompt}
-                    onChange={(e) => setImagePrompt(e.target.value)}
-                    placeholder="Enter prompt to generate an Image"
-                    rows={6}
-                  />
-                </div>
-                <Label className=" text-sm text-muted-foreground mt-4  mb-2">Upload Reference Image(s) (Optional):</Label>
-                <ImageFileDropzone
-                  files={uploadedFiles}
-                  setFiles={setUploadedFiles}
-                  maxFiles={1}
-                />
-                <Button className="w-full" size={'sm'}>Generate Image</Button>
-              </section>
-              <Separator />
-
-              <section className="space-y-4 flex flex-col">
-                <h4 className=" flex  items-center gap-2"> <span className="bg-primary/15 border border-primary/50 p-2.5 rounded-full text-primary"><RiChatSmileAiFill size={30} /></span> Chat with <br /> Generated Content</h4>
-                <Label className=" text-sm text-muted-foreground  mb-2">Upload docs for chat (Optional)</Label>
-                <PdfFileDropzone
-                  files={uploadedPdfs}
-                  setFiles={setUploadedPdfs}
-                  setReferenceMaterial={setReferenceMaterial}
-                  maxFiles={1}
-                />
-              </section>
-            </main>
+              modelAlias={selectedModelObj?.label}
+              temperature={creativityValue}
+            />
           </>
-        }
-
-
+        )}
       </section>
     </main>
   )

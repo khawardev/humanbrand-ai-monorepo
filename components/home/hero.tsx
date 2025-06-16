@@ -14,7 +14,7 @@ export const Hero = () => {
         // <section className="bg-linear-to-b relative to-muted from-background">
 
         <section >
-            <div className=" md:pb-12">
+            <div className=" md:py-12">
                 <div className="div-center-md">
                     <div className="md:w-2/3">
                         <div>

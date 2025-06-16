@@ -54,8 +54,9 @@ import { ImageGenerator } from "./image-generator";
 import { ContentChat } from "./content-chat";
 import { GeneratedPersonaContent } from "./persona/generated-persona-content";
 import { LineSpinner } from "@/shared/spinner";
+import { knowledgeBaseContent } from "@/lib/ai/knowledge_base";
 
-export function GeneratedContent({ content, imagePrompt, handleRevise, feedback, setFeedback, generatingPersona, personaGeneratedContent, setpersonasText, personasText, setuploadedPersonaFileData, handleAdaptPersona }: any) {
+export function GeneratedContent({ content, imagePrompt, handleRevise, feedback, setFeedback, generatingPersona, personaGeneratedContent, setpersonasText, personasText, setuploadedPersonaFileData, handleAdaptPersona, modelAlias,temperature }: any) {
     const [isHeaderSticky, setIsHeaderSticky] = useState(false);
     const contentRef = useRef<HTMLDivElement>(null);
     const headerRef = useRef<HTMLDivElement>(null);
@@ -95,8 +96,6 @@ export function GeneratedContent({ content, imagePrompt, handleRevise, feedback,
                                 personasText={personasText}
                                 setuploadedPersonaFileData={setuploadedPersonaFileData}
                                 handleAdaptPersona={handleAdaptPersona}
-
-
                             />
                         </div>
                         {!isHeaderSticky && <Separator className="mb-4" />}
@@ -123,7 +122,12 @@ export function GeneratedContent({ content, imagePrompt, handleRevise, feedback,
             )}
             <ImageGenerator imagePrompt={imagePrompt} />
             <Separator />
-            <ContentChat />
+           
+            <ContentChat
+                originalContent={content}
+                modelAlias={modelAlias}
+                temperature={temperature}
+            />
         </main>
     );
 }

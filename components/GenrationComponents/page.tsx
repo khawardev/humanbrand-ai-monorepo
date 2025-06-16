@@ -58,6 +58,7 @@ export default function Home() {
         selectedContentTypes.length === 0 ||
         selectedCtas.length === 0 ||
         (isSocialPostSelected && selectedSocialPlatform === null);
+    const selectedModelObj = modelTabs.find((tab) => tab.id === selectedModel)
 
 
     const handleGenerate = async () => {
@@ -117,7 +118,6 @@ export default function Home() {
         setGeneratingContent(false)
     }
     
-
     const handleRevise = async () => {
         if (isGenerateDisabled) return;
 
@@ -205,6 +205,41 @@ export default function Home() {
     }
 
 
+
+    const handleGenerateChat = async () => {
+        if (isGenerateDisabled) return;
+        setgeneratingPersona(true)
+
+        const selectedModelObj = modelTabs.find((tab) => tab.id === selectedModel)
+        const personapromptData = {
+            originalContent: contentGenerated,
+            personasText: personasText,
+            uploadedFilesData: uploadedPersonaFileData,
+            knowledgeBaseContent: knowledgeBaseContent,
+
+        }
+
+        const { systemPrompt, userPrompt } = getHyperRelevancePrompts(personapromptData)
+
+        const generatePersonaData = {
+            modelAlias: selectedModelObj?.label,
+            temperature: creativityValue,
+            systemPrompt,
+            userPrompt,
+        }
+
+        const generatedPersonaResult = await generateNewContent(generatePersonaData)
+        const cleanedMarkdown = cleanAndFlattenBulletsGoogle(generatedPersonaResult.generatedText)
+        setPersonaGeneratedContent(cleanedMarkdown)
+        setgeneratingPersona(false)
+    }
+
+
+
+
+
+
+
     const handleSaveDraft = () => {
         console.log("Draft saved!")
     }
@@ -270,6 +305,9 @@ export default function Home() {
                             setuploadedPersonaFileData={setuploadedPersonaFileData}
                             handleAdaptPersona={handleAdaptPersona}
                             personasText={personasText}
+
+                            modelAlias={selectedModelObj?.label}
+                            temperature={creativityValue}
                         />
                     </>
                 )}

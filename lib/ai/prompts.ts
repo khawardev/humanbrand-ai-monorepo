@@ -118,6 +118,7 @@ export function getRevisionPrompts(
     return { systemPrompt, userPrompt };
 }
 
+
 export function getHyperRelevancePrompts(
     data: any
 ): any {
@@ -156,3 +157,36 @@ export function getHyperRelevancePrompts(
                           `;
     return { systemPrompt, userPrompt };
 }
+
+
+export function getChatSystemPrompt({
+    originalContent, conversationHistory, uploadedFileText, knowledgeBaseContent
+}: any): string {
+
+    const chatSystemPrompt =   `**Act as a helpful AIAG Assistant, adhering to the provided KB.** Your role is to discuss the 'Original Generated Content' with the user.
+                                Context for this Chat Turn:
+                                * Original Generated Content (Primary subject): ${originalContent || "Original content not available."}
+                                * User Uploaded Documents (Optional context for this turn ONLY): ${uploadedFileText || "None Provided"}
+                                * Previous Conversations: ${conversationHistory || "None Provided"}
+                                AIAG Communication Standards (Mandatory, from the KB):
+                                1.  Answer Accurately & Relevantly. Use 'Conversation History', 'User Uploaded Documents', and the 'AIAG Knowledge Base'.
+                                2.  Maintain AIAG Voice: ${AIAG_CORE_VOICE}.
+                                3.  Apply Tone: 'Professional yet Approachable' and 'Empowering and Supportive'.
+                                4.  Uphold Constraints: ${AIAG_CRITICAL_CONSTRAINTS}. Base answers ONLY on provided materials.
+                                5.  Clarity on Limitations: If information is NOT in provided context, state that politely.
+                                
+                                Full AIAG Knowledge Base (Primary Reference): ${knowledgeBaseContent || KNOWLEDGE_BASE_FALLBACK}
+      
+                                ---
+                                Respond directly to the last user message in the history, considering the full context provided.`;
+
+    return chatSystemPrompt
+}
+
+
+
+
+
+
+
+

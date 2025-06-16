@@ -24,7 +24,7 @@ export function ReviseDialog({ isOpen, onOpenChange, handleRevise, feedback, set
         <Dialog open={isOpen} onOpenChange={onOpenChange}>
             <DialogContent className="sm:max-w-3xl">
                 <section >
-                    <span className=" font-semibold text-accent-foreground tracking-tight">Provide Feedback for Revision</span>
+                    <span className=" font-semibold text-accent-foreground tracking-tighter">Provide Feedback for Revision</span>
                     <Label className=" text-sm text-muted-foreground  mb-2">Changes requested:</Label>
                     <Textarea
                         id="revision-feedback"

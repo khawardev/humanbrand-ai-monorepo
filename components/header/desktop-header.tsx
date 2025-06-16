@@ -33,7 +33,9 @@ export default function DesktopHeader() {
             <div className="sm:w-8/12 w-full mx-auto sm:px-0 px-4">
                 <div className="flex h-16 items-center justify-between gap-4 ">
                     <Link href="/" className="flex items-center space-x-1">
-                        <span className=" md:inline-block hidden"><FullLogo /></span> <span className=" md:hidden inline-block "><FullLogo /></span>
+                        <FullLogo />
+                        
+                        {/* <span className=" md:inline-block hidden"><FullLogo /></span> <span className=" md:hidden inline-block "><FullLogo /></span> */}
                         {/* <span className=" text-[22px]  tracking-tighter   font-extrabold md:inline-block  hidden">
                         Humanbrand AI
                     </span> */}
