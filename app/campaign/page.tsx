@@ -11,7 +11,7 @@ import { RadioCard } from "@/components/aiag-components/reusable-components/radi
 import { Textarea } from "@/components/ui/textarea"
 import { Label } from "@radix-ui/react-dropdown-menu"
 import { Slider } from "@/components/ui/slider"
-import { PdfFileDropzone } from "@/components/aiag-components/reusable-components/PdfFileDropzone"
+import { PdfFileDropzone } from "@/components/aiag-components/reusable-components/uploads/PdfFileDropzone"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { cn } from "@/lib/utils"
 

@@ -20,7 +20,7 @@ type ModelsTabsProps = {
 export const ModelsTabs = ({ options, selectedValue, onValueChange }: ModelsTabsProps) => {
     return (
         <NavigationMenu>
-            <NavigationMenuList className="bg-card border text-muted-foreground inline-flex h-9 w-fit items-center justify-center rounded-full p-[3px]">
+            <NavigationMenuList className="bg-accent border text-muted-foreground inline-flex h-9 w-fit items-center justify-center rounded-full p-[3px]">
                 {options.map((tab) => (
                     <NavigationMenuItem key={tab.id}>
                         <button

@@ -104,7 +104,7 @@ export function ImageFileDropzone({
                     {files.map((file, index) => (
                         <div
                             key={file.name + index}
-                            className="relative w-full flex items-center justify-between p-2 pl-2 border rounded-md bg-muted/50"
+                            className="relative w-full flex items-center justify-between p-2 pl-2 border rounded-md bg-accent"
                         >
                             <div className="flex items-center gap-4 flex-grow min-w-0">
                                 <img

@@ -1,7 +1,7 @@
 import { text, timestamp, boolean, pgSchema } from 'drizzle-orm/pg-core';
 
-export const repurai_schema = pgSchema('repurai_schema')
-export const user = repurai_schema.table('user', {
+export const aiag_schema = pgSchema('aiag_schema')
+export const user = aiag_schema.table('user', {
     id: text('id').primaryKey(),
     name: text('name').notNull(),
     email: text('email').notNull().unique(),
@@ -13,7 +13,7 @@ export const user = repurai_schema.table('user', {
     displayUsername: text('displayUsername'),
 });
 
-export const session = repurai_schema.table('session', {
+export const session = aiag_schema.table('session', {
     id: text('id').primaryKey(),
     expiresAt: timestamp('expiresAt').notNull(),
     token: text('token').notNull().unique(),
@@ -24,7 +24,7 @@ export const session = repurai_schema.table('session', {
     userId: text('userId').notNull().references(() => user.id, { onDelete: 'cascade' }),
 });
 
-export const account = repurai_schema.table('account', {
+export const account = aiag_schema.table('account', {
     id: text('id').primaryKey(),
     accountId: text('accountId').notNull(),
     providerId: text('providerId').notNull(),
@@ -40,7 +40,7 @@ export const account = repurai_schema.table('account', {
     updatedAt: timestamp('updatedAt').notNull().defaultNow(),
 });
 
-export const verification = repurai_schema.table('verification', {
+export const verification = aiag_schema.table('verification', {
     id: text('id').primaryKey(),
     identifier: text('identifier').notNull(),
     value: text('value').notNull(),

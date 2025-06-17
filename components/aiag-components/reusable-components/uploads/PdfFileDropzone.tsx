@@ -118,7 +118,7 @@ export function PdfFileDropzone({
                     files.map((file, index) => (
                         <div
                             key={file.name + index}
-                            className="relative flex items-center justify-between p-2 pl-4 border rounded-md bg-muted/50"
+                            className="relative flex items-center justify-between p-2 pl-4 border rounded-md bg-accent"
                         >
                             <div className="flex items-center gap-4 flex-grow min-w-0">
                                 <PiFilePdfFill className="h-6 w-6 text-muted-foreground flex-shrink-0" />

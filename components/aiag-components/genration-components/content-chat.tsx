@@ -2,7 +2,7 @@
 
 import React, { useState, useRef, useEffect } from "react";
 import { Label } from "@/components/ui/label";
-import { PdfFileDropzone } from "@/components/aiag-components/reusable-components/PdfFileDropzone";
+import { PdfFileDropzone } from "@/components/aiag-components/reusable-components/uploads/PdfFileDropzone";
 import { Button } from "@/components/ui/button";
 import { generateNewContent } from "@/actions/generate-new-content";
 import { getChatSystemPrompt } from "@/lib/aiag/prompts";
@@ -78,7 +78,7 @@ export function ContentChat({ originalContent, modelAlias, temperature }: any) {
     return (
         <section className="space-y-4 flex flex-col h-[90vh]">
             <div>
-                <h4>Chat with Generated Content</h4>
+                <span className="text-lg tracking-tight font-bold">Chat with Generated Content</span>
                 <Label className="text-sm text-muted-foreground">Upload docs for chat (Optional)</Label>
             </div>
 
@@ -90,8 +90,8 @@ export function ContentChat({ originalContent, modelAlias, temperature }: any) {
                 ) : (
                     messages.map((msg, index) => (
                         <div key={index} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
-                            <div className={`max-w-xl p-2 rounded-lg text-[15px] ${msg.role === 'user' ? 'bg-primary text-primary-foreground border ' : 'bg-muted/50 border '}`}>
-                                <div className="markdown-body-sm text-sm">
+                            <div className={`max-w-xl p-2 rounded-lg text-[15px] ${msg.role === 'user' ? 'bg-primary text-primary-foreground border ' : 'bg-accent border '}`}>
+                                <div className="markdown-body-sm text-[15px]">
                                     <ReactMarkdown remarkPlugins={[remarkGfm]}>{msg.content}</ReactMarkdown>
                                 </div>
                             </div>
@@ -100,7 +100,7 @@ export function ContentChat({ originalContent, modelAlias, temperature }: any) {
                 )}
                 {isLoading && (
                     <div className="flex justify-start">
-                        <div className="max-w-xl p-2 rounded-lg bg-muted/50 border">
+                        <div className="max-w-xl p-2 rounded-lg bg-accent border">
                             <LineSpinner>Thinking</LineSpinner>
                         </div>
                     </div>

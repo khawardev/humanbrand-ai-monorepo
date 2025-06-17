@@ -20,7 +20,7 @@ export const HalfGreenLogo = () => {
 
 export const FullBlackLogo = () => {
     return (
-        <div className={`flex size-40 items-center  justify-center`}>
+        <div className={`flex size-42 items-center  justify-center`}>
             <img src={'https://i.postimg.cc/yY06gqFK/HB-logo-name-mark-side-black-1.png'} width={1000} alt={`Logo`}
                 className=' cursor-pointer  '
             />
@@ -29,7 +29,7 @@ export const FullBlackLogo = () => {
 }
 export const FullGreenLogo = () => {
     return (
-        <div className={`flex size-40 items-center  justify-center`}>
+        <div className={`flex size-42 items-center  justify-center`}>
             <img src={'https://i.postimg.cc/c1jwNRnH/HB-logo-name-mark-side-green-1.png'} width={1000} alt={`Logo`}
                 className=' cursor-pointer  '
             />

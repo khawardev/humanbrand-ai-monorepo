@@ -1,18 +1,9 @@
-import {
-  BoltIcon,
-  BookOpenIcon,
-  Layers2Icon,
-  LogOutIcon,
-  PinIcon,
-  UserPenIcon,
-} from "lucide-react"
-
+'use client'
 import {
   Avatar,
   AvatarFallback,
   AvatarImage,
 } from "@/components/ui/avatar"
-import { Button } from "@/components/ui/button"
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -21,36 +12,42 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
+import { LogOutIcon } from 'lucide-react'
+import { signOut } from '@/lib/auth-client'
+import { useRouter } from "next/navigation"
 
-export default function UserMenu() {
+const UserMenu = ({ user }: any) => {
+  const router = useRouter()
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger asChild>
-        <Button variant="ghost" size={'icon'} className="p-0" >
-          <Avatar>
-            <AvatarImage src="https://i.postimg.cc/pX4gQSWX/1721851062033.jpg" alt="Profile image" />
-            <AvatarFallback>CW</AvatarFallback>
-          </Avatar>
-        </Button>
+      <DropdownMenuTrigger  >
+        <Avatar className=" hover:cursor-pointer">
+          <AvatarImage src={user?.image} alt="Profile image" />
+          <AvatarFallback>{user.name?.slice(0, 2).toUpperCase()}</AvatarFallback>
+        </Avatar>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="max-w-64" align="end">
         <DropdownMenuLabel className="flex gap-2 items-center min-w-0 ">
-          <img src="https://i.postimg.cc/pX4gQSWX/1721851062033.jpg" className=" size-8 rounded-md " alt="" />
-          <div className=" flex flex-col" >
-            <span className="text-foreground truncate text-sm font-medium">
-              Carrie Wright
+          <img src={user?.image} className="size-8 rounded-md" alt="" />
+          <div className="flex flex-col">
+            <span className="text-foreground tracking-tight truncate text-sm font-medium">
+              {user?.name}
             </span>
-            <span className="text-muted-foreground truncate text-xs font-normal">
-              cwright@aiag.org
+            <span className="text-xs w-[85%] overflow-hidden text-muted-foreground text-ellipsis whitespace-wrap font-normal">
+              {user?.email}
             </span>
           </div>
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
-        <DropdownMenuItem>
-          <LogOutIcon size={16} className="opacity-60" aria-hidden="true" />
+        <DropdownMenuItem onClick={async () => {
+          await signOut();
+          router.refresh();
+        }}>
+          <LogOutIcon size={16} className="opacity-60 mr-2" />
           <span>Logout</span>
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
   )
 }
+export default UserMenu

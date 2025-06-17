@@ -8,8 +8,9 @@ import { cn } from '@/lib/utils';
 import { AIAGConfig } from '@/config/aiag-config';
 import { usePathname } from 'next/navigation';
 import { ScrollArea } from "@/components/ui/scroll-area";
+import { SigninButtonMobile } from '../aiag-components/reusable-components/auth/signin-button';
 
-export default function MobileHeader() {
+export default function MobileHeader({ user }:any) {
     const pathname = usePathname()
     const [open, setOpen] = React.useState(false)
 
@@ -66,18 +67,7 @@ export default function MobileHeader() {
                             </div>
                         </ScrollArea>
                     </div>
-                    <div className=' flex flex-col space-y-2' >
-                        <Link onClick={() => setOpen(false)} href="/signup">
-                            <Button className=' w-full' size={'sm'}>
-                                Register
-                            </Button>
-                        </Link>
-                        <Link onClick={() => setOpen(false)} href="/signin">
-                            <Button className=' w-full' size={'sm'} variant={'outline'}>
-                                Sign In
-                            </Button>
-                        </Link>
-                    </div> 
+                    {!user && <SigninButtonMobile /> }
                 </Drawer.Content>
             </Drawer.Portal>
         </Drawer.Root>

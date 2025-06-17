@@ -52,7 +52,7 @@ export const CheckboxCard = ({ options, selectedValues, onSelectionChange }: Che
                                     handleCheckedChange(checked, item.id)
                                 }}
                             />
-                            <div className={cn("h-9 w-9 rounded-full flex items-center justify-center border-0 border-none ", isprimary ? 'text-primary bg-primary/15' : 'text-pink-600 bg-pink-400/15')}>
+                            <div className={cn("h-9 w-9  rounded-full flex items-center justify-center border-0 border-none ", isprimary ? 'text-primary bg-primary/15' : 'text-pink-600 bg-pink-400/15')}>
                                 <item.Icon className="opacity-60" size={16} aria-hidden="true" />
                             </div>
                             

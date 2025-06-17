@@ -4,7 +4,7 @@ import React, { useState, useTransition } from "react";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
-import { ImageFileDropzone } from "@/components/aiag-components/reusable-components/ImageFileDropzone";
+import { ImageFileDropzone } from "@/components/aiag-components/reusable-components/uploads/ImageFileDropzone";
 import { generateImageAction } from "@/actions/generate-image";
 import { toast } from "sonner";
 import { ButtonSpinner, LineSpinner } from "@/shared/spinner";
@@ -53,7 +53,7 @@ export function ImageGenerator({ imagePrompt }: ImageGeneratorProps) {
     return (
         <section className="space-y-4 flex flex-col">
             <div>
-                <h4> Generate Accompanying Image</h4>
+                <span className="text-lg tracking-tight font-bold">Generate Accompanying Image</span>
                 <Label htmlFor="image-prompt" className="text-sm text-muted-foreground mb-3">Image Prompt:</Label>
                 <Textarea
                     id="image-prompt"
