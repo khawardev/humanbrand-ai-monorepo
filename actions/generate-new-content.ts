@@ -2,7 +2,7 @@
 import { generateText } from 'ai';
 import { openai } from '@ai-sdk/openai';
 import { google } from '@ai-sdk/google';
-import { GEMINI_MODEL_NAME, OPENAI_MODEL_NAME } from '@/lib/ai/constants';
+import { GEMINI_MODEL_NAME, OPENAI_MODEL_NAME } from '@/lib/aiag/constants';
 
 
 export async function generateNewContent(

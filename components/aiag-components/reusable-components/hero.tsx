@@ -4,7 +4,7 @@ import Link from "next/link"
 import { ChevronDown } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { useTheme } from "next-themes"
-import { AIAG_VERSION } from "@/lib/ai/constants"
+import { AIAG_VERSION } from "@/lib/aiag/constants"
 
 export const Hero = () => {
     const theme = useTheme()

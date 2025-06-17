@@ -1,23 +1,23 @@
 'use client'
 
 import React from "react"
-import { Hero } from "@/components/home/hero"
-import { Generate } from "@/components/home/generate"
+import { Hero } from "@/components/aiag-components/reusable-components/hero"
+import { Generate } from "@/components/aiag-components/reusable-components/generate"
 import { Separator } from "@/components/ui/separator"
 import { LineSpinner } from "@/shared/spinner"
-import { GeneratedContent } from "@/components/GenrationComponents/generated-content"
 import { useNewContentGenerator } from "@/hooks/useNewContentGenerator"
+import { ModelsSection } from "@/components/aiag-components/selection-components/ModelsSection"
+import { AudienceSection } from "@/components/aiag-components/selection-components/AudienceSection"
+import { SubjectSection } from "@/components/aiag-components/selection-components/SubjectSection"
+import { ContentTypeSection } from "@/components/aiag-components/selection-components/ContentTypeSection"
+import { SocialPlatformSection } from "@/components/aiag-components/selection-components/SocialPlatformSection"
+import { CtaSection } from "@/components/aiag-components/selection-components/CtaSection"
+import { ReferenceMaterialSection } from "@/components/aiag-components/selection-components/ReferenceMaterialSection"
+import { AdditionalInstructionsSection } from "@/components/aiag-components/selection-components/AdditionalInstructionsSection"
+import { ContextualAwarenessSection } from "@/components/aiag-components/selection-components/ContextualAwarenessSection"
+import { ToneAndCreativitySection } from "@/components/aiag-components/selection-components/ToneAndCreativitySection"
+import { GeneratedContent } from "@/components/aiag-components/genration-components/generated-content"
 
-import { ModelsSection } from "@/components/GeminiStudioComponents/ModelsSection"
-import { AudienceSection } from "@/components/GeminiStudioComponents/AudienceSection"
-import { SubjectSection } from "@/components/GeminiStudioComponents/SubjectSection"
-import { ContentTypeSection } from "@/components/GeminiStudioComponents/ContentTypeSection"
-import { SocialPlatformSection } from "@/components/GeminiStudioComponents/SocialPlatformSection"
-import { CtaSection } from "@/components/GeminiStudioComponents/CtaSection"
-import { ReferenceMaterialSection } from "@/components/GeminiStudioComponents/ReferenceMaterialSection"
-import { AdditionalInstructionsSection } from "@/components/GeminiStudioComponents/AdditionalInstructionsSection"
-import { ContextualAwarenessSection } from "@/components/GeminiStudioComponents/ContextualAwarenessSection"
-import { ToneAndCreativitySection } from "@/components/GeminiStudioComponents/ToneAndCreativitySection"
 
 export default function HomePage() {
   const {

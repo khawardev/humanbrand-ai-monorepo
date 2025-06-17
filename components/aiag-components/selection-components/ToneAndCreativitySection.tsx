@@ -1,4 +1,4 @@
-import { FormSection } from "@/components/home/form-section"
+import { FormSection } from "@/components/aiag-components/reusable-components/form-section"
 import { Label } from "@radix-ui/react-dropdown-menu"
 import { Slider } from "@/components/ui/slider"
 import { adjustToneAndCreativityData } from "@/config/form-data"

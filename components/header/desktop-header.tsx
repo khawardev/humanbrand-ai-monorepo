@@ -23,25 +23,23 @@ import {
 import { ThemeSwitcher } from "../ui/theme-switcher"
 import MobileHeader from "./mobile-header"
 import { AIAGConfig } from "@/config/aiag-config"
-import { FullLogo, HalfLogo } from "@/shared/logo"
+import { FullBlackLogo, FullGreenLogo, HalfBlackLogo, HalfGreenLogo } from "@/shared/logo"
+import { useTheme } from "next-themes"
 export default function DesktopHeader() {
     const id = useId()
     const pathname = usePathname()
-
+    const { resolvedTheme } = useTheme();
+    
     return (
         <header className="border-b ">
             <div className="sm:w-8/12 w-full mx-auto sm:px-0 px-4">
                 <div className="flex h-16 items-center justify-between gap-4 ">
-                    <Link href="/" className="flex items-center space-x-1">
-                        <FullLogo />
-                        
-                        {/* <span className=" md:inline-block hidden"><FullLogo /></span> <span className=" md:hidden inline-block "><FullLogo /></span> */}
-                        {/* <span className=" text-[22px]  tracking-tighter   font-extrabold md:inline-block  hidden">
-                        Humanbrand AI
-                    </span> */}
+                    <Link href="/" className="md:flex hidden items-center space-x-1">
+                        {resolvedTheme === 'dark' ? <FullGreenLogo /> : <FullBlackLogo />}
                     </Link>
-                    {/* <NavigationMenuList className=" bg-card border text-muted-foreground inline-flex h-9 w-fit items-center justify-center rounded-full p-[3px]"> */}
-                    {/* <NavigationMenuList className="bg-transparent border-none text-muted-foreground inline-flex h-9 w-fit items-center justify-center rounded-full p-[3px]"> */}
+                    <Link href="/" className="md:hidden flex  items-center space-x-1">
+                        {resolvedTheme === 'dark' ? <HalfGreenLogo /> : <HalfBlackLogo />}
+                    </Link>
                     <div className='sm:inline-block hidden'>
                         <NavigationMenu>
                             <NavigationMenuList className=" bg-accent border text-muted-foreground inline-flex h-9 w-fit items-center justify-center rounded-full p-[3px]">
@@ -129,10 +127,9 @@ export default function DesktopHeader() {
                             </DropdownMenuContent>
                         </DropdownMenu>
 
-                        <UserMenu />
-                        {/* <div className=" pr-2  flex items-center"><UserMenu /></div>
-                    <div className=" pl-2 border-l"><ThemeSwitcher /></div> */}
-                        <div className="sm:hidden block"><MobileHeader /></div>
+                        <div className=" pr-2  flex items-center"><UserMenu /></div>
+                        <div className="sm:hidden block pl-2 border-l"><MobileHeader /></div>
+                        <div className=" md:pl-2 md:border-l"><ThemeSwitcher /></div>
                     </div>
                 </div>
             </div>

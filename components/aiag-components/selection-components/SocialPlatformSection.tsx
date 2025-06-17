@@ -1,5 +1,5 @@
-import { FormSection } from "@/components/home/form-section"
-import { RadioCard } from "@/components/home/radio-card"
+import { FormSection } from "@/components/aiag-components/reusable-components/form-section"
+import { RadioCard } from "@/components/aiag-components/reusable-components/radio-card"
 import { socialPlatforms } from "@/config/form-data"
 
 interface SocialPlatformSectionProps {

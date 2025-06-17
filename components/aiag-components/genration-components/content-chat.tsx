@@ -2,16 +2,16 @@
 
 import React, { useState, useRef, useEffect } from "react";
 import { Label } from "@/components/ui/label";
-import { PdfFileDropzone } from "@/components/home/PdfFileDropzone";
+import { PdfFileDropzone } from "@/components/aiag-components/reusable-components/PdfFileDropzone";
 import { Button } from "@/components/ui/button";
 import { generateNewContent } from "@/actions/generate-new-content";
-import { getChatSystemPrompt } from "@/lib/ai/prompts";
-import { knowledgeBaseContent } from "@/lib/ai/knowledge_base";
-import { LineSpinner } from './../../shared/spinner';
+import { getChatSystemPrompt } from "@/lib/aiag/prompts";
+import { knowledgeBaseContent } from "@/lib/aiag/knowledge_base";
 import { LuLoaderCircle } from "react-icons/lu";
-import { Input } from "../ui/input";
 import remarkGfm from "remark-gfm";
 import ReactMarkdown from "react-markdown";
+import { LineSpinner } from "@/shared/spinner";
+import { Input } from "@/components/ui/input";
 
 interface Message {
     role: 'user' | 'assistant';
@@ -90,7 +90,7 @@ export function ContentChat({ originalContent, modelAlias, temperature }: any) {
                 ) : (
                     messages.map((msg, index) => (
                         <div key={index} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
-                            <div className={`max-w-xl p-2 rounded-lg ${msg.role === 'user' ? 'bg-primary text-primary-foreground' : 'bg-muted'}`}>
+                            <div className={`max-w-xl p-2 rounded-lg text-[15px] ${msg.role === 'user' ? 'bg-primary text-primary-foreground border ' : 'bg-muted/50 border '}`}>
                                 <div className="markdown-body-sm text-sm">
                                     <ReactMarkdown remarkPlugins={[remarkGfm]}>{msg.content}</ReactMarkdown>
                                 </div>
@@ -100,7 +100,7 @@ export function ContentChat({ originalContent, modelAlias, temperature }: any) {
                 )}
                 {isLoading && (
                     <div className="flex justify-start">
-                        <div className="max-w-xl p-2 rounded-lg bg-muted">
+                        <div className="max-w-xl p-2 rounded-lg bg-muted/50 border">
                             <LineSpinner>Thinking</LineSpinner>
                         </div>
                     </div>

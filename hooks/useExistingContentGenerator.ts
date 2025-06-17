@@ -2,8 +2,8 @@
 
 import { useState, useEffect } from "react"
 import { modelTabs, contentTypes, subjects, audiences, ctas, socialPlatforms } from "@/config/form-data"
-import { getNewGenerationPrompts, getImageGenerationPrompt, getRevisionPrompts, getHyperRelevancePrompts, getExistingContentPrompts } from "@/lib/ai/prompts"
-import { knowledgeBaseContent } from "@/lib/ai/knowledge_base"
+import { getImageGenerationPrompt, getRevisionPrompts, getHyperRelevancePrompts, getExistingContentPrompts } from "@/lib/aiag/prompts"
+import { knowledgeBaseContent } from "@/lib/aiag/knowledge_base"
 import { generateNewContent } from "@/actions/generate-new-content"
 import { cleanAndFlattenBulletsGoogle } from "@/lib/cleanMarkdown"
 import { adjustToneAndCreativityData } from "@/config/form-data"
@@ -16,7 +16,7 @@ export function useExistingContentGenerator() {
     const [selectedCtas, setSelectedCtas] = useState<number[]>([])
     const [selectedSocialPlatform, setSelectedSocialPlatform] = useState<number | null>(null)
     const [uploadedPdfs, setUploadedPdfs] = useState<File[]>([])
-    const [referenceMaterial, setReferenceMaterial] = useState<string>()
+    const [referenceMaterial, setReferenceMaterial] = useState<string>('')
     const [additionalInstructions, setAdditionalInstructions] = useState("")
     const [contextualAwareness, setContextualAwareness] = useState("")
     const [toneValue, setToneValue] = useState<number>(adjustToneAndCreativityData.tone.defaultValue)
@@ -41,16 +41,12 @@ export function useExistingContentGenerator() {
         }
     }, [isSocialPostSelected, selectedContentTypes])
 
-    const isGenerateDisabled =
-        selectedAudiences.length === 0 ||
-        selectedSubjects === null ||
-        selectedContentTypes.length === 0 ||
-        selectedCtas.length === 0 ||
-        (isSocialPostSelected && selectedSocialPlatform === null);
+    const isGenerateDisabled = referenceMaterial === '';
 
     const selectedModelObj = modelTabs.find((tab) => tab.id === selectedModel)
 
     const handleGenerate = async () => {
+        if (isGenerateDisabled) return;
 
         setGeneratingContent(true)
         setContentGenerated("")

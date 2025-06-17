@@ -1,5 +1,5 @@
-import { FormSection } from "@/components/home/form-section"
-import { ModelsTabs } from "@/components/home/models-tabs"
+import { FormSection } from "@/components/aiag-components/reusable-components/form-section"
+import { ModelsTabs } from "@/components/aiag-components/reusable-components/models-tabs"
 import { modelTabs } from "@/config/form-data"
 
 interface ModelsSectionProps {

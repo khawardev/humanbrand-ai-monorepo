@@ -1,5 +1,5 @@
-import { FormSection } from "@/components/home/form-section"
-import { CheckboxCard } from "@/components/home/checkbox-card"
+import { FormSection } from "@/components/aiag-components/reusable-components/form-section"
+import { CheckboxCard } from "@/components/aiag-components/reusable-components/checkbox-card"
 import { contentTypes } from "@/config/form-data"
 
 interface ContentTypeSectionProps {

@@ -1,5 +1,5 @@
-import { FormSection } from "@/components/home/form-section"
-import { Textarea } from "@/components/ui/textarea"
+import { FormSection } from "@/components/aiag-components/reusable-components/form-section"
+import { Input } from "../../ui/input";
 
 interface AdditionalInstructionsSectionProps {
     value: string;
@@ -10,7 +10,7 @@ interface AdditionalInstructionsSectionProps {
 export function AdditionalInstructionsSection({ value, onChange, title }: AdditionalInstructionsSectionProps) {
     return (
         <FormSection title={title}>
-            <Textarea placeholder="Enter any specific requirements or instructions..." rows={14} value={value} onChange={(e) => onChange(e.target.value)} />
+            <Input placeholder="Enter any specific instructions..." value={value} onChange={(e) => onChange(e.target.value)} />
         </FormSection>
     )
 }

@@ -1,6 +1,6 @@
 
-import { FormSection } from "@/components/home/form-section"
-import { PdfFileDropzone } from "@/components/home/PdfFileDropzone"
+import { FormSection } from "@/components/aiag-components/reusable-components/form-section"
+import { PdfFileDropzone } from "@/components/aiag-components/reusable-components/PdfFileDropzone"
 
 interface ReferenceMaterialSectionProps {
     files: File[];

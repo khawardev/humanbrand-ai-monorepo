@@ -1,60 +1,14 @@
-// import React, { useRef } from "react";
-// import ReactMarkdown from "react-markdown";
-// import remarkGfm from "remark-gfm";
-// import { Separator } from "@/components/ui/separator";
-// import { AIAG_VERSION } from "@/lib/ai/constants";
-// import { ContentActions } from "./content-actions";
-// import { ImageGenerator } from "./image-generator";
-// import { ContentChat } from "./content-chat";
-
-// interface GeneratedContentProps {
-//     content: string;
-//     imagePrompt: string;
-//     setImagePrompt: (prompt: string) => void;
-//     setContentGenerated?:any
-// }
-
-// export function GeneratedContent({ content, imagePrompt, handleRevise, feedback, setFeedback }: any) {
-//     const contentRef = useRef<any>(null);
-
-//     return (
-//         <main className="space-y-10">
-//             <section>
-//                 <div className="md:flex items-center justify-between">
-//                     <h3 className="mb-4">AIAG - Content Generation Details ({AIAG_VERSION})</h3>
-//                     <ContentActions
-//                         handleRevise={handleRevise}
-//                         feedback={feedback}
-//                         setFeedback={setFeedback}
-//                         content={content}
-//                         contentRef={contentRef}
-//                     />
-//                 </div>
-//                 <Separator className="mb-4" />
-//                 <div ref={contentRef} className="prose prose-neutral max-w-none markdown-body space-y-3 dark:prose-invert">
-//                     <ReactMarkdown remarkPlugins={[remarkGfm]}>{content}</ReactMarkdown>
-//                 </div>
-//                 <Separator className="mt-8" />
-//             </section>
-//             <ImageGenerator imagePrompt={imagePrompt}  />
-//             <Separator />
-//             <ContentChat />
-//         </main>
-//     );
-// }
-
-
 import React, { useState, useEffect, useRef } from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { Separator } from "@/components/ui/separator";
-import { AIAG_VERSION } from "@/lib/ai/constants";
+import { AIAG_VERSION } from "@/lib/aiag/constants";
 import { ContentActions } from "./content-actions";
 import { ImageGenerator } from "./image-generator";
 import { ContentChat } from "./content-chat";
 import { GeneratedPersonaContent } from "./persona/generated-persona-content";
 import { LineSpinner } from "@/shared/spinner";
-import { knowledgeBaseContent } from "@/lib/ai/knowledge_base";
+import { knowledgeBaseContent } from "@/lib/aiag/knowledge_base";
 
 export function GeneratedContent({ content, imagePrompt, handleRevise, feedback, setFeedback, generatingPersona, personaGeneratedContent, setpersonasText, personasText, setuploadedPersonaFileData, handleAdaptPersona, modelAlias,temperature }: any) {
     const [isHeaderSticky, setIsHeaderSticky] = useState(false);

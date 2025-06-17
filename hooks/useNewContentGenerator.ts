@@ -2,8 +2,8 @@
 
 import { useState, useEffect } from "react"
 import { modelTabs, contentTypes, subjects, audiences, ctas, socialPlatforms } from "@/config/form-data"
-import { getNewGenerationPrompts, getImageGenerationPrompt, getRevisionPrompts, getHyperRelevancePrompts } from "@/lib/ai/prompts"
-import { knowledgeBaseContent } from "@/lib/ai/knowledge_base"
+import { getNewGenerationPrompts, getImageGenerationPrompt, getRevisionPrompts, getHyperRelevancePrompts } from "@/lib/aiag/prompts"
+import { knowledgeBaseContent } from "@/lib/aiag/knowledge_base"
 import { generateNewContent } from "@/actions/generate-new-content"
 import { cleanAndFlattenBulletsGoogle } from "@/lib/cleanMarkdown"
 import { adjustToneAndCreativityData } from "@/config/form-data"

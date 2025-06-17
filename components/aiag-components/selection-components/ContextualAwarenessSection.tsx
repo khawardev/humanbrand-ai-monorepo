@@ -1,5 +1,6 @@
-import { FormSection } from "@/components/home/form-section"
+import { FormSection } from "@/components/aiag-components/reusable-components/form-section"
 import { Textarea } from "@/components/ui/textarea"
+import { Input } from "../../ui/input";
 
 interface ContextualAwarenessSectionProps {
     value: string;
@@ -10,7 +11,7 @@ interface ContextualAwarenessSectionProps {
 export function ContextualAwarenessSection({ value, onChange, title }: ContextualAwarenessSectionProps) {
     return (
         <FormSection title={title}>
-            <Textarea placeholder="Provide relevant background information or context..." rows={49} value={value} onChange={(e) => onChange(e.target.value)} />
+            <Input placeholder="Provide relevant background context..." value={value} onChange={(e) => onChange(e.target.value)} />
         </FormSection>
     )
 }
