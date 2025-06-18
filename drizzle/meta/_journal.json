@@ -22,6 +22,34 @@
       "when": 1750158194399,
       "tag": "0002_safe_champions",
       "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1750230078279,
+      "tag": "0003_bitter_electro",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1750231844607,
+      "tag": "0004_black_punisher",
+      "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "7",
+      "when": 1750233050951,
+      "tag": "0005_heavy_valkyrie",
+      "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1750233156605,
+      "tag": "0006_furry_brood",
+      "breakpoints": true
     }
   ]
 }

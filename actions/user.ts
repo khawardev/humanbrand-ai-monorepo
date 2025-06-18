@@ -1,9 +1,10 @@
 "use server";
 
 import { db } from "@/db";
-import { user } from "@/db/schema/users-auth";
+import { savedSession } from "@/db/schema/session-schema";
+import { user } from "@/db/schema/users-schema";
 import { auth } from "@/lib/auth";
-import { eq } from "drizzle-orm";
+import { desc, eq } from "drizzle-orm";
 import { headers } from "next/headers";
 
 export async function getUser(){
@@ -13,4 +14,33 @@ export async function getUser(){
   }
 
   return (await db.select().from(user).where(eq(user.id, session.user.id)))[0];
+}
+
+
+export async function getUserWithSessions() {
+  const session = await auth.api.getSession({ headers: await headers() });
+  console.log("Session result:", session);
+
+  if (!session || !session.user?.id) {
+    console.warn("No session or user ID in session");
+    return null;
+  }
+
+  const results = await db
+    .select({
+      user: user,
+      sessions: savedSession
+    })
+    .from(user)
+    .leftJoin(savedSession, eq(user.id, savedSession.userId))
+    .where(eq(user.id, session.user.id))
+    .orderBy(desc(savedSession.createdAt)); 
+
+  const userData = results[0]?.user;
+  const sessions = results.filter(row => row.sessions !== null).map(row => row.sessions);
+
+  return {
+    ...userData,
+    savedSessions: sessions
+  };
 }

@@ -4,9 +4,12 @@ import { useState, useEffect } from "react"
 import { modelTabs, contentTypes, subjects, audiences, ctas, socialPlatforms } from "@/config/form-data"
 import { getNewGenerationPrompts, getImageGenerationPrompt, getRevisionPrompts, getHyperRelevancePrompts } from "@/lib/aiag/prompts"
 import { knowledgeBaseContent } from "@/lib/aiag/knowledge_base"
-import { generateNewContent } from "@/actions/generate-new-content"
+import { generateNewContent, generateSessionTitle } from "@/actions/generate-new-content"
 import { cleanAndFlattenBulletsGoogle } from "@/lib/cleanMarkdown"
 import { adjustToneAndCreativityData } from "@/config/form-data"
+import { getUser } from "@/actions/user"
+import { createSession } from "@/actions/session-actions"
+import { toast } from "sonner"
 
 export function useNewContentGenerator() {
     const [selectedModel, setSelectedModel] = useState<number>(modelTabs[0].id)
@@ -52,10 +55,15 @@ export function useNewContentGenerator() {
 
     const handleGenerate = async () => {
         if (isGenerateDisabled) return;
-
         setGeneratingContent(true)
+        const user: any = await getUser()
+        if (!user) toast.warning('Please Login first')
+        
+        
         setContentGenerated("")
         setImagePrompt("")
+        setPersonaGeneratedContent("")
+
 
         const selectedAudienceLabels = audiences.filter((a) => selectedAudiences.includes(a.id)).map((a) => a.label)
         const selectedSubjectObj = subjects.find((s) => s.id === selectedSubjects)
@@ -73,20 +81,53 @@ export function useNewContentGenerator() {
             additionalInstructions: additionalInstructions || '',
             contextualAwareness: contextualAwareness || '',
             knowledgeBaseContent: knowledgeBaseContent,
-            selectedtone: toneValue,
+            selectedtone: toneValue as number,
         }
 
+
+        // Content Genration
         const { systemPrompt, userPrompt } = getNewGenerationPrompts(promptData)
         const generateData = { modelAlias: selectedModelObj?.label, temperature: creativityValue, systemPrompt, userPrompt }
         const generatedResult = await generateNewContent(generateData)
         const cleanedMarkdown = cleanAndFlattenBulletsGoogle(generatedResult.generatedText)
-        setContentGenerated(cleanedMarkdown)
 
+
+        // Session Title Genration
+        const generateSessionData = { modelAlias: selectedModelObj?.label, temperature: creativityValue, userPrompt: generatedResult.generatedText }
+        const generatedSessionTitle = await generateSessionTitle(generateSessionData)
+
+
+        // Image Genration
         const imagePromptData = { selectedAudiences: selectedAudienceLabels, selectedSubject: selectedSubjectObj?.label || "", contentGenerated: cleanedMarkdown }
         const { finalImagePrompt } = getImageGenerationPrompt(imagePromptData)
         const imagePromptGenerated = await generateNewContent({ modelAlias: selectedModelObj?.label, temperature: creativityValue, userPrompt: finalImagePrompt })
-        setImagePrompt(imagePromptGenerated.generatedText)
 
+        // Save Session
+        const session_data = {
+            sessionType: "new",
+            userId: user?.id,
+
+            sessionTitle: generatedSessionTitle.generatedText,
+            selectedModel: selectedModelObj?.label,
+            selectedAudiences: selectedAudienceLabels,
+            selectedSubjects: selectedSubjectObj?.label || null,
+            selectedContentTypes: selectedContentTypeLabels,
+            selectedCtas: selectedCtaLabels,
+            selectedSocialPlatform: selectedSocialPlatformObj?.label || null,
+            referenceMaterial: referenceMaterial || '',
+            additionalInstructions: additionalInstructions || '',
+            contextualAwareness: contextualAwareness || '',
+            selectedtone: toneValue,
+            temperature: creativityValue,
+
+            generatedContent: cleanedMarkdown,
+            imagePrompt: imagePromptGenerated.generatedText,
+        }
+
+        await createSession(session_data)
+
+        setContentGenerated(cleanedMarkdown)
+        setImagePrompt(imagePromptGenerated.generatedText)
         setGeneratingContent(false)
     }
 
@@ -127,6 +168,48 @@ export function useNewContentGenerator() {
         const imagePromptGenerated = await generateNewContent({ modelAlias: selectedModelObj?.label, temperature: creativityValue, userPrompt: finalImagePrompt })
         setImagePrompt(imagePromptGenerated.generatedText)
 
+
+
+
+
+        // const data = {
+        //     sessionType: "EXISTING",
+        //     userId: user.id,
+
+        //     selectedModel: selectedModelObj?.id,
+        //     selectedAudiences: selectedAudiences, 
+        //     selectedSubjects: selectedSubjects || null,
+        //     selectedContentTypes: selectedContentTypes, 
+        //     selectedCtas: selectedCtas, 
+        //     selectedSocialPlatform: selectedSocialPlatform || null,
+        //     referenceMaterial: referenceMaterial || '',
+        //     additionalInstructions: additionalInstructions || '',
+        //     contextualAwareness: contextualAwareness || '',
+        //     toneValue: toneValue,
+        //     creativityValue: Number(creativityValue.toFixed(1)),
+
+        //     generatedContent: cleanedMarkdown,
+        //     imagePrompt: imagePromptGenerated.generatedText,
+        //     feedback: feedback || '',
+        //     personaGeneratedContent: '', 
+        //     personasText: '',
+
+        //     updatedAt: new Date(),
+        // }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         setFeedback('');
         setGeneratingContent(false)
     }
@@ -141,6 +224,49 @@ export function useNewContentGenerator() {
         const generatedPersonaResult = await generateNewContent(generatePersonaData)
         const cleanedMarkdown = cleanAndFlattenBulletsGoogle(generatedPersonaResult.generatedText)
         setPersonaGeneratedContent(cleanedMarkdown)
+
+
+
+
+
+
+        // const data = {
+        //     sessionType: "EXISTING",
+        //     userId: user.id,
+
+        //     selectedModel: selectedModelObj?.id,
+        //     selectedAudiences: selectedAudiences, 
+        //     selectedSubjects: selectedSubjects || null,
+        //     selectedContentTypes: selectedContentTypes, 
+        //     selectedCtas: selectedCtas, 
+        //     selectedSocialPlatform: selectedSocialPlatform || null,
+        //     referenceMaterial: referenceMaterial || '',
+        //     additionalInstructions: additionalInstructions || '',
+        //     contextualAwareness: contextualAwareness || '',
+        //     toneValue: toneValue,
+        //     creativityValue: Number(creativityValue.toFixed(1)),
+
+        //     generatedContent: contentGenerated,
+        //     imagePrompt: imagePrompt || '', 
+        //     feedback: feedback || '',
+        //     personaGeneratedContent: cleanedMarkdown, 
+        //     personasText: personasText || '',
+
+        //     updatedAt: new Date(),
+        // }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         setgeneratingPersona(false)
     }

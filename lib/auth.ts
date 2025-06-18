@@ -1,25 +1,19 @@
 import { betterAuth } from 'better-auth';
 import { drizzleAdapter } from 'better-auth/adapters/drizzle';
-import { username } from 'better-auth/plugins';
 import { db } from '@/db';
-import * as schema from '@/db/schema/users-auth';
+import * as schema from '@/db/schema/users-schema';
 
 export const auth = betterAuth({
     database: drizzleAdapter(db, {
         provider: 'pg',
         schema,
     }),
-    // emailAndPassword: {
-    //     enabled: true,
-    //     requireEmailVerification: false, 
-    // },
     socialProviders: {
         google: {
             clientId: process.env.GOOGLE_CLIENT_ID as string,
             clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
         },
     },
-    // plugins: [username()],
 });
 
 export type Session = typeof auth.$Infer.Session;

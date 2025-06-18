@@ -1,0 +1,2 @@
+CREATE TYPE "public"."model_type" AS ENUM('recomended', 'deepthink');--> statement-breakpoint
+ALTER TABLE "aiag_schema"."saved_sessions" ALTER COLUMN "model" SET DATA TYPE "public"."model_type" USING "model"::"public"."model_type";

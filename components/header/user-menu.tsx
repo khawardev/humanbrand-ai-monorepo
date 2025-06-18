@@ -17,12 +17,14 @@ import { signOut } from '@/lib/auth-client'
 import { useRouter } from "next/navigation"
 
 const UserMenu = ({ user }: any) => {
+  console.log(user,'<-> user <->');
+  
   const router = useRouter()
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger  >
+      <DropdownMenuTrigger>
         <Avatar className=" hover:cursor-pointer">
-          <AvatarImage src={user?.image} alt="Profile image" />
+          <AvatarImage src={user.image&&user.image} alt="Profile image" />
           <AvatarFallback>{user.name?.slice(0, 2).toUpperCase()}</AvatarFallback>
         </Avatar>
       </DropdownMenuTrigger>
