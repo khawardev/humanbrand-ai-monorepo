@@ -92,37 +92,37 @@ function SessionClientPageComponent({ initialData }: any) {
                     isDisabled={isGenerateDisabled}
                 />
 
-                {isContentPending && (
+                {isContentPending ? (
                     <>
                         <Separator />
-                        <LineSpinner>Updating Session...</LineSpinner>
+                        <LineSpinner>Generating Content...</LineSpinner>
                     </>
-                )}
-
-                <div ref={contentRef}>
-                    {contentGenerated && (
-                        <GeneratedContent
-                            isPersonaPending={isPersonaPending}
-                            isImagePending={isImagePending}
-                            content={contentGenerated}
-                            imagePrompt={imagePrompt}
-                            imageUrls={imageUrls}
-                            personaContent={personaContent}
-                            chatHistory={chatHistory}
-                            feedback={feedback}
-                            setFeedback={setFeedback}
-                            personasText={personasText}
-                            setPersonasText={setPersonasText}
-                            setUploadedPersonaFileData={setUploadedPersonaFileData}
-                            handleRevise={handleRevise}
-                            handleAdaptPersona={handleAdaptPersona}
-                            handleImageAction={handleImageAction}
-                            handleChatSend={handleChatSend}
-                            modelAlias={modelAlias}
-                            temperature={creativityValue}
-                        />
-                    )}
-                </div>
+                ) :
+                    <div ref={contentRef}>
+                        {contentGenerated && (
+                            <GeneratedContent
+                                isPersonaPending={isPersonaPending}
+                                isImagePending={isImagePending}
+                                content={contentGenerated}
+                                imagePrompt={imagePrompt}
+                                imageUrls={imageUrls}
+                                personaContent={personaContent}
+                                chatHistory={chatHistory}
+                                feedback={feedback}
+                                setFeedback={setFeedback}
+                                personasText={personasText}
+                                setPersonasText={setPersonasText}
+                                setUploadedPersonaFileData={setUploadedPersonaFileData}
+                                handleRevise={handleRevise}
+                                handleAdaptPersona={handleAdaptPersona}
+                                handleImageAction={handleImageAction}
+                                handleChatSend={handleChatSend}
+                                modelAlias={modelAlias}
+                                temperature={creativityValue}
+                            />
+                        )}
+                    </div>
+                }
             </section>
         </main>
     )

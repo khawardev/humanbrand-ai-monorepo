@@ -10,6 +10,7 @@ import { getChatSystemPrompt } from "@/lib/aiag/prompts"
 import { knowledgeBaseContent } from "@/lib/aiag/knowledge_base"
 
 export function useSessionContentGenerator(initialData: any) {
+    
     const [isContentPending, startContentTransition] = useTransition();
     const [isPersonaPending, startPersonaTransition] = useTransition();
     const [isImagePending, startImageTransition] = useTransition();
@@ -41,6 +42,7 @@ export function useSessionContentGenerator(initialData: any) {
     const [uploadedPersonaFileData, setUploadedPersonaFileData] = useState<any>(null)
 
     const modelAlias = modelTabs.find(tab => tab.id === selectedModel)?.label
+    console.log(uploadedPersonaFileData, `<-> uploadedPersonaFileData <->`);
 
     useEffect(() => {
         setContentGenerated(initialData.generatedContent ?? "");

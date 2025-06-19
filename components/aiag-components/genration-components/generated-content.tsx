@@ -101,7 +101,7 @@ import { GeneratedPersonaContent } from "./persona/generated-persona-content";
 import { LineSpinner } from "@/shared/spinner";
 import { CustomTabs } from "@/shared/CustomTabs";
 import { TbBrandTwitterFilled, TbBrandYoutubeFilled } from "react-icons/tb";
-import { GlobeIcon, Image } from "lucide-react";
+import { GlobeIcon, Image, User } from "lucide-react";
 import { HiOutlineChatAlt } from "react-icons/hi";
 import { BsStars } from "react-icons/bs";
 import { RiImageAiFill } from "react-icons/ri";
@@ -145,10 +145,8 @@ export function GeneratedContent(props: any) {
                     icon: <BsStars />,
                     content: <>
                         <section>
-                            {/* <div ref={headerRef} className={headerClasses}> */}
                             <div ref={headerRef} >
                                 <div>
-                                    {/* <div className={isHeaderSticky ? "md:flex items-center justify-between w-full" : "md:flex items-center justify-between mb-4"}> */}
                                     <div className={"md:flex items-center justify-between mb-4"}>
                                         <h4>AIAG - Content Generation Details ({AIAG_VERSION})</h4>
                                         <ContentActions
@@ -166,15 +164,13 @@ export function GeneratedContent(props: any) {
                                 </div>
                             </div>
 
-                            {isHeaderSticky && <div style={{ height: headerRef.current?.offsetHeight }} />}
                             <div ref={contentRef} className="prose prose-neutral max-w-none markdown-body space-y-3 dark:prose-invert">
                                 <ReactMarkdown remarkPlugins={[remarkGfm]}>{content}</ReactMarkdown>
                             </div>
                             <Separator className="mt-8" />
                         </section>
 
-                        {isPersonaPending && <LineSpinner>Adapting Persona...</LineSpinner>}
-                        {personaContent && !isPersonaPending && <GeneratedPersonaContent content={personaContent} />}
+                        
                     </>,
                 },
                 {
@@ -202,6 +198,20 @@ export function GeneratedContent(props: any) {
                             modelAlias={modelAlias}
                             temperature={temperature}
                         />
+                    ),
+                },
+                {
+                    label: "Persona",
+                    value: "persona",
+                    icon: <User />,
+                    content: (
+                        <>
+                            {isPersonaPending && <LineSpinner>Adapting Persona...</LineSpinner>}
+                            {!isPersonaPending && !personaContent && <div className="flex items-center justify-center h-[50vh] text-muted-foreground">
+                                No persona has been adapted
+                            </div>}
+                            {personaContent && !isPersonaPending && <GeneratedPersonaContent content={personaContent} />}
+                        </>
                     ),
                 },
             ]}

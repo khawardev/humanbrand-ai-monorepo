@@ -15,7 +15,7 @@ interface CustomTabsProps {
 }
 
 const tabTriggerClass =
-    "data-[state=active]:after:bg-primary px-1  justify-start data-[state=active]:after:top-[33px] max-w-36 dark:data-[state=active]:border-none dark:data-[state=active]:bg-background relative rounded-none py-2 after:absolute after:inset-x-0 after:bottom-0 after:h-0.5 data-[state=active]:bg-transparent data-[state=active]:shadow-none   "
+    "data-[state=active]:after:bg-primary px-0 justify-start data-[state=active]:after:top-[33px] max-w-30 dark:data-[state=active]:border-none dark:data-[state=active]:bg-background relative rounded-none py-2 after:absolute after:inset-x-0 after:bottom-0 after:h-0.5 data-[state=active]:bg-transparent data-[state=active]:shadow-none   "
 
 export const CustomTabs: React.FC<CustomTabsProps> = ({ defaultValue, tabs }) => {
     return (

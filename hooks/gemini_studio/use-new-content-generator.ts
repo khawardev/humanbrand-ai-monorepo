@@ -43,13 +43,13 @@ export function useNewContentGenerator() {
     const handleGenerate = async () => {
         if (isGenerateDisabled) return;
 
-        const user: any = await getUser()
-        if (!user) {
-            toast.warning('Please Login first')
-            return;
-        }
-
         startTransition(async () => {
+            const user: any = await getUser()
+            if (!user) {
+                toast.warning('Please Login first')
+                return;
+            }
+
             const sessionData = {
                 sessionType: "new",
                 userId: user?.id,
