@@ -8,7 +8,7 @@ import { cn } from '@/lib/utils';
 import { AIAGConfig } from '@/config/aiag-config';
 import { usePathname } from 'next/navigation';
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { SigninButtonMobile } from '../aiag-components/reusable-components/auth/signin-button';
+import { SigninButtonMobile, SignoutButtonMobile } from '../aiag-components/reusable-components/auth/signin-button';
 
 export default function MobileHeader({ user }:any) {
     const pathname = usePathname()
@@ -67,7 +67,7 @@ export default function MobileHeader({ user }:any) {
                             </div>
                         </ScrollArea>
                     </div>
-                    {!user && <SigninButtonMobile /> }
+                    {user ? <SignoutButtonMobile />   : <SigninButtonMobile /> }
                 </Drawer.Content>
             </Drawer.Portal>
         </Drawer.Root>
