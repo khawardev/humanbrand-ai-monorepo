@@ -271,18 +271,20 @@ export function GeneratedContent(props: any) {
                     content: (
                         <section>
                             <div ref={headerRef}>
-                                <div className={"md:flex items-center justify-between mb-4"}>
+                                <div className={"flex md:items-center items-end justify-between mb-4"}>
                                     <h4>AIAG - Content Generation Details ({AIAG_VERSION})</h4>
-                                    <ContentActions
-                                        content={content}
-                                        handleRevise={handleRevise}
-                                        feedback={feedback}
-                                        setFeedback={setFeedback}
-                                        handleAdaptPersona={handleAdaptPersona}
-                                        personasText={personasText}
-                                        setPersonasText={setPersonasText}
-                                        setUploadedPersonaFileData={setUploadedPersonaFileData}
-                                    />
+                                    <div className=" flex justify-end ">
+                                        <ContentActions
+                                            content={content}
+                                            handleRevise={handleRevise}
+                                            feedback={feedback}
+                                            setFeedback={setFeedback}
+                                            handleAdaptPersona={handleAdaptPersona}
+                                            personasText={personasText}
+                                            setPersonasText={setPersonasText}
+                                            setUploadedPersonaFileData={setUploadedPersonaFileData}
+                                        />
+                                    </div>
                                 </div>
                                 <Separator className="mb-4" />
                             </div>
@@ -330,7 +332,7 @@ export function GeneratedContent(props: any) {
                         <>
                             {isPersonaPending && <LineSpinner>Adapting Persona...</LineSpinner>}
                             {!isPersonaPending && !personaContent && (
-                                <div className="flex items-center justify-center h-[50vh] text-muted-foreground">
+                                <div className="flex items-center  text-center justify-center h-[50vh] text-muted-foreground">
                                     No persona has been adapted for this content yet.
                                 </div>
                             )}
