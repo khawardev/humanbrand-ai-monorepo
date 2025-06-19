@@ -12,7 +12,6 @@ export const auth = betterAuth({
         google: {
             clientId: process.env.GOOGLE_CLIENT_ID as string,
             clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
-            redirectUri: `https://aiag-content-action-model-3-3.vercel.app/api/auth/callback/google`
         },
     },
 });
