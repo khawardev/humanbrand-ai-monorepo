@@ -12,7 +12,7 @@ export  function SigninButtonDesktop() {
     }
     return (
         <section className="md:inline-block hidden ">
-            <Button onClick={signInGoogle} variant={'ghost'} size={'sm'}>
+            <Button onClick={signInGoogle} variant={'outline'} size={'sm'}>
                 <FcGoogle /> Sign In
             </Button>
         </section>
