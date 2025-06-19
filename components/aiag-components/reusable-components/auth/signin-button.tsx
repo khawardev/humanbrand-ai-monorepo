@@ -43,7 +43,7 @@ export function SignoutButtonMobile() {
                 await signOut();
                 router.refresh();
             }} size={'sm'} variant={'destructive'}>
-                <LogOutIcon /> Sign out
+                Sign out 
             </Button>
         </section>
     )

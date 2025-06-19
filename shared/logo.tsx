@@ -35,6 +35,18 @@ export const FullLogo = () => {
         </div>
     )
 }
+export const FullLogoMobile = () => {
+    const theme = useTheme()
+    return (
+        <div className={`flex items-center  justify-center `}>
+            {theme.resolvedTheme === 'light' ? <img src={'https://i.postimg.cc/yY06gqFK/HB-logo-name-mark-side-black-1.png'} width={140} alt={`Logo`}
+                className=' cursor-pointer   '
+            /> : <img src={'https://i.postimg.cc/c1jwNRnH/HB-logo-name-mark-side-green-1.png'} width={140} alt={`Logo`}
+                    className=' cursor-pointer '
+            />}
+        </div>
+    )
+}
 export const FullGreenLogo = () => {
     return (
         <div className={`flex size-42 items-center  justify-center`}>

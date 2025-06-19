@@ -2,7 +2,7 @@ import UserMenu from "@/components/header/user-menu"
 import Link from "next/link"
 import { ThemeSwitcher } from "../ui/theme-switcher"
 import MobileHeader from "./mobile-header"
-import { FullLogo, HalfLogo } from "@/shared/logo"
+import { FullLogo, FullLogoMobile, HalfLogo } from "@/shared/logo"
 import SavedSessions from "../aiag-components/reusable-components/session/saved-sessions"
 import { getUser, getUserWithSessions } from "@/actions/user"
 import { SigninButtonDesktop } from "../aiag-components/reusable-components/auth/signin-button"
@@ -17,7 +17,7 @@ const DesktopHeader = async () => {
                 <div className="flex h-18 items-center justify-between gap-4 ">
                     <Link href="/">
                         <span className=" md:block hidden"><FullLogo /></span>
-                        <span className=" md:hidden block "><HalfLogo /></span>
+                        <span className=" md:hidden block "><FullLogoMobile /></span>
                     </Link>
                     <NavigationMenuComp />
                     <div className="flex  items-center justify-end gap-2">
