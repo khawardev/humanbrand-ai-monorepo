@@ -10,8 +10,10 @@ import { adjustToneAndCreativityData } from "@/config/form-data"
 import { getUser } from "@/actions/user"
 import { createSession } from "@/actions/session-actions"
 import { toast } from "sonner"
+import { useRouter } from "next/navigation"
 
 export function useNewContentGenerator() {
+    const router = useRouter();
     const [selectedModel, setSelectedModel] = useState<number>(modelTabs[0].id)
     const [selectedAudiences, setSelectedAudiences] = useState<number[]>([])
     const [selectedSubjects, setSelectedSubjects] = useState<number | null>(null)
@@ -58,8 +60,8 @@ export function useNewContentGenerator() {
         setGeneratingContent(true)
         const user: any = await getUser()
         if (!user) toast.warning('Please Login first')
-        
-        
+
+
         setContentGenerated("")
         setImagePrompt("")
         setPersonaGeneratedContent("")
@@ -106,14 +108,15 @@ export function useNewContentGenerator() {
         const session_data = {
             sessionType: "new",
             userId: user?.id,
-
             sessionTitle: generatedSessionTitle.generatedText,
-            selectedModel: selectedModelObj?.label,
-            selectedAudiences: selectedAudienceLabels,
-            selectedSubjects: selectedSubjectObj?.label || null,
-            selectedContentTypes: selectedContentTypeLabels,
-            selectedCtas: selectedCtaLabels,
-            selectedSocialPlatform: selectedSocialPlatformObj?.label || null,
+
+            selectedModel: selectedModelObj?.id,
+            selectedAudiences: selectedAudiences,
+            selectedSubjects: selectedSubjects || null,
+            selectedContentTypes: selectedContentTypes,
+            selectedCtas: selectedCtas,
+            selectedSocialPlatform: selectedSocialPlatform || null,
+
             referenceMaterial: referenceMaterial || '',
             additionalInstructions: additionalInstructions || '',
             contextualAwareness: contextualAwareness || '',
@@ -122,9 +125,14 @@ export function useNewContentGenerator() {
 
             generatedContent: cleanedMarkdown,
             imagePrompt: imagePromptGenerated.generatedText,
+
         }
 
-        await createSession(session_data)
+        const res = await createSession(session_data)
+
+        if (res?.sessionId) {
+            router.push(`/session/${res.sessionId}`)
+        }
 
         setContentGenerated(cleanedMarkdown)
         setImagePrompt(imagePromptGenerated.generatedText)

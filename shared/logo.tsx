@@ -26,11 +26,11 @@ export const HalfLogo = () => {
 export const FullLogo = () => {
     const theme = useTheme()
     return (
-        <div className={`flex size-42 items-center  justify-center`}>
-            {theme.resolvedTheme === 'light' ? <img src={'https://i.postimg.cc/yY06gqFK/HB-logo-name-mark-side-black-1.png'} width={1000} alt={`Logo`}
-                className=' cursor-pointer  '
-            /> : <img src={'https://i.postimg.cc/c1jwNRnH/HB-logo-name-mark-side-green-1.png'} width={1000} alt={`Logo`}
-                className=' cursor-pointer  '
+        <div className={`flex  items-center  justify-center `}>
+            {theme.resolvedTheme === 'light' ? <img src={'https://i.postimg.cc/yY06gqFK/HB-logo-name-mark-side-black-1.png'} width={170} alt={`Logo`}
+                className=' cursor-pointer   '
+            /> : <img src={'https://i.postimg.cc/c1jwNRnH/HB-logo-name-mark-side-green-1.png'} width={170} alt={`Logo`}
+                    className=' cursor-pointer '
             />}
         </div>
     )

@@ -18,9 +18,8 @@ export async function createSession(data: any) {
         if (!sessionId) {
             throw new Error("Failed to create session.")
         }
-        revalidatePath('/');
-        // revalidatePath(`/session/${sessionId}`)
-        // redirect(`/session/${sessionId}`)
+        revalidatePath(`/session/${sessionId}`)
+        return { sessionId }
         
     } catch (error) {
         console.error("Error creating session:", error)

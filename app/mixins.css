@@ -12,10 +12,6 @@
   @apply flex justify-between items-center;
 }
 
-.large-text {
-  @apply md:text-[40px]  text-[50px]  md:leading-[100px] leading-[70px] font-bold;
-}
-
 ::-webkit-scrollbar {
   width: 11px;
   height: 8px;

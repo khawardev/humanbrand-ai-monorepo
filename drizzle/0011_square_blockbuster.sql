@@ -1,0 +1,1 @@
+ALTER TABLE "aiag_schema"."saved_sessions" ALTER COLUMN "model" SET DATA TYPE integer;

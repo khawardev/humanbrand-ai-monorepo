@@ -6,7 +6,7 @@ import {
     contentTypes,
     adjustToneAndCreativityData,
 } from "@/config/form-data"
-import { generateAndCreateSession } from "@/actions/session-actions"
+import { createSession } from "@/actions/session-actions"
 
 export function useNewContentGenerator() {
     const [isPending, startTransition] = useTransition()
@@ -69,7 +69,7 @@ export function useNewContentGenerator() {
         }
 
         startTransition(() => {
-            generateAndCreateSession(data)
+            createSession(data)
         })
     }
 

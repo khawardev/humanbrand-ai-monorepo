@@ -53,7 +53,7 @@ export function PersonaDialog({ isOpen, onOpenChange, setpersonasText, setupload
                     />
                 </section>
                 <DialogFooter>
-                    <Button size={'sm'} onClick={handleSubmit} disabled={!personasText.trim()}>Generate</Button>
+                    <Button size={'sm'} onClick={handleSubmit} disabled={!personasText?.trim()}>Generate</Button>
                 </DialogFooter>
             </DialogContent>
         </Dialog>

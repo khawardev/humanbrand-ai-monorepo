@@ -17,8 +17,6 @@ import { signOut } from '@/lib/auth-client'
 import { useRouter } from "next/navigation"
 
 const UserMenu = ({ user }: any) => {
-  console.log(user,'<-> user <->');
-  
   const router = useRouter()
   return (
     <DropdownMenu>
@@ -28,7 +26,7 @@ const UserMenu = ({ user }: any) => {
           <AvatarFallback>{user.name?.slice(0, 2).toUpperCase()}</AvatarFallback>
         </Avatar>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="max-w-64" align="end">
+      <DropdownMenuContent className="max-w-58" align="end">
         <DropdownMenuLabel className="flex gap-2 items-center min-w-0 ">
           <img src={user?.image} className="size-8 rounded-md" alt="" />
           <div className="flex flex-col">

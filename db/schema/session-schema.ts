@@ -5,7 +5,6 @@ import {
     integer,
     jsonb,
     numeric,
-    pgEnum,
 } from "drizzle-orm/pg-core"
 import { user } from "./users-schema"
 import crypto from "crypto";
@@ -21,18 +20,20 @@ export const savedSession = aiag_schema.table("saved_sessions", {
     userId: text("user_id").notNull().references(() => user.id, { onDelete: "cascade" }),
     sessionTitle: text("title"),
 
-    selectedModel: text("model").notNull(),
+    
+    selectedModel: integer("model"),
     selectedAudiences: jsonb("audiences"),
-    selectedSubjects: text("subjects"),
+    selectedSubjects: integer("subjects"),
     selectedContentTypes: jsonb("content_types"),
     selectedCtas: jsonb("ctas"),
-    selectedSocialPlatform: text("social_platform"),
+    selectedSocialPlatform: integer("social_platform"),
+
+
     referenceMaterial: text("reference_material"),
     additionalInstructions: text("additional_instructions"),
     contextualAwareness: text("contextual_awareness"),
     selectedtone: integer("tone").notNull(),
     temperature: numeric("temperature").notNull(),
-
 
     generatedContent: text("generated_content").notNull(),
     imagePrompt: text("image_prompt").notNull(),

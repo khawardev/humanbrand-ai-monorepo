@@ -4,26 +4,22 @@ import React from "react"
 import { Hero } from "@/components/aiag-components/reusable-components/hero"
 import { Generate } from "@/components/aiag-components/reusable-components/generate"
 import { Separator } from "@/components/ui/separator"
+import { CtaSection } from "@/components/aiag-components/selection-components/CtaSection"
 import { LineSpinner } from "@/shared/spinner"
-import { useSessionContentGenerator } from "@/hooks/use-session-content-generator"
 import { ModelsSection } from "@/components/aiag-components/selection-components/ModelsSection"
-import { AudienceSection } from "@/components/aiag-components/selection-components/AudienceSection"
 import { SubjectSection } from "@/components/aiag-components/selection-components/SubjectSection"
+import { AudienceSection } from "@/components/aiag-components/selection-components/AudienceSection"
+import { GeneratedContent } from "@/components/aiag-components/genration-components/generated-content"
 import { ContentTypeSection } from "@/components/aiag-components/selection-components/ContentTypeSection"
 import { SocialPlatformSection } from "@/components/aiag-components/selection-components/SocialPlatformSection"
-import { CtaSection } from "@/components/aiag-components/selection-components/CtaSection"
 import { ReferenceMaterialSection } from "@/components/aiag-components/selection-components/ReferenceMaterialSection"
-import { AdditionalInstructionsSection } from "@/components/aiag-components/selection-components/AdditionalInstructionsSection"
-import { ContextualAwarenessSection } from "@/components/aiag-components/selection-components/ContextualAwarenessSection"
 import { ToneAndCreativitySection } from "@/components/aiag-components/selection-components/ToneAndCreativitySection"
-import { GeneratedContent } from "@/components/aiag-components/genration-components/generated-content"
-import { contentSession } from "@/db/schema/session-schema"
+import { ContextualAwarenessSection } from "@/components/aiag-components/selection-components/ContextualAwarenessSection"
+import { useSessionContentGenerator } from "@/hooks/use-session-content-generator"
+import { AdditionalInstructionsSection } from "@/components/aiag-components/selection-components/AdditionalInstructionsSection"
 
-type SessionComponentProps = {
-    initialData: typeof contentSession.$inferSelect
-}
 
-export function SessionComponent({ initialData }: SessionComponentProps) {
+export function SessionComponent({ initialData }: any) {
     const {
         isPending,
         selectedModel,
@@ -57,6 +53,7 @@ export function SessionComponent({ initialData }: SessionComponentProps) {
         isGenerateDisabled,
         handleGenerate,
         handleRevise,
+        personaContent, // Get the safe personaContent value from the hook
     } = useSessionContentGenerator(initialData)
 
     return (
@@ -118,22 +115,16 @@ export function SessionComponent({ initialData }: SessionComponentProps) {
                     creativityValue={creativityValue}
                     setCreativityValue={setCreativityValue}
                 />
-
                 <Generate
-                    generatingContent={isPending}
                     onGenerate={handleGenerate}
-                    onRevise={handleRevise}
-                    isDisabled={isGenerateDisabled || isPending}
-                    showRevise={true}
+                    isDisabled={isGenerateDisabled}
                 />
-
                 {isPending && (
                     <>
                         <Separator />
                         <LineSpinner>Updating Content..</LineSpinner>
                     </>
                 )}
-
                 {!isPending && contentGenerated && (
                     <GeneratedContent
                         handleRevise={handleRevise}
@@ -141,6 +132,8 @@ export function SessionComponent({ initialData }: SessionComponentProps) {
                         setFeedback={setFeedback}
                         content={contentGenerated}
                         imagePrompt={imagePrompt}
+                        // Pass the safe personaContent down to the child component
+                        personaContent={personaContent}
                     />
                 )}
             </section>
