@@ -146,14 +146,14 @@ export default function Home() {
               
 
              
-                <FormSection title="Reference Materials (optional)">
+                {/* <FormSection title="Reference Materials (optional)">
                     <PdfFileDropzone
                         files={uploadedPdfs}
                         setFiles={setUploadedPdfs}
                         setReferenceMaterial={setReferenceMaterial}
                         maxFiles={1}
                     />
-                </FormSection>
+                </FormSection> */}
                 <FormSection title="Additional Instructions (optional)">
                     <Textarea placeholder="Enter any specific requirements or instructions..." rows={14} />
                 </FormSection>

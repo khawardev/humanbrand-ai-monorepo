@@ -12,7 +12,7 @@ const SessionsList = ({ savedSessions }: any) => {
     return (
         savedSessions?.length === 0 ? (
             <DropdownMenuItem disabled>
-                <span className="text-sm text-muted-foreground">No savedSessions found.</span>
+                <span className="text-sm text-muted-foreground">No session found.</span>
             </DropdownMenuItem>
         ) : (
             <div className="flex flex-col space-y-1">

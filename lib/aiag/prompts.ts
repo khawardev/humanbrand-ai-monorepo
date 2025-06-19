@@ -151,10 +151,10 @@ export function getHyperRelevancePrompts({
     const userPrompt = `Original AIAG Content (to be adapted): ${originalContent || ""}
                           ---
                           Target Persona(s) Description (Manual Input - General Guidance):
-                          ${personasText || "None Provided. Check KB for standard personas if applicable."} (Refer to the KB Section 3.11 for persona language hints).
+                          [] ${personasText || "None Provided. Check KB for standard personas if applicable."} (Refer to the KB Section 3.11 for persona language hints).
                           ---
                           Target Persona(s) Details (from Uploaded Files - ***PRIORITIZE THIS DATA***):
-                          ${uploadedFilesData || "No specific file data provided. Rely on manual description or KB personas if applicable."}
+                          [] ${uploadedFilesData || "No specific file data provided. Rely on manual description or KB personas if applicable."}
                           ---
                           Hyper-Relevance Instructions:
                           1.  Analyze Persona Data: Deeply analyze the persona information (user-provided first, then KB if needed). Identify key characteristics, needs, pain points, motivations, and language style (refer to the KB Section 3.11).

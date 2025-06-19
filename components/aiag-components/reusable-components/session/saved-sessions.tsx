@@ -34,7 +34,7 @@ const SavedSessions = ({ savedSessions }: any) => {
                     </div>
                 </DropdownMenuLabel>
                 <DropdownMenuSeparator />
-                <section className=" max-h-30 overflow-y-auto no-scrollbar">
+                <section className=" max-h-33 overflow-y-auto no-scrollbar">
                     <SessionsList savedSessions={savedSessions} />
                 </section>
 

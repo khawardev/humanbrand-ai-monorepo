@@ -63,12 +63,8 @@
 
 
 
-
-
-
 'use client'
 
-import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import {
     Dialog,
@@ -80,16 +76,15 @@ import { Label } from "@/components/ui/label";
 import { PdfFileDropzone } from "../../reusable-components/uploads/PdfFileDropzone";
 
 export function PersonaDialog({ isOpen, onOpenChange, setPersonasText, setUploadedPersonaFileData, handleAdaptPersona, personasText }: any) {
-    const [uploadedPdfs, setUploadedPdfs] = useState<File[]>([]);
 
     const handleSubmit = () => {
         handleAdaptPersona();
         onOpenChange(false);
-        setUploadedPdfs([]);
     };
 
-    const handlePdfParsed = (data: any) => {
-        setUploadedPersonaFileData(data);
+    const handlePersonaFileChange = (data: any) => {
+        const parsedText = data ? data.parsedText : null;
+        setUploadedPersonaFileData(parsedText);
     };
 
     return (
@@ -107,10 +102,7 @@ export function PersonaDialog({ isOpen, onOpenChange, setPersonasText, setUpload
                     />
                     <Label className="text-sm text-muted-foreground mt-4 mb-2">Upload Persona Details (Optional):</Label>
                     <PdfFileDropzone
-                        files={uploadedPdfs}
-                        setFiles={setUploadedPdfs}
-                        setReferenceMaterial={handlePdfParsed}
-                        maxFiles={1}
+                        onFileChange={handlePersonaFileChange}
                     />
                 </section>
                 <DialogFooter>

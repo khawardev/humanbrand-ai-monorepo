@@ -11,75 +11,46 @@ import { ReferenceMaterialSection } from "@/components/aiag-components/selection
 import { AdditionalInstructionsSection } from "@/components/aiag-components/selection-components/AdditionalInstructionsSection"
 import { ContextualAwarenessSection } from "@/components/aiag-components/selection-components/ContextualAwarenessSection"
 import { ToneAndCreativitySection } from "@/components/aiag-components/selection-components/ToneAndCreativitySection"
-import { GeneratedContent } from "@/components/aiag-components/genration-components/generated-content"
 
-
-export default function page() {
+export default function ExistingContentPage() {
   const {
+    isPending,
     selectedModel, setSelectedModel,
-    uploadedPdfs, setUploadedPdfs,
+    referencePdfInfo,
+    handleReferenceFileChange,
     additionalInstructions, setAdditionalInstructions,
     contextualAwareness, setContextualAwareness,
-    setReferenceMaterial,
     toneValue, setToneValue,
     creativityValue, setCreativityValue,
-    generatingContent,
-    contentGenerated,
-    imagePrompt,
-    feedback, setFeedback,
-    generatingPersona,
-    personaGeneratedContent,
-    personasText, setpersonasText,
-    setuploadedPersonaFileData,
-    handleAdaptPersona,
     isGenerateDisabled,
-    selectedModelObj,
     handleGenerate,
-    handleRevise
   } = useExistingContentGenerator()
-
-  const handleSaveDraft = () => console.log("Draft saved!")
 
   return (
     <main className="overflow-hidden pt-14">
       <Hero />
       <section className="div-center-md">
         <ModelsSection title={'HBAI Models'} selectedValue={selectedModel} onValueChange={setSelectedModel} />
-        <ReferenceMaterialSection title={'Existing Content'} files={uploadedPdfs} setFiles={setUploadedPdfs} setReferenceMaterial={setReferenceMaterial} />
+        <ReferenceMaterialSection
+          title={'Existing Content'}
+          initialFileInfo={referencePdfInfo}
+          onFileChange={handleReferenceFileChange}
+        />
         <AdditionalInstructionsSection title={'Additional Instructions (optional)'} value={additionalInstructions} onChange={setAdditionalInstructions} />
         <ContextualAwarenessSection title={'Contextual Awareness (optional)'} value={contextualAwareness} onChange={setContextualAwareness} />
         <ToneAndCreativitySection title={'Adjust Tone and Creativity'} toneValue={toneValue} setToneValue={setToneValue} creativityValue={creativityValue} setCreativityValue={setCreativityValue} />
 
-        {/* <Generate
-          generatingContent={generatingContent}
-          onSaveDraft={handleSaveDraft}
+        <Generate
+          isPending={isPending}
           onGenerate={handleGenerate}
           isDisabled={isGenerateDisabled}
-        /> */}
+        />
 
-        {generatingContent && (
+        {isPending && (
           <>
             <Separator />
-            <LineSpinner>Generating Content..</LineSpinner>
+            <LineSpinner>Enhancing Content & Creating Session...</LineSpinner>
           </>
-        )}
-
-        {!generatingContent && contentGenerated && (
-          <GeneratedContent
-            handleRevise={handleRevise}
-            feedback={feedback}
-            setFeedback={setFeedback}
-            content={contentGenerated}
-            imagePrompt={imagePrompt}
-            generatingPersona={generatingPersona}
-            personaGeneratedContent={personaGeneratedContent}
-            setpersonasText={setpersonasText}
-            setuploadedPersonaFileData={setuploadedPersonaFileData}
-            handleAdaptPersona={handleAdaptPersona}
-            personasText={personasText}
-            modelAlias={selectedModelObj?.label}
-            temperature={creativityValue}
-          />
         )}
       </section>
     </main>

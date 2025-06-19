@@ -4,6 +4,7 @@ import "./globals.css";
 import DesktopHeader from "@/components/header/desktop-header";
 import { Toaster } from "@/components/ui/sonner";
 import { ThemeProvider } from "next-themes";
+import Providers from "@/components/progressBarProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -34,9 +35,11 @@ export default function RootLayout({
           defaultTheme="system"
           enableSystem
         > 
+          <Providers>
           <DesktopHeader />
           {children}
-          <Toaster />
+            <Toaster />
+          </Providers>
         </ThemeProvider> 
       </body>
     </html>

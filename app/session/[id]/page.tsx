@@ -1,5 +1,4 @@
 import { getSessionById } from "@/actions/session-actions"
-import { SessionComponent } from "@/components/aiag-components/session/session-component"
 import { SessionClientPage } from "@/components/aiag-components/session/SessionClientPageComponent";
 import { notFound } from "next/navigation"
 
