@@ -50,12 +50,12 @@ export default function page() {
         <ContextualAwarenessSection title={'Contextual Awareness (optional)'} value={contextualAwareness} onChange={setContextualAwareness} />
         <ToneAndCreativitySection title={'Adjust Tone and Creativity'} toneValue={toneValue} setToneValue={setToneValue} creativityValue={creativityValue} setCreativityValue={setCreativityValue} />
 
-        <Generate
+        {/* <Generate
           generatingContent={generatingContent}
           onSaveDraft={handleSaveDraft}
           onGenerate={handleGenerate}
           isDisabled={isGenerateDisabled}
-        />
+        /> */}
 
         {generatingContent && (
           <>

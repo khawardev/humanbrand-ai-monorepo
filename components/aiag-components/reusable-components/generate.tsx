@@ -1,18 +1,38 @@
+// import { Button } from "@/components/ui/button"
+// import { ButtonSpinner } from "@/shared/spinner";
+
+// type FormActionsProps = {
+//     onSaveDraft: () => void;
+//     onGenerate: () => void;
+//     generatingContent: boolean;
+//     isDisabled ?: boolean;
+// }
+
+// export const Generate =  ({ onSaveDraft, onGenerate, generatingContent, isDisabled }: any) => {
+//     return (
+//         <div className="flex justify-end space-x-3 mb-12">
+//             <Button size="sm"  disabled={generatingContent || isDisabled} onClick={onGenerate}>
+//                 {generatingContent ? <ButtonSpinner>Generating</ButtonSpinner> : 'Generate'}
+//             </Button>
+//         </div>
+//     )
+// }
+
+
 import { Button } from "@/components/ui/button"
 import { ButtonSpinner } from "@/shared/spinner";
 
-type FormActionsProps = {
-    onSaveDraft: () => void;
+type GenerateProps = {
     onGenerate: () => void;
-    generatingContent: boolean;
-    isDisabled ?: boolean;
+    isPending: boolean;
+    isDisabled?: boolean;
 }
 
-export const Generate =  ({ onSaveDraft, onGenerate, generatingContent, isDisabled }: any) => {
+export const Generate = ({ onGenerate, isPending, isDisabled }: GenerateProps) => {
     return (
         <div className="flex justify-end space-x-3 mb-12">
-            <Button size="sm"  disabled={generatingContent || isDisabled} onClick={onGenerate}>
-                {generatingContent ? <ButtonSpinner>Generating</ButtonSpinner> : 'Generate'}
+            <Button size="sm" disabled={isPending || isDisabled} onClick={onGenerate}>
+                {isPending ? <ButtonSpinner>Please wait</ButtonSpinner> : 'Generate'}
             </Button>
         </div>
     )

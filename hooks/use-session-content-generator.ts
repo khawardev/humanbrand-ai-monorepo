@@ -2,7 +2,6 @@
 
 import { useState, useEffect, useTransition } from "react"
 import { contentTypes } from "@/config/form-data"
-import { updateSession } from "@/actions/session-actions"
 
 interface SessionData {
     id: string;
@@ -82,21 +81,21 @@ export function useSessionContentGenerator(initialData: SessionData) {
         personaContent,
     })
 
-    const handleGenerate = () => {
-        if (isGenerateDisabled) return
-        startTransition(async () => {
-            const data = prepareData()
-            await updateSession(initialData.id, data)
-        })
-    }
+    // const handleGenerate = () => {
+    //     if (isGenerateDisabled) return
+    //     startTransition(async () => {
+    //         const data = prepareData()
+    //         await updateSession(initialData.id, data)
+    //     })
+    // }
 
-    const handleRevise = () => {
-        if (isGenerateDisabled || !feedback) return
-        startTransition(async () => {
-            const data = prepareData()
-            await updateSession(initialData.id, data)
-        })
-    }
+    // const handleRevise = () => {
+    //     if (isGenerateDisabled || !feedback) return
+    //     startTransition(async () => {
+    //         const data = prepareData()
+    //         await updateSession(initialData.id, data)
+    //     })
+    // }
 
     return {
         isPending,
@@ -129,8 +128,6 @@ export function useSessionContentGenerator(initialData: SessionData) {
         feedback,
         setFeedback,
         isGenerateDisabled,
-        handleGenerate,
-        handleRevise,
         personaContent, // Export the new state
         setPersonaContent, // And its setter
     }

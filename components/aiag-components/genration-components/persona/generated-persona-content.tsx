@@ -29,10 +29,12 @@ export function GeneratedPersonaContent({ content }: any) {
     return (
         <main className="space-y-10 ">
             <section>
-                <div ref={headerRef} className={headerClasses}>
+                {/* <div ref={headerRef} className={headerClasses}> */}
+                <div ref={headerRef} >
                     <div >
-                        <div className={isHeaderSticky ? "md:flex items-center justify-between w-full" : "md:flex items-center justify-between mb-4"}>
-                            <h3 className="text-muted-foreground">Hyper-Relevant Persona Version</h3>
+                        {/* <div className={isHeaderSticky ? "md:flex items-center justify-between w-full" : "md:flex items-center justify-between mb-4"}> */}
+                        <div className={"md:flex items-center justify-between mb-4"}>
+                            <h4>Hyper-Relevant Persona Version</h4>
                             <PersonaContentActions
                                 content={content}
                             />

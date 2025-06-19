@@ -20,7 +20,7 @@ const tabTriggerClass =
 export const CustomTabs: React.FC<CustomTabsProps> = ({ defaultValue, tabs }) => {
     return (
         <Tabs  defaultValue={defaultValue}>
-            <TabsList className="w-full overflow-x-auto md:mt-6 mt-4 flex-wrap no-scrollbar justify-start rounded-none border-b p-0 bg-transparent">
+            <TabsList className="w-full overflow-x-auto flex-wrap no-scrollbar justify-start rounded-none border-b p-0 bg-transparent">
                 {tabs.map(({ label, value, icon }) => (
                     <TabsTrigger key={value} value={value} className={tabTriggerClass}>
                         {icon} {label}

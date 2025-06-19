@@ -11,14 +11,11 @@ import {
 import { Copy, Download, Stars } from "lucide-react";
 import { TfiLoop } from "react-icons/tfi";
 import { IoIosArrowDown } from "react-icons/io";
-import { BiSolidFilePdf } from "react-icons/bi";
-// import jsPDF from "jspdf";
-// import html2canvas from "html2canvas";
 import { ReviseDialog } from "./revise-dialog";
 import { toast } from "sonner";
 import { PersonaDialog } from "./persona/persona-dialog";
 
-export function ContentActions({ content, handleRevise, feedback, setFeedback, setpersonasText, personasText , setuploadedPersonaFileData, handleAdaptPersona }: any) {
+export function ContentActions({ content, handleRevise, feedback, setFeedback, setPersonasText, personasText, setUploadedPersonaFileData, handleAdaptPersona }: any) {
     const [isReviseOpen, setReviseOpen] = useState(false);
     const [isAdaptOpen, setAdaptOpen] = useState(false);
 
@@ -76,13 +73,12 @@ export function ContentActions({ content, handleRevise, feedback, setFeedback, s
                 isOpen={isReviseOpen}
                 onOpenChange={setReviseOpen}
             />
-            
             <PersonaDialog
                 isOpen={isAdaptOpen}
                 onOpenChange={setAdaptOpen}
-                setpersonasText={setpersonasText}
+                setPersonasText={setPersonasText}             
                 personasText={personasText}
-                setuploadedPersonaFileData={setuploadedPersonaFileData}
+                setUploadedPersonaFileData={setUploadedPersonaFileData} 
                 handleAdaptPersona={handleAdaptPersona}
             />
         </>

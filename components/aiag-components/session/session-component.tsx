@@ -51,8 +51,6 @@ export function SessionComponent({ initialData }: any) {
         feedback,
         setFeedback,
         isGenerateDisabled,
-        handleGenerate,
-        handleRevise,
         personaContent, // Get the safe personaContent value from the hook
     } = useSessionContentGenerator(initialData)
 
@@ -115,27 +113,17 @@ export function SessionComponent({ initialData }: any) {
                     creativityValue={creativityValue}
                     setCreativityValue={setCreativityValue}
                 />
-                <Generate
+                {/* <Generate
                     onGenerate={handleGenerate}
                     isDisabled={isGenerateDisabled}
-                />
+                /> */}
                 {isPending && (
                     <>
                         <Separator />
                         <LineSpinner>Updating Content..</LineSpinner>
                     </>
                 )}
-                {!isPending && contentGenerated && (
-                    <GeneratedContent
-                        handleRevise={handleRevise}
-                        feedback={feedback}
-                        setFeedback={setFeedback}
-                        content={contentGenerated}
-                        imagePrompt={imagePrompt}
-                        // Pass the safe personaContent down to the child component
-                        personaContent={personaContent}
-                    />
-                )}
+               
             </section>
         </main>
     )

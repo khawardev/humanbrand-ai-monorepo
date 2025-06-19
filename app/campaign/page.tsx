@@ -177,7 +177,7 @@ export default function Home() {
                         ))}
                     </div>
                 </FormSection>
-                <Generate generatingContent={generatingContent} onSaveDraft={handleSaveDraft} onGenerate={handleGenerate} />
+                {/* <Generate generatingContent={generatingContent} onSaveDraft={handleSaveDraft} onGenerate={handleGenerate} /> */}
 
             </section>
         </main>
