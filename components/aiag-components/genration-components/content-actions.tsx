@@ -29,7 +29,7 @@ export function ContentActions({ content, handleRevise, feedback, setFeedback, s
         const url = URL.createObjectURL(blob);
         const a = document.createElement("a");
         a.href = url;
-        a.download = "AIAG_Generated_Content.txt";
+        a.download = "AIAG_generatedContent.txt";
         document.body.appendChild(a);
         a.click();
         document.body.removeChild(a);
@@ -46,7 +46,7 @@ export function ContentActions({ content, handleRevise, feedback, setFeedback, s
                         Actions <IoIosArrowDown />
                     </Button>
                 </DropdownMenuTrigger>
-                <DropdownMenuContent className="max-w-64" align="end">
+                <DropdownMenuContent className="w-22" align="end">
                     <DropdownMenuItem onClick={handleCopy}>
                         <Copy size={16} className="opacity-60 mr-2" aria-hidden="true" />
                         <span>Copy</span>

@@ -531,6 +531,8 @@ export function useSessionContentGenerator(initialData: any) {
     const [personasText, setPersonasText] = useState("")
     const [uploadedPersonaFileData, setUploadedPersonaFileData] = useState<any>(null)
 
+    const [isChatLoading, setIsChatLoading] = useState(false);
+
     const modelAlias = modelTabs.find(tab => tab.id === selectedModel)?.label
 
     useEffect(() => {
@@ -639,6 +641,8 @@ export function useSessionContentGenerator(initialData: any) {
     };
 
     const handleChatSend = async (userInput: string) => {
+        setIsChatLoading(true);
+
         const userMessage = { role: 'user', content: userInput };
         const newHistory = [...chatHistory, userMessage];
         setChatHistory(newHistory);
@@ -655,12 +659,15 @@ export function useSessionContentGenerator(initialData: any) {
         const assistantMessage = { role: 'assistant', content: result.generatedText || "Sorry, an error occurred." };
         const finalHistory = [...newHistory, assistantMessage];
         setChatHistory(finalHistory);
+        
+        setIsChatLoading(false);
 
         await updateChatForSession(initialData.id, {
             chatHistory: finalHistory,
             chatPdfInfo: chatPdfInfo,
             chatPdfData: chatPdfData,
         });
+
     };
 
     const handleReferenceFileChange = ({ file, parsedText }: any) => {
@@ -722,6 +729,7 @@ export function useSessionContentGenerator(initialData: any) {
         imageReferenceFileInfo,
 
         handleChatSend,
+        isChatLoading,
         handleChatFileChange,
         chatPdfInfo,
 

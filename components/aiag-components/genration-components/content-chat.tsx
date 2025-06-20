@@ -371,10 +371,9 @@ import ReactMarkdown from "react-markdown";
 import { LineSpinner } from "@/shared/spinner";
 import { PdfFileDropzone } from "../reusable-components/uploads/PdfFileDropzone";
 
-export function ContentChat({ chatHistory = [], handleChatSend, onChatFileChange, chatPdfInfo }: any) {
+export function ContentChat({ chatHistory = [], handleChatSend, onChatFileChange, chatPdfInfo, isChatLoading }: any) {
     const [messages, setMessages] = useState(chatHistory);
     const [input, setInput] = useState<string>("");
-    const [isLoading, setIsLoading] = useState<boolean>(false);
     const chatContainerRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
@@ -387,19 +386,13 @@ export function ContentChat({ chatHistory = [], handleChatSend, onChatFileChange
 
     const handleSend = async (e: React.FormEvent) => {
         e.preventDefault();
-        if (!input.trim() || isLoading) return;
-
-        setIsLoading(true);
+        if (!input.trim() || isChatLoading) return;
         const currentInput = input;
         setInput("");
-
         setMessages((prev: any) => [...prev, { role: 'user', content: currentInput }]);
-
         await handleChatSend(currentInput);
-
-        setIsLoading(false);
     };
-
+    
     return (
         <section className="space-y-4 flex flex-col h-[90vh]">
             <div>
@@ -407,26 +400,41 @@ export function ContentChat({ chatHistory = [], handleChatSend, onChatFileChange
             </div>
 
             <div ref={chatContainerRef} className="flex-1 overflow-y-auto  space-y-4 pr-2">
-                {messages.length === 0 && !isLoading ? (
+                {messages.length === 0 && !isChatLoading ? (
                     <div className="flex items-center justify-center h-full text-muted-foreground">
                         Start the conversation by typing below.
                     </div>
                 ) : (
                     messages.map((msg: any, index: number) => (
-                        <div key={index} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
-                            <div className={`max-w-xl p-2 rounded-lg text-[15px] ${msg.role === 'user' ? 'bg-primary text-primary-foreground border ' : 'bg-accent border '}`}>
-                                <div className="markdown-body-sm text-[15px]">
+                        <div key={index} className="flex items-start gap-2 my-2 no-scrollbar">
+                            {/* Avatar */}
+                            <img
+                                src={msg.role === 'user' ? 'https://lh3.googleusercontent.com/a/ACg8ocKctIUVaiLHfumqG0mGTEmK6sc2AgpaTJzxnOU4J-h1S-wY0y-h=s96-c' : 'http://localhost:3000/_next/image?url=https%3A%2F%2Fi.postimg.cc%2FZYDgZQyF%2Faiag-logo.jpg&w=256&q=75'}
+                                alt={`${msg.role} avatar`}
+                                className={`w-9 h-9 border rounded-md object-cover mt-1 ${msg.role !== 'user' && 'mt-3'} `}
+                            />
+
+                            <div className={`w-full p-2 rounded-lg text-[15px]  ${msg.role === 'user'
+                                    ? 'bg-primary text-primary-foreground'
+                                    : ''
+                                    }`}
+                            >
+                                <div className="markdown-body space-y-1 text-[15px]">
                                     <ReactMarkdown remarkPlugins={[remarkGfm]}>{msg.content}</ReactMarkdown>
                                 </div>
                             </div>
                         </div>
+
                     ))
                 )}
-                {isLoading && (
-                    <div className="flex justify-start">
-                        <div className="max-w-xl p-2 rounded-lg bg-accent border">
-                            <LineSpinner>Thinking</LineSpinner>
-                        </div>
+                {isChatLoading && (
+                    <div className="flex items-start gap-2 my-2">
+                        <img
+                            src={'http://localhost:3000/_next/image?url=https%3A%2F%2Fi.postimg.cc%2FZYDgZQyF%2Faiag-logo.jpg&w=256&q=75'}
+                            alt={` avatar`}
+                            className="w-9 h-9 border rounded-md object-cover mt-1"
+                        />
+                        <span className="p-2"> <LineSpinner>Thinking</LineSpinner></span>
                     </div>
                 )}
             </div>
@@ -445,10 +453,10 @@ export function ContentChat({ chatHistory = [], handleChatSend, onChatFileChange
                     onChange={(e) => setInput(e.target.value)}
                     placeholder="Ask a question about the generated content..."
                     onKeyDown={(e) => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); handleSend(e); } }}
-                    disabled={isLoading}
+                    disabled={isChatLoading}
                 />
-                <Button type="submit" disabled={isLoading || !input.trim()}>
-                    {isLoading ? <LuLoaderCircle className="text-background size-3 animate-spin" /> : 'Send'}
+                <Button type="submit" disabled={isChatLoading || !input.trim()}>
+                    {isChatLoading ? <LuLoaderCircle className="text-background size-3 animate-spin" /> : 'Send'}
                 </Button>
             </form>
         </section>

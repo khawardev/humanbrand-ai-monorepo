@@ -273,7 +273,7 @@ export default function HomePage() {
         {isPending && (
           <>
             <Separator />
-            <LineSpinner>Generating & Creating Session...</LineSpinner>
+            <LineSpinner>Generating Content...</LineSpinner>
           </>
         )}
       </section>

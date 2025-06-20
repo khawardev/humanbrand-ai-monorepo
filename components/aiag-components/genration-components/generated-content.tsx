@@ -170,7 +170,7 @@
 //                             <Separator className="mt-8" />
 //                         </section>
 
-                        
+
 //                     </>,
 //                 },
 //                 {
@@ -242,11 +242,13 @@ import { ContentActions } from "./content-actions";
 import { ImageGenerator } from "./image-generator";
 import { ContentChat } from "./content-chat";
 import { GeneratedPersonaContent } from "./persona/generated-persona-content";
-import { LineSpinner } from "@/shared/spinner";
+import { LineSpinner, Spinner } from "@/shared/spinner";
 import { CustomTabs } from "@/shared/CustomTabs";
 import { Image, User } from "lucide-react";
 import { HiOutlineChatAlt } from "react-icons/hi";
 import { BsStars } from "react-icons/bs";
+import { MdOutlinePerson } from "react-icons/md";
+import { RiAiGenerate, RiChatSmileAiLine, RiImageCircleAiFill } from "react-icons/ri";
 
 export function GeneratedContent(props: any) {
     const {
@@ -254,7 +256,7 @@ export function GeneratedContent(props: any) {
         handleRevise, feedback, setFeedback,
         handleAdaptPersona, personasText, setPersonasText, setUploadedPersonaFileData,
         handleImageAction, onImageFileChange, imageReferenceFileInfo,
-        handleChatSend, onChatFileChange, chatPdfInfo,
+        handleChatSend, isChatLoading, onChatFileChange, chatPdfInfo,
         modelAlias, temperature
     } = props;
 
@@ -263,11 +265,12 @@ export function GeneratedContent(props: any) {
     return (
         <CustomTabs
             defaultValue="content_generate"
+            triggerMaxWidthClass="max-w-30"
             tabs={[
                 {
                     label: "Content",
                     value: "content_generate",
-                    icon: <BsStars />,
+                    icon: <RiAiGenerate />,
                     content: (
                         <section>
                             <div ref={headerRef}>
@@ -297,7 +300,7 @@ export function GeneratedContent(props: any) {
                 {
                     label: "Image",
                     value: "image_generate",
-                    icon: <Image />,
+                    icon: <RiImageCircleAiFill />,
                     content: (
                         <ImageGenerator
                             imagePrompt={imagePrompt}
@@ -312,11 +315,12 @@ export function GeneratedContent(props: any) {
                 {
                     label: "Chat",
                     value: "chat",
-                    icon: <HiOutlineChatAlt />,
+                    icon: <RiChatSmileAiLine />,
                     content: (
                         <ContentChat
                             chatHistory={chatHistory}
                             handleChatSend={handleChatSend}
+                            isChatLoading={isChatLoading}
                             onChatFileChange={onChatFileChange}
                             chatPdfInfo={chatPdfInfo}
                             modelAlias={modelAlias}
@@ -327,15 +331,15 @@ export function GeneratedContent(props: any) {
                 {
                     label: "Persona",
                     value: "persona",
-                    icon: <User />,
+                    icon: isPersonaPending ? <Spinner /> : <MdOutlinePerson />,
                     content: (
                         <>
-                            {isPersonaPending && <LineSpinner>Adapting Persona...</LineSpinner>}
                             {!isPersonaPending && !personaContent && (
                                 <div className="flex items-center  text-center justify-center h-[50vh] text-muted-foreground">
                                     No persona has been adapted for this content yet.
                                 </div>
                             )}
+                            {isPersonaPending && <LineSpinner>Adapting Persona...</LineSpinner>}
                             {personaContent && !isPersonaPending && <GeneratedPersonaContent content={personaContent} />}
                         </>
                     ),
