@@ -1,6 +1,6 @@
 import { getSessionById } from "@/actions/session-actions"
 import { getUser } from "@/actions/user";
-import { SessionClientPage } from "@/components/aiag-components/session/SessionClientPageComponent";
+import { SessionPageComponent } from "@/components/aiag-components/session/session-component";
 import { notFound } from "next/navigation"
 
 const page = async ({ params }: any) => {
@@ -11,7 +11,7 @@ const page = async ({ params }: any) => {
     if (!sessionData) {
         notFound()
     }
-    return <SessionClientPage user={user} initialData={sessionData} />
+    return <SessionPageComponent user={user} initialData={sessionData} />
 }
 
 export default page

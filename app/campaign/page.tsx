@@ -2,7 +2,6 @@
 
 import { CheckboxCard } from "@/components/aiag-components/reusable-components/checkbox-card"
 import { FormSection } from "@/components/aiag-components/reusable-components/form-section"
-import { Generate } from "@/components/aiag-components/reusable-components/generate"
 import { ModelsTabs } from "@/components/aiag-components/reusable-components/models-tabs"
 import { adjustToneAndCreativityData, audiences, campaignElementsData, campaignTypes, contentTypes, ctas, modelTabs, socialPlatforms, subjects } from "@/config/form-data"
 import { Hero } from "@/components/aiag-components/reusable-components/hero"
@@ -11,7 +10,6 @@ import { RadioCard } from "@/components/aiag-components/reusable-components/radi
 import { Textarea } from "@/components/ui/textarea"
 import { Label } from "@radix-ui/react-dropdown-menu"
 import { Slider } from "@/components/ui/slider"
-import { PdfFileDropzone } from "@/components/aiag-components/reusable-components/uploads/PdfFileDropzone"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { cn } from "@/lib/utils"
 

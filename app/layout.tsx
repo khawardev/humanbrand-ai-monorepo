@@ -30,17 +30,17 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning={true}>
       <body className={`${inter?.className} relative  antialiased`} suppressHydrationWarning={true}>
-       <ThemeProvider
+        <ThemeProvider
           attribute="class"
           defaultTheme="system"
           enableSystem
-        > 
+        >
           <Providers>
-          <DesktopHeader />
-          {children}
+            <DesktopHeader />
+            {children}
             <Toaster />
           </Providers>
-        </ThemeProvider> 
+        </ThemeProvider>
       </body>
     </html>
   );

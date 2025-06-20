@@ -2,16 +2,12 @@ import React from 'react'
 import {
     DropdownMenu,
     DropdownMenuContent,
-    DropdownMenuItem,
     DropdownMenuLabel,
     DropdownMenuSeparator,
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { Bookmark } from "lucide-react"
 import { Button } from '@/components/ui/button'
-import { HiOutlineChatAlt } from 'react-icons/hi';
-import Link from 'next/link';
-import { formatCompactTime } from '@/shared/server-functions';
 import SessionsList from './sessions-list';
 
 const SavedSessions = ({ savedSessions }: any) => {

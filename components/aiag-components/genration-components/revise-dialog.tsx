@@ -1,22 +1,13 @@
 'use client'
 
-import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import {
     Dialog,
     DialogContent,
     DialogFooter,
-    DialogHeader,
-    DialogTitle,
 } from "@/components/ui/dialog";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
-
-interface ReviseDialogProps {
-    isOpen: boolean;
-    onOpenChange: (isOpen: boolean) => void;
-    setContentGenerated:any
-}
 
 export function ReviseDialog({ isOpen, onOpenChange, handleRevise, feedback, setFeedback }: any) {
 

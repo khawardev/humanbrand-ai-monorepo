@@ -1,5 +1,3 @@
-// actions/generate-image.ts
-
 'use server';
 
 import OpenAI from 'openai';
@@ -14,7 +12,6 @@ interface ImageGenerationResult {
     error?: string;
 }
 
-// Helper function to convert base64 to data URL
 function base64ToDataUrl(base64: string, format: string = 'png'): string {
     return `data:image/${format};base64,${base64}`;
 }

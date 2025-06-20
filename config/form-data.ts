@@ -2,7 +2,6 @@ import {
     FaAward,
     FaBlog,
     FaBuilding,
-    FaCalendarPlus,
     FaCrown,
     FaDownload,
     FaFacebook,
@@ -189,9 +188,6 @@ export const campaignElementsData = [
         ],
     },
 ]
-
-
-
 
 
 export const adjustToneAndCreativityData = {

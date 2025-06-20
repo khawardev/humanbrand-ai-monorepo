@@ -1,15 +1,3 @@
-// export function cleanAndFlattenBulletsGoogle(md: string): string {
-//     const flattenRegex = /^(\s*[-*]\s+\*\*.+?\*\*)\s*\n\s*:?\s*/gm;
-
-//     return md
-//         .trim()
-//         .replace(/^---\s*/g, '')
-//         .replace(/\s*---$/g, '')
-//         .replace(flattenRegex, '$1 ')
-//         .replace(/\n\s*\n/g, '\n\n');
-// }
-
-
 export function cleanAndFlattenBulletsGoogle(md: string): string {
   const flattenRegex = /^(\s*[-*]\s+\*\*.+?:\*\*)\s*\n\s*/gm;
   
