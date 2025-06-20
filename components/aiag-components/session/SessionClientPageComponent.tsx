@@ -443,7 +443,7 @@ function SessionClientPageComponent({ initialData }: any) {
                             ),
                         },
                         {
-                            label: "Content Genrated",
+                            label: "AIAG Content",
                             value: "content_generate",
                             icon: isContentPending ? <Spinner /> : <RiAiGenerate />,
                             content: (
