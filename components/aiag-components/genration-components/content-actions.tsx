@@ -14,6 +14,7 @@ import { IoIosArrowDown } from "react-icons/io";
 import { ReviseDialog } from "./revise-dialog";
 import { toast } from "sonner";
 import { PersonaDialog } from "./persona/persona-dialog";
+import { MdOutlinePerson } from 'react-icons/md';
 
 export function ContentActions({ content, handleRevise, feedback, setFeedback, setPersonasText, personasText, setUploadedPersonaFileData, handleAdaptPersona }: any) {
     const [isReviseOpen, setReviseOpen] = useState(false);
@@ -60,7 +61,7 @@ export function ContentActions({ content, handleRevise, feedback, setFeedback, s
                         <span>Revise</span>
                     </DropdownMenuItem>
                     <DropdownMenuItem onSelect={(e) => { e.preventDefault(); setAdaptOpen(true); }}>
-                        <Stars size={16} className="opacity-60 mr-2" aria-hidden="true" />
+                        <MdOutlinePerson size={16} className="opacity-60 mr-2" aria-hidden="true" />
                         <span>Adapt for persona</span>
                     </DropdownMenuItem>
                 </DropdownMenuContent>
