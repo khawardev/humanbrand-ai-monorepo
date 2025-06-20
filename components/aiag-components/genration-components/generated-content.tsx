@@ -257,7 +257,7 @@ export function GeneratedContent(props: any) {
         handleAdaptPersona, personasText, setPersonasText, setUploadedPersonaFileData,
         handleImageAction, onImageFileChange, imageReferenceFileInfo,
         handleChatSend, isChatLoading, onChatFileChange, chatPdfInfo,
-        modelAlias, temperature
+        modelAlias, temperature, user
     } = props;
 
     const headerRef = useRef<HTMLDivElement>(null);
@@ -325,6 +325,7 @@ export function GeneratedContent(props: any) {
                             chatPdfInfo={chatPdfInfo}
                             modelAlias={modelAlias}
                             temperature={temperature}
+                            user={user}
                         />
                     ),
                 },

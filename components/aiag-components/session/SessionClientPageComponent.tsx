@@ -330,7 +330,7 @@ import { PiBrain } from "react-icons/pi"
 import { RiAiGenerate } from "react-icons/ri"
 import { CustomTabs } from "@/shared/CustomTabs"
 
-function SessionClientPageComponent({ initialData }: any) {
+function SessionClientPageComponent({ initialData, user }: any) {
     const router = useRouter()
     const searchParams = useSearchParams()
     const contentRef = useRef<HTMLDivElement>(null)
@@ -457,6 +457,7 @@ function SessionClientPageComponent({ initialData }: any) {
                                             <>
                                                 <h2>{initialData.title}</h2>
                                                 <GeneratedContent
+                                                    user={user}
                                                     isPersonaPending={isPersonaPending}
                                                     isImagePending={isImagePending}
                                                     content={contentGenerated}
@@ -494,10 +495,10 @@ function SessionClientPageComponent({ initialData }: any) {
     )
 }
 
-export function SessionClientPage({ initialData }: any) {
+export function SessionClientPage({ initialData, user }: any) {
     return (
         <Suspense fallback={<div>Loading...</div>}>
-            <SessionClientPageComponent initialData={initialData} />
+            <SessionClientPageComponent initialData={initialData} user={user} />
         </Suspense>
     )
 }

@@ -371,7 +371,7 @@ import ReactMarkdown from "react-markdown";
 import { LineSpinner } from "@/shared/spinner";
 import { PdfFileDropzone } from "../reusable-components/uploads/PdfFileDropzone";
 
-export function ContentChat({ chatHistory = [], handleChatSend, onChatFileChange, chatPdfInfo, isChatLoading }: any) {
+export function ContentChat({ chatHistory = [], handleChatSend, onChatFileChange, chatPdfInfo, isChatLoading, user }: any) {
     const [messages, setMessages] = useState(chatHistory);
     const [input, setInput] = useState<string>("");
     const chatContainerRef = useRef<HTMLDivElement>(null);
@@ -409,7 +409,7 @@ export function ContentChat({ chatHistory = [], handleChatSend, onChatFileChange
                         <div key={index} className="flex items-start gap-2 my-2 no-scrollbar">
                             {/* Avatar */}
                             <img
-                                src={msg.role === 'user' ? 'https://lh3.googleusercontent.com/a/ACg8ocKctIUVaiLHfumqG0mGTEmK6sc2AgpaTJzxnOU4J-h1S-wY0y-h=s96-c' : 'http://localhost:3000/_next/image?url=https%3A%2F%2Fi.postimg.cc%2FZYDgZQyF%2Faiag-logo.jpg&w=256&q=75'}
+                                src={msg.role === 'user' ? user?.image && user?.image : 'https://i.postimg.cc/ZYDgZQyF/aiag-logo.jpg'}
                                 alt={`${msg.role} avatar`}
                                 className={`w-9 h-9 border rounded-md object-cover mt-1 ${msg.role !== 'user' && 'mt-3'} `}
                             />
