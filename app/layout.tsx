@@ -4,7 +4,6 @@ import "./globals.css";
 import DesktopHeader from "@/components/header/desktop-header";
 import { Toaster } from "@/components/ui/sonner";
 import { ThemeProvider } from "next-themes";
-import Providers from "@/components/progressBarProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -17,9 +16,9 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://www.repurai.com/"),
+  metadataBase: new URL("https://aiag-content-action-model-3-3.vercel.app/"),
   title: "AIAG content action model 25.1",
-  description: "AI that Repurpose Content in Revenue Ready Assets",
+  description: "Plateform for genrating AIAG Content",
 };
 
 export default function RootLayout({
@@ -35,11 +34,9 @@ export default function RootLayout({
           defaultTheme="system"
           enableSystem
         >
-          <Providers>
             <DesktopHeader />
             {children}
             <Toaster />
-          </Providers>
         </ThemeProvider>
       </body>
     </html>

@@ -149,8 +149,14 @@ export function useSessionContentGenerator(initialData: any) {
                     imageUrls: newImageUrls,
                     imageReferenceFileInfo: imageReferenceFileInfo
                 });
-                toast.success("Image updated successfully!");
-            } else {
+                setTimeout(() => {
+                    toast.success("Preparing Image...");
+                }, 2000);
+                setTimeout(() => {
+                    toast.success("Image Generated successfully!");
+                }, 3000);
+            }
+            else {
                 toast.error(result.error || "Failed to generate image.");
             }
         });
