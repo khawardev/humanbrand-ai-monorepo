@@ -6,7 +6,7 @@ import MobileHeader from "./mobile-header";
 
 export const revalidate = 0;
 
-const DesktopHeaderClient = async () => {
+const DesktopHeaderServer = async () => {
     const user = await getUserWithSessions();
     return (
         <>
@@ -24,4 +24,4 @@ const DesktopHeaderClient = async () => {
     );
 };
 
-export default DesktopHeaderClient;
+export default DesktopHeaderServer;

@@ -1,23 +1,9 @@
 import Link from "next/link";
-import { Suspense } from "react";
 import { ThemeSwitcher } from "../ui/theme-switcher";
 import { FullLogo, FullLogoMobile } from "@/shared/logo";
 import NavigationMenuComp from "./navigation-menu";
-import { Skeleton } from "../ui/skeleton";
-import DesktopHeaderClient from "./desktop-header-client";
+import DesktopHeaderServer from "./desktop-header-server";
 
-
-const HeaderFallback = () => {
-    return (
-        <div className="flex items-center justify-end gap-2">
-            <Skeleton className="size-8 rounded-md" />
-            <Skeleton className="size-8 rounded-md" />
-            <div className="sm:hidden block pl-2 border-l">
-                <Skeleton className="size-8 rounded-md" />
-            </div>
-        </div>
-    );
-};
 
 const DesktopHeader = () => {
     return (
@@ -30,9 +16,7 @@ const DesktopHeader = () => {
                     </Link>
                     <NavigationMenuComp />
                     <div className="flex items-center justify-end gap-2">
-                        <Suspense fallback={<HeaderFallback />}>
-                            <DesktopHeaderClient />
-                        </Suspense>
+                        <DesktopHeaderServer />
                         <div className="md:pl-2 md:border-l">
                             <ThemeSwitcher />
                         </div>
