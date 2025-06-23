@@ -18,9 +18,9 @@ export async function getUser(){
 
 
 export async function getUserWithSessions() {
-  const session = await auth.api.getSession({ headers: await headers() });
+  const session = await getSession();
 
-  if (!session || !session.user?.id) {
+  if (!session) {
     console.warn("No session or user ID in session");
     return null;
   }

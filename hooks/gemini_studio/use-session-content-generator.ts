@@ -8,6 +8,7 @@ import { generateImageAction } from "@/actions/generate-image"
 import { generateNewContent } from "@/actions/generate-new-content"
 import { getChatSystemPrompt } from "@/lib/aiag/prompts"
 import { knowledgeBaseContent } from "@/lib/aiag/knowledge_base"
+import { uploadImageToSupabase } from "@/lib/uploadImageToSupabase"
 
 export function useSessionContentGenerator(initialData: any) {
     const [isContentPending, startContentTransition] = useTransition();
@@ -131,37 +132,72 @@ export function useSessionContentGenerator(initialData: any) {
         });
     };
 
+
+
+    // const handleImageAction = (newPrompt: string) => {
+    //     startImageTransition(async () => {
+    //         const formData = new FormData();
+    //         formData.append('prompt', newPrompt);
+    //         if (imageReferenceFile) {
+    //             formData.append('image', imageReferenceFile);
+    //         }
+
+    //         const result = await generateImageAction(formData);
+
+    //         if (result.success && result.imageUrl) {
+    //             const newImageUrls = [...imageUrls, result.imageUrl];
+    //             toast.success("Preparing Image...");
+
+    //             await manageImageForSession(initialData.id, {
+    //                 imagePrompt: newPrompt,
+    //                 imageUrls: newImageUrls,
+    //                 imageReferenceFileInfo: imageReferenceFileInfo
+    //             });
+    //         }
+    //         else {
+    //             toast.error(result.error || "Failed to generate image.");
+    //         }
+    //         toast.success("Image Generated successfully!");
+    //     });
+    // };
+
+
+
     const handleImageAction = (newPrompt: string) => {
         startImageTransition(async () => {
-            const formData = new FormData();
-            formData.append('prompt', newPrompt);
-            if (imageReferenceFile) {
-                formData.append('image', imageReferenceFile);
-            }
+            try {
+                const formData = new FormData();
+                formData.append("prompt", newPrompt);
 
-            const result = await generateImageAction(formData);
+                // ✅ Upload image to Supabase client-side (if available)
+                if (imageReferenceFile) {
+                    const imageUrl = await uploadImageToSupabase(imageReferenceFile);
+                    formData.append("imageUrl", imageUrl);
+                }
 
-            if (result.success && result.imageUrl) {
-                const newImageUrls = [...imageUrls, result.imageUrl];
+                // ✅ Call server action
+                const result = await generateImageAction(formData);
 
-                await manageImageForSession(initialData.id, {
-                    imagePrompt: newPrompt,
-                    imageUrls: newImageUrls,
-                    imageReferenceFileInfo: imageReferenceFileInfo
-                });
-                setTimeout(() => {
+                if (result.success && result.imageUrl) {
+                    const newImageUrls = [...imageUrls, result.imageUrl];
                     toast.success("Preparing Image...");
-                }, 2000);
-                setTimeout(() => {
+
+                    await manageImageForSession(initialData.id, {
+                        imagePrompt: newPrompt,
+                        imageUrls: newImageUrls,
+                        imageReferenceFileInfo: imageReferenceFileInfo,
+                    });
+
                     toast.success("Image Generated successfully!");
-                }, 3000);
-            }
-            else {
-                toast.error(result.error || "Failed to generate image.");
+                } else {
+                    toast.error(result.error || "Failed to generate image.");
+                }
+            } catch (error) {
+                toast.error("Unexpected error occurred.");
+                console.error(error);
             }
         });
     };
-
     const handleChatSend = async (userInput: string) => {
         setIsChatLoading(true);
 
@@ -181,7 +217,7 @@ export function useSessionContentGenerator(initialData: any) {
         const assistantMessage = { role: 'assistant', content: result.generatedText || "Sorry, an error occurred." };
         const finalHistory = [...newHistory, assistantMessage];
         setChatHistory(finalHistory);
-        
+
         setIsChatLoading(false);
 
         await updateChatForSession(initialData.id, {
