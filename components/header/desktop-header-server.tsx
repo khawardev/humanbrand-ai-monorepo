@@ -7,7 +7,7 @@ import MobileHeader from "./mobile-header";
 export const revalidate = 0;
 
 const DesktopHeaderServer = async () => {
-    const user = await getUserWithSessions();
+    const user:any = await getUserWithSessions();
     return (
         <>
             {!user && <SigninButtonDesktop />}

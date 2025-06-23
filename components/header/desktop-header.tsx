@@ -3,8 +3,14 @@ import { ThemeSwitcher } from "../ui/theme-switcher";
 import { FullLogo, FullLogoMobile } from "@/shared/logo";
 import NavigationMenuComp from "./navigation-menu";
 import DesktopHeaderServer from "./desktop-header-server";
+import { Suspense } from "react";
 
-
+const Skeleton = () => (
+    <div className="flex items-center gap-2 animate-pulse">
+        <div className="size-8 rounded-md " />
+        <div className="size-8 rounded-md " />
+    </div>
+);
 const DesktopHeader = () => {
     return (
         <header className="border-b">
@@ -16,7 +22,9 @@ const DesktopHeader = () => {
                     </Link>
                     <NavigationMenuComp />
                     <div className="flex items-center justify-end gap-2">
-                        <DesktopHeaderServer />
+                        <Suspense fallback={<Skeleton />}>
+                            <DesktopHeaderServer />
+                        </Suspense>
                         <div className="md:pl-2 md:border-l">
                             <ThemeSwitcher />
                         </div>

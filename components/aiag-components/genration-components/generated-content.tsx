@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, {  useRef } from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { Separator } from "@/components/ui/separator";
@@ -9,8 +9,7 @@ import { ContentChat } from "./content-chat";
 import { GeneratedPersonaContent } from "./persona/generated-persona-content";
 import { LineSpinner, Spinner } from "@/shared/spinner";
 import { CustomTabs } from "@/shared/CustomTabs";
-import { MdOutlinePerson } from "react-icons/md";
-import { RiAiGenerate, RiChatSmileAiLine, RiImageCircleAiFill } from "react-icons/ri";
+import { RiAiGenerate, RiChatSmileAiLine, RiImageCircleAiFill, RiUserSmileLine } from "react-icons/ri";
 
 export function GeneratedContent(props: any) {
     const {
@@ -94,7 +93,7 @@ export function GeneratedContent(props: any) {
                 {
                     label: "Persona",
                     value: "persona",
-                    icon: isPersonaPending ? <Spinner /> : <MdOutlinePerson />,
+                    icon: isPersonaPending ? <Spinner /> : <RiUserSmileLine />,
                     content: (
                         <>
                             {!isPersonaPending && !personaContent && (

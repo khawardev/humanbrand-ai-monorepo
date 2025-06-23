@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import { LuLoaderCircle } from "react-icons/lu";
 import remarkGfm from "remark-gfm";
 import ReactMarkdown from "react-markdown";
-import { LineSpinner } from "@/shared/spinner";
+import { LineSpinner, Spinner } from "@/shared/spinner";
 import { PdfFileDropzone } from "../reusable-components/uploads/PdfFileDropzone";
 
 export function ContentChat({ chatHistory = [], handleChatSend, onChatFileChange, chatPdfInfo, isChatLoading, user }: any) {
@@ -20,7 +20,7 @@ export function ContentChat({ chatHistory = [], handleChatSend, onChatFileChange
     }, [chatHistory])
 
     useEffect(() => {
-        chatContainerRef.current?.scrollTo({ top: chatContainerRef.current.scrollHeight, behavior: 'smooth' });
+        chatContainerRef.current?.scrollTo({ top: chatContainerRef.current.scrollHeight });
     }, [messages]);
 
     const handleSend = async (e: React.FormEvent) => {
@@ -34,11 +34,11 @@ export function ContentChat({ chatHistory = [], handleChatSend, onChatFileChange
     
     return (
         <section className="space-y-4 flex flex-col h-[90vh]">
-            <div>
+            {/* <div>
                 <span className="text-lg tracking-tight font-bold">Chat with Generated Content</span>
-            </div>
+            </div> */}
 
-            <div ref={chatContainerRef} className="flex-1 overflow-y-auto  space-y-4 pr-2">
+            <div ref={chatContainerRef} className="flex-1 overflow-y-auto  space-y-4 pl-2  ">
                 {messages.length === 0 && !isChatLoading ? (
                     <div className="flex items-center justify-center h-full text-muted-foreground">
                         Start the conversation by typing below.
@@ -50,7 +50,7 @@ export function ContentChat({ chatHistory = [], handleChatSend, onChatFileChange
                             <img
                                 src={msg.role === 'user' ? user?.image && user?.image : 'https://i.postimg.cc/ZYDgZQyF/aiag-logo.jpg'}
                                 alt={`${msg.role} avatar`}
-                                className={`w-9 h-9 border rounded-md object-cover mt-1 ${msg.role !== 'user' && 'mt-3'} `}
+                                className={`w-10 h-10  rounded-md object-cover mt-1 ${msg.role !== 'user' && 'mt-3'} `}
                             />
 
                             <div className={`w-full p-2 rounded-lg text-[15px]  ${msg.role === 'user'
@@ -67,13 +67,13 @@ export function ContentChat({ chatHistory = [], handleChatSend, onChatFileChange
                     ))
                 )}
                 {isChatLoading && (
-                    <div className="flex items-start gap-2 my-2">
+                    <div className="flex items-center gap-2 my-2">
                         <img
                             src={'https://i.postimg.cc/ZYDgZQyF/aiag-logo.jpg'}
                             alt={` avatar`}
-                            className="w-9 h-9 border rounded-md object-cover mt-1"
+                            className="w-10 h-10 border rounded-md object-cover mt-1"
                         />
-                        <span className="p-2"> <LineSpinner>Thinking</LineSpinner></span>
+                        <span className="p-2"> <Spinner /></span>
                     </div>
                 )}
             </div>
