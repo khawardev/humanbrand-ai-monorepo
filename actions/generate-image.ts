@@ -78,18 +78,19 @@
 
 
 
-
-
-
-
-
 'use server';
 
 import OpenAI from 'openai';
+import { createClient } from '@supabase/supabase-js';
 
 const openai = new OpenAI({
     apiKey: process.env.OPENAI_API_KEY! as string,
 });
+
+const supabase = createClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+);
 
 interface ImageGenerationResult {
     success: boolean;
@@ -97,27 +98,39 @@ interface ImageGenerationResult {
     error?: string;
 }
 
-async function uploadToTempService(base64Data: string): Promise<string> {
+async function uploadToSupabase(base64Data: string): Promise<string> {
     try {
         const buffer = Buffer.from(base64Data, 'base64');
-        const formData = new FormData();
-        formData.append('file', new Blob([buffer], { type: 'image/png' }), 'generated-image.png');
+        const filePath = `${Date.now()}-generated-image.png`;
 
-        const response = await fetch('https://tmpfiles.org/api/v1/upload', {
-            method: 'POST',
-            body: formData,
-        });
+        const { data, error } = await supabase.storage
+            .from("aiag-images")
+            .upload(filePath, buffer, {
+                contentType: 'image/png'
+            });
 
-        if (!response.ok) {
-            throw new Error('Upload failed');
+        if (error) {
+            console.error("Upload failed:", error.message);
+            throw new Error(`Upload failed: ${error.message}`);
         }
 
-        const result = await response.json();
-        return result.data.url.replace('tmpfiles.org/', 'tmpfiles.org/dl/');
+        const { data: publicUrlData } = supabase.storage
+            .from("aiag-images")
+            .getPublicUrl(filePath);
+
+        return publicUrlData.publicUrl;
     } catch (error) {
-        console.error('Temp upload failed:', error);
+        console.error('Supabase upload failed:', error);
         throw error;
     }
+}
+
+function sanitizePrompt(prompt: string): string {
+    return prompt
+        .replace(/\b(nude|naked|nsfw|explicit|sexual|porn|adult)\b/gi, '')
+        .replace(/\b(violence|weapon|gun|knife|blood|death)\b/gi, '')
+        .replace(/\b(hate|racist|offensive|inappropriate)\b/gi, '')
+        .trim();
 }
 
 export async function generateImageAction(
@@ -130,6 +143,12 @@ export async function generateImageAction(
         return { success: false, error: 'Prompt is required.' };
     }
 
+    const sanitizedPrompt = sanitizePrompt(prompt);
+
+    if (!sanitizedPrompt.trim()) {
+        return { success: false, error: 'Please provide a valid image description.' };
+    }
+
     try {
         let response: any;
 
@@ -137,7 +156,7 @@ export async function generateImageAction(
             response = await openai.images.edit({
                 model: "gpt-image-1",
                 image: imageFile,
-                prompt: prompt,
+                prompt: sanitizedPrompt,
                 n: 1,
                 size: '1024x1024',
                 quality: 'high'
@@ -145,7 +164,7 @@ export async function generateImageAction(
         } else {
             response = await openai.images.generate({
                 model: "gpt-image-1",
-                prompt: prompt,
+                prompt: sanitizedPrompt,
                 n: 1,
                 size: '1024x1024',
                 quality: 'high'
@@ -157,15 +176,23 @@ export async function generateImageAction(
             throw new Error('Image generation failed to return base64 data.');
         }
 
-        const imageUrl = await uploadToTempService(base64Image);
+        const imageUrl = await uploadToSupabase(base64Image);
         return { success: true, imageUrl };
 
-    } catch (error) {
+    } catch (error: any) {
         console.error('GPT-Image-1 generation failed:', error);
+
+        if (error?.code === 'moderation_blocked' || error?.status === 400) {
+            return {
+                success: false,
+                error: 'Your request was blocked by the safety system. Please try a different description that follows content guidelines.',
+            };
+        }
+
         const errorMessage = error instanceof Error ? error.message : String(error);
         return {
             success: false,
-            error: `API call failed: ${errorMessage}`,
+            error: `Image generation failed: ${errorMessage}`,
         };
     }
 }

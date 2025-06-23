@@ -12,6 +12,85 @@ import 'yet-another-react-lightbox/styles.css'
 import { ImageFileDropzone } from '../../reusable-components/uploads/ImageFileDropzone'
 import { Copy, Download } from 'lucide-react'
 
+function ImageSkeleton() {
+    return (
+        <div className="relative">
+            <div className="animate-pulse bg-accent rounded-2xl max-h-[80vh] aspect-square flex items-center justify-center">
+                <div className="text-muted-foreground">
+                    <svg
+                        className="w-14 h-14"
+                        fill="currentColor"
+                        viewBox="0 0 20 20"
+                    >
+                        <path fillRule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clipRule="evenodd" />
+                    </svg>
+                </div>
+            </div>
+            <div className="space-x-1 flex absolute top-4 right-4">
+                <div className="animate-pulse bg-accent rounded-md h-9 w-9 border"></div>
+                <div className="animate-pulse bg-accent rounded-md h-9 w-9 border"></div>
+            </div>
+        </div>
+    )
+}
+
+function ImageWithSkeleton({
+    src,
+    alt,
+    onClick,
+    onDownload,
+    onCopy,
+    index
+}: {
+    src: string
+    alt: string
+    onClick: () => void
+    onDownload: () => void
+    onCopy: () => void
+    index: number
+}) {
+    const [isLoading, setIsLoading] = useState(true)
+    const [hasError, setHasError] = useState(false)
+
+    return (
+        <div className="relative">
+            {isLoading && <ImageSkeleton />}
+            <img
+                src={src}
+                alt={alt}
+                onClick={onClick}
+                onLoad={() => setIsLoading(false)}
+                onError={() => {
+                    setIsLoading(false)
+                    setHasError(true)
+                }}
+                className={`max-w-full cursor-pointer max-h-[80vh] rounded-2xl shadow-lg border border-border ring-border ring-offset-accent/80 ring-1 ring-offset-4 object-contain ${isLoading ? 'opacity-0 absolute' : 'opacity-100'
+                    } ${hasError ? 'hidden' : ''}`}
+            />
+            {hasError && (
+                <div className="max-w-full max-h-[80vh] aspect-square rounded-2xl shadow-lg border border-border bg-accent flex items-center justify-center">
+                    <div className="text-center text-muted-foreground">
+                        <svg className="w-12 h-12 mx-auto mb-2" fill="currentColor" viewBox="0 0 20 20">
+                            <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
+                        </svg>
+                        <p className="text-sm">Failed to load image</p>
+                    </div>
+                </div>
+            )}
+            {!isLoading && !hasError && (
+                <div className="space-x-1 flex absolute top-4 right-4">
+                    <Button onClick={onDownload} variant={'outline'} size={'icon'}>
+                        <Download />
+                    </Button>
+                    <Button onClick={onCopy} variant={'outline'} size={'icon'}>
+                        <Copy />
+                    </Button>
+                </div>
+            )}
+        </div>
+    )
+}
+
 export function ImageGenerator({
     imagePrompt,
     imageUrls = [],
@@ -93,40 +172,45 @@ export function ImageGenerator({
                 </Button>
 
                 {isPending && (
-                    <LineSpinner>Image processing may take up to 30-50 seconds...</LineSpinner>
+                    <>
+                        <LineSpinner>Image processing may take up to 30-50 seconds...</LineSpinner>
+                        <div className='space-y-4'>
+                            <Label className='text-sm text-muted-foreground'>Generating Image...</Label>
+                            <section className='grid md:grid-cols-2 grid-cols-1 gap-6'>
+                                <ImageSkeleton />
+                            </section>
+                        </div>
+                    </>
                 )}
 
                 {reversedUrls && reversedUrls.length > 0 && (
                     <div className='space-y-4'>
-                        <Label className='text-sm text-muted-foreground '>{'Image Results'}</Label>
+                        <Label className='text-sm text-muted-foreground'>Image Results</Label>
                         <section className='grid md:grid-cols-2 grid-cols-1 gap-6'>
                             {reversedUrls.map((url: string, index: number) => (
-                                <div key={url + index} className="relative">
-                                    <img
-                                        src={url}
-                                        alt={`AI generated image ${index + 1}`}
-                                        onClick={() => setLightboxIndex(index)}
-                                        className="max-w-full cursor-pointer max-h-[80vh] rounded-2xl shadow-lg border border-border ring-border ring-offset-accent/80 ring-1 ring-offset-4 object-contain"
-                                    />
-                                    <div className="space-x-1 flex absolute top-4 right-4">
-                                        <Button onClick={() => {
-                                            const link = document.createElement('a');
-                                            link.href = url;
-                                            link.download = `generated-image-${index}.png`;
-                                            link.click();
-                                        }} variant={'outline'} size={'icon'}><Download /></Button>
-                                        <Button onClick={async () => {
-                                            try {
-                                                const response = await fetch(url);
-                                                const blob = await response.blob();
-                                                await navigator.clipboard.write([new ClipboardItem({ [blob.type]: blob })]);
-                                                toast.success("Image copied to clipboard!");
-                                            } catch (error) {
-                                                toast.error("Failed to copy image to clipboard");
-                                            }
-                                        }} variant={'outline'} size={'icon'}><Copy /></Button>
-                                    </div>
-                                </div>
+                                <ImageWithSkeleton
+                                    key={url + index}
+                                    src={url}
+                                    alt={`AI generated image ${index + 1}`}
+                                    onClick={() => setLightboxIndex(index)}
+                                    onDownload={() => {
+                                        const link = document.createElement('a')
+                                        link.href = url
+                                        link.download = `generated-image-${index}.png`
+                                        link.click()
+                                    }}
+                                    onCopy={async () => {
+                                        try {
+                                            const response = await fetch(url)
+                                            const blob = await response.blob()
+                                            await navigator.clipboard.write([new ClipboardItem({ [blob.type]: blob })])
+                                            toast.success("Image copied to clipboard!")
+                                        } catch (error) {
+                                            toast.error("Failed to copy image to clipboard")
+                                        }
+                                    }}
+                                    index={index}
+                                />
                             ))}
                         </section>
                     </div>
