@@ -1,5 +1,5 @@
+import { Spinner } from '@/shared/spinner'
 import React from 'react'
-import Spinner from './spinner'
 
 const Loading = () => {
     return (
