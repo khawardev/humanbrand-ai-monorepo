@@ -26,10 +26,6 @@ function ImageSkeleton() {
                     </svg>
                 </div>
             </div>
-            <div className="space-x-1 flex absolute top-4 right-4">
-                <div className="animate-pulse bg-accent rounded-md h-9 w-9 border"></div>
-                <div className="animate-pulse bg-accent rounded-md h-9 w-9 border"></div>
-            </div>
         </div>
     )
 }
@@ -171,17 +167,7 @@ export function ImageGenerator({
                     )}
                 </Button>
 
-                {isPending && (
-                    <>
-                        <LineSpinner>Image processing may take up to 30-50 seconds...</LineSpinner>
-                        <div className='space-y-4'>
-                            <Label className='text-sm text-muted-foreground'>Generating Image...</Label>
-                            <section className='grid md:grid-cols-2 grid-cols-1 gap-6'>
-                                <ImageSkeleton />
-                            </section>
-                        </div>
-                    </>
-                )}
+                {isPending && <LineSpinner>Image processing may take up to 50-60 seconds...</LineSpinner>}
 
                 {reversedUrls && reversedUrls.length > 0 && (
                     <div className='space-y-4'>
