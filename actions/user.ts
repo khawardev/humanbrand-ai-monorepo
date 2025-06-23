@@ -33,7 +33,7 @@ export async function getUserWithSessions() {
     .from(user)
     .leftJoin(savedSession, eq(user.id, savedSession.userId))
     .where(eq(user.id, session.user.id))
-    .orderBy(desc(savedSession.createdAt)); 
+    .orderBy(desc(savedSession.updatedAt)); 
 
   const userData = results[0]?.user;
   const sessions = results.filter(row => row.sessions !== null).map(row => row.sessions);

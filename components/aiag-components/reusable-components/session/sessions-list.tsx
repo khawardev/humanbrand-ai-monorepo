@@ -30,7 +30,7 @@ const SessionsList = ({ savedSessions }: any) => {
                                         <span className="truncate text-sm max-w-[170px]">{session?.title}</span>
                                     </div>
                                     <span className="text-xs text-muted-foreground shrink-0">
-                                        {formatCompactTime(session?.createdAt)}
+                                        {formatCompactTime(session?.updatedAt)}
                                     </span>
                                 </div>
                             </DropdownMenuItem>
