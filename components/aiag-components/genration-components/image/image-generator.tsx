@@ -121,9 +121,6 @@ export function ImageGenerator({
         <>
             <section className='space-y-4 flex flex-col'>
                 <div>
-                    <span className='text-lg tracking-tight font-bold'>
-                        Generate Accompanying Image
-                    </span>
                     <Label
                         htmlFor='image-prompt'
                         className='text-sm text-muted-foreground mb-3'
@@ -172,7 +169,7 @@ export function ImageGenerator({
                 {reversedUrls && reversedUrls.length > 0 && (
                     <div className='space-y-4'>
                         <Label className='text-sm text-muted-foreground'>Image Results</Label>
-                        <section className='grid md:grid-cols-2 grid-cols-1 gap-6'>
+                        <section className='grid  md:grid-cols-2 grid-cols-1 gap-6'>
                             {reversedUrls.map((url: string, index: number) => (
                                 <ImageWithSkeleton
                                     key={url + index}

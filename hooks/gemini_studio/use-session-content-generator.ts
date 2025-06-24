@@ -168,7 +168,7 @@ export function useSessionContentGenerator(initialData: any) {
             try {
                 const formData = new FormData();
                 formData.append("prompt", newPrompt);
-                let reference_image_url;
+                let reference_image_url: any = null;
                 if (imageReferenceFile) {
                     reference_image_url = await uploadImageToSupabase(imageReferenceFile);
                     formData.append("imageUrl", reference_image_url);
@@ -177,14 +177,14 @@ export function useSessionContentGenerator(initialData: any) {
                 const result = await generateImageAction(formData);
 
                 if (result.success && result.imageUrl) {
-                    const newImageUrls = [...imageUrls, result.imageUrl];
                     toast.success("Preparing Image...");
+                    const newImageUrls = [...imageUrls, result.imageUrl];
 
                     await manageImageForSession(initialData.id, {
                         reference_image: reference_image_url,
                         imagePrompt: newPrompt,
                         imageUrls: newImageUrls,
-                        imageReferenceFileInfo: imageReferenceFileInfo,
+                        imageReferenceFileInfo: { ...imageReferenceFileInfo, reference_image_url: reference_image_url },
                     });
 
                     toast.success("Image Generated successfully!");

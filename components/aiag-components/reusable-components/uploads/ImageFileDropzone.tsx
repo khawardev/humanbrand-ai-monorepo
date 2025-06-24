@@ -8,12 +8,12 @@ import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 
 interface FileWithPreview extends File {
-    preview: string;
+    preview: any;
 }
 
 type ImageFileDropzoneProps = {
     onFileChange: (file: FileWithPreview | null) => void;
-    initialFileInfo?: { name: string; size: number; reference_image?: string; } | null;
+    initialFileInfo?: { name: string; size: number; reference_image_url?: string; } | null;
 };
 
 function formatBytes(bytes: number, decimals = 2): string {
@@ -27,6 +27,7 @@ function formatBytes(bytes: number, decimals = 2): string {
 
 export function ImageFileDropzone({ onFileChange, initialFileInfo }: ImageFileDropzoneProps) {
     const [file, setFile] = useState<FileWithPreview | null>(null);
+    console.log(initialFileInfo,'initialFileInfo===');
 
     useEffect(() => {
         if (initialFileInfo && !file) {
@@ -37,7 +38,7 @@ export function ImageFileDropzone({ onFileChange, initialFileInfo }: ImageFileDr
                     initialFileInfo.name.endsWith('.jpg') || initialFileInfo.name.endsWith('.jpeg') ? 'image/jpeg' :
                         initialFileInfo.name.endsWith('.png') ? 'image/png' : 'image/webp',
                 lastModified: Date.now(),
-                preview: initialFileInfo.reference_image || '', // Use the reference_image URL
+                preview: initialFileInfo?.reference_image_url || '', // Use the reference_image URL
                 arrayBuffer: () => Promise.resolve(new ArrayBuffer(0)),
                 slice: () => new Blob(),
                 stream: () => new ReadableStream(),
@@ -94,7 +95,7 @@ export function ImageFileDropzone({ onFileChange, initialFileInfo }: ImageFileDr
                             }}
                         />
                     )}
-
+                    
                     <div className="flex flex-col min-w-0">
                         <span className="text-sm font-medium text-foreground truncate">{file.name}</span>
                         <span className="text-xs text-muted-foreground">
