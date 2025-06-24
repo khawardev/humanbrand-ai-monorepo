@@ -60,11 +60,11 @@ function ImageWithSkeleton({
                     setIsLoading(false)
                     setHasError(true)
                 }}
-                className={`max-w-full cursor-pointer max-h-[80vh] rounded-2xl shadow-lg border border-border ring-border ring-offset-accent/80 ring-1 ring-offset-4 object-contain ${isLoading ? 'opacity-0 absolute' : 'opacity-100'
+                className={`w-full cursor-pointer  aspect-square  rounded-2xl shadow-lg border border-border ring-border ring-offset-accent/80 ring-1 ring-offset-4 object-contain ${isLoading ? 'opacity-0 absolute' : 'opacity-100'
                     } ${hasError ? 'hidden' : ''}`}
             />
             {hasError && (
-                <div className="max-w-full max-h-[80vh] aspect-square rounded-2xl shadow-lg border border-border bg-accent flex items-center justify-center">
+                <div className="max-w-full aspect-square rounded-2xl shadow-lg border border-border bg-accent flex items-center justify-center">
                     <div className="text-center text-muted-foreground">
                         <svg className="w-12 h-12 mx-auto mb-2" fill="currentColor" viewBox="0 0 20 20">
                             <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clipRule="evenodd" />

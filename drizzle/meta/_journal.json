@@ -99,6 +99,13 @@
       "when": 1750343532060,
       "tag": "0013_long_next_avengers",
       "breakpoints": true
+    },
+    {
+      "idx": 14,
+      "version": "7",
+      "when": 1750766280170,
+      "tag": "0014_wide_captain_cross",
+      "breakpoints": true
     }
   ]
 }

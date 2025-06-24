@@ -34,7 +34,7 @@ export const RadioCard = ({ options, selectedValue, onSelectionChange, className
         <RadioGroup
             value={selectedValue?.toString() ?? ""}
             onValueChange={(value) => onSelectionChange(value ? parseInt(value, 10) : null)}
-            className={cn("grid md:grid-cols-5 sm:grid-cols-4 grid-cols-2 gap-3", className)}
+            className={cn("grid 2xl:grid-cols-6 md:grid-cols-4  sm:grid-cols-3 grid-cols-2 gap-3", className)}
         >
             {options.map((item: Option) => {
                 const elementId = `${idPrefix}-${item.id}`;

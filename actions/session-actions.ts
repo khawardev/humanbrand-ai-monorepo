@@ -210,6 +210,7 @@ export async function adaptPersonaForSession(sessionId: string, data: any) {
 export async function manageImageForSession(sessionId: string, data: any) {
     try {
         await db.update(savedSession).set({
+            reference_image: data.reference_image,
             imagePrompt: data.imagePrompt,
             imageUrls: data.imageUrls,
             imageReferenceFileInfo: data.imageReferenceFileInfo

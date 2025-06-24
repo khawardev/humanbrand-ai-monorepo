@@ -13,7 +13,7 @@ interface FileWithPreview extends File {
 
 type ImageFileDropzoneProps = {
     onFileChange: (file: FileWithPreview | null) => void;
-    initialFileInfo?: { name: string; size: number; } | null;
+    initialFileInfo?: { name: string; size: number; reference_image?: string; } | null;
 };
 
 function formatBytes(bytes: number, decimals = 2): string {
@@ -37,7 +37,7 @@ export function ImageFileDropzone({ onFileChange, initialFileInfo }: ImageFileDr
                     initialFileInfo.name.endsWith('.jpg') || initialFileInfo.name.endsWith('.jpeg') ? 'image/jpeg' :
                         initialFileInfo.name.endsWith('.png') ? 'image/png' : 'image/webp',
                 lastModified: Date.now(),
-                preview: '', 
+                preview: initialFileInfo.reference_image || '', // Use the reference_image URL
                 arrayBuffer: () => Promise.resolve(new ArrayBuffer(0)),
                 slice: () => new Blob(),
                 stream: () => new ReadableStream(),
@@ -63,7 +63,8 @@ export function ImageFileDropzone({ onFileChange, initialFileInfo }: ImageFileDr
     }, [onFileChange]);
 
     const handleRemoveFile = () => {
-        if (file && file.preview) {
+        // Only revoke object URLs, not external URLs
+        if (file && file.preview && file.preview.startsWith('blob:')) {
             URL.revokeObjectURL(file.preview);
         }
         setFile(null);
@@ -82,7 +83,16 @@ export function ImageFileDropzone({ onFileChange, initialFileInfo }: ImageFileDr
             <div className="relative w-full flex items-center justify-between p-2 pl-2 border rounded-md bg-accent">
                 <div className="flex items-center gap-4 flex-grow min-w-0">
                     {file.preview && (
-                        <img src={file.preview} alt={file.name} className="h-12 w-12 object-cover bg-accent border rounded-md flex-shrink-0" />
+                        <img
+                            src={file.preview}
+                            alt={file.name}
+                            className="h-12 w-12 object-cover bg-accent border rounded-md flex-shrink-0"
+                            onError={(e) => {
+                                // Handle image load errors gracefully
+                                console.error('Failed to load image:', file.preview);
+                                e.currentTarget.style.display = 'none';
+                            }}
+                        />
                     )}
 
                     <div className="flex flex-col min-w-0">

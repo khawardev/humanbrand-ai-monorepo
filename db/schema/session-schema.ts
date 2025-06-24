@@ -41,7 +41,8 @@ export const savedSession = aiag_schema.table("saved_sessions", {
 
     imageUrls: jsonb("image_urls"),
     imageReferenceFileInfo: jsonb("image_reference_file_info"),
-
+    reference_image: text("reference_image"),
+        
     chatHistory: jsonb("chat_history"),
     chatPdfInfo: jsonb("chat_pdf_info"),
     chatPdfData: text("chat_pdf_data"),

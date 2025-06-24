@@ -1,0 +1,1 @@
+ALTER TABLE "aiag_schema"."saved_sessions" ADD COLUMN "reference_image" text;

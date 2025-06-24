@@ -29,7 +29,7 @@ export const CheckboxCard = ({ options, selectedValues, onSelectionChange }: Che
     }
 
     return (
-        <div className="grid  sm:grid-cols-4 grid-cols-2 gap-3">
+        <div className="grid 2xl:grid-cols-6 md:grid-cols-4  sm:grid-cols-3 grid-cols-2 gap-3">
             {options.map((item: Option) => {
                 const isChecked = selectedValues.includes(item.id)
                 const dimOthers = selectedValues.length > 0 && !isChecked

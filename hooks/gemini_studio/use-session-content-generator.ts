@@ -168,14 +168,12 @@ export function useSessionContentGenerator(initialData: any) {
             try {
                 const formData = new FormData();
                 formData.append("prompt", newPrompt);
-
-                // ✅ Upload image to Supabase client-side (if available)
+                let reference_image_url;
                 if (imageReferenceFile) {
-                    const imageUrl = await uploadImageToSupabase(imageReferenceFile);
-                    formData.append("imageUrl", imageUrl);
+                    reference_image_url = await uploadImageToSupabase(imageReferenceFile);
+                    formData.append("imageUrl", reference_image_url);
                 }
 
-                // ✅ Call server action
                 const result = await generateImageAction(formData);
 
                 if (result.success && result.imageUrl) {
@@ -183,6 +181,7 @@ export function useSessionContentGenerator(initialData: any) {
                     toast.success("Preparing Image...");
 
                     await manageImageForSession(initialData.id, {
+                        reference_image: reference_image_url,
                         imagePrompt: newPrompt,
                         imageUrls: newImageUrls,
                         imageReferenceFileInfo: imageReferenceFileInfo,

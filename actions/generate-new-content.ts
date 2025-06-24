@@ -19,7 +19,7 @@ export async function generateNewContent(
 
         const result = await generateText({
             model,
-            temperature: data.temperature,
+            temperature: 0.7,
             system: data.systemPrompt ?? undefined,
             prompt: data.userPrompt,
         });
@@ -61,7 +61,7 @@ export async function generateSessionTitle(
 
         const result = await generateText({
             model,
-            temperature: data.temperature,
+            temperature: 0.7,
             system: "You are help full Analyzer and analyse the content and based on the content give 3-4 words Title , Do not add Precontext and Post Context , Just Output with the 3-4 Words Title",
             prompt: data.userPrompt,
         });

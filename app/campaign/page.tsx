@@ -160,7 +160,7 @@ export default function Home() {
                     <Textarea placeholder="Provide relevant background information or context..." rows={49} />
                 </FormSection>
 
-                <FormSection title="Adjust Tone and Creativity">
+                {/* <FormSection title="Adjust Tone and Creativity">
                     <div className="space-y-8 mt-3">
                         {Object.entries(adjustToneAndCreativityData).map(([key, setting]) => (
                             <div key={key}>
@@ -174,7 +174,7 @@ export default function Home() {
                             </div>
                         ))}
                     </div>
-                </FormSection>
+                </FormSection> */}
                 {/* <Generate generatingContent={generatingContent} onSaveDraft={handleSaveDraft} onGenerate={handleGenerate} /> */}
 
             </section>

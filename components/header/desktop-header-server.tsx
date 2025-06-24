@@ -10,8 +10,7 @@ export const revalidate = 0;
 
 const Skeleton = () => (
     <div className="flex items-center gap-2 animate-pulse">
-        <div className="size-8 rounded-md bg-card border flex items-center justify-center"> <Spinner/></div>
-        <div className="size-8 rounded-md bg-card border flex items-center justify-center"> <Spinner/></div>
+        <div className="size-8 rounded-md bg-card border flex items-center justify-center" /> 
     </div>
 );
 

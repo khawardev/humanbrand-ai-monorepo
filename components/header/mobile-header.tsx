@@ -47,7 +47,9 @@ export default function MobileHeader({ user }:any) {
             <Drawer.Portal>
                 <Drawer.Overlay className="fixed z-45 inset-0  bg-background/60 " />
                 <Drawer.Content className="bg-gradient-to-tr from-background/80 to-card/40 p-4 z-50 flex flex-col backdrop-blur-xl dark:from-background/90 dark:to-card/30 border rounded-t-[20px] h-fit fixed bottom-0 left-0 right-0 outline-none">
+                    <Drawer.Title>
                     <div aria-hidden className="mx-auto w-12 h-2 flex-shrink-0 rounded-full bg-gray-300 mb-8" />
+                    </Drawer.Title>
                     <div className="w-full">
                         <ScrollArea className="h-[calc(42vh-8rem)] ">
                             <div className="flex flex-col space-y-2" >

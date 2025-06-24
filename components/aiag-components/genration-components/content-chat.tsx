@@ -40,7 +40,7 @@ export function ContentChat({ chatHistory = [], handleChatSend, onChatFileChange
 
             <div ref={chatContainerRef} className="flex-1 overflow-y-auto  space-y-4 pl-2  ">
                 {messages.length === 0 && !isChatLoading ? (
-                    <div className="flex items-center justify-center h-full text-muted-foreground">
+                    <div className="flex items-center justify-center h-[50vh] text-muted-foreground">
                         Start the conversation by typing below.
                     </div>
                 ) : (

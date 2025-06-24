@@ -28,3 +28,7 @@ export const CONTEXTUAL_AWARENESS_PROMPT_TEMPLATE = `
 * **Challenges:** [User might input bullet points here]
 * **Opportunities:** [User might input bullet points here]
 `;
+
+
+
+
