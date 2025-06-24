@@ -27,18 +27,17 @@ function formatBytes(bytes: number, decimals = 2): string {
 
 export function ImageFileDropzone({ onFileChange, initialFileInfo }: ImageFileDropzoneProps) {
     const [file, setFile] = useState<FileWithPreview | null>(null);
-    console.log(initialFileInfo,'initialFileInfo===');
 
     useEffect(() => {
         if (initialFileInfo && !file) {
             const mockFile = {
                 name: initialFileInfo?.name,
                 size: initialFileInfo?.size,
-                type: initialFileInfo.name.endsWith('.webp') ? 'image/webp' :
-                    initialFileInfo.name.endsWith('.jpg') || initialFileInfo.name.endsWith('.jpeg') ? 'image/jpeg' :
-                        initialFileInfo.name.endsWith('.png') ? 'image/png' : 'image/webp',
+                type: initialFileInfo?.name?.endsWith('.webp') ? 'image/webp' :
+                    initialFileInfo?.name?.endsWith('.jpg') || initialFileInfo?.name?.endsWith('.jpeg') ? 'image/jpeg' :
+                        initialFileInfo?.name?.endsWith('.png') ? 'image/png' : 'image/webp',
                 lastModified: Date.now(),
-                preview: initialFileInfo?.reference_image_url || '', // Use the reference_image URL
+                preview: initialFileInfo?.reference_image_url || '',
                 arrayBuffer: () => Promise.resolve(new ArrayBuffer(0)),
                 slice: () => new Blob(),
                 stream: () => new ReadableStream(),
@@ -64,7 +63,6 @@ export function ImageFileDropzone({ onFileChange, initialFileInfo }: ImageFileDr
     }, [onFileChange]);
 
     const handleRemoveFile = () => {
-        // Only revoke object URLs, not external URLs
         if (file && file.preview && file.preview.startsWith('blob:')) {
             URL.revokeObjectURL(file.preview);
         }
