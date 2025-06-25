@@ -1,2 +1,2 @@
-export * as users from "./users-schema";
-export * as sessions from "./session-schema";
+export * from "./users-schema";
+export * from "./saved-session-schema";

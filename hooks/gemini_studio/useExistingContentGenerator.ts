@@ -191,8 +191,8 @@ import { useState, useTransition } from "react"
 import { useRouter } from "next/navigation"
 import { toast } from "sonner"
 import { modelTabs, adjustToneAndCreativityData } from "@/config/form-data"
-import { getUser } from "@/actions/user"
-import { createExistingContentSession } from "@/actions/session-actions"
+import { getUser } from "@/actions/users-actions"
+import { createExistingContentSession } from "@/actions/saved-session-actions"
 
 export function useExistingContentGenerator() {
     const router = useRouter();

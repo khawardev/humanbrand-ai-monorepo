@@ -1,6 +1,8 @@
+import { relations } from 'drizzle-orm';
 import { text, timestamp, boolean, pgSchema } from 'drizzle-orm/pg-core';
+import { savedSession } from './saved-session-schema';
+import { aiag_schema } from './aiag-schema';
 
-export const aiag_schema = pgSchema('aiag_schema')
 export const user = aiag_schema.table('user', {
     id: text('id').primaryKey(),
     name: text('name').notNull(),
@@ -48,3 +50,26 @@ export const verification = aiag_schema.table('verification', {
     createdAt: timestamp('createdAt').notNull().defaultNow(),
     updatedAt: timestamp('updatedAt').notNull().defaultNow(),
 });
+
+
+
+export const userRelations = relations(user, ({ many }) => ({
+    savedSessions: many(savedSession),
+    sessions: many(session),
+    accounts: many(account),
+}));
+
+
+export const sessionRelations = relations(session, ({ one }) => ({
+    user: one(user, {
+        fields: [session.userId],
+        references: [user.id],
+    }),
+}));
+
+export const accountRelations = relations(account, ({ one }) => ({
+    user: one(user, {
+        fields: [account.userId],
+        references: [user.id],
+    }),
+}));

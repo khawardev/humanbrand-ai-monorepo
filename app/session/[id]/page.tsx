@@ -1,5 +1,5 @@
-import { getSessionById } from "@/actions/session-actions"
-import { getUser } from "@/actions/user";
+import { getSessionById } from "@/actions/saved-session-actions"
+import { getUser } from "@/actions/users-actions";
 import { SessionPageComponent } from "@/components/aiag-components/session/session-component";
 import { notFound } from "next/navigation"
 

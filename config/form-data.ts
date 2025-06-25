@@ -42,7 +42,7 @@ import { MdRocketLaunch, MdEvent, MdSchool, MdTrendingUp } from "react-icons/md"
 
 export const modelTabs = [
     { id: 1, label: 'recomended', title: "Core" },
-    { id: 2, label: 'deepthink', title: "Advance" },
+    { id: 2, label: 'deepthink', title: "Advanced" },
 ];
 
 export const COLOR_PRIMARY = "bg-primary/15 border border-primary/50";

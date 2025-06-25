@@ -4,9 +4,7 @@ import { FullLogo, FullLogoMobile } from "@/shared/logo";
 import NavigationMenuComp from "./navigation-menu";
 import DesktopHeaderServer from "./desktop-header-server";
 
-
 const DesktopHeader = () => {
-   
     
     return (
         <header className="border-b">

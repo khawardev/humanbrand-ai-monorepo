@@ -14,7 +14,7 @@ const NavigationMenuComp = () => {
     return (
         <div className='sm:inline-block hidden'>
             <NavigationMenu>
-                <NavigationMenuList className=" bg-accent border text-muted-foreground inline-flex h-9 w-fit items-center justify-center rounded-full p-[3px]">
+                <NavigationMenuList className=" text-muted-foreground inline-flex h-9 w-fit items-center justify-center rounded-full p-[3px]">
                     {AIAGConfig?.mainNav.map((link: any, index: number) => (
                         <NavigationMenuItem key={index}>
                             <NavigationMenuLink

@@ -27,7 +27,6 @@ function formatBytes(bytes: number, decimals = 2): string {
 
 export function ImageFileDropzone({ onFileChange, initialFileInfo }: ImageFileDropzoneProps) {
     const [file, setFile] = useState<FileWithPreview | null>(null);
-console.log(initialFileInfo, `<-> initialFileInfo <->`);
 
     useEffect(() => {
         if (initialFileInfo?.reference_image_url && !file) {

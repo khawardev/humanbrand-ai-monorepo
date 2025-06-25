@@ -8,8 +8,9 @@ import {
 } from "drizzle-orm/pg-core"
 import { user } from "./users-schema"
 import crypto from "crypto";
+import {  relations } from "drizzle-orm";
+import { aiag_schema } from "./aiag-schema";
 
-export const aiag_schema = pgSchema("aiag_schema")
 
 export const savedSession = aiag_schema.table("saved_sessions", {
     id: text("id")
@@ -50,3 +51,12 @@ export const savedSession = aiag_schema.table("saved_sessions", {
     createdAt: timestamp('created_at').notNull().defaultNow(),
     updatedAt: timestamp('updated_at').notNull().defaultNow().$onUpdate(() => new Date()),
 })
+
+
+
+export const savedSessionRelations = relations(savedSession, ({ one }) => ({
+    user: one(user, {
+        fields: [savedSession.userId],
+        references: [user.id],
+    }),
+}));

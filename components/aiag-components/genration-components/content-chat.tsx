@@ -9,6 +9,7 @@ import remarkGfm from "remark-gfm";
 import ReactMarkdown from "react-markdown";
 import { LineSpinner, Spinner } from "@/shared/spinner";
 import { PdfFileDropzone } from "../reusable-components/uploads/PdfFileDropzone";
+import { Skeleton } from "@/components/ui/skeleton";
 
 export function ContentChat({ chatHistory = [], handleChatSend, onChatFileChange, chatPdfInfo, isChatLoading, user }: any) {
     const [messages, setMessages] = useState(chatHistory);
@@ -46,7 +47,6 @@ export function ContentChat({ chatHistory = [], handleChatSend, onChatFileChange
                 ) : (
                     messages.map((msg: any, index: number) => (
                         <div key={index} className="flex items-start gap-2 my-2 no-scrollbar">
-                            {/* Avatar */}
                             <img
                                 src={msg.role === 'user' ? user?.image && user?.image : 'https://i.postimg.cc/ZYDgZQyF/aiag-logo.jpg'}
                                 alt={`${msg.role} avatar`}
@@ -66,14 +66,14 @@ export function ContentChat({ chatHistory = [], handleChatSend, onChatFileChange
 
                     ))
                 )}
-                {isChatLoading && (
+                {!isChatLoading && (
                     <div className="flex items-center gap-2 my-2">
                         <img
                             src={'https://i.postimg.cc/ZYDgZQyF/aiag-logo.jpg'}
                             alt={` avatar`}
                             className="w-10 h-10 border rounded-md object-cover mt-1"
                         />
-                        <span className="p-2"> <Spinner /></span>
+                         <Skeleton className='w-full h-10'   />
                     </div>
                 )}
             </div>

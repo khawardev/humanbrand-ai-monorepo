@@ -15,8 +15,10 @@ import {
 import { LogOutIcon } from 'lucide-react'
 import { signOut } from '@/lib/auth-client'
 import { useRouter } from "next/navigation"
+import { Skeleton } from "../ui/skeleton"
 
 const UserMenu = ({ user }: any) => {
+  if (!user) return <Skeleton />;
   const router = useRouter()
   return (
     <DropdownMenu>
