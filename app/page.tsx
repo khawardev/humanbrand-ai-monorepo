@@ -41,9 +41,7 @@ export default function HomePage() {
 
   return (
     <main className="overflow-hidden pt-14 relative">
-      <div className="fixed bottom-5 right-5 z-50">
-        <KnowledgeBaseChatComponent />
-      </div>
+     
       <Hero />
       <section className="div-center-md">
         <ModelsSection title={'HBAI Models'} selectedValue={selectedModel} onValueChange={setSelectedModel} />

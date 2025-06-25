@@ -18,7 +18,7 @@ export default function KnowledgeBaseChatComponent() {
 
     useEffect(() => {
         if (chatContainerRef.current) {
-            chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
+            chatContainerRef.current?.scrollTo({ top: chatContainerRef.current.scrollHeight });
         }
     }, [chatHistory, isResponding]);
 
@@ -27,7 +27,6 @@ export default function KnowledgeBaseChatComponent() {
         handleSendMessage(input);
         setInput("");
     };
-
 
 
     return (

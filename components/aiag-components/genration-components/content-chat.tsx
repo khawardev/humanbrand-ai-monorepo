@@ -79,7 +79,7 @@ export function ContentChat({ chatHistory = [], handleChatSend, onChatFileChange
                         <img
                             src={'https://i.postimg.cc/ZYDgZQyF/aiag-logo.jpg'}
                             alt="assistant avatar"
-                            className="w-9 h-9 border rounded-md object-cover mt-1"
+                            className="w-9 h-9  rounded-md object-cover mt-1"
                         />
                         <div className='w-full space-y-2 p-3 bg-accent rounded-lg'>
                             <Skeleton className='w-[30%] h-4 bg-muted-foreground/20' />
