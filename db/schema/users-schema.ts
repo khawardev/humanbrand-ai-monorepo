@@ -2,6 +2,7 @@ import { relations } from 'drizzle-orm';
 import { text, timestamp, boolean, pgSchema } from 'drizzle-orm/pg-core';
 import { savedSession } from './saved-session-schema';
 import { aiag_schema } from './aiag-schema';
+import { knowledgeBaseChat } from './knowledge-base-chat-schema';
 
 export const user = aiag_schema.table('user', {
     id: text('id').primaryKey(),
@@ -53,10 +54,11 @@ export const verification = aiag_schema.table('verification', {
 
 
 
-export const userRelations = relations(user, ({ many }) => ({
+export const userRelations = relations(user, ({ many, one }) => ({
     savedSessions: many(savedSession),
     sessions: many(session),
     accounts: many(account),
+    knowledgeBaseChat: one(knowledgeBaseChat),
 }));
 
 

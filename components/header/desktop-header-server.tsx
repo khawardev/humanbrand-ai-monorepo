@@ -15,11 +15,13 @@ const Skeleton = () => (
 );
 
 const AuthenticatedContent = async () => {
-    const user: any = await getUserWithSavedSessions();
+    const rawUser: any = await getUserWithSavedSessions();
 
-    if (!user) {
+    if (!rawUser) {
         return null;
     }
+
+    const user = JSON.parse(JSON.stringify(rawUser));
 
     return (
         <>

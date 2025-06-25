@@ -132,37 +132,6 @@ export function useSessionContentGenerator(initialData: any) {
         });
     };
 
-
-
-    // const handleImageAction = (newPrompt: string) => {
-    //     startImageTransition(async () => {
-    //         const formData = new FormData();
-    //         formData.append('prompt', newPrompt);
-    //         if (imageReferenceFile) {
-    //             formData.append('image', imageReferenceFile);
-    //         }
-
-    //         const result = await generateImageAction(formData);
-
-    //         if (result.success && result.imageUrl) {
-    //             const newImageUrls = [...imageUrls, result.imageUrl];
-    //             toast.success("Preparing Image...");
-
-    //             await manageImageForSession(initialData.id, {
-    //                 imagePrompt: newPrompt,
-    //                 imageUrls: newImageUrls,
-    //                 imageReferenceFileInfo: imageReferenceFileInfo
-    //             });
-    //         }
-    //         else {
-    //             toast.error(result.error || "Failed to generate image.");
-    //         }
-    //         toast.success("Image Generated successfully!");
-    //     });
-    // };
-
-
-
     const handleImageAction = (newPrompt: string) => {
         startImageTransition(async () => {
             try {

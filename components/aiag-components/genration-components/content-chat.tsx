@@ -7,7 +7,6 @@ import { Button } from "@/components/ui/button";
 import { LuLoaderCircle } from "react-icons/lu";
 import remarkGfm from "remark-gfm";
 import ReactMarkdown from "react-markdown";
-import { LineSpinner, Spinner } from "@/shared/spinner";
 import { PdfFileDropzone } from "../reusable-components/uploads/PdfFileDropzone";
 import { Skeleton } from "@/components/ui/skeleton";
 
@@ -35,10 +34,6 @@ export function ContentChat({ chatHistory = [], handleChatSend, onChatFileChange
     
     return (
         <section className="space-y-4 flex flex-col h-[90vh]">
-            {/* <div>
-                <span className="text-lg tracking-tight font-bold">Chat with Generated Content</span>
-            </div> */}
-
             <div ref={chatContainerRef} className="flex-1 overflow-y-auto  space-y-4 pl-2  ">
                 {messages.length === 0 && !isChatLoading ? (
                     <div className="flex items-center justify-center h-[50vh] text-muted-foreground">
@@ -66,14 +61,30 @@ export function ContentChat({ chatHistory = [], handleChatSend, onChatFileChange
 
                     ))
                 )}
-                {!isChatLoading && (
+                {/* {isChatLoading && (
                     <div className="flex items-center gap-2 my-2">
                         <img
                             src={'https://i.postimg.cc/ZYDgZQyF/aiag-logo.jpg'}
                             alt={` avatar`}
-                            className="w-10 h-10 border rounded-md object-cover mt-1"
+                            className="w-10 h-10  rounded-md object-cover "
                         />
-                         <Skeleton className='w-full h-10'   />
+                        <div className='w-full space-y-1'>
+                         <Skeleton className='w-[20%] h-4'   />
+                         <Skeleton className='w-[60%] h-4'   />
+                        </div>
+                    </div>
+                )} */}
+                {isChatLoading && (
+                    <div className="flex items-start gap-3 my-2">
+                        <img
+                            src={'https://i.postimg.cc/ZYDgZQyF/aiag-logo.jpg'}
+                            alt="assistant avatar"
+                            className="w-9 h-9 border rounded-md object-cover mt-1"
+                        />
+                        <div className='w-full space-y-2 p-3 bg-accent rounded-lg'>
+                            <Skeleton className='w-[30%] h-4 bg-muted-foreground/20' />
+                            <Skeleton className='w-[70%] h-4 bg-muted-foreground/20' />
+                        </div>
                     </div>
                 )}
             </div>

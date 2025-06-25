@@ -16,6 +16,7 @@ import { AdditionalInstructionsSection } from "@/components/aiag-components/sele
 import { ContextualAwarenessSection } from "@/components/aiag-components/selection-components/ContextualAwarenessSection"
 import { ToneAndCreativitySection } from "@/components/aiag-components/selection-components/ToneAndCreativitySection"
 import { useNewContentGenerator } from "@/hooks/gemini_studio/use-new-content-generator"
+import KnowledgeBaseChatComponent from "@/components/knowledge-base-chat/knowledge-base-chat-component"
 
 
 export default function HomePage() {
@@ -39,7 +40,10 @@ export default function HomePage() {
   } = useNewContentGenerator()
 
   return (
-    <main className="overflow-hidden pt-14">
+    <main className="overflow-hidden pt-14 relative">
+      <div className="fixed bottom-5 right-5 z-50">
+        <KnowledgeBaseChatComponent />
+      </div>
       <Hero />
       <section className="div-center-md">
         <ModelsSection title={'HBAI Models'} selectedValue={selectedModel} onValueChange={setSelectedModel} />
@@ -72,6 +76,7 @@ export default function HomePage() {
           </>
         )}
       </section>
+        
     </main>
   )
 }
