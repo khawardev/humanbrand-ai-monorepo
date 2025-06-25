@@ -6,11 +6,6 @@ import { Suspense } from "react";
 import { getSession } from "@/lib/get-session";
 
 
-const Skeleton = () => (
-    <div className="flex items-center gap-2 animate-pulse">
-        <div className="size-8 rounded-md bg-card border flex items-center justify-center" />
-    </div>
-);
 
 const DesktopHeaderServer = async () => {
     const session = await getSession();

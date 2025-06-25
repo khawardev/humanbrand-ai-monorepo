@@ -10,8 +10,12 @@ import { Bookmark } from "lucide-react"
 import { Button } from '@/components/ui/button'
 import SessionsList from './sessions-list';
 import { getUserWithSavedSessions } from '@/actions/users-actions';
-import { Skeleton } from '@/components/ui/skeleton';
 
+const Skeleton = () => (
+    <div className="flex items-center gap-2 animate-pulse">
+        <div className="size-8 rounded-md bg-card border flex items-center justify-center" />
+    </div>
+);
 const SavedSessions = async () => {
     const user: any = await getUserWithSavedSessions();
     if (user?.savedSessions.length === 0) {
