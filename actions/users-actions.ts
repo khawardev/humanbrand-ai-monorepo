@@ -88,37 +88,37 @@ export const getUserWithSavedSessions = async () => {
   try {
     console.log(`<-> trying userWithSavedSessions .... <->`);
 
-    const userWithSavedSessions = await db
-      .select({
-        user: user,
-        sessions: savedSession
-      })
-      .from(user)
-      .leftJoin(savedSession, eq(user.id, savedSession.userId))
-      .where(eq(user.id, session.user.id))
-      .orderBy(desc(savedSession.updatedAt));
+    // const userWithSavedSessions = await db
+    //   .select({
+    //     user: user,
+    //     sessions: savedSession
+    //   })
+    //   .from(user)
+    //   .leftJoin(savedSession, eq(user.id, savedSession.userId))
+    //   .where(eq(user.id, session.user.id))
+    //   .orderBy(desc(savedSession.updatedAt));
 
-    const userData = userWithSavedSessions[0]?.user;
-    const sessions = userWithSavedSessions.filter(row => row.sessions !== null).map(row => row.sessions);
-    console.log(userWithSavedSessions, `<-> userWithSavedSessions <->`);
-
-    return {
-      ...userData,
-      savedSessions: sessions
-    };
-
-
-    // const userWithSavedSessions = await db.query.user.findFirst({
-    //   where: eq(user?.email, session?.user?.email),
-    //   with: {
-    //     savedSessions: {
-    //       orderBy: [desc(savedSession?.updatedAt)],
-    //     },
-    //   },
-    // });
+    // const userData = userWithSavedSessions[0]?.user;
+    // const sessions = userWithSavedSessions.filter(row => row.sessions !== null).map(row => row.sessions);
     // console.log(userWithSavedSessions, `<-> userWithSavedSessions <->`);
 
-    // return userWithSavedSessions ?? null;
+    // return {
+    //   ...userData,
+    //   savedSessions: sessions
+    // };
+
+
+    const userWithSavedSessions = await db.query.user.findFirst({
+      where: eq(user?.email, session?.user?.email),
+      with: {
+        savedSessions: {
+          orderBy: [desc(savedSession?.updatedAt)],
+        },
+      },
+    });
+    console.log(userWithSavedSessions, `<-> userWithSavedSessions <->`);
+
+    return userWithSavedSessions ?? null;
   } catch (error) {
     console.error("Error fetching user with saved sessions:", error);
     return null;
