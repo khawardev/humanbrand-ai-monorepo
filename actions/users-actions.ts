@@ -86,7 +86,7 @@ export const getUserWithSavedSessions = async () => {
   }
 
   try {
-    console.log(`<-> trying userWithSavedSessions .... <->`);
+    // console.log(`<-> trying userWithSavedSessions .... <->`);
 
     // const userWithSavedSessions = await db
     //   .select({
@@ -107,6 +107,7 @@ export const getUserWithSavedSessions = async () => {
     //   savedSessions: sessions
     // };
 
+    console.log(`<-> trying userWith findFirst SavedSessions .... <->`);
 
     const userWithSavedSessions = await db.query.user.findFirst({
       where: eq(user?.email, session?.user?.email),
@@ -116,7 +117,7 @@ export const getUserWithSavedSessions = async () => {
         },
       },
     });
-    console.log(userWithSavedSessions, `<-> userWithSavedSessions <->`);
+    console.log(userWithSavedSessions, `<-> userWith findFirst SavedSessions <->`);
 
     return userWithSavedSessions ?? null;
   } catch (error) {
