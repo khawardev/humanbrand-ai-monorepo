@@ -62,6 +62,7 @@ import { getSession } from "@/lib/get-session";
 import { desc, eq } from "drizzle-orm";
 import { user } from "@/db/schema/users-schema";
 import { savedSession } from "@/db/schema/saved-session-schema";
+import { cache } from "react";
 
 export async function getUser() {
   const session: any = await getSession();
@@ -78,7 +79,7 @@ export async function getUser() {
   return currentUser[0] ?? null;
 }
 
-export const getUserWithSavedSessions = async () => {
+export const getUserWithSavedSessions = cache(async () => {
   const session: any = await getSession();
 
   if (!session?.user?.id) {
@@ -86,27 +87,6 @@ export const getUserWithSavedSessions = async () => {
   }
 
   try {
-    // console.log(`<-> trying userWithSavedSessions .... <->`);
-
-    // const userWithSavedSessions = await db
-    //   .select({
-    //     user: user,
-    //     sessions: savedSession
-    //   })
-    //   .from(user)
-    //   .leftJoin(savedSession, eq(user.id, savedSession.userId))
-    //   .where(eq(user.id, session.user.id))
-    //   .orderBy(desc(savedSession.updatedAt));
-
-    // const userData = userWithSavedSessions[0]?.user;
-    // const sessions = userWithSavedSessions.filter(row => row.sessions !== null).map(row => row.sessions);
-    // console.log(userWithSavedSessions, `<-> userWithSavedSessions <->`);
-
-    // return {
-    //   ...userData,
-    //   savedSessions: sessions
-    // };
-
     console.log(`<-> trying userWith findFirst SavedSessions .... <->`);
 
     const userWithSavedSessions = await db.query.user.findFirst({
@@ -124,17 +104,4 @@ export const getUserWithSavedSessions = async () => {
     console.error("Error fetching user with saved sessions:", error);
     return null;
   }
-
-
-
-
-
-
-
-
-
-
-
-
-
-};
+});

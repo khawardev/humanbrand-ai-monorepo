@@ -2,9 +2,9 @@ import UserMenu from "@/components/header/user-menu";
 import SavedSessions from "../aiag-components/reusable-components/session/saved-sessions";
 import { SigninButtonDesktop } from "../aiag-components/reusable-components/auth/signin-button";
 import MobileHeader from "./mobile-header";
+import { Suspense } from "react";
 import { getSession } from "@/lib/get-session";
 
-export const revalidate = 0;
 
 const Skeleton = () => (
     <div className="flex items-center gap-2 animate-pulse">
@@ -19,9 +19,12 @@ const DesktopHeaderServer = async () => {
         return <SigninButtonDesktop />;
     }
 
+
     return (
         <>
-            <SavedSessions />
+            <Suspense fallback={<Skeleton />}>
+                <SavedSessions />
+            </Suspense>
             <UserMenu user={session?.user} />
             <div className="sm:hidden block pl-2 border-l">
                 <MobileHeader user={session?.user} />
