@@ -9,9 +9,9 @@ import { usePathname } from "next/navigation";
 import { Skeleton } from '@/components/ui/skeleton'
 
 const SessionsList = ({ savedSessions }: any) => {
-    if (!savedSessions) {
-        return <Skeleton />;
-    }
+    // if (!savedSessions) {
+    //     return <Skeleton />;
+    // }
     const pathname = usePathname()
     return (
         savedSessions?.length === 0 ? (
