@@ -3,7 +3,6 @@ import SavedSessions from "../aiag-components/reusable-components/session/saved-
 import { SigninButtonDesktop } from "../aiag-components/reusable-components/auth/signin-button";
 import MobileHeader from "./mobile-header";
 import { Suspense } from "react";
-import { Spinner } from "@/shared/spinner";
 import { getSession } from "@/lib/get-session";
 import { getUserWithSavedSessions } from "@/actions/users-actions";
 
@@ -17,8 +16,10 @@ const Skeleton = () => (
 
 const AuthenticatedContent = async () => {
     const user: any = await getUserWithSavedSessions();
-    console.log(user, `<-> user getUserWithSavedSessions <->`);
-    if (user) return <Skeleton />;
+
+    if (!user) {
+        return null;
+    }
 
     return (
         <>

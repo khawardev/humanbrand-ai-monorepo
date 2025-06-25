@@ -22,7 +22,7 @@ const SavedSessions = ({ savedSessions }: any) => {
                 <DropdownMenuLabel className="flex gap-2 items-center min-w-0">
                     <div className="flex flex-col">
                         <span className="text-foreground tracking-tight truncate text-sm font-medium">
-                            Saved Sessions 
+                            Saved Sessions
                         </span>
                         <span className="text-muted-foreground truncate text-xs font-normal">
                             Your previously saved content sessions.
@@ -30,13 +30,12 @@ const SavedSessions = ({ savedSessions }: any) => {
                     </div>
                 </DropdownMenuLabel>
                 <DropdownMenuSeparator />
-                <section className=" max-h-33 overflow-y-auto no-scrollbar">
+                <section className="max-h-60 overflow-y-auto no-scrollbar">
                     <SessionsList savedSessions={savedSessions} />
                 </section>
-
             </DropdownMenuContent>
         </DropdownMenu>
     )
 }
 
-export default SavedSessions
+export default SavedSessions;
