@@ -9,8 +9,6 @@ import { usePathname } from "next/navigation";
 import { Skeleton } from '@/components/ui/skeleton'
 
 const SessionsList = ({ savedSessions }: any) => {
-   console.log(savedSessions, `<-> savedSessions <->`);
-   
     const pathname = usePathname()
     return (
         savedSessions?.length === 0 ? (

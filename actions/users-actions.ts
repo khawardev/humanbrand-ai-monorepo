@@ -90,10 +90,10 @@ export const getUserWithSavedSessions = cache(async () => {
     console.log(`<-> trying userWith findFirst SavedSessions .... <->`);
 
     const userWithSavedSessions = await db.query.user.findFirst({
-      where: eq(user?.email, session?.user?.email),
+      where: eq(user.email, session.user.email), 
       with: {
         savedSessions: {
-          orderBy: [desc(savedSession?.updatedAt)],
+          orderBy: [desc(savedSession.updatedAt)], 
         },
       },
     });

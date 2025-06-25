@@ -9,18 +9,8 @@ import {
 import { Bookmark } from "lucide-react"
 import { Button } from '@/components/ui/button'
 import SessionsList from './sessions-list';
-import { getUserWithSavedSessions } from '@/actions/users-actions';
 
-const Skeleton = () => (
-    <div className="flex items-center gap-2 animate-pulse">
-        <div className="size-8 rounded-md bg-card border flex items-center justify-center" />
-    </div>
-);
-const SavedSessions = async () => {
-    const user: any = await getUserWithSavedSessions();
-    if (user?.savedSessions.length === 0) {
-        return <Skeleton />;
-    }
+const SavedSessions = ({ savedSessions }: any) => {
     return (
         <DropdownMenu>
             <DropdownMenuTrigger asChild>
@@ -41,8 +31,9 @@ const SavedSessions = async () => {
                 </DropdownMenuLabel>
                 <DropdownMenuSeparator />
                 <section className=" max-h-33 overflow-y-auto no-scrollbar">
-                    <SessionsList savedSessions={user?.savedSessions} />
+                    <SessionsList savedSessions={savedSessions} />
                 </section>
+
             </DropdownMenuContent>
         </DropdownMenu>
     )
