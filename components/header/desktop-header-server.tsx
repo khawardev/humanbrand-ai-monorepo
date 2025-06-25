@@ -22,9 +22,7 @@ const DesktopHeaderServer = async () => {
 
     return (
         <>
-            <Suspense fallback={<Skeleton />}>
-                <SavedSessions />
-            </Suspense>
+            <SavedSessions />
             <UserMenu user={session?.user} />
             <div className="sm:hidden block pl-2 border-l">
                 <MobileHeader user={session?.user} />

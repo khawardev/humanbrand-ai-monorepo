@@ -14,7 +14,7 @@ import { Skeleton } from '@/components/ui/skeleton';
 
 const SavedSessions = async () => {
     const user: any = await getUserWithSavedSessions();
-    if (!user?.savedSessions) {
+    if (user?.savedSessions.length === 0) {
         return <Skeleton />;
     }
     return (
