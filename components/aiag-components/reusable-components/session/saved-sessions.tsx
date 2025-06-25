@@ -13,9 +13,11 @@ import { getUserWithSavedSessions } from '@/actions/users-actions';
 import { Skeleton } from '@/components/ui/skeleton';
 
 const SavedSessions = async () => {
-    const { user: { savedSessions } }: any = await getUserWithSavedSessions();
-    if (!savedSessions) return <Skeleton />;
+    const user: any = await getUserWithSavedSessions();
 
+    if (!user || !user.savedSessions) {
+        return <Skeleton />;
+    }
     return (
         <DropdownMenu>
             <DropdownMenuTrigger asChild>
@@ -36,9 +38,8 @@ const SavedSessions = async () => {
                 </DropdownMenuLabel>
                 <DropdownMenuSeparator />
                 <section className=" max-h-33 overflow-y-auto no-scrollbar">
-                    <SessionsList savedSessions={savedSessions} />
+                    <SessionsList savedSessions={user?.savedSessions} />
                 </section>
-
             </DropdownMenuContent>
         </DropdownMenu>
     )

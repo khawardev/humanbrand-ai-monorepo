@@ -4,6 +4,7 @@ import { SigninButtonDesktop } from "../aiag-components/reusable-components/auth
 import MobileHeader from "./mobile-header";
 import { Suspense } from "react";
 import { getSession } from "@/lib/get-session";
+import { getUserWithSavedSessions } from "@/actions/users-actions";
 
 export const revalidate = 0;
 
@@ -19,6 +20,7 @@ const DesktopHeaderServer = async () => {
     if (!session) {
         return <SigninButtonDesktop />;
     }
+
 
     return (
         <>

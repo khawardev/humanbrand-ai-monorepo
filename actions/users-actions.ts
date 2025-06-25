@@ -80,7 +80,6 @@ export async function getUser() {
 
 export const getUserWithSavedSessions = async () => {
   const session: any = await getSession();
-  console.log(session, `<-> session <->`);
 
   if (!session?.user?.id) {
     return null;
