@@ -10,14 +10,9 @@ import { Bookmark } from "lucide-react"
 import { Button } from '@/components/ui/button'
 import SessionsList from './sessions-list';
 import { getUserWithSavedSessions } from '@/actions/users-actions';
-import { Skeleton } from '@/components/ui/skeleton';
 
 const SavedSessions = async () => {
     const user: any = await getUserWithSavedSessions();
-
-    if (!user || !user.savedSessions) {
-        return <Skeleton />;
-    }
     return (
         <DropdownMenu>
             <DropdownMenuTrigger asChild>
