@@ -36,7 +36,7 @@ export default function KnowledgeBaseChatComponent() {
                     <RiChatSmileAiLine />
                 </Button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent className="rounded-xl w-[350px] p-3" align='end'>
+            <DropdownMenuContent className="rounded-xl w-[345px] p-3" align='end'>
                 <div className="flex flex-col h-[70vh]">
                     {isLoading ? <div className='flex-center min-h-[70vh]'> <LuLoaderCircle className="text-muted-foreground size-4 animate-spin" /></div> :
                         <>

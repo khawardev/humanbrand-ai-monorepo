@@ -61,19 +61,6 @@ export function ContentChat({ chatHistory = [], handleChatSend, onChatFileChange
 
                     ))
                 )}
-                {/* {isChatLoading && (
-                    <div className="flex items-center gap-2 my-2">
-                        <img
-                            src={'https://i.postimg.cc/ZYDgZQyF/aiag-logo.jpg'}
-                            alt={` avatar`}
-                            className="w-10 h-10  rounded-md object-cover "
-                        />
-                        <div className='w-full space-y-1'>
-                         <Skeleton className='w-[20%] h-4'   />
-                         <Skeleton className='w-[60%] h-4'   />
-                        </div>
-                    </div>
-                )} */}
                 {isChatLoading && (
                     <div className="flex items-start gap-3 my-2">
                         <img

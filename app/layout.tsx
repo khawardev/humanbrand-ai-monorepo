@@ -35,7 +35,7 @@ export default function RootLayout({
           defaultTheme="system"
           enableSystem
         >
-          <div className="fixed bottom-5 right-5 z-50">
+          <div className="fixed bottom-6 right-6 z-50">
             <KnowledgeBaseChatComponent />
           </div>
             <DesktopHeader />
