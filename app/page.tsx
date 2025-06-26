@@ -14,9 +14,7 @@ import { CtaSection } from "@/components/aiag-components/selection-components/Ct
 import { ReferenceMaterialSection } from "@/components/aiag-components/selection-components/ReferenceMaterialSection"
 import { AdditionalInstructionsSection } from "@/components/aiag-components/selection-components/AdditionalInstructionsSection"
 import { ContextualAwarenessSection } from "@/components/aiag-components/selection-components/ContextualAwarenessSection"
-import { ToneAndCreativitySection } from "@/components/aiag-components/selection-components/ToneAndCreativitySection"
 import { useNewContentGenerator } from "@/hooks/gemini_studio/use-new-content-generator"
-import KnowledgeBaseChatComponent from "@/components/knowledge-base-chat/knowledge-base-chat-component"
 
 
 export default function HomePage() {

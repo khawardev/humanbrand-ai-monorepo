@@ -31,7 +31,7 @@ export function ContentChat({ chatHistory = [], handleChatSend, onChatFileChange
         setMessages((prev: any) => [...prev, { role: 'user', content: currentInput }]);
         await handleChatSend(currentInput);
     };
-    
+
     return (
         <section className="space-y-4 flex flex-col h-[90vh]">
             <div ref={chatContainerRef} className="flex-1 overflow-y-auto  space-y-4 pl-2  ">
@@ -49,9 +49,9 @@ export function ContentChat({ chatHistory = [], handleChatSend, onChatFileChange
                             />
 
                             <div className={`w-full p-2 rounded-lg text-[15px]  ${msg.role === 'user'
-                                    ? 'bg-primary text-primary-foreground'
-                                    : ''
-                                    }`}
+                                ? 'bg-primary text-primary-foreground'
+                                : ''
+                                }`}
                             >
                                 <div className="markdown-body space-y-1 text-[15px]">
                                     <ReactMarkdown remarkPlugins={[remarkGfm]}>{msg.content}</ReactMarkdown>

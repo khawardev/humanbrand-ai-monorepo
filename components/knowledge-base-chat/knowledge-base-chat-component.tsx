@@ -84,7 +84,7 @@ export default function KnowledgeBaseChatComponent() {
                                 <Input
                                     value={input}
                                     onChange={(e) => setInput(e.target.value)}
-                                    placeholder="Ask a question about the knowledge base..."
+                                    placeholder="Ask from knowledge base"
                                     onKeyDown={(e) => { if (e.key === 'Enter' && !e.shiftKey) { handleSend(e); } }}
                                     disabled={isResponding || !user}
                                 />

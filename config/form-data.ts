@@ -200,7 +200,7 @@ export const adjustToneAndCreativityData = {
     },
     creativity: {
         label: "Creativity",
-        defaultValue: 0.5,
+        defaultValue: 0.7,
         maxValue:1,
         minValue:0,
         options: ["Conservative", "Practical", "Balanced", "Creative", "Authoritative"],

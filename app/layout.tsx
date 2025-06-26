@@ -38,9 +38,12 @@ export default function RootLayout({
           <div className="fixed bottom-6 right-6 z-50">
             <KnowledgeBaseChatComponent />
           </div>
-            <DesktopHeader />
-            {children}
-            <Toaster />
+          <DesktopHeader />
+          {children}
+          <Toaster />
+          <div className="pointer-events-none fixed bottom-0 left-20 z-0 -translate-x-1/3" aria-hidden="true">
+            <div className="h-80 w-80 rounded-full bg-gradient-to-tr from-background to-primary  opacity-40 blur-[160px]" />
+          </div>
         </ThemeProvider>
       </body>
     </html>

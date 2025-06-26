@@ -30,7 +30,7 @@ export function useSessionContentGenerator(initialData: any) {
     const [additionalInstructions, setAdditionalInstructions] = useState(initialData.additionalInstructions ?? "")
     const [contextualAwareness, setContextualAwareness] = useState(initialData.contextualAwareness ?? "")
     const [toneValue, setToneValue] = useState<number>(initialData.tone ?? 3)
-    const [creativityValue, setCreativityValue] = useState<number>(Number(initialData.temperature ?? "0.5"))
+    const [creativityValue, setCreativityValue] = useState<number>(Number(initialData.temperature ?? 0.7))
 
     const [contentGenerated, setContentGenerated] = useState<string>(initialData.generatedContent ?? "")
     const [imagePrompt, setImagePrompt] = useState<string>(initialData.imagePrompt ?? "")
