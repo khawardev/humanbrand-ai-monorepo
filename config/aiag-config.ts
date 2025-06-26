@@ -12,6 +12,10 @@ export const AIAGConfig: any = {
       title: "Campaign",
       href: "/campaign",
     },
+    {
+      title: "Admin",
+      href: "/admin",
+    },
    
   ],
   authNav: [
