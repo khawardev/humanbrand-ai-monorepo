@@ -10,7 +10,7 @@ import { usePathname } from 'next/navigation';
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { SigninButtonMobile, SignoutButtonMobile } from '../aiag-components/reusable-components/auth/signin-button';
 
-export default function MobileHeader({ user }:any) {
+export default function MobileHeader({ user, navLinks }:any) {
     const pathname = usePathname()
     const [open, setOpen] = React.useState(false)
 
@@ -51,9 +51,9 @@ export default function MobileHeader({ user }:any) {
                     <div aria-hidden className="mx-auto w-12 h-2 flex-shrink-0 rounded-full bg-gray-300 mb-8" />
                     </Drawer.Title>
                     <div className="w-full">
-                        <ScrollArea className="h-[calc(42vh-8rem)] ">
+                        <ScrollArea className="h-[calc(50vh-8rem)] ">
                             <div className="flex flex-col space-y-2" >
-                                {AIAGConfig.mainNav.map((link: any, index: any) => (
+                                {navLinks.map((link: any, index: any) => (
                                     <Link
                                         key={index}
                                         href={link.href ?? ""}

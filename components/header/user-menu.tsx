@@ -24,18 +24,18 @@ const UserMenu = ({ user }: any) => {
     <DropdownMenu>
       <DropdownMenuTrigger>
         <Avatar className=" hover:cursor-pointer">
-          <AvatarImage src={user.image&&user.image} alt="Profile image" />
+          <AvatarImage src={user.image && user.image} alt="Profile image" />
           <AvatarFallback>{user.name?.slice(0, 2).toUpperCase()}</AvatarFallback>
         </Avatar>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="max-w-58" align="end">
         <DropdownMenuLabel className="flex gap-2 items-center min-w-0 ">
           <img src={user?.image} className="size-8 rounded-md" alt="" />
-          <div className="flex flex-col">
+          <div className="flex flex-col ">
             <span className="text-foreground tracking-tight truncate text-sm font-medium">
               {user?.name}
             </span>
-            <span className="text-xs w-[85%] overflow-hidden text-muted-foreground text-ellipsis whitespace-wrap font-normal">
+            <span className="text-xs  w-[85%] overflow-hidden text-muted-foreground text-ellipsis whitespace-wrap font-normal">
               {user?.email}
             </span>
           </div>

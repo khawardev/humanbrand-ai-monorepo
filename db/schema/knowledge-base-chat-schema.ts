@@ -4,7 +4,6 @@ import {
     jsonb,
 } from "drizzle-orm/pg-core"
 import { user } from "./users-schema"
-import crypto from "crypto";
 import { relations } from "drizzle-orm";
 import { aiag_schema } from "./aiag-schema";
 

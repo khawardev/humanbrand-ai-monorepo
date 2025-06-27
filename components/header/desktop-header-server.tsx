@@ -14,7 +14,7 @@ const Skeleton = () => (
     </div>
 );
 
-const AuthenticatedContent = async () => {
+const AuthenticatedContent = async ({navLinks}:any) => {
     const rawUser: any = await getUserWithSavedSessions();
 
     if (!rawUser) {
@@ -27,14 +27,14 @@ const AuthenticatedContent = async () => {
         <>
             <SavedSessions savedSessions={user?.savedSessions} />
             <UserMenu user={user} />
-            <div className="sm:hidden block pl-2 border-l">
-                <MobileHeader user={user} />
+            <div className="pl-2 border-l">
+                <MobileHeader navLinks={navLinks} user={user} />
             </div>
         </>
     );
 };
 
-const DesktopHeaderServer = async () => {
+const DesktopHeaderServer = async ({navLinks}:any) => {
     const session = await getSession();
 
     if (!session) {
@@ -43,7 +43,7 @@ const DesktopHeaderServer = async () => {
 
     return (
         <Suspense fallback={<Skeleton />}>
-            <AuthenticatedContent />
+            <AuthenticatedContent navLinks={navLinks} />
         </Suspense>
     );
 };

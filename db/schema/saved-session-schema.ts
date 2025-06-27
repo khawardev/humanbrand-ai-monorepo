@@ -63,17 +63,14 @@
 
 
 
-
 import {
     text,
     timestamp,
-    pgSchema,
     integer,
     jsonb,
     numeric,
 } from "drizzle-orm/pg-core"
 import { user } from "./users-schema"
-import crypto from "crypto";
 import { relations } from "drizzle-orm";
 import { aiag_schema } from "./aiag-schema";
 
@@ -110,14 +107,9 @@ export const savedSession = aiag_schema.table("saved_sessions", {
     imageReferenceFileInfo: jsonb("image_reference_file_info"),
     reference_image: text("reference_image"),
 
-    ////////////////// changes explain comment start ////////////
-    // RESTORED: The `chatHistory` field is correctly restored. I apologize for mistakenly removing it.
     chatHistory: jsonb("chat_history"),
-    // RENAMED: `chatPdfInfo` to `chatFileInfos` to store an array of file info objects for the chat.
     chatFileInfos: jsonb("chat_file_infos"),
-    // RENAMED: `chatPdfData` to `chatFilesData` to store the combined parsed text from all chat files.
     chatFilesData: text("chat_files_data"),
-    ////////////////// changes explain comment end ////////////
 
     createdAt: timestamp('created_at').notNull().defaultNow(),
     updatedAt: timestamp('updated_at').notNull().defaultNow().$onUpdate(() => new Date()),

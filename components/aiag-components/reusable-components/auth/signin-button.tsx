@@ -2,7 +2,6 @@
 
 import { Button } from "@/components/ui/button"
 import { signIn, signOut } from "@/lib/auth-client"
-import { LogOutIcon } from "lucide-react"
 import { useRouter } from "next/navigation"
 import { FcGoogle } from "react-icons/fc"
 

@@ -18,15 +18,12 @@ export const AIAGConfig: any = {
     },
    
   ],
-  authNav: [
-    {
-      title: "Sign in",
-      href: "/signin",
-    },
-    {
-      title: "Sign up",
-      href: "/signup",
-    },
-  ]
 };
 
+
+export const ADMIN_EMAILS = [
+    "khawarsultan.developer@gmail.com",
+    "aaron@humanbrand.ai",
+    "john@humanbrand.ai",
+    "rizwaniscoder@gmail.com",
+];

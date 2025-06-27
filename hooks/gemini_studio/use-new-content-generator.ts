@@ -168,7 +168,11 @@ export function useNewContentGenerator() {
         startTransition(async () => {
             const user: any = await getUser()
             if (!user) {
-                toast.warning('Please Login first')
+                toast.warning('Please Login to continue')
+                return;
+            }
+            if (user?.adminVerified === false) {
+                toast.warning('Please wait for the Admin to Approve')
                 return;
             }
 

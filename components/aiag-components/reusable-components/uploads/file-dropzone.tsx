@@ -9,18 +9,6 @@ import { toast } from "sonner";
 import { LineSpinner } from "@/shared/spinner";
 import { PiFilePdf, PiFileDoc, PiFileXls, PiFilePpt, PiFileCsv, PiFile, PiFilePdfFill, PiFileDocFill, PiFileXlsFill, PiFilePptFill, PiFileCsvFill, PiFileFill } from "react-icons/pi";
 
-////////////////// changes explain comment start ////////////
-// 1. Renamed component from `PdfFileDropzone` to `FileDropzone`.
-// 2. Updated `FileInfo` to be clearer.
-// 3. Changed props to handle multiple files (`initialFileInfos` as an array) and a more descriptive `onFilesChange` callback.
-// 4. Introduced a new state `uploadedFiles` to hold the actual `File` objects, which is crucial for re-parsing when a file is removed.
-// 5. Updated `useDropzone` options to accept multiple files (`multiple: true`) and a wide range of document types.
-// 6. Implemented `parseFiles` function to send multiple files to the new `/api/parse-documents` endpoint.
-// 7. Implemented `handleRemoveFile` to remove a specific file from the list, and then re-parse the remaining files to keep the parent component's text data in sync.
-// 8. The dropzone now remains visible with the remaining files until the last one is removed, fulfilling a key requirement.
-// 9. Added dynamic icons for different file types for better UX.
-// 10. Refactored the main return block to map over and display a list of uploaded files.
-////////////////// changes explain comment end ////////////
 type FileInfo = {
     name: string;
     size: number;
@@ -148,7 +136,7 @@ export function FileDropzone({ onFilesChange, initialFileInfos }: FileDropzonePr
                 <div className="flex w-full gap-3">
 
                 {fileInfos.map((info, index) => (
-                    <div key={index} className="relative flex w-full items-center justify-between p-2 pl-4 border rounded-md bg-accent">
+                    <div key={index}  className="relative flex w-full items-center justify-between p-2 pl-4 border rounded-md bg-accent">
                         <div className="flex items-center gap-4 flex-grow min-w-0">
                             {getFileIcon(info.name)}
                             <div className="flex flex-col min-w-0">

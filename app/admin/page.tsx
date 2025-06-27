@@ -1,9 +1,15 @@
-import React from 'react'
+import { getAllUsers } from '@/actions/users-actions';
+import UsersTable from '@/components/aiag-components/admin-verification/users/users-table';
+import React from 'react';
 
-const page = () => {
-  return (
-    <div>page</div>
-  )
+const AdminUsersPage = async () => {
+    const users = await getAllUsers();
+
+    return (
+        <div className='div-center-md'>
+            <UsersTable users={users} />
+        </div>
+    )
 }
 
-export default page
+export default AdminUsersPage;
