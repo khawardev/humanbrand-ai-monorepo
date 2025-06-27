@@ -16,18 +16,18 @@ const NavigationMenuComp = ({ navLinks }: { navLinks: any[] }) => {
             <NavigationMenu>
                 <NavigationMenuList className=" border text-muted-foreground inline-flex h-9 w-fit items-center justify-center rounded-full p-[3px]">
                     {navLinks.map((link: any, index: number) => (
-                        <Link key={index} href={link.href}>
-                            <NavigationMenuItem suppressHydrationWarning={true}>
-                                <NavigationMenuLink
-                                    href={link.href}
-                                    active={pathname === link.href}
-                                    className="text-muted-foreground px-4 rounded-full hover:text-primary py-1 font-medium"
-                                >
+                        <NavigationMenuItem key={link.href} >
+                            <NavigationMenuLink
+                                active={pathname === link.href}
+                                asChild
+                                className="text-muted-foreground px-4 rounded-full hover:text-primary py-1 font-medium"
+                            >
+                                <Link  href={link.href}>
                                     {link.title}
-                                </NavigationMenuLink>
-                            </NavigationMenuItem>
+                                </Link>
+                            </NavigationMenuLink>
+                        </NavigationMenuItem>
 
-                        </Link>
                     ))}
                 </NavigationMenuList>
             </NavigationMenu>

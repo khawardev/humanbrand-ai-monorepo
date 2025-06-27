@@ -165,11 +165,11 @@ export function FileDropzone({ onFilesChange, initialFileInfos }: FileDropzonePr
         <div {...getRootProps()} className={`flex flex-col items-center justify-center w-full h-34 border-2 border-dashed rounded-lg cursor-pointer transition-colors ${isDragActive ? "border-primary bg-primary/10" : "border-border hover:border-primary/20 hover:bg-primary/5"}`}>
             <input {...getInputProps()} />
             <MdOutlineFileUpload className="w-12 h-12 text-muted-foreground/50" />
-            <p className="mt-2 px-10 text-sm text-center text-muted-foreground">
+            <div className="mt-2 px-10 text-sm text-center text-muted-foreground">
                 {isDragActive ? "Drop the files here..." : <>
                     <p> (PDF, DOCX, TXT, XLSX, CSV, PPTX)</p> <p>Drag & drop files, or click to select</p>
                 </>}
-            </p>
+            </div>
         </div>
     );
 }
