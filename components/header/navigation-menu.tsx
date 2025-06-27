@@ -22,7 +22,7 @@ const NavigationMenuComp = ({ navLinks }: { navLinks: any[] }) => {
                                 asChild
                                 className="text-muted-foreground px-4 rounded-full hover:text-primary py-1 font-medium"
                             >
-                                <Link  href={link.href}>
+                                <Link className="rounded-full"  href={link.href}>
                                     {link.title}
                                 </Link>
                             </NavigationMenuLink>

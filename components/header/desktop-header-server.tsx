@@ -27,7 +27,7 @@ const AuthenticatedContent = async ({navLinks}:any) => {
         <>
             <SavedSessions savedSessions={user?.savedSessions} />
             <UserMenu user={user} />
-            <div className="pl-2 border-l">
+            <div className="sm:hidden block pl-2 border-l">
                 <MobileHeader navLinks={navLinks} user={user} />
             </div>
         </>
