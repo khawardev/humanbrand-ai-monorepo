@@ -415,13 +415,19 @@ export async function updateSessionContent(sessionId: string, data: any) {
 
         if (feedback) {
             const promptData = {
-                // ... (revision prompt data is unaffected by the file schema change)
+                selectedAudiences: selectedAudienceLabels,
+                selectedSubject: selectedSubjectObj?.label || "",
+                selectedContentTypes: selectedContentTypeLabels,
+                selectedCtas: selectedCtaLabels,
+                selectedSocialPlatform: selectedSocialPlatformObj?.label || "",
+                additionalInstructions: formData.additionalInstructions || '',
+                knowledgeBaseContent: knowledgeBaseContent,
+                revisionInstructions: feedback,
+                originalContent: formData.originalContent,
             };
             ({ systemPrompt, userPrompt } = getRevisionPrompts(promptData));
+            
         } else {
-            ////////////////// changes explain comment start ////////////
-            // 5. UPDATED: Correctly reads from `formData.referenceFilesData`.
-            ////////////////// changes explain comment end ////////////
             const promptData = {
                 selectedAudiences: selectedAudienceLabels,
                 selectedSubject: selectedSubjectObj?.label || "",
@@ -441,14 +447,8 @@ export async function updateSessionContent(sessionId: string, data: any) {
         const cleanedMarkdown = cleanAndFlattenBulletsGoogle(generatedResult.generatedText);
 
         const imagePromptResult = await generateNewContent({ modelAlias: selectedModelObj?.label, temperature: formData.temperature, userPrompt: getImageGenerationPrompt({ selectedAudiences: selectedAudienceLabels, selectedSubject: selectedSubjectObj?.label || "", contentGenerated: cleanedMarkdown }).finalImagePrompt });
-
-        ////////////////// changes explain comment start ////////////
-        // 6. CRITICAL FIX: The `set` object in the update query is corrected.
-        // It no longer wrongly sets persona, image, and chat data to `null` when updating content.
-        // It now correctly uses the new schema field names (`referenceFileInfos`, `referenceFilesData`).
-        ////////////////// changes explain comment end ////////////
         await db.update(savedSession).set({
-            ...formData, // Spreads fields like modelId, audienceIds, etc.
+            ...formData, 
             referenceFileInfos: formData.referenceFileInfos,
             referenceFilesData: formData.referenceFilesData,
             generatedContent: cleanedMarkdown,
@@ -487,7 +487,6 @@ export async function adaptPersonaForSession(sessionId: string, data: any) {
 
 export async function manageImageForSession(sessionId: string, data: any) {
     try {
-        // This function is correct and does not need changes for the reference/chat file schema.
         await db.update(savedSession).set({
             reference_image: data.reference_image,
             imagePrompt: data.imagePrompt,
@@ -505,10 +504,6 @@ export async function manageImageForSession(sessionId: string, data: any) {
 
 export async function updateChatForSession(sessionId: string, data: any) {
     try {
-        ////////////////// changes explain comment start ////////////
-        // 7. UPDATED: The database update now uses the correct schema field names.
-        // It writes to `chatHistory`, `chatFileInfos`, and `chatFilesData`.
-        ////////////////// changes explain comment end ////////////
         await db.update(savedSession).set({
             chatHistory: data.chatHistory,
             chatFileInfos: data.chatFileInfos,

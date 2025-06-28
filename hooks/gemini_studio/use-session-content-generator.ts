@@ -677,6 +677,7 @@ export function useSessionContentGenerator(initialData: any) {
         startContentTransition(async () => {
             const data = { ...prepareUpdateData(), feedback };
             const result = await updateSessionContent(initialData.id, data)
+
             if (result.error) toast.error(result.error)
             else {
                 toast.success("Content revised successfully!");

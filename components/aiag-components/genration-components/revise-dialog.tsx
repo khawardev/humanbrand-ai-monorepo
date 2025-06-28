@@ -18,6 +18,14 @@ export function ReviseDialog({ isOpen, onOpenChange, handleRevise, feedback, set
                     <span className=" font-semibold text-accent-foreground tracking-tighter">Provide Feedback for Revision</span>
                     <Label className=" text-sm text-muted-foreground  mb-2">Changes requested:</Label>
                     <Textarea
+                        onKeyDown={(e) => {
+                            if (e.key === 'Enter' && !e.shiftKey) {
+                                e.preventDefault();
+                                if (feedback.trim()) {
+                                    handleRevise();
+                                }
+                            }
+                        }}
                         id="revision-feedback"
                         value={feedback}
                         onChange={(e) => setFeedback(e.target.value)}

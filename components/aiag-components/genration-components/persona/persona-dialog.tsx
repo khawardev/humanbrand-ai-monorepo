@@ -86,6 +86,14 @@ export function PersonaDialog({ isOpen, onOpenChange, setPersonasText, setUpload
                     <span className="font-semibold text-accent-foreground tracking-tighter">Adapt Content for Hyper Relevance</span>
                     <Label className="text-sm text-muted-foreground mb-2">Describe Target Persona(s):</Label>
                     <Textarea
+                        onKeyDown={(e) => {
+                            if (e.key === 'Enter' && !e.shiftKey) {
+                                e.preventDefault();
+                                if (personasText.trim()) {
+                                    handleSubmit();
+                                }
+                            }
+                        }}
                         id="persona-description"
                         value={personasText}
                         onChange={(e) => setPersonasText(e.target.value)}
