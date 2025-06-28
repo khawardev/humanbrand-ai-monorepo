@@ -97,7 +97,7 @@ export function DataTable<TData, TValue>({
     return (
         <div className={cn("w-full  space-y-8", containerClassName)}>
             {title && <h2 className="text-3xl font-bold tracking-tight">{title}</h2>}
-            <div className="space-y-4">
+            <div className="md:space-y-4">
 
                 <DataTableToolbar
                     table={table}
@@ -109,7 +109,7 @@ export function DataTable<TData, TValue>({
                     topBarComponents={topBarComponents}
                 />
 
-                <div className="rounded-xl border bg-background overflow-x-auto">
+                <div className="rounded-xl border  bg-background overflow-x-auto">
                     <Table className={cn("w-full table-auto", tableClassName)}>
                         <TableHeader>
                             {table.getHeaderGroups().map((headerGroup: any) => (
