@@ -91,7 +91,7 @@ export const getUsersColumns = (
                 return (
                     <div className="text-right">
                         <Button
-                            variant="outline"
+                            variant={`${user.adminVerified ? 'destructive' : 'default'}`}
                             size="sm"
                             onClick={() => onVerificationToggle(user.id, user.adminVerified)}
                             disabled={isPending}
