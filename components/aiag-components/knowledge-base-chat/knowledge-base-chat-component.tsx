@@ -48,7 +48,7 @@ export default async function KnowledgeBaseChatComponent() {
                             content: (
                                 <div className="text-center items-center flex space-y-1 justify-center flex-col">
                                     <span className="text-muted-foreground">Ask from knowledge base</span>
-                                    <Gemini_Live_AIAG />
+                                    <Gemini_Live_AIAG user={user} />
                                 </div>
                             ),
                         },

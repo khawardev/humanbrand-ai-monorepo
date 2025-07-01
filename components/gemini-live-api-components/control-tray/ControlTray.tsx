@@ -11,7 +11,7 @@ export type ControlTrayProps = {
   children?: ReactNode;
 };
 
-function ControlTray({ children }: ControlTrayProps) {
+function ControlTray({ children, user }: any) {
   useState<MediaStream | null>(null);
   const [inVolume, setInVolume] = useState(0);
   const [audioRecorder] = useState(() => new AudioRecorder());
@@ -52,6 +52,7 @@ function ControlTray({ children }: ControlTrayProps) {
       <div className={cn("connection-container", { connected })}>
         <div className="connection-button-container">
           <button
+            disabled={!user}
             ref={connectButtonRef}
             className={cn("action-button connect-toggle", { connected })}
             onClick={connected ? disconnect : connect}
@@ -63,6 +64,7 @@ function ControlTray({ children }: ControlTrayProps) {
       <canvas style={{ display: "none" }} ref={renderCanvasRef} />
       <nav className={cn("actions-nav", { disabled: !connected })}>
         <button
+          disabled={!user}
           className={cn("action-button mic-button")}
           onClick={() => setMuted(!muted)}
         >

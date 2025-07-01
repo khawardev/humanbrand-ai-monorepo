@@ -2,6 +2,7 @@ import ControlTray from "@/components/gemini-live-api-components/control-tray/Co
 import { LiveClientOptions } from "./types";
 import { KnowledgeBaseChat } from "@/components/gemini-live-api-components/KnowledgeBaseChat";
 import { LiveAPIProvider } from "@/contexts/LiveAPIContext";
+import { getUser } from "@/actions/users-actions";
 
 
 const API_KEY = process.env.GOOGLE_GENERATIVE_AI_API_KEY! as string;
@@ -12,13 +13,12 @@ const apiOptions: LiveClientOptions = {
   apiKey: API_KEY,
 };
 
-function Gemini_Live_AIAG() {
-
+function Gemini_Live_AIAG({ user }:any) {
   return (
     <div>
       <LiveAPIProvider options={apiOptions}>
         <KnowledgeBaseChat />
-        <ControlTray />
+        <ControlTray user={user} />
       </LiveAPIProvider>
     </div>
   );
