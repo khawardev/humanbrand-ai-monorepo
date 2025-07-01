@@ -52,7 +52,6 @@ function ControlTray({ children, user }: any) {
       <div className={cn("connection-container", { connected })}>
         <div className="connection-button-container">
           <button
-            disabled={!user}
             ref={connectButtonRef}
             className={cn("action-button connect-toggle", { connected })}
             onClick={connected ? disconnect : connect}
@@ -64,7 +63,6 @@ function ControlTray({ children, user }: any) {
       <canvas style={{ display: "none" }} ref={renderCanvasRef} />
       <nav className={cn("actions-nav", { disabled: !connected })}>
         <button
-          disabled={!user}
           className={cn("action-button mic-button")}
           onClick={() => setMuted(!muted)}
         >

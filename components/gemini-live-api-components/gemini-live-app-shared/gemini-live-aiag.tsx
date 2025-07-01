@@ -2,7 +2,6 @@ import ControlTray from "@/components/gemini-live-api-components/control-tray/Co
 import { LiveClientOptions } from "./types";
 import { KnowledgeBaseChat } from "@/components/gemini-live-api-components/KnowledgeBaseChat";
 import { LiveAPIProvider } from "@/contexts/LiveAPIContext";
-import { getUser } from "@/actions/users-actions";
 
 
 const API_KEY = process.env.GOOGLE_GENERATIVE_AI_API_KEY! as string;
