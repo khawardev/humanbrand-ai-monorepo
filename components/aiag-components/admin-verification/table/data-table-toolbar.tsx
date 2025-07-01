@@ -136,40 +136,6 @@ export function DataTableToolbar<TData>({
                 {filterComponents.map(filter => (
                     <filter.component key={filter.id} table={table} />
                 ))}
-
-                {/* {viewOptions && (
-                    <DropdownMenu>
-                        <DropdownMenuTrigger asChild>
-                            <Button variant="outline" size="sm" className="ml-auto flex">
-                                <Columns3Icon  />
-                                View
-                            </Button>
-                        </DropdownMenuTrigger>
-                        <DropdownMenuContent align="end" className="w-[150px]">
-                            <DropdownMenuLabel>Toggle columns</DropdownMenuLabel>
-                            {table
-                                .getAllColumns()
-                                .filter(
-                                    (column:any) =>
-                                        typeof column.accessorFn !== "undefined" && column.getCanHide()
-                                )
-                                .map((column: any) => {
-                                    return (
-                                        <DropdownMenuCheckboxItem
-                                            key={column.id}
-                                            className="capitalize"
-                                            checked={column.getIsVisible()}
-                                            onCheckedChange={(value) =>
-                                                column.toggleVisibility(!!value)
-                                            }
-                                        >
-                                            {column.id.replace(/_/g, ' ')}
-                                        </DropdownMenuCheckboxItem>
-                                    );
-                                })}
-                        </DropdownMenuContent>
-                    </DropdownMenu>
-                )} */}
             </div>
 
             <div className="flex items-center gap-2 flex-shrink-0 w-full md:w-auto justify-end">

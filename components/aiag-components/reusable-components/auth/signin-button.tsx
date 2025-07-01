@@ -1,7 +1,7 @@
 'use client'
 
 import { Button } from "@/components/ui/button"
-import { signIn, signOut } from "@/lib/auth-client"
+import { signIn, signOut } from "@/lib/better-auth/auth-client"
 import { useRouter } from "next/navigation"
 import { FcGoogle } from "react-icons/fc"
 

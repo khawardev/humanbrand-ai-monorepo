@@ -1,0 +1,42 @@
+// audio-pulse.scss
+
+.audioPulse {
+  display: flex;
+  width: 24px;
+  height: 24px;
+  justify-content: space-evenly;
+  align-items: center;
+  opacity: 0.6;
+
+  > div {
+    background-color: var(--muted-foreground);
+    border-radius: 1000px;
+    width: 4px;
+    min-height: 4px;
+    transition: height 0.1s;
+  }
+
+  &.hover > div {
+    animation: hover 1.4s infinite alternate ease-in-out;
+  }
+
+  transition: opacity 0.333s;
+
+  &.active {
+    opacity: 1;
+
+    > div {
+      background-color: var(--primary);
+    }
+  }
+}
+
+@keyframes hover {
+  from {
+    transform: translateY(0);
+  }
+
+  to {
+    transform: translateY(-3.5px);
+  }
+}

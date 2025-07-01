@@ -13,7 +13,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { LogOutIcon } from 'lucide-react'
-import { signOut } from '@/lib/auth-client'
+import { signOut } from '@/lib/better-auth/auth-client'
 import { useRouter } from "next/navigation"
 import { Skeleton } from "../ui/skeleton"
 

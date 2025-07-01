@@ -5,11 +5,8 @@ import DesktopHeader from "@/components/header/desktop-header";
 import { Toaster } from "@/components/ui/sonner";
 import { ThemeProvider } from "next-themes";
 import KnowledgeBaseChatComponent from "@/components/aiag-components/knowledge-base-chat/knowledge-base-chat-component";
-import { getUser } from "@/actions/users-actions";
-import { getKnowledgeBaseChat } from "@/actions/knowledge-base-chat-actions";
 
 const inter = Inter({ subsets: ["latin"] });
-
 
 export const viewport: Viewport = {
   initialScale: 1,
@@ -31,14 +28,6 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const user = await getUser();
-  let initialChatHistory = [];
-  if (user) {
-    const chat = await getKnowledgeBaseChat(user.id);
-    if (chat && chat.chatHistory) {
-      initialChatHistory = chat.chatHistory as any[];
-    }
-  }
   return (
     <html lang="en" suppressHydrationWarning={true}>
       <body className={`${inter?.className} relative  antialiased`} suppressHydrationWarning={true}>
@@ -48,13 +37,10 @@ export default async function RootLayout({
           enableSystem
         >
           <div className="fixed bottom-6 right-6 z-50">
-            <KnowledgeBaseChatComponent
-              user={user}
-              initialChatHistory={initialChatHistory}
-            />
+            <KnowledgeBaseChatComponent />
           </div>
           <DesktopHeader />
-          {children} 
+          {children}
           <Toaster />
         </ThemeProvider>
       </body>

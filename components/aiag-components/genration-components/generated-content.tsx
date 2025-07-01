@@ -1,117 +1,3 @@
-// import React, {  useRef } from "react";
-// import ReactMarkdown from "react-markdown";
-// import remarkGfm from "remark-gfm";
-// import { Separator } from "@/components/ui/separator";
-// import { AIAG_VERSION } from "@/lib/aiag/constants";
-// import { ContentActions } from "./content-actions";
-// import { ImageGenerator } from "./image/image-generator";
-// import { ContentChat } from "./content-chat";
-// import { GeneratedPersonaContent } from "./persona/generated-persona-content";
-// import { LineSpinner, Spinner } from "@/shared/spinner";
-// import { CustomTabs } from "@/shared/CustomTabs";
-// import { RiAiGenerate, RiChatSmileAiLine, RiImageCircleAiFill, RiUserSmileLine } from "react-icons/ri";
-
-// export function GeneratedContent(props: any) {
-//     const {
-//         isPersonaPending, isImagePending, content, imagePrompt, imageUrls, personaContent, chatHistory,
-//         handleRevise, feedback, setFeedback,
-//         handleAdaptPersona, personasText, setPersonasText, setUploadedPersonaFileData,
-//         handleImageAction, onImageFileChange, imageReferenceFileInfo,
-//         handleChatSend, isChatLoading, onChatFileChange, chatPdfInfo,
-//         modelAlias, temperature, user
-//     } = props;
-
-//     const headerRef = useRef<HTMLDivElement>(null);
-
-//     return (
-//         <CustomTabs
-//             defaultValue="content_generate"
-//             triggerMaxWidthClass="max-w-30"
-//             tabs={[
-//                 {
-//                     label: "Content",
-//                     value: "content_generate",
-//                     icon: <RiAiGenerate />,
-//                     content: (
-//                         <section>
-//                             <div ref={headerRef}>
-//                                 <div className={"flex md:items-center items-end justify-between mb-4"}>
-//                                     <h4>AIAG - Content Generation Details ({AIAG_VERSION})</h4>
-//                                     <div className=" flex justify-end ">
-//                                         <ContentActions
-//                                             content={content}
-//                                             handleRevise={handleRevise}
-//                                             feedback={feedback}
-//                                             setFeedback={setFeedback}
-//                                             handleAdaptPersona={handleAdaptPersona}
-//                                             personasText={personasText}
-//                                             setPersonasText={setPersonasText}
-//                                             setUploadedPersonaFileData={setUploadedPersonaFileData}
-//                                         />
-//                                     </div>
-//                                 </div>
-//                                 <Separator className="mb-4" />
-//                             </div>
-//                             <div className="prose prose-neutral max-w-none markdown-body space-y-3 dark:prose-invert">
-//                                 <ReactMarkdown remarkPlugins={[remarkGfm]}>{content}</ReactMarkdown>
-//                             </div>
-//                         </section>
-//                     ),
-//                 },
-//                 {
-//                     label: "Image",
-//                     value: "image_generate",
-//                     icon: <RiImageCircleAiFill />,
-//                     content: (
-//                         <ImageGenerator
-//                             imagePrompt={imagePrompt}
-//                             imageUrls={imageUrls}
-//                             handleImageAction={handleImageAction}
-//                             isPending={isImagePending}
-//                             onImageFileChange={onImageFileChange}
-//                             imageReferenceFileInfo={imageReferenceFileInfo}
-//                         />
-//                     ),
-//                 },
-//                 {
-//                     label: "Chat",
-//                     value: "chat",
-//                     icon: <RiChatSmileAiLine />,
-//                     content: (
-//                         <ContentChat
-//                             chatHistory={chatHistory}
-//                             handleChatSend={handleChatSend}
-//                             isChatLoading={isChatLoading}
-//                             onChatFileChange={onChatFileChange}
-//                             chatPdfInfo={chatPdfInfo}
-//                             modelAlias={modelAlias}
-//                             temperature={temperature}
-//                             user={user}
-//                         />
-//                     ),
-//                 },
-//                 {
-//                     label: "Persona",
-//                     value: "persona",
-//                     icon: isPersonaPending ? <Spinner /> : <RiUserSmileLine />,
-//                     content: (
-//                         <>
-//                             {!isPersonaPending && !personaContent && (
-//                                 <div className="flex items-center  text-center justify-center h-[50vh] text-muted-foreground">
-//                                     No persona has been adapted for this content yet.
-//                                 </div>
-//                             )}
-//                             {isPersonaPending && <LineSpinner>Adapting Persona...</LineSpinner>}
-//                             {personaContent && !isPersonaPending && <GeneratedPersonaContent content={personaContent} />}
-//                         </>
-//                     ),
-//                 },
-//             ]}
-//         />
-//     );
-// }
-
-
 import React, { useRef } from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
@@ -126,10 +12,7 @@ import { CustomTabs } from "@/shared/CustomTabs";
 import { RiAiGenerate, RiChatSmileAiLine, RiImageCircleAiFill, RiUserSmileLine } from "react-icons/ri";
 
 export function GeneratedContent(props: any) {
-    ////////////////// changes explain comment start ////////////
-    // 1. Updated the destructured prop from `chatPdfInfo` to `chatFileInfos`. 
-    // This aligns with the changes in the parent hook (`useSessionContentGenerator`) which now manages an array of file information objects for the chat, not just a single one.
-    ////////////////// changes explain comment end ////////////
+
     const {
         isPersonaPending, isImagePending, content, imagePrompt, imageUrls, personaContent, chatHistory,
         handleRevise, feedback, setFeedback,
@@ -196,10 +79,6 @@ export function GeneratedContent(props: any) {
                     value: "chat",
                     icon: <RiChatSmileAiLine />,
                     content: (
-                        ////////////////// changes explain comment start ////////////
-                        // 2. Updated the prop passed to `ContentChat` from `chatPdfInfo` to `chatFileInfos`.
-                        // The `ContentChat` component has been updated to receive an array of file info objects to display multiple uploaded files.
-                        ////////////////// changes explain comment end ////////////
                         <ContentChat
                             chatHistory={chatHistory}
                             handleChatSend={handleChatSend}

@@ -15,7 +15,7 @@ import { CtaSection } from "@/components/aiag-components/selection-components/Ct
 import { ReferenceMaterialSection } from "@/components/aiag-components/selection-components/ReferenceMaterialSection"
 import { AdditionalInstructionsSection } from "@/components/aiag-components/selection-components/AdditionalInstructionsSection"
 import { ContextualAwarenessSection } from "@/components/aiag-components/selection-components/ContextualAwarenessSection"
-import { useNewContentGenerator } from "@/hooks/gemini_studio/use-new-content-generator"
+import { useNewContentGenerator } from "@/hooks/aiag_hooks/use-new-content-generator"
 
 
 export default function HomePageComponent() {

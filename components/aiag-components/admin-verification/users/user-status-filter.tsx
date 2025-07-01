@@ -46,14 +46,6 @@ export function UserStatusFilter<TData>({ table }:any) {
                 <Button variant="outline" size="sm" >
                     <FilterIcon />
                     Status
-                    {/* {selectedValues.size > 0 && (
-                        <>
-                            <Separator orientation="vertical" className="mx-2 h-4" />
-                            <Badge variant="outline" className=" rounded-sm px-2 font-normal">
-                                {selectedValues.size}
-                            </Badge>
-                        </>
-                    )} */}
                 </Button>
             </PopoverTrigger>
             <PopoverContent className="w-[200px] p-0" align="start">
