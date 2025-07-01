@@ -16,7 +16,7 @@ function Gemini_Live_AIAG({ user }:any) {
   return (
     <div>
       <LiveAPIProvider options={apiOptions}>
-        <KnowledgeBaseChat />
+        <KnowledgeBaseChat/>
         <ControlTray user={user} />
       </LiveAPIProvider>
     </div>

@@ -5,7 +5,6 @@ import { AudioStreamer } from "../lib/gemini-live-api/audio-streamer";
 import { audioContext } from "../lib/gemini-live-api/utils";
 import VolMeterWorket from "../lib/gemini-live-api/worklets/vol-meter";
 import { LiveConnectConfig } from "@google/genai";
-import { LiveClientOptions } from "@/components/gemini-live-api-components/gemini-live-app-shared/types";
 
 export type UseLiveAPIResults = {
   client: GenAILiveClient;
@@ -19,8 +18,8 @@ export type UseLiveAPIResults = {
   volume: number;
 };
 
-export function useLiveAPI(options: LiveClientOptions): UseLiveAPIResults {
-  const client:any = useMemo(() => new GenAILiveClient(options), [options]);
+export function useLiveAPI(options: any): UseLiveAPIResults {
+  const client = useMemo(() => new GenAILiveClient(options), [options]);
   const audioStreamerRef = useRef<AudioStreamer | null>(null);
 
   const [model, setModel] = useState<string>("models/gemini-2.0-flash-exp");
