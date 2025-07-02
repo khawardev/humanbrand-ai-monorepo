@@ -6,11 +6,10 @@ import Image from "next/image";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Spinner } from "@/shared/spinner";
 import { DataTableColumnHeader } from "../table/data-table";
-import { CheckCircle, XCircle } from "lucide-react";
-import { RiVerifiedBadgeFill } from "react-icons/ri";
-import { MdCancel } from "react-icons/md";
-import { TbCancel } from "react-icons/tb";
 import { IoIosCheckmarkCircle } from "react-icons/io";
+import { TiCancel } from "react-icons/ti";
+import { TbLockCancel } from "react-icons/tb";
+import { MdCancel } from "react-icons/md";
 
 export const getUsersColumns = (
     onVerificationToggle: (userId: string, currentStatus: boolean) => void,
@@ -85,23 +84,22 @@ export const getUsersColumns = (
         },
         {
             id: "actions",
-            header: () => <div className="text-right">Actions</div>,
+            header: () => <div className="text-right gap-2 flex items-center">{isPending && <Spinner />} Actions</div>,
             cell: ({ row }: any) => {
                 const user = row.original;
                 return (
                     <div className="text-right">
                         <Button
-                            variant={`${user.adminVerified ? 'destructive' : 'default'}`}
+                            variant={`${user.adminVerified ? 'outline' : 'default'}`}
                             size="sm"
                             onClick={() => onVerificationToggle(user.id, user.adminVerified)}
                             disabled={isPending}
                         >
                             {user.adminVerified ? <>
-                                {isPending ? <Spinner /> : <TbCancel />}
-                                Revoke
+                                Revoke 
                             </> : <>
-                                {isPending ? <Spinner /> : <IoIosCheckmarkCircle />}
-                                Verify
+                                <IoIosCheckmarkCircle />
+                                 Verify 
                             </>}
                         </Button>
                     </div>

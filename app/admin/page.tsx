@@ -14,10 +14,11 @@ const AdminUsersPage = async () => {
     }
 
     const users = await getAllUsers();
-
+    const filterdAdminUsers = users?.filter(user => !ADMIN_EMAILS?.includes(user?.email))
+    
     return (
         <div className='div-center-md'>
-            <UsersTable users={users} />
+            <UsersTable users={filterdAdminUsers} />
         </div>
     );
 }
