@@ -2,11 +2,10 @@ import { getUser } from "@/actions/users-actions";
 import { getKnowledgeBaseChat } from "@/actions/knowledge-base-chat-actions";
 import KnowledgeBaseChatUI from "./knowledge-base-chat-ui";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
-import { RiChatSmileAiLine, RiVoiceAiLine } from "react-icons/ri";
+import { RiChatSmileAiLine, RiChatVoiceAiFill, RiChatVoiceAiLine, RiVoiceAiLine } from "react-icons/ri";
 import { CustomTabs } from "@/shared/CustomTabs";
 import Gemini_Live_AIAG from "@/components/gemini-live-api-components/gemini-live-app-shared/gemini-live-aiag";
 import { Button } from "@/components/ui/button";
-import { BsStars } from "react-icons/bs";
 
 export default async function KnowledgeBaseChatComponent() {
     const user = await getUser();
@@ -22,7 +21,7 @@ export default async function KnowledgeBaseChatComponent() {
         <DropdownMenu>
             <DropdownMenuTrigger asChild>
                 <Button className="size-10 rounded-full" size="icon">
-                    <BsStars />
+                    <RiChatVoiceAiFill />
                 </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent className="rounded-xl w-[320px] p-3" align='end'>

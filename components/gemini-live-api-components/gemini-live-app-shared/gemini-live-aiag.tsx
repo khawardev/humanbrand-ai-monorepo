@@ -1,6 +1,6 @@
 import ControlTray from "@/components/gemini-live-api-components/control-tray/ControlTray";
 import { LiveClientOptions } from "./types";
-import { KnowledgeBaseChat } from "@/components/gemini-live-api-components/KnowledgeBaseChat";
+import { KnowledgeBaseAudioPrompt} from "@/components/gemini-live-api-components/KnowledgeBaseAudioPrompt";
 import { LiveAPIProvider } from "@/contexts/LiveAPIContext";
 
 
@@ -16,7 +16,7 @@ function Gemini_Live_AIAG({ user }:any) {
   return (
     <div>
       <LiveAPIProvider options={apiOptions}>
-        <KnowledgeBaseChat/>
+        <KnowledgeBaseAudioPrompt />
         <ControlTray user={user} />
       </LiveAPIProvider>
     </div>
