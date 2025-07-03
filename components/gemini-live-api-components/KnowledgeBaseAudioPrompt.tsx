@@ -85,8 +85,7 @@ function KnowledgeBaseAudioPromptComponent() {
                                 ✅ Only include information directly from the AIAG Knowledge Base.  
                                 🚫 Do NOT guess, infer, or pull from external sources.  
                                 🚫 Do NOT generate content outside what is explicitly stated in the KB.  
-                                ✅ If the information is unavailable, respond with:  
-                                   “The requested information is not available in the AIAG knowledge base.”
+                                ✅ If the information is unavailable, respond with: “The requested information is not available in the AIAG knowledge base.”
 
                                 ---
 
