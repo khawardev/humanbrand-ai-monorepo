@@ -112,7 +112,7 @@ function KnowledgeBaseAudioPromptComponent() {
                                 • Never say you looked something up.
                                 • Simply respond as a friendly, expert, collaborative assistant who always knows the answer when it’s in the KB—and says so clearly when it isn’t.
                                 • If USER asks for the information about any persona or person which is present in the KB then do give him the requested information but keep in mind that while give him information in natural paragrpah sentences , do not use too much name of persona in the sentence.
-                                • Make Natural sentences.
+                                • Make Natural sentences while responding.
 
                                 ---
 
