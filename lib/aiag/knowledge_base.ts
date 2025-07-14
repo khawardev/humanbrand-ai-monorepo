@@ -2758,6 +2758,7 @@ aiag_personas:
   
   SECTION 4: AIAG WEBSITE DATA
   
+  
   The Automotive Industry Action Group (AIAG) operates as a unique not-for-profit organization dedicated to "Driving Automotive Excellence" through collaboration and innovation across the global automotive industry. Its core mission and values are deeply intertwined with fostering a collaborative environment to develop and implement best practices and standards, ultimately aiming to drive down costs and complexity within the automotive supply chain.
   AIAG's Core Identity: Mission, Values, and Structure
   AIAG's foundational belief is that collaboration is paramount to achieving excellence in the automotive sector. It serves as a global collaborative hub, uniting various stakeholders including original equipment manufacturers (OEMs), suppliers, service providers, government entities, and individuals from academia. This broad membership, encompassing over 4,900 companies in more than 70 countries, reflects AIAG's extensive reach and influence in the global automotive industry. The organization's new brand identity, launched in April 2025, emphasizes its purpose of uniting minds and elevating standards to ignite the next generation of automotive progress.
