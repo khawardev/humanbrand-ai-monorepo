@@ -17,9 +17,8 @@ const DesktopHeader = async () => {
         : AIAGConfig.mainNav.filter((link: any) => link.title !== "Admin");
 
     return (
-        <header className="border-b">
             <div className="sm:w-8/12 w-full mx-auto sm:px-0 px-4">
-                <div className="flex h-18 items-center justify-between gap-4">
+                <div className="flex h-22  items-center justify-between gap-4">
                     <Link href="/" suppressHydrationWarning={true}>
                         <span ><FullLogo /></span>
                     </Link>
@@ -37,7 +36,6 @@ const DesktopHeader = async () => {
                     </div>
                 </div>
             </div>
-        </header>
     );
 };
 
