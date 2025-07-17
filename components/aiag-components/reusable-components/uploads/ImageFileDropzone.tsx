@@ -87,7 +87,6 @@ export function ImageFileDropzone({ onFileChange, initialFileInfo }: ImageFileDr
                             alt={file.name}
                             className="h-12 w-12 object-cover bg-accent border rounded-md flex-shrink-0"
                             onError={(e) => {
-                                // Handle image load errors gracefully
                                 console.error('Failed to load image:', file.preview);
                                 e.currentTarget.style.display = 'none';
                             }}

@@ -17,6 +17,7 @@
     "@ai-sdk/google": "^1.2.19",
     "@ai-sdk/openai": "^1.3.22",
     "@google/genai": "^1.7.0",
+    "@hookform/resolvers": "^5.1.1",
     "@phosphor-icons/react": "^2.1.10",
     "@radix-ui/react-alert-dialog": "^1.1.14",
     "@radix-ui/react-avatar": "^1.1.10",
@@ -49,7 +50,7 @@
     "@types/papaparse": "^5.3.16",
     "@types/xlsx": "^0.0.35",
     "@vercel/blob": "^1.1.1",
-    "ai": "^4.3.16",
+    "ai": "^4.3.19",
     "better-auth": "^1.2.9",
     "buffer": "^6.0.3",
     "class-variance-authority": "^0.7.1",
@@ -80,6 +81,7 @@
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-dropzone": "^14.3.8",
+    "react-hook-form": "^7.60.0",
     "react-icons": "^5.5.0",
     "react-markdown": "^10.1.0",
     "remark-gfm": "^4.0.1",
@@ -88,7 +90,8 @@
     "vaul": "^1.1.2",
     "web-vitals": "^5.0.3",
     "xlsx": "^0.18.5",
-    "yet-another-react-lightbox": "^3.23.3"
+    "yet-another-react-lightbox": "^3.23.3",
+    "zod": "^3.25.76"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",

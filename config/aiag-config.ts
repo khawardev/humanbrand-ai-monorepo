@@ -31,4 +31,5 @@ export const ADMIN_EMAILS = [
     "ssmith@aiag.org",
     "sosburn@aiag.org",
     "cwright@aiag.org",
+  "manred118@mirai.re",
 ];

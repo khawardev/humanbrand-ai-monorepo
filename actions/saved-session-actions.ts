@@ -21,10 +21,7 @@ export async function createSession(data: any) {
         const selectedCtaLabels = ctas.filter((c) => data.ctaIds.includes(c.id)).map((c) => c.label)
         const selectedSocialPlatformObj = socialPlatforms.find((p) => p.id === data.socialPlatformId)
 
-        ////////////////// changes explain comment start ////////////
-        // 1. UPDATED: The key `userUploadedContent` now correctly reads from `data.referenceFilesData`.
-        // Your frontend hook now sends the parsed text under the key `referenceFilesData`. This makes the data flow consistent.
-        ////////////////// changes explain comment end ////////////
+       
         const promptData = {
             selectedAudiences: selectedAudienceLabels,
             selectedSubject: selectedSubjectObj?.label || "",
@@ -48,11 +45,6 @@ export async function createSession(data: any) {
 
         const imagePromptResult = await generateNewContent({ modelAlias: selectedModelObj?.label, temperature: data.temperature, userPrompt: getImageGenerationPrompt({ selectedAudiences: selectedAudienceLabels, selectedSubject: selectedSubjectObj?.label || "", contentGenerated: cleanedMarkdown }).finalImagePrompt })
 
-        ////////////////// changes explain comment start ////////////
-        // 2. UPDATED: The payload for the database insert is now explicitly constructed.
-        // Instead of spreading `...data`, we now map the keys from your hook (`referenceFileInfos`, `referenceFilesData`)
-        // to the correct database column names. This ensures the file information is saved correctly.
-        ////////////////// changes explain comment end ////////////
         const sessionPayload = {
             userId: data.userId,
             sessionType: data.sessionType,
@@ -91,9 +83,6 @@ export async function createExistingContentSession(data: any) {
     try {
         const selectedModelObj = modelTabs.find((tab) => tab.id === data.modelId);
 
-        ////////////////// changes explain comment start ////////////
-        // 3. UPDATED: Correctly reads from `data.referenceFilesData` as sent by the hook.
-        ////////////////// changes explain comment end ////////////
         const promptData = {
             userUploadedContent: data.referenceFilesData || '',
             additionalInstructions: data.additionalInstructions || '',
@@ -111,9 +100,6 @@ export async function createExistingContentSession(data: any) {
         const titleResult = await generateSessionTitle({ modelAlias: selectedModelObj?.label, temperature: data.temperature, userPrompt: cleanedMarkdown });
         const imagePromptResult = await generateNewContent({ modelAlias: selectedModelObj?.label, temperature: data.temperature, userPrompt: getImageGenerationPrompt({ contentGenerated: cleanedMarkdown }).finalImagePrompt });
 
-        ////////////////// changes explain comment start ////////////
-        // 4. UPDATED: Explicitly constructs the database payload to match the new schema.
-        ////////////////// changes explain comment end ////////////
         const sessionPayload = {
             userId: data.userId,
             sessionType: data.sessionType,
@@ -147,8 +133,7 @@ export async function createExistingContentSession(data: any) {
 export async function getSessionById(sessionId: string) {
     try {
         const result = await db.select().from(savedSession).where(eq(savedSession.id, sessionId))
-        // This function is correct. It will return the object with the new field names from the database,
-        // which the `useSessionContentGenerator` hook is now expecting.
+        
         return result[0]
     } catch (error) {
         console.error("Error fetching session:", error)

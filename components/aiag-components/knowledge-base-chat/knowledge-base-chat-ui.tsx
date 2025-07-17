@@ -27,10 +27,10 @@ export default function KnowledgeBaseChatUI({ user, initialChatHistory }: { user
     };
 
     return (
-        <div className="flex flex-col h-[70vh]">
+        <div className="flex flex-col h-[50vh]">
             <div ref={chatContainerRef} className="flex flex-col flex-1 overflow-y-auto space-y-4 ">
                 {chatHistory.length === 0 && !isResponding ? (
-                    <div className="flex text-center items-center justify-center min-h-[70vh] text-muted-foreground">
+                    <div className="flex text-center items-center justify-center min-h-[50vh] text-muted-foreground">
                         Ask a question from the Knowledge base to get started.
                     </div>
                 ) : (

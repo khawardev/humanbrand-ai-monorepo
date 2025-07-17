@@ -5,6 +5,7 @@ import MobileHeader from "./mobile-header";
 import { Suspense } from "react";
 import { getSession } from "@/lib/get-session";
 import { getUserWithSavedSessions } from "@/actions/users-actions";
+import AuthButtons from "../aiag-components/reusable-components/auth/AuthButtons";
 
 export const revalidate = 0;
 
@@ -37,8 +38,11 @@ const AuthenticatedContent = async ({navLinks}:any) => {
 const DesktopHeaderServer = async ({navLinks}:any) => {
     const session = await getSession();
 
+    // if (!session) {
+    //     return <SigninButtonDesktop />;
+    // }
     if (!session) {
-        return <SigninButtonDesktop />;
+        return <AuthButtons />;
     }
 
     return (

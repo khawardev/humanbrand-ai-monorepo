@@ -17,7 +17,7 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://aiag-content-action-model-3-3.vercel.app/"),
-  title: "AIAG content action model 25.1",
+  title: "AIAG CAM 25.1 | Humanbrand AI",
   description: "Plateform for genrating AIAG Content",
 };
 

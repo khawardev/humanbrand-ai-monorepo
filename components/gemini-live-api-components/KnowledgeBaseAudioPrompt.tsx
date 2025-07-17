@@ -153,7 +153,6 @@ function KnowledgeBaseAudioPromptComponent() {
             });
 
             if (functionResponses.length > 0) {
-                // Removed the setTimeout for a more robust and immediate response.
                 client.sendToolResponse({ functionResponses });
             }
         };

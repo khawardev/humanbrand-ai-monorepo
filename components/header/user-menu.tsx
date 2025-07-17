@@ -23,14 +23,17 @@ const UserMenu = ({ user }: any) => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger>
-        <Avatar className=" hover:cursor-pointer">
-          <AvatarImage src={user.image && user.image} alt="Profile image" />
-          <AvatarFallback>{user.name?.slice(0, 2).toUpperCase()}</AvatarFallback>
+        <Avatar className="border border-input hover:cursor-pointer">
+          <AvatarImage src={user.image && user.image || `https://avatar.vercel.sh/${user.email}.png`} alt="Profile image" />
+          <AvatarFallback>{user.name?.slice(0, 1).toUpperCase()}</AvatarFallback>
         </Avatar>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="max-w-58" align="end">
         <DropdownMenuLabel className="flex gap-2 items-center min-w-0 ">
-          <img src={user?.image} className="size-8 rounded-md" alt="" />
+          <Avatar className="border border-input">
+            <AvatarImage src={user.image && user.image || `https://avatar.vercel.sh/${user.email}.png`} alt="Profile image" />
+          <AvatarFallback>{user.name?.slice(0, 1).toUpperCase()}</AvatarFallback>
+        </Avatar>
           <div className="flex flex-col ">
             <span className="text-foreground tracking-tight truncate text-sm font-medium">
               {user?.name}
