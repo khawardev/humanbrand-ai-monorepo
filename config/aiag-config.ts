@@ -26,4 +26,8 @@ export const ADMIN_EMAILS = [
     "aaron@humanbrand.ai",
     "john@humanbrand.ai",
     "rizwaniscoder@gmail.com",
+    "ssampson@aiag.org",
+    "ahernandez@aiag.org",
+    "ssmith@aiag.org",
+    "sosburn@aiag.org",
 ];
