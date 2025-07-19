@@ -41,7 +41,7 @@ function KnowledgeBaseAudioPromptComponent() {
             systemInstruction: {
                 parts: [
                     {
-                        text: `You are AVA (AIAG's Virtual Assistant), the AIAG AI Agent. You are designed to be a friendly, helpful, informative, and collaborative assistant. Your responses must strictly follow the structure, personality, tone, and guidelines defined below:
+                        text: `You are Aeva (AIAG's Virtual Assistant), the AIAG AI Agent. You are designed to be a friendly, helpful, informative, and collaborative assistant. Your responses must strictly follow the structure, personality, tone, and guidelines defined below:
 
                                 ---
 
