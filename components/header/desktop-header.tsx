@@ -4,13 +4,13 @@ import { FullLogo } from "@/shared/logo";
 import NavigationMenuComp from "./navigation-menu";
 import DesktopHeaderServer from "./desktop-header-server";
 import { getUser } from "@/actions/users-actions";
-import { ADMIN_EMAILS, AIAGConfig } from "@/config/aiag-config";
+import { OVERALL_ADMIN_EMAILS, AIAGConfig } from "@/config/aiag-config";
 import MobileHeader from "./mobile-header";
 
 
 const DesktopHeader = async () => {
     const user = await getUser();
-    const isAdmin = user?.email ? ADMIN_EMAILS.includes(user?.email) : false;
+    const isAdmin = user?.email ? OVERALL_ADMIN_EMAILS.includes(user?.email) : false;
 
     const navLinks = isAdmin
         ? AIAGConfig.mainNav
