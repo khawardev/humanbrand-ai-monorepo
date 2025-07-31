@@ -10,7 +10,7 @@ export const Hero = () => {
         <section >
             <div className=" md:py-12">
                 <div className="div-center-md">
-                    <div className="md:w-2/3">
+                    <div className="md:w-2/3 select-none">
                         <div>
                             <h1 className="text-balance  font-extrabold">
                                 <span className=" md:flex  hidden items-start gap-8"> <Image className=" rounded-full" src={'https://i.postimg.cc/ZYDgZQyF/aiag-logo.jpg'} alt="" width={90} height={90} /> AIAG Content <br /> Action Model {AIAG_VERSION}</span>
