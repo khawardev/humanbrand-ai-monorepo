@@ -37,10 +37,6 @@ const AuthenticatedContent = async ({navLinks}:any) => {
 
 const DesktopHeaderServer = async ({navLinks}:any) => {
     const session = await getSession();
-
-    // if (!session) {
-    //     return <SigninButtonDesktop />;
-    // }
     if (!session) {
         return <AuthButtons />;
     }

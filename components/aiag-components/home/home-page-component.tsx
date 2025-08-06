@@ -46,8 +46,7 @@ export default function HomePageComponent() {
             <ContentTypeSection title={'Content Type(s)'} selectedValues={selectedContentTypes} onSelectionChange={setSelectedContentTypes} />
             {isSocialPostSelected && (
                 <SocialPlatformSection title={'Social Platform'} selectedValue={selectedSocialPlatform} onSelectionChange={setSelectedSocialPlatform} />
-            )
-            }
+            )}
             <CtaSection title={'Call to Action(s)'} selectedValues={selectedCtas} onSelectionChange={setSelectedCtas} />
             <ReferenceMaterialSection
                 title={'Reference Materials (optional)'}

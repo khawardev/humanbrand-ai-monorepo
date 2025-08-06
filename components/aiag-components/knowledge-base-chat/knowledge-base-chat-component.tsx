@@ -24,7 +24,7 @@ export default async function KnowledgeBaseChatComponent() {
                     <RiChatVoiceAiFill />
                 </Button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent className="rounded-xl w-[320px] p-3" align='end'>
+            <DropdownMenuContent className="rounded-xl w-[820px] p-3 mx-auto " align='end'>
                 <CustomTabs
                     defaultValue="content_ask"
                     triggerMaxWidthClass="max-w-30"

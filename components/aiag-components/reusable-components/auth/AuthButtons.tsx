@@ -13,8 +13,8 @@ export default function AuthButtons() {
     };
     return (
         <>
-            <Button onClick={() => setAuthModalOpen(true)} size={'sm'} className="rounded-full">
-                Sign In
+            <Button onClick={() => setAuthModalOpen(true)} size={'xs'} className="rounded-full">
+            Sign In
             </Button>
             <AuthModal
                 isOpen={isAuthModalOpen}

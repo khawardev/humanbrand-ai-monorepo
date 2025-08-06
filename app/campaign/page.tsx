@@ -3,21 +3,26 @@
 import { CheckboxCard } from "@/components/aiag-components/reusable-components/checkbox-card"
 import { FormSection } from "@/components/aiag-components/reusable-components/form-section"
 import { ModelsTabs } from "@/components/aiag-components/reusable-components/models-tabs"
-import { adjustToneAndCreativityData, audiences, campaignElementsData, campaignTypes, contentTypes, ctas, modelTabs, socialPlatforms, subjects } from "@/config/form-data"
+import { campaignContent, campaignElementsData, campaignTypes, audiences, subjects, contentTypes, ctas, modelTabs, socialPlatforms, campaignSocialPlatforms } from "@/config/form-data"
 import { Hero } from "@/components/aiag-components/reusable-components/hero"
 import React, { useState, useEffect, useRef } from "react"
 import { RadioCard } from "@/components/aiag-components/reusable-components/radio-card"
 import { Textarea } from "@/components/ui/textarea"
-import { Label } from "@radix-ui/react-dropdown-menu"
-import { Slider } from "@/components/ui/slider"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { cn } from "@/lib/utils"
+import { SocialPlatformSection } from "@/components/aiag-components/selection-components/SocialPlatformSection"
+import AdminMailAlert from "@/components/aiag-components/admin-mail-alert"
+import { Alert, AlertTitle } from "@/components/ui/alert"
+import { MdOutlineMailLock } from "react-icons/md"
+import { VscDebugConsole } from "react-icons/vsc";
 
 export default function Home() {
     const [selectedModel, setSelectedModel] = useState<number>(modelTabs[0].id)
     const [selectedAudiences, setSelectedAudiences] = useState<number[]>([])
     const [selectedSubjects, setSelectedSubjects] = useState<number | null>(null)
     const [selectedCampaignType, setSelectedCampaignType] = useState<number | null>(null)
+    const [selectedCampaignContent, setSelectedCampaignContent] = useState<number | null>(null)
+    const [selectedCampaignSocial, setSelectedCampaignSocial] = useState<number | null>(null)
     const [selectedContentTypes, setSelectedContentTypes] = useState<number[]>([])
     const [selectedCtas, setSelectedCtas] = useState<number[]>([])
     const [selectedSocialPlatform, setSelectedSocialPlatform] = useState<number | null>(null)
@@ -25,13 +30,11 @@ export default function Home() {
     const [generatingContent, setgeneratingContent] = useState(false);
     const [referenceMaterial, setReferenceMaterial] = useState<string>()
 
-    const socialPostContentTypeId = contentTypes.find(
-        (type) => type.label === "Social Media Post"
+    const socialPostContentTypeId = campaignContent.find(
+        (type) => type.label === "Social Media Posts"
     )?.id
 
-    const isSocialPostSelected =
-        socialPostContentTypeId !== undefined &&
-        selectedContentTypes.includes(socialPostContentTypeId)
+    const isSocialPostSelected = selectedCampaignContent === socialPostContentTypeId;
 
     useEffect(() => {
         if (!isSocialPostSelected) {
@@ -84,8 +87,15 @@ export default function Home() {
     };
     return (
         <main className="overflow-hidden">
+            <div className="div-center-md" >
+                <Alert variant={'destructive'}>
+                    <VscDebugConsole />
+                    <AlertTitle>Campaign Page is Under Development</AlertTitle>
+                </Alert>
+            </div>
             <Hero />
             <section className="div-center-md">
+
                 <div id="form-start" ref={formRef}>
                     <FormSection title="HBAI Models">
                         <ModelsTabs
@@ -95,7 +105,29 @@ export default function Home() {
                         />
                     </FormSection>
                 </div>
-
+                <FormSection title="Campaign Type(s)">
+                    <RadioCard
+                        options={campaignTypes}
+                        selectedValue={selectedCampaignType}
+                        onSelectionChange={setSelectedCampaignType}
+                    />
+                </FormSection>
+                <FormSection title="Campaign Content">
+                    <RadioCard
+                        options={campaignContent}
+                        selectedValue={selectedCampaignContent}
+                        onSelectionChange={setSelectedCampaignContent}
+                    />
+                </FormSection>
+                {isSocialPostSelected && (
+                    <FormSection title="Social Platforms">
+                        <RadioCard
+                            options={campaignSocialPlatforms}
+                            selectedValue={selectedCampaignSocial}
+                            onSelectionChange={setSelectedCampaignSocial}
+                        />
+                    </FormSection>
+                )}
                 <FormSection title="Audience(s)">
                     <CheckboxCard
                         options={audiences}
@@ -111,19 +143,13 @@ export default function Home() {
                         onSelectionChange={setSelectedSubjects}
                     />
                 </FormSection>
-                <FormSection title="Campaign Type(s)">
-                    <RadioCard
-                        options={campaignTypes}
-                        selectedValue={selectedCampaignType}
-                        onSelectionChange={setSelectedCampaignType}
-                    />
-                </FormSection>
+
 
                 <FormSection title="Campaign Elements">
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                         {campaignElementsData.map((typeId: any) => {
                             return (
-                                <Card key={typeId}>
+                                <Card key={typeId.title}>
                                     <CardHeader>
                                         <CardTitle>{typeId.title}</CardTitle>
                                     </CardHeader>
@@ -141,17 +167,9 @@ export default function Home() {
                         })}
                     </div>
                 </FormSection>
-              
 
-             
-                {/* <FormSection title="Reference Materials (optional)">
-                    <PdfFileDropzone
-                        files={uploadedPdfs}
-                        setFiles={setUploadedPdfs}
-                        setReferenceMaterial={setReferenceMaterial}
-                        maxFiles={1}
-                    />
-                </FormSection> */}
+
+
                 <FormSection title="Additional Instructions (optional)">
                     <Textarea placeholder="Enter any specific requirements or instructions..." rows={14} />
                 </FormSection>
@@ -159,23 +177,6 @@ export default function Home() {
                 <FormSection title="Contextual Awareness (optional)">
                     <Textarea placeholder="Provide relevant background information or context..." rows={49} />
                 </FormSection>
-
-                {/* <FormSection title="Adjust Tone and Creativity">
-                    <div className="space-y-8 mt-3">
-                        {Object.entries(adjustToneAndCreativityData).map(([key, setting]) => (
-                            <div key={key}>
-                                <Label className="text-base font-medium">{setting.label}</Label>
-                                <Slider defaultValue={[setting.defaultValue]} className="my-4" />
-                                <div className="flex justify-between text-xs text-muted-foreground px-1">
-                                    {setting.options.map((option, index) => (
-                                        <span key={index}>{option}</span>
-                                    ))}
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-                </FormSection> */}
-                {/* <Generate generatingContent={generatingContent} onSaveDraft={handleSaveDraft} onGenerate={handleGenerate} /> */}
 
             </section>
         </main>

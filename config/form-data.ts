@@ -38,11 +38,16 @@ import {
     MdCampaign
 } from "react-icons/md";
 
-import { MdRocketLaunch, MdEvent, MdSchool, MdTrendingUp } from "react-icons/md";
-
+import { MdEvent, MdRocketLaunch, MdSchool, MdOndemandVideo } from "react-icons/md";
+import {
+    Newspaper,     
+    FileText,        
+    BadgeDollarSign, 
+    Megaphone        
+} from "lucide-react";
 export const modelTabs = [
-    { id: 1, label: 'recomended', title: "Core" },
-    { id: 2, label: 'deepthink', title: "Advanced" },
+    { id: 1, label: 'recomended', title: "Core", tooltip:'Best for most content' },
+    { id: 2, label: 'deepthink', title: "Advanced", tooltip: 'Technical content (white papers)' },
 ];
 
 export const COLOR_PRIMARY = "bg-primary/15 border border-primary/50";
@@ -102,11 +107,25 @@ export const socialPlatforms = [
 ];
 
 export const campaignTypes = [
-    { id: 1, label: "Product Launch", Icon: MdRocketLaunch, color: COLOR_PRIMARY },
-    { id: 2, label: "Event or Summit Promo", Icon: MdEvent, color: COLOR_PRIMARY },
-    { id: 3, label: "Training & Certifications", Icon: MdSchool, color: COLOR_PRIMARY },
-    { id: 4, label: "Membership Growth & Retention", Icon: MdTrendingUp, color: COLOR_PRIMARY },
+    { id: 1, label: "Events", Icon: MdEvent, color: COLOR_PRIMARY },
+    { id: 2, label: "Product or Service Launch", Icon: MdRocketLaunch, color: COLOR_PRIMARY },
+    { id: 3, label: "Training", Icon: MdSchool, color: COLOR_PRIMARY },
+    { id: 4, label: "Webinar", Icon: MdOndemandVideo, color: COLOR_PRIMARY },
 ];
+export const campaignContent = [
+    { id: 1, label: "Newsletter Articles", Icon: Newspaper, color: COLOR_PRIMARY },
+    { id: 2, label: "Social Media Posts", Icon: MdShare, color: COLOR_PRIMARY },
+    { id: 3, label: "Press Release + Media Kit", Icon: Megaphone, color: COLOR_PRIMARY },
+];
+
+export const campaignSocialPlatforms = [
+    { id: 1, label: "LinkedIn", Icon: FaLinkedin, color: COLOR_PRIMARY },
+    { id: 2, label: "Facebook", Icon: FaFacebook, color: COLOR_PRIMARY },
+    { id: 3, label: "X", Icon: FaTwitter, color: COLOR_PRIMARY },
+    { id: 4, label: "YouTube Scripts", Icon: FaYoutube, color: COLOR_PRIMARY },
+    { id: 5, label: "Paid LI ads", Icon: FaInstagram, color: COLOR_PRIMARY },
+];
+
 
 export const campaignElementsData = [
     {

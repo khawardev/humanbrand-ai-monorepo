@@ -22,7 +22,6 @@ export default function AuthModal({ isOpen, onOpenChange, onAuthSuccess }: AuthM
         }, {
             onSuccess: () => {
                 onAuthSuccess();
-                
             }
         });
         if (error) {
@@ -39,7 +38,7 @@ export default function AuthModal({ isOpen, onOpenChange, onAuthSuccess }: AuthM
                         One last step to start your free website audit.
                     </DialogDescription>
                 </DialogHeader>
-                <Tabs defaultValue="signup" className="w-full">
+                <Tabs defaultValue="signin" className="w-full">
                     <TabsList className="grid w-full grid-cols-2">
                         <TabsTrigger value="signup">Sign Up</TabsTrigger>
                         <TabsTrigger value="signin">Sign In</TabsTrigger>
