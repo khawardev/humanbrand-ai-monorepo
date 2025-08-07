@@ -25,6 +25,7 @@ export default function AuthModal({ isOpen, onOpenChange, onAuthSuccess }: AuthM
             }
         });
         if (error) {
+            console.error("Google sign-in failed, Please try again.", error);
             toast.error("Google sign-in failed, Please try again.");
         }
     };
