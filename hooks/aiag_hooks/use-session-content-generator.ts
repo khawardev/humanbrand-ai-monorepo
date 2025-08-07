@@ -176,6 +176,7 @@ export function useSessionContentGenerator(initialData: any) {
                     toast.error(result.error || "Failed to generate image.");
                 }
             } catch (error) {
+                console.error("Unexpected error occurred.", error);
                 toast.error("Unexpected error occurred.");
                 console.error(error);
             }

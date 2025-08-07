@@ -76,8 +76,9 @@ export class AudioStreamer {
       try {
         const int16 = dataView.getInt16(i * 2, true);
         float32Array[i] = int16 / 32768;
-      } catch (e) {
-        console.error(e);
+      } catch (error) {
+        console.error("Unexpected error occurred.", error);
+        console.error(error);
       }
     }
     return float32Array;

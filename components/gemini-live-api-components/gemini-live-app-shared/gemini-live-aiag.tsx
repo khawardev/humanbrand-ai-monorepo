@@ -4,12 +4,8 @@ import { KnowledgeBaseAudioPrompt} from "@/components/gemini-live-api-components
 import { LiveAPIProvider } from "@/contexts/LiveAPIContext";
 
 
-const API_KEY = process.env.GOOGLE_GENERATIVE_AI_API_KEY! as string;
-if (typeof API_KEY !== "string" || !API_KEY) {
-  throw new Error("set GOOGLE_GENERATIVE_AI_API_KEY in .env.local");
-}
 const apiOptions: LiveClientOptions = {
-  apiKey: API_KEY,
+  apiKey: process?.env?.GOOGLE_GENERATIVE_AI_API_KEY! as string,
 };
 
 function Gemini_Live_AIAG({ user }:any) {

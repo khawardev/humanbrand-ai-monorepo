@@ -52,6 +52,7 @@ export function PdfFileDropzone({ onFileChange, initialFileInfo }: PdfFileDropzo
                 onFileChange({ file: null, parsedText: null });
             }
         } catch (error) {
+            console.error("An error occurred while parsing the PDF.", error);
             toast.error("An error occurred while parsing the PDF.");
             onFileChange({ file: null, parsedText: null });
         } finally {

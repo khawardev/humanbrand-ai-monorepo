@@ -115,8 +115,8 @@ export class GenAILiveClient extends EventEmitter<LiveClientEventTypes> {
         config,
         callbacks,
       });
-    } catch (e) {
-      console.error("Error connecting to GenAI Live:", e);
+    } catch (error) {
+      console.error("Error connecting to GenAI Live:", error);
       this._status = "disconnected";
       return false;
     }

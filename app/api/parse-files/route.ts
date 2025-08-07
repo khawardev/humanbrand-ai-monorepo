@@ -48,6 +48,7 @@ async function parseDOCX(buffer: Buffer): Promise<string> {
         const result = await mammoth.extractRawText({ buffer });
         return result.value;
     } catch (error) {
+        console.error("Error Parsing Docx", error);
         throw new Error("Failed to parse DOCX file");
     }
 }
@@ -57,6 +58,7 @@ async function parseTXT(buffer: Buffer): Promise<string> {
     try {
         return buffer.toString("utf-8");
     } catch (error) {
+        console.error("Error Parsing Txt", error);
         throw new Error("Failed to parse TXT file");
     }
 }
@@ -82,6 +84,7 @@ async function parseExcel(buffer: Buffer): Promise<string> {
 
         return allText;
     } catch (error) {
+        console.error("Error Parsing Excel", error);
         throw new Error("Failed to parse Excel file");
     }
 }
@@ -104,6 +107,7 @@ async function parseCSV(buffer: Buffer): Promise<string> {
 
         return allText;
     } catch (error) {
+        console.error("Error Parsing CSV", error);
         throw new Error("Failed to parse CSV file");
     }
 }
@@ -139,6 +143,7 @@ async function parsePPTX(buffer: Buffer): Promise<string> {
 
         return allText || "No text content found in presentation";
     } catch (error) {
+        console.error("Error Parsing PPTX file", error);
         throw new Error("Failed to parse PPTX file");
     }
 }
@@ -217,7 +222,6 @@ export async function POST(req: NextRequest) {
 
             } catch (error) {
                 console.error(`Error parsing file ${file.name}:`, error);
-                // For failed files, still add them to the list but mark as failed
                 processedFiles.push({
                     name: file.name,
                     size: file.size,

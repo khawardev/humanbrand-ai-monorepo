@@ -36,7 +36,8 @@ export const audioContext: (
         map.set(options.id, ctx);
       }
       return ctx;
-    } catch (e) {
+    } catch (error) {
+      console.error("Unexpected error occurred while converting audio.", error);
       await didInteract;
       if (options?.id && map.has(options.id)) {
         const ctx = map.get(options.id);

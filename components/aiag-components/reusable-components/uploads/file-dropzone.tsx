@@ -85,6 +85,7 @@ export function FileDropzone({ onFilesChange, initialFileInfos }: FileDropzonePr
                 onFilesChange({ files: null, parsedText: null, fileInfos: null });
             }
         } catch (error) {
+            console.error("An error occurred while parsing the files.", error);
             toast.error("An error occurred while parsing the files.");
             onFilesChange({ files: null, parsedText: null, fileInfos: null });
         } finally {

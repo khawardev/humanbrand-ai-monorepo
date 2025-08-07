@@ -17,7 +17,7 @@ export default function UsersTable({ users }: any) {
                 toast.success(`User status updated successfully.`);
             } catch (error) {
                 toast.error("Failed to update user status.");
-                console.error(error);
+                console.error("Failed to update user status.", error);
             }
         });
     };

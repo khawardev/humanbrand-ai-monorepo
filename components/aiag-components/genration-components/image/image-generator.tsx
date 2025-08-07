@@ -189,6 +189,7 @@ export function ImageGenerator({
                                             await navigator.clipboard.write([new ClipboardItem({ [blob.type]: blob })])
                                             toast.success("Image copied to clipboard!")
                                         } catch (error) {
+                                            console.error("Failed to copy image to clipboard", error);
                                             toast.error("Failed to copy image to clipboard")
                                         }
                                     }}
