@@ -8,6 +8,7 @@ import { toast } from 'sonner';
 import { useState } from 'react';
 import { Loader2 } from 'lucide-react';
 import { signIn } from '@/lib/better-auth/auth-client';
+import { PasswordInput } from './Password-Input';
 
 interface FormValues {
     email: string;
@@ -75,7 +76,7 @@ export default function SignInForm({ onSuccess }: { onSuccess: () => void }) {
                         <FormItem>
                             <FormLabel>Password</FormLabel>
                             <FormControl>
-                                <Input type="password" placeholder="••••••••" {...field} />
+                                <PasswordInput placeholder="••••••••" {...field} />
                             </FormControl>
                             <FormMessage />
                         </FormItem>

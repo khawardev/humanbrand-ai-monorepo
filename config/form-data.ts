@@ -47,7 +47,7 @@ import {
 } from "lucide-react";
 export const modelTabs = [
     { id: 1, label: 'recomended', title: "Core", tooltip:'Best for most content' },
-    { id: 2, label: 'deepthink', title: "Advanced", tooltip: 'Technical content (white papers)' },
+    { id: 2, label: 'deepthink', title: "Advanced", tooltip: 'Technical content like white papers' },
 ];
 
 export const COLOR_PRIMARY = "bg-primary/15 border border-primary/50";

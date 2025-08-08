@@ -8,6 +8,7 @@ import { toast } from 'sonner';
 import { useState } from 'react';
 import { Loader2 } from 'lucide-react';
 import { signUp } from '@/lib/better-auth/auth-client';
+import { PasswordInput } from './Password-Input';
 
 interface FormValues {
     name: string;
@@ -83,16 +84,12 @@ export default function SignUpForm({ onSuccess }: { onSuccess: () => void }) {
                     name="password"
                     rules={{
                         required: "Password is required.",
-                        minLength: {
-                            value: 8,
-                            message: "Password must be at least 8 characters.",
-                        },
                     }}
                     render={({ field }) => (
                         <FormItem>
                             <FormLabel>Password</FormLabel>
                             <FormControl>
-                                <Input type="password" placeholder="••••••••" {...field} />
+                                <PasswordInput placeholder="••••••••" {...field} />
                             </FormControl>
                             <FormMessage />
                         </FormItem>
