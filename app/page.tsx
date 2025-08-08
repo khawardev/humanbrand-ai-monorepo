@@ -7,7 +7,8 @@ export default function HomePage() {
   console.log(process.env.GOOGLE_CLIENT_SECRET, `GOOGLE_CLIENT_SECRET`);
   return (
     <main className="pt-14 relative">
-      
+      Better auth env : {process.env.BETTER_AUTH_URL}
+      Google env : {process.env.GOOGLE_CLIENT_SECRET}
       <Hero />
       <section className="div-center-md">
         <AdminMailAlert />
