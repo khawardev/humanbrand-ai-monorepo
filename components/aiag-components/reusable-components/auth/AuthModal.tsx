@@ -48,7 +48,7 @@ export default function AuthModal({ isOpen, onOpenChange, onAuthSuccess }: AuthM
                         <SignUpForm onSuccess={onAuthSuccess} />
                     </TabsContent>
                     <TabsContent value="signin">
-                        <SignInForm onSuccess={onAuthSuccess} />
+                        <SignInForm onSuccess={onAuthSuccess} onOpenChange={onOpenChange} />
                     </TabsContent>
                 </Tabs>
                 <div className="relative">

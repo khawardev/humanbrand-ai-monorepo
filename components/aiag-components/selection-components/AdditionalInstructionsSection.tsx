@@ -11,7 +11,7 @@ interface AdditionalInstructionsSectionProps {
 export function AdditionalInstructionsSection({ value, onChange, title }: AdditionalInstructionsSectionProps) {
     return (
         <FormSection title={title}>
-            <Textarea rows={30} placeholder="Enter any specific instructions..." value={value} onChange={(e) => onChange(e.target.value)} />
+            <Textarea placeholder="Enter any specific instructions..." value={value} onChange={(e) => onChange(e.target.value)} />
         </FormSection>
     )
 }

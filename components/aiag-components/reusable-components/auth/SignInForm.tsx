@@ -9,13 +9,15 @@ import { useState } from 'react';
 import { Loader2 } from 'lucide-react';
 import { signIn } from '@/lib/better-auth/auth-client';
 import { PasswordInput } from './Password-Input';
+import ForgotPassword from './ForgotPassword';
+import Link from 'next/link';
 
 interface FormValues {
     email: string;
     password: string;
 }
 
-export default function SignInForm({ onSuccess }: { onSuccess: () => void }) {
+export default function SignInForm({ onSuccess, onOpenChange }: { onSuccess: () => void, onOpenChange: (open: boolean) => void }) {
     const [isLoading, setIsLoading] = useState(false);
     const form = useForm<FormValues>({
         defaultValues: { email: "", password: "" },
@@ -30,7 +32,7 @@ export default function SignInForm({ onSuccess }: { onSuccess: () => void }) {
             },
             onError: (err: any) => {
                 console.log(err, `<-> err <->`);
-                
+
                 if (err.status === 403) {
                     toast.error("Please verify your email before signing in.");
                 } else {
@@ -74,7 +76,11 @@ export default function SignInForm({ onSuccess }: { onSuccess: () => void }) {
                     }}
                     render={({ field }) => (
                         <FormItem>
-                            <FormLabel>Password</FormLabel>
+                            <div className="flex justify-between">
+                                <FormLabel>Password</FormLabel>
+                                <FormLabel><Link href="/forgot-password" onClick={() => onOpenChange(false)}>Forgot Password?</Link></FormLabel>
+                            </div>
+
                             <FormControl>
                                 <PasswordInput placeholder="••••••••" {...field} />
                             </FormControl>
