@@ -33,7 +33,7 @@ export async function POST(req: Request) {
         }
 
         const ai = new GoogleGenAI({
-            apiKey: process.env.GOOGLE_GENERATIVE_AI_API_KEY as string,
+            apiKey: process?.env?.NEXT_PUBLIC_GOOGLE_GENERATIVE_AI_API_KEY! as string,
         });
 
         const response = await ai.models.generateContent({

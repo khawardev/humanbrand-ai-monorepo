@@ -1,167 +1,106 @@
-// control-tray.scss
-
-.action-button {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  // REMOVED: Default background color
-  background: transparent;
-  color: var(--foreground); // Changed to foreground for better visibility on transparent bg
-  font-size: 1.25rem;
-  line-height: 1.75rem;
-  text-transform: lowercase;
-  cursor: pointer;
-  transition: all 0.2s ease-in-out;
-  width: 58px;
-  height: 58px; // Made it a square for a cleaner look
-  border-radius: 16px;
-  border: 1px solid transparent;
-  user-select: none;
-
-  &:focus-visible {
-    outline-offset: 2px;
-    outline: 2px solid var(--ring);
-  }
-
-  // This class is likely no longer needed but styles are removed
-  &.outlined {
-    background: transparent;
-    border: 1px solid transparent;
-  }
-
-  .no-action {
-    pointer-events: none;
-  }
-
-  // Updated hover effect for a background-less button
-  &:hover {
-    background: var(--muted);
-    color: var(--muted-foreground);
-  }
-
-  // The .connected class on the parent container now controls the look
-  &.connected {
-    background: transparent;
-    color: var(--primary); // Use primary color to indicate connection
-  }
-}
-
 @property --volume {
   syntax: "<length>";
   inherit: false;
   initial-value: 0px;
 }
 
-.disabled .mic-button,
-.mic-button.disabled {
-  &:before {
-    background: transparent;
+.control-tray {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-block: 1rem;
+  gap: 12px;
+  font-family: sans-serif;
+
+  button:disabled {
+    background-color: var(--muted) !important;
+    color: var(--muted-foreground) !important;
+    cursor: not-allowed;
+    transform: none;
+
+    &:hover {
+      transform: none;
+    }
+
+    .button-text {
+      display: none;
+    }
   }
 }
 
-
-.mic-button {
-  position: relative; // This is needed for the ::before pseudo-element pulse
-  background-color: var(--destructive);
-  z-index: 1;
-  color: var(--background);
-  transition: all 0.2s ease-in;
-  &:focus-visible {
-padding: 2px;
-    outline: 2px solid var(--destructive);
-  }
-
-  &:hover {
-    background-color: oklch(from var(--destructive) l calc(c - 0.05) h);
-  }
-
-  &:before {
-    position: absolute;
-    z-index: -1;
-    top: calc(var(--volume) * -1);
-    left: calc(var(--volume) * -1);
-    display: block;
-    content: "";
-    background-color: oklch(from var(--destructive) l c h / 0.35);
-    border-radius: 24px;
-    transition: all 0.02s ease-in-out;
-  }
+.connect-toggle-pill,
+.mic-pill,
+.visualizer-pill {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  border: 1.5px solid var(--border);
+  transition: all 0.2s ease-in-out;
+  height: 50px;
 }
 
-.connect-toggle {
-  &:not(.connected) {
-    // Kept functional color for usability
+.connect-toggle-pill {
+  width: 110px;
+  gap: 8px;
+  padding: 0 16px;
+  background-color: var(--background);
+  color: var(--primary);
+  cursor: pointer;
+  font-weight: 600;
+  height: 47px;
+  .button-text {
+    font-size: 14px;
+    margin-top: 3px;
+    transition: all 0.2s ease;
+  }
+
+  
+
+  &.connected {
     background-color: var(--primary);
+    border-color: var(--primary);
     color: var(--primary-foreground);
+
     &:hover {
       background-color: oklch(from var(--primary) l calc(c - 0.05) h);
     }
   }
 }
 
-.control-tray {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  margin-block: 1rem;
-  align-items: flex-start;
-  gap: 8px;
+.mic-pill {
+  position: relative;
+  width: 70px;
+  background-color: var(--destructive);
+  color: var(--destructive-foreground);
+  border: none;
+  z-index: 1;
+  cursor: pointer;
+  height: 41px;
+ 
 
-  .disabled .action-button,
-  .action-button.disabled {
-    background: transparent;
-    border: 1px solid var(--muted);
-    color: var(--muted-foreground);
-    cursor: not-allowed;
-  }
-
-  .connection-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 4px;
-
-    .connection-button-container {
-      // REMOVED: Container styling
-      background: transparent;
-      border: none;
-      padding: 0; // Padding is not needed without a container
-    }
-
-    .text-indicator {
-      font-size: 11px;
-      color: var(--primary);
-      user-select: none;
-      opacity: 0;
-      transition: opacity 0.3s ease-in-out;
-    }
-
-    &.connected {
-      .text-indicator {
-        opacity: 1;
-      }
-    }
+  &::before {
+    position: absolute;
+    z-index: -1;
+    content: "";
+    top: calc(var(--volume) * -1);
+    left: calc(var(--volume) * -1);
+    right: calc(var(--volume) * -1);
+    bottom: calc(var(--volume) * -1);
+    background-color: oklch(from var(--destructive) l c h / 0.35);
+    border-radius: 9999px;
+    transition: all 0.02s ease-in-out;
   }
 }
 
-.actions-nav {
-  // REMOVED: Container styling
-  background: transparent;
-  border: none;
-  padding: 0; // Padding is not needed without a container
+.visualizer-pill {
+  width: 80px;
+  background-color: var(--muted);
+  border-color: transparent;
+  padding: 0 10px;
 
-  // Kept original layout properties
-  display: inline-flex;
-  gap: 12px;
-  align-items: center;
-  overflow: clip;
-  transition: all 0.1s ease-in;
-
-  > * {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    gap: 1rem;
+  &.disabled {
+    opacity: 0.5;
   }
 }

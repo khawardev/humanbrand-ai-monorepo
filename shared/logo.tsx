@@ -38,7 +38,7 @@ export const FullLogo = () => {
             <span className="inline dark:hidden">
                 <img
                     src="https://i.postimg.cc/nzx83C4D/HB-logo.png"
-                    width={50}
+                    width={45}
                     alt="Logo"
                     className="cursor-pointer block lg:hidden"
                 />
@@ -53,7 +53,7 @@ export const FullLogo = () => {
             <span className="hidden dark:inline">
                 <img
                     src="https://i.postimg.cc/5ythqc3x/HB-Green-Halflogo-name-mark-side-green-1.png"
-                    width={50}
+                    width={45}
                     alt="Logo"
                     className="cursor-pointer block lg:hidden"
                 />

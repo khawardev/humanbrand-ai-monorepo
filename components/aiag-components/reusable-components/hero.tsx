@@ -5,9 +5,8 @@ import { AIAG_VERSION } from "@/lib/aiag/constants"
 export const Hero = () => {
 
     return (
-        <section >
             <div className=" md:py-12">
-                <div className="div-center-md">
+                <div className="div-center-md md:py-12 py-0">
                     <div className="md:w-2/3 select-none">
                         <div>
                             <h1 className="text-balance  font-extrabold">
@@ -19,6 +18,5 @@ export const Hero = () => {
                     </div>
                 </div>
             </div>
-        </section>
     )
 }
