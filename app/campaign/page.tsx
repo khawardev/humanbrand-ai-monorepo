@@ -87,13 +87,13 @@ export default function Home() {
     };
     return (
         <main className="overflow-hidden">
+            <Hero />
             <div className="div-center-md" >
                 <Alert variant={'destructive'}>
                     <VscDebugConsole />
                     <AlertTitle>Campaign Page is Under Development</AlertTitle>
                 </Alert>
             </div>
-            <Hero />
             <section className="div-center-md">
 
                 <div id="form-start" ref={formRef}>
@@ -171,11 +171,11 @@ export default function Home() {
 
 
                 <FormSection title="Additional Instructions (optional)">
-                    <Textarea placeholder="Enter any specific requirements or instructions..." rows={14} />
+                    <Textarea placeholder="Enter any specific requirements or instructions..."  />
                 </FormSection>
 
                 <FormSection title="Contextual Awareness (optional)">
-                    <Textarea placeholder="Provide relevant background information or context..." rows={49} />
+                    <Textarea placeholder="Provide relevant background information or context..."  />
                 </FormSection>
 
             </section>

@@ -18,7 +18,8 @@ interface AuthModalProps {
 export default function AuthModal({ isOpen, onOpenChange, onAuthSuccess }: AuthModalProps) {
     const handleGoogleSignIn = async () => {
         const { error } = await signIn.social({
-            provider: "google"
+            provider: "google",
+            
         }, {
             onSuccess: () => {
                 onAuthSuccess();
@@ -34,7 +35,7 @@ export default function AuthModal({ isOpen, onOpenChange, onAuthSuccess }: AuthM
         <Dialog open={isOpen} onOpenChange={onOpenChange}>
             <DialogContent className="sm:max-w-[480px]">
                 <DialogHeader>
-                    <h5 className="font-semibold">Create an Account or Sign In</h5>
+                    <DialogTitle><span className="font-bold text-lg tracking-tight">Create an Account or Sign In</span></DialogTitle>
                     <DialogDescription>
                         One last step to start your free website audit.
                     </DialogDescription>

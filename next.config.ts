@@ -1,11 +1,10 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  experimental: {
-    serverActions: {
-      bodySizeLimit: "10mb",
-    },
-  },
+  allowedDevOrigins: [
+    "http://192.168.18.110:3000",
+    "http://localhost:3000"
+  ],
   images: {
     remotePatterns: [
       {

@@ -73,3 +73,16 @@ export async function updateUserVerification(userId: string, isVerified: boolean
     throw new Error("Failed to update user status.");
   }
 }
+
+
+export async function deleteUserById(userId: string) {
+  try {
+    await db.delete(savedSession).where(eq(savedSession.userId, userId));
+    await db.delete(user).where(eq(user.id, userId));
+    revalidatePath("/admin");
+    return { success: true };
+  } catch (error) {
+    console.error("Error deleting user:", error);
+    return { success: false, error: "Failed to delete user." };
+  }
+}

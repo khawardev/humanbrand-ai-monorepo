@@ -14,7 +14,7 @@ const NavigationMenuComp = ({ navLinks }: { navLinks: any[] }) => {
     return (
         <div className='sm:inline-block hidden'>
             <NavigationMenu>
-                <NavigationMenuList className=" border text-muted-foreground inline-flex h-9 w-fit items-center justify-center rounded-full p-[3px]">
+                <NavigationMenuList className="bg-muted border  text-muted-foreground inline-flex h-9 w-fit items-center justify-center rounded-full p-[3px]">
                     {navLinks.map((link: any, index: number) => (
                         <NavigationMenuItem key={link.href} >
                             <NavigationMenuLink

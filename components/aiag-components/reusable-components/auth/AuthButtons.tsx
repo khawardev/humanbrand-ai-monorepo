@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import AuthModal from "./AuthModal";
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 export default function AuthButtons() {
     const router = useRouter();
@@ -13,14 +14,22 @@ export default function AuthButtons() {
     };
     return (
         <>
-            <Button onClick={() => setAuthModalOpen(true)} size={'xs'} className="rounded-full">
-            Sign In
+            
+            <Button asChild size={'xs'} className="rounded-full">
+                <Link href={'/signin'}>
+                    Sign In
+                </Link>
             </Button>
-            <AuthModal
+
+            {/* <Button asChild onClick={() => setAuthModalOpen(true)} size={'xs'} className="rounded-full">
+                    Sign In
+            </Button> */}
+
+            {/* <AuthModal
                 isOpen={isAuthModalOpen}
                 onOpenChange={setAuthModalOpen}
                 onAuthSuccess={handleAuthSuccess}
-            />
+            /> */}
         </>
 
     )

@@ -10,10 +10,15 @@ import { IoIosCheckmarkCircle } from "react-icons/io";
 import { TiCancel } from "react-icons/ti";
 import { TbLockCancel } from "react-icons/tb";
 import { MdCancel } from "react-icons/md";
+import { Delete, Trash } from "lucide-react";
+import { deleteUserById } from "@/actions/users-actions";
+import { startTransition } from "react";
+import { toast } from "sonner";
 
 export const getUsersColumns = (
     onVerificationToggle: (userId: string, currentStatus: boolean) => void,
-    isPending: boolean
+    isPending: boolean,
+    handleDeleteUser:any
 ): any => [
         {
             id: "select",
@@ -88,19 +93,27 @@ export const getUsersColumns = (
             cell: ({ row }: any) => {
                 const user = row.original;
                 return (
-                    <div className="text-right">
+                    <div className="text-right flex  justify-end gap-2">
                         <Button
                             variant={`${user.adminVerified ? 'outline' : 'default'}`}
-                            size="sm"
+                            size="xs"
                             onClick={() => onVerificationToggle(user.id, user.adminVerified)}
                             disabled={isPending}
                         >
                             {user.adminVerified ? <>
-                                Revoke 
+                                Revoke
                             </> : <>
                                 <IoIosCheckmarkCircle />
-                                 Verify 
+                                Verify
                             </>}
+                        </Button>
+                        <Button
+                            variant='destructive'
+                            size="xs"
+                            onClick={() => handleDeleteUser(user.name, user.id)}
+                            disabled={isPending}
+                        >
+                            <Trash /> Delete
                         </Button>
                     </div>
 

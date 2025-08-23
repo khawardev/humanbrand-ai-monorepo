@@ -5,10 +5,13 @@ import { signIn, signOut } from "@/lib/better-auth/auth-client"
 import { useRouter } from "next/navigation"
 import { FcGoogle } from "react-icons/fc"
 
+
 export function SigninButtonDesktop() {
     const signInGoogle = async () => {
         await signIn.social({
-            provider: "google"
+            provider: "google",
+            callbackURL: "/dashboard",
+            redirect: true, 
         })
     }
     return (
@@ -23,7 +26,8 @@ export function SigninButtonDesktop() {
 export function SigninButtonMobile() {
     const signInGoogle = async () => {
         await signIn.social({
-            provider: "google"
+            provider: "google",
+            
         })
     }
     return (

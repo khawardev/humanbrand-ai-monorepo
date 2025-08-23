@@ -41,11 +41,23 @@ export const auth = betterAuth({
             clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
         },
     },
+    // session: {
+    //     expiresIn: 60 * 60 * 24,
+    //     disableSessionRefresh: true
+    // }
     session: {
-        expiresIn: 60 * 60 * 24,
-        disableSessionRefresh: true
+        expiresIn: secondsUntilMidnight(),
+        updateAge: 0 
     }
 });
 
 export type Session = typeof auth.$Infer.Session;
 export type User = typeof auth.$Infer.Session.user;
+
+function secondsUntilMidnight() {
+    const now = new Date()
+    const tomorrow = new Date(now)
+    tomorrow.setDate(now.getDate() + 1)
+    tomorrow.setHours(0, 0, 0, 0)
+    return Math.floor((tomorrow.getTime() - now.getTime()) / 1000)
+}
