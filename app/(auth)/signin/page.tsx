@@ -40,16 +40,23 @@ export default function Page() {
   };
 
   const handleGoogleSignIn = async () => {
-    const { error } = await signIn.social({
-      provider: "google",
-    }, {
-      onSuccess: () => {
-        toast.success("Google sign-in successfull");
+    try {
+      const res = await signIn.social({
+        provider: "google",
+      });
+
+      if (res?.error) {
+        console.error("Google sign-in failed", res.error);
+        toast.error("Google sign-in failed, please try again.");
+        return;
       }
-    });
-    if (error) {
-      console.error("Google sign-in failed, Please try again.", error);
-      toast.error("Google sign-in failed, Please try again.");
+
+      // If redirect doesn’t happen (like Safari popup blocking),
+      // you can manually handle here
+      toast.success("Google sign-in successful!");
+    } catch (err) {
+      console.error("Google sign-in failed:", err);
+      toast.error("Google sign-in failed, please try again.");
     }
   };
   return (
@@ -87,7 +94,10 @@ export default function Page() {
             }}
             render={({ field }: any) => (
               <FormItem>
-                <FormLabel>Password</FormLabel>
+                <div className=' flex flex-between items-center w-full'>
+                  <FormLabel>Password</FormLabel>
+                  <FormLabel><Link href={'/forgot-password'} >Forgot Password</Link></FormLabel>
+                </div>
                 <FormControl>
                   <Input type="password" placeholder="••••••••" {...field} autoComplete="on" />
                 </FormControl>
@@ -102,23 +112,23 @@ export default function Page() {
               Sign In
             </Button>
           </div>
-          <div className="relative my-4">
-            <div className="absolute inset-0 flex items-center">
-              <span className="w-full border-t" />
-            </div>
-            <div className="relative flex justify-center text-xs uppercase">
-              <span className="bg-background px-2 text-muted-foreground">
-                Or continue with
-              </span>
-            </div>
-          </div>
-
-          <Button variant="outline" className='w-full' onClick={handleGoogleSignIn}>
-            <FcGoogle className="h-4 w-4" />
-            Google
-          </Button>
         </form>
       </Form>
+      <div className="relative my-4">
+        <div className="absolute inset-0 flex items-center">
+          <span className="w-full border-t" />
+        </div>
+        <div className="relative flex justify-center text-xs uppercase">
+          <span className="bg-background px-2 text-muted-foreground">
+            Or continue with
+          </span>
+        </div>
+      </div>
+
+      <Button variant="outline" className='w-full' onClick={handleGoogleSignIn}>
+        <FcGoogle className="h-4 w-4" />
+        Google
+      </Button>
       <div className="mt-4 text-center text-sm">
         Don't have an account?{" "}
         <Link href="/signup" className="underline underline-offset-4">

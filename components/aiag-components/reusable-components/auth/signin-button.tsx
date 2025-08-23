@@ -10,8 +10,6 @@ export function SigninButtonDesktop() {
     const signInGoogle = async () => {
         await signIn.social({
             provider: "google",
-            callbackURL: "/dashboard",
-            redirect: true, 
         })
     }
     return (
@@ -27,7 +25,6 @@ export function SigninButtonMobile() {
     const signInGoogle = async () => {
         await signIn.social({
             provider: "google",
-            
         })
     }
     return (

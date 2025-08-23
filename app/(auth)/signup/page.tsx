@@ -40,16 +40,16 @@ export default function Page() {
     setIsLoading(false);
   };
   const handleGoogleSignIn = async () => {
-    const { error } = await signIn.social({
-      provider: "google",
-    }, {
-      onSuccess: () => {
-        toast.success("Google sign-in successfull");
+    try {
+      const res = await signIn.social({
+        provider: "google",
+      });
+      if (res?.error) {
+        console.error("Google sign-in failed", res.error);
+        return;
       }
-    });
-    if (error) {
-      console.error("Google sign-in failed, Please try again.", error);
-      toast.error("Google sign-in failed, Please try again.");
+    } catch (err) {
+      console.error("Google sign-in failed:", err);
     }
   };
   return (
@@ -126,23 +126,23 @@ export default function Page() {
             </Button>
           </div>
 
-          <div className="relative my-4">
-            <div className="absolute inset-0 flex items-center">
-              <span className="w-full border-t" />
-            </div>
-            <div className="relative flex justify-center text-xs uppercase">
-              <span className="bg-background px-2 text-muted-foreground">
-                Or continue with
-              </span>
-            </div>
-          </div>
-
-          <Button variant="outline" className='w-full' onClick={handleGoogleSignIn}>
-            <FcGoogle className="h-4 w-4" />
-            Google
-          </Button>
         </form>
       </Form>
+      <div className="relative my-4">
+        <div className="absolute inset-0 flex items-center">
+          <span className="w-full border-t" />
+        </div>
+        <div className="relative flex justify-center text-xs uppercase">
+          <span className="bg-background px-2 text-muted-foreground">
+            Or continue with
+          </span>
+        </div>
+      </div>
+
+      <Button variant="outline" className='w-full' onClick={handleGoogleSignIn}>
+        <FcGoogle className="h-4 w-4" />
+        Google
+      </Button>
       <div className="mt-4 text-center text-sm">
         Have an account?{" "}
         <Link href="/signin" className="underline underline-offset-4">

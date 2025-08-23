@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { ThemeSwitcher } from "../ui/theme-switcher";
-import { FullLogo } from "@/shared/logo";
+import { FullLogo, HalfLogo } from "@/shared/logo";
 import NavigationMenuComp from "./navigation-menu";
 import DesktopHeaderServer from "./desktop-header-server";
 import { getUser } from "@/actions/users-actions";
@@ -20,7 +20,7 @@ const DesktopHeader = async () => {
             <div className="sm:w-8/12 w-full mx-auto sm:px-0 px-4">
                 <div className="flex h-22  items-center justify-between gap-4">
                     <Link href="/" suppressHydrationWarning={true}>
-                        <span ><FullLogo /></span>
+                    <FullLogo />
                     </Link>
                     <NavigationMenuComp navLinks={navLinks} />
                     <div className="flex items-center justify-end gap-2">
