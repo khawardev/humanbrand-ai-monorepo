@@ -5,8 +5,7 @@ import HomePageComponent from "@/components/aiag-components/home/home-page-compo
 export default function HomePage() {
   return (
     <main className="pt-14 relative">
-      
-      <Hero />
+       <Hero />
       <section className="div-center-md">
         <AdminMailAlert />
         <HomePageComponent />

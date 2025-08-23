@@ -1,10 +1,8 @@
 'use client'
 import Image from "next/image"
-import { useTheme } from "next-themes"
 import { AIAG_VERSION } from "@/lib/aiag/constants"
 
 export const Hero = () => {
-    const theme = useTheme()
 
     return (
         <section >

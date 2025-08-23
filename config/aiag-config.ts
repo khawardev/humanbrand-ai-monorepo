@@ -13,6 +13,10 @@ export const AIAGConfig: any = {
       href: "/campaign",
     },
     {
+      title: "AI",
+      href: "/ai",
+    },
+    {
       title: "Admin",
       href: "/admin",
     },
