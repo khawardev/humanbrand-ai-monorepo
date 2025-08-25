@@ -158,7 +158,7 @@ export function ImageGenerator({
                             {hasUploadedImage ? 'Editing' : 'Generating'}
                         </ButtonSpinner>
                     ) : hasUploadedImage ? (
-                        'Edit Image'
+                        'Generate Image'
                     ) : (
                         'Generate Image'
                     )}

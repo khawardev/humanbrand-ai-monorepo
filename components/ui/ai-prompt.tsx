@@ -104,7 +104,7 @@ export default function AI_Prompt({ user, initialChatHistory }: AI_PromptProps) 
         switch (selectedModel) {
             case "AI Chat":
                 return (
-                    <div ref={chatContainerRef} className="flex flex-col flex-1 overflow-y-auto space-y-4 p-4 no-scrollbar">
+                    <div ref={chatContainerRef} className="flex flex-col flex-1 overflow-y-auto space-y-4  no-scrollbar">
                         {chatHistory.map((msg: any, index: any) => (
                             <div key={index} className="flex items-start gap-3 w-full">
                                 <Image
@@ -174,7 +174,7 @@ export default function AI_Prompt({ user, initialChatHistory }: AI_PromptProps) 
     };
 
     return (
-        <div className="p-1.5 flex flex-col h-full">
+        <div className=" flex flex-col h-full">
             <div className="flex-grow overflow-y-auto" style={{ maxHeight: "calc(100% - 150px)" }}>
                 {renderContent()}
             </div>
