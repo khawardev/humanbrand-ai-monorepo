@@ -71,10 +71,9 @@ export function FileDropzone({ onFilesChange, initialFileInfos }: FileDropzonePr
             files.forEach(file => formData.append("files", file));
 
             const response = await fetch("/api/parse-files", { method: "POST", body: formData });
-
             if (response.ok) {
                 const { parsedText } = await response.json();
-                
+
                 const newFileInfos = files.map(f => ({ name: f.name, size: f.size }));
                 onFilesChange({ files, parsedText, fileInfos: newFileInfos });
                 setFileInfos(newFileInfos);
@@ -136,20 +135,20 @@ export function FileDropzone({ onFilesChange, initialFileInfos }: FileDropzonePr
             <div className="flex flex-col gap-2 mt-4 w-full">
                 <div className="flex w-full gap-3">
 
-                {fileInfos.map((info, index) => (
-                    <div key={index}  className="relative flex w-full items-center justify-between p-2 pl-4 border rounded-md bg-accent">
-                        <div className="flex items-center gap-4 flex-grow min-w-0">
-                            {getFileIcon(info.name)}
-                            <div className="flex flex-col min-w-0">
-                                <span className="text-sm font-medium text-foreground truncate">{info.name}</span>
-                                <span className="text-xs text-muted-foreground">{formatBytes(info.size)}</span>
+                    {fileInfos.map((info, index) => (
+                        <div key={index} className="relative flex w-full items-center justify-between p-2 pl-4 border rounded-md bg-accent">
+                            <div className="flex items-center gap-4 flex-grow min-w-0">
+                                {getFileIcon(info.name)}
+                                <div className="flex flex-col min-w-0">
+                                    <span className="text-sm font-medium text-foreground truncate">{info.name}</span>
+                                    <span className="text-xs text-muted-foreground">{formatBytes(info.size)}</span>
+                                </div>
                             </div>
+                            <Button type="button" variant="ghost" size="icon" className="ml-2 h-7 w-7 flex-shrink-0" onClick={() => handleRemoveFile(index)}>
+                                <IoClose className="h-4 w-4" />
+                            </Button>
                         </div>
-                        <Button type="button" variant="ghost" size="icon" className="ml-2 h-7 w-7 flex-shrink-0" onClick={() => handleRemoveFile(index)}>
-                            <IoClose className="h-4 w-4" />
-                        </Button>
-                    </div>
-                ))}
+                    ))}
                 </div>
 
                 <div {...getRootProps()} className={`flex flex-col items-center justify-center w-full p-4 mt-2 border-2 border-dashed rounded-lg cursor-pointer transition-colors ${isDragActive ? "border-primary bg-primary/10" : "border-border hover:border-primary/20 hover:bg-primary/5"}`}>
