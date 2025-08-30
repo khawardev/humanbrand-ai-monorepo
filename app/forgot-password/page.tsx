@@ -1,10 +1,12 @@
 "use client";
 
+import { getUser } from "@/actions/users-actions";
 import { FormSection } from "@/components/aiag-components/reusable-components/form-section";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { authClient } from "@/lib/better-auth/auth-client";
+import { redirect } from "next/navigation";
 import { useState } from "react";
 
 export default function ForgotPassword() {
@@ -26,18 +28,21 @@ export default function ForgotPassword() {
 
     return (
         <div className="max-w-sm mx-auto space-y-4 flex flex-col justify-center h-[60vh]">
-            <FormSection title={'Forgot Password'}>
+            <FormSection title={'Forgot Password'} >
                 <form onSubmit={handleSubmit} className="space-y-3">
                     <div className="space-y-2">
                         <Label>Email</Label>
-                        <Input
-                            type="email"
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
-                            required
-                        />
+                        <div className=" flex gap-2">
+
+                            <Input
+                                type="email"
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                                required
+                            />
+                            <Button type="submit">Reset Link</Button>
+                        </div>
                     </div>
-                    <Button size="sm" type="submit">Reset Link</Button>
                 </form>
             </FormSection>
             {msg && <p className="text-sm">{msg}</p>}
