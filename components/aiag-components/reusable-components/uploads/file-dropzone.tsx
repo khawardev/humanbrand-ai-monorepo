@@ -57,6 +57,47 @@ export function FileDropzone({ onFilesChange, initialFileInfos }: FileDropzonePr
         }
     }, [initialFileInfos]);
 
+    // const parseFiles = async (files: File[]) => {
+    //     if (files.length === 0) {
+    //         onFilesChange({ files: null, parsedText: null, fileInfos: null });
+    //         setFileInfos(null);
+    //         setUploadedFiles([]);
+    //         return;
+    //     }
+
+    //     setIsLoading(true);
+    //     try {
+    //         const formData = new FormData();
+    //         files.forEach(file => formData.append("files", file));
+
+    //         const response = await fetch("/api/parse-files", { method: "POST", body: formData });
+    //         if (response.ok) {
+    //             const { parsedText } = await response.json();
+
+    //             const newFileInfos = files.map(f => ({ name: f.name, size: f.size }));
+    //             onFilesChange({ files, parsedText, fileInfos: newFileInfos });
+    //             setFileInfos(newFileInfos);
+    //             setUploadedFiles(files);
+    //         } else {
+    //             const errorData = await response.json();
+    //             toast.error(errorData.message || `Failed to parse files.`);
+    //             onFilesChange({ files: null, parsedText: null, fileInfos: null });
+    //         }
+    //     } catch (error) {
+    //         console.error("An error occurred while parsing the files.", error);
+    //         toast.error("An error occurred while parsing the files.");
+    //         onFilesChange({ files: null, parsedText: null, fileInfos: null });
+    //     } finally {
+    //         setIsLoading(false);
+    //     }
+    // };
+
+    const MAX_TOKENS = 1_000_000; 
+
+    function estimateTokens(text: string): number {
+        return Math.ceil(text.length / 4);
+    }
+
     const parseFiles = async (files: File[]) => {
         if (files.length === 0) {
             onFilesChange({ files: null, parsedText: null, fileInfos: null });
@@ -73,6 +114,15 @@ export function FileDropzone({ onFilesChange, initialFileInfos }: FileDropzonePr
             const response = await fetch("/api/parse-files", { method: "POST", body: formData });
             if (response.ok) {
                 const { parsedText } = await response.json();
+
+                const tokenCount = estimateTokens(parsedText);
+                
+                if (tokenCount > MAX_TOKENS) {
+                    toast.warning(
+                        `Your file content is about ${tokenCount.toLocaleString()} tokens, which exceeds the model's ${MAX_TOKENS.toLocaleString()} token limit. Please upload a smaller file.`
+                    );
+                    return
+                }
 
                 const newFileInfos = files.map(f => ({ name: f.name, size: f.size }));
                 onFilesChange({ files, parsedText, fileInfos: newFileInfos });
@@ -91,6 +141,7 @@ export function FileDropzone({ onFilesChange, initialFileInfos }: FileDropzonePr
             setIsLoading(false);
         }
     };
+
 
     const onDrop = useCallback((acceptedFiles: File[], fileRejections: FileRejection[]) => {
         if (fileRejections.length > 0) {
