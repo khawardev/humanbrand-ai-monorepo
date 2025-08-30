@@ -12,7 +12,7 @@ export const HalfBlackLogo = () => {
 export const HalfLogo = () => {
     const theme = useTheme()
     return (
-        <div className={`flex size-5 items-center  justify-center`} suppressHydrationWarning={true}>
+        <div className={`flex size-12 items-center  justify-center`} suppressHydrationWarning={true}>
             {theme.resolvedTheme === 'light' ? <img src={'https://i.postimg.cc/nzx83C4D/HB-logo.png'} width={1000} alt={`Logo`}
                 className=' cursor-pointer  '
             /> : <img src={'https://i.postimg.cc/5ythqc3x/HB-Green-Halflogo-name-mark-side-green-1.png'} width={1000} alt={`Logo`}
