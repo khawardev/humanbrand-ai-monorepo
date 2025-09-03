@@ -13,7 +13,7 @@ import { knowledgeBaseContent } from "@/lib/aiag/knowledge_base";
 const knowledgeBaseToolDeclaration: FunctionDeclaration = {
     name: "search_aiag_knowledge_base",
     description:
-        "Provides access to the comprehensive AIAG knowledge base to find answers to user questions. This tool must be used to respond to any query related to AIAG's brand, messaging, guidelines, or personas.",
+        "Provides access to the comprehensive AIAG knowledge base to find answers to user questions. This tool must be used to respond to any query related to AIAG's Knowledge Base Content.",
     parameters: {
         type: Type.OBJECT,
         properties: {
@@ -120,7 +120,6 @@ function KnowledgeBaseAudioPromptComponent() {
                                 AIAG Knowledge Base Content:  
                                 ${knowledgeBaseContent}
                                 `
-
                     },
                 ],
             },

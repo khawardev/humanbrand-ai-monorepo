@@ -42,7 +42,7 @@ export function ContentChat({ chatHistory = [], handleChatSend, onChatFileChange
                     </div>
                 ) : (
                     messages.map((msg: any, index: number) => (
-                        <div key={index} className="flex items-start gap-2 my-2 no-scrollbar">
+                        <div key={index} className="flex items-start gap-2 my-2 ">
                             <img
                                 src={msg.role === 'user' ? user?.image && user?.image : 'https://i.postimg.cc/ZYDgZQyF/aiag-logo.jpg'}
                                 alt={`${msg.role} avatar`}
@@ -69,7 +69,7 @@ export function ContentChat({ chatHistory = [], handleChatSend, onChatFileChange
                             alt="assistant avatar"
                             className="w-9 h-9  rounded-md object-cover mt-1"
                         />
-                        <div className='w-full space-y-2 p-3 bg-accent rounded-lg'>
+                        <div className='w-full space-y-2 px-2 rounded-lg'>
                             <Skeleton className='w-[30%] h-4 bg-muted-foreground/20' />
                             <Skeleton className='w-[70%] h-4 bg-muted-foreground/20' />
                         </div>

@@ -4,9 +4,6 @@ import "./globals.css";
 import DesktopHeader from "@/components/header/desktop-header";
 import { Toaster } from "@/components/ui/sonner";
 import { ThemeProvider } from "next-themes";
-import KnowledgeBaseChatComponent from "@/components/aiag-components/knowledge-base-chat/knowledge-base-chat-component";
-import { Button } from "@/components/ui/button";
-import Link from "next/link";
 
 const inter = Inter({ subsets: ["latin"] });
 

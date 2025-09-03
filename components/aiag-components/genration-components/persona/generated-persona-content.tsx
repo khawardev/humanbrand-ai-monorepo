@@ -9,18 +9,16 @@ export function GeneratedPersonaContent({ content }: any) {
     return (
         <main className="space-y-10 ">
             <section>
-                <div  >
-                    <div >
-                        <div className={"flex md:items-center items-end justify-between mb-4"}>
-                            <h4>Hyper-Relevant Persona Version</h4>
-                            <div className=" flex justify-end ">
-                                <PersonaContentActions
-                                    content={content}
-                                />
-                            </div>
+                <div>
+                    <div className={"flex md:items-center items-end justify-between mb-4"}>
+                        <h4>Hyper-Relevant Persona Version</h4>
+                        <div className=" flex justify-end ">
+                            <PersonaContentActions
+                                content={content}
+                            />
                         </div>
-                        <Separator className="mb-4" />
                     </div>
+                    <Separator className="mb-4" />
                 </div>
 
                 <div className="prose prose-neutral max-w-none markdown-body space-y-3 dark:prose-invert">

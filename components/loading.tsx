@@ -5,7 +5,7 @@ import { LuLoaderCircle } from 'react-icons/lu'
 
 const Loading = () => {
     return (
-        <div className='flex-center min-h-[85vh]'>
+        <div className='flex-center animate-pulse min-h-[85vh]'>
             {/* <LuLoaderCircle className="text-muted-foreground size-4 animate-spin" /> */}
             <HalfLogo />
             {/* <span className="relative flex size-3.5">

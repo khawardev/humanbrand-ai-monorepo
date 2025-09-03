@@ -36,7 +36,7 @@ export function GeneratedContent(props: any) {
                     content: (
                         <section>
                             <div ref={headerRef}>
-                                <div className={"flex md:items-center items-end justify-between mb-4"}>
+                                <div className={"md:flex md:space-y-0 space-y-3 md:items-center items-end justify-between mb-4"}>
                                     <h4>AIAG - Content Generation Details ({AIAG_VERSION})</h4>
                                     <div className=" flex justify-end ">
                                         <ContentActions

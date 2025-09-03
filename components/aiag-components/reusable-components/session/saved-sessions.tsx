@@ -25,13 +25,12 @@ const SavedSessions = ({ savedSessions }: any) => {
                             Saved Sessions
                         </span>
                         <span className="text-muted-foreground truncate text-xs font-normal">
-                            Your previously saved content sessions.
+                            Your previously saved sessions.
                         </span>
                     </div>
                 </DropdownMenuLabel>
                 <DropdownMenuSeparator />
-                <section className="max-h-40 overflow-y-auto no-scrollbar">
-                    
+                <section className="h-40 overflow-y-auto">
                     <SessionsList savedSessions={savedSessions} />
                 </section>
             </DropdownMenuContent>

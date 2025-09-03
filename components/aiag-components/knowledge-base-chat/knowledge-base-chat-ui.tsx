@@ -35,7 +35,7 @@ export default function KnowledgeBaseChatUI({ user, initialChatHistory }: { user
                     </div>
                 ) : (
                     chatHistory.map((msg: any, index: any) => (
-                        <div key={index} className="flex items-start gap-2 no-scrollbar">
+                        <div key={index} className="flex items-start gap-2 ">
                             <img
                                 src={msg.role === 'user' ? user?.image && user?.image : 'https://i.postimg.cc/ZYDgZQyF/aiag-logo.jpg'}
                                 alt={`${msg.role} avatar`}

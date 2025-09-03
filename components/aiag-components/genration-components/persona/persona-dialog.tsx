@@ -5,10 +5,13 @@ import {
     Dialog,
     DialogContent,
     DialogFooter,
+    DialogTitle,
+    DialogTrigger,
 } from "@/components/ui/dialog";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { FileDropzone } from "../../reusable-components/uploads/file-dropzone";
+import { RiUserSmileLine } from "react-icons/ri";
 
 
 export function PersonaDialog({ isOpen, onOpenChange, setPersonasText, setUploadedPersonaFileData, handleAdaptPersona, personasText }: any) {
@@ -25,6 +28,12 @@ export function PersonaDialog({ isOpen, onOpenChange, setPersonasText, setUpload
 
     return (
         <Dialog open={isOpen} onOpenChange={onOpenChange}>
+            <DialogTrigger >
+                <Button size={'sm'} variant={'ghost'}>
+                    <RiUserSmileLine size={16} className="opacity-60" aria-hidden="true" />
+                    <span>Persona</span>
+                </Button>
+            </DialogTrigger>
             <DialogContent className="sm:max-w-3xl">
                 <section>
                     <span className="font-semibold text-accent-foreground tracking-tighter">Adapt Content for Hyper Relevance</span>

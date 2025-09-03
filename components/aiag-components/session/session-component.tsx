@@ -82,7 +82,7 @@ export function SessionPageComponent({ initialData, user }: any) {
     return (
         <main className="overflow-hidden pt-12">
             <Hero />
-            <section className="sm:w-8/12 w-full m-auto sm:px-0 px-4 pt-10">
+            <section className="div-center-md">
                 <CustomTabs
                     triggerMaxWidthClass="max-w-40"
                     defaultValue="content_generate"

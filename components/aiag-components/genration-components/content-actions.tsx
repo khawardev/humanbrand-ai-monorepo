@@ -14,7 +14,6 @@ import { IoIosArrowDown } from "react-icons/io";
 import { ReviseDialog } from "./revise-dialog";
 import { toast } from "sonner";
 import { PersonaDialog } from "./persona/persona-dialog";
-import { RiUserSmileLine } from "react-icons/ri";
 
 export function ContentActions({ content, handleRevise, feedback, setFeedback, setPersonasText, personasText, setUploadedPersonaFileData, handleAdaptPersona }: any) {
     const [isReviseOpen, setReviseOpen] = useState(false);
@@ -37,13 +36,28 @@ export function ContentActions({ content, handleRevise, feedback, setFeedback, s
         URL.revokeObjectURL(url);
     };
 
-   
+
 
     return (
-        <>
+        <section className="flex gap-2 items-center">
+            <ReviseDialog
+                handleRevise={handleRevise}
+                feedback={feedback}
+                setFeedback={setFeedback}
+                isOpen={isReviseOpen}
+                onOpenChange={setReviseOpen}
+            />
+            <PersonaDialog
+                isOpen={isAdaptOpen}
+                onOpenChange={setAdaptOpen}
+                setPersonasText={setPersonasText}
+                personasText={personasText}
+                setUploadedPersonaFileData={setUploadedPersonaFileData}
+                handleAdaptPersona={handleAdaptPersona}
+            />
             <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                    <Button variant="ghost" size={'sm'}>
+                    <Button  size={'xs'}>
                         Actions <IoIosArrowDown />
                     </Button>
                 </DropdownMenuTrigger>
@@ -56,32 +70,8 @@ export function ContentActions({ content, handleRevise, feedback, setFeedback, s
                         <Download size={16} className="opacity-60 mr-2" aria-hidden="true" />
                         <span>Download .txt</span>
                     </DropdownMenuItem>
-                    <DropdownMenuItem onSelect={(e) => { e.preventDefault(); setReviseOpen(true); }}>
-                        <TfiLoop size={16} className="opacity-60 mr-2" aria-hidden="true" />
-                        <span>Revise</span>
-                    </DropdownMenuItem>
-                    <DropdownMenuItem onSelect={(e) => { e.preventDefault(); setAdaptOpen(true); }}>
-                        <RiUserSmileLine size={16} className="opacity-60 mr-2" aria-hidden="true" />
-                        <span>Adapt for persona</span>
-                    </DropdownMenuItem>
                 </DropdownMenuContent>
             </DropdownMenu>
-
-            <ReviseDialog
-                handleRevise={handleRevise}
-                feedback={feedback}
-                setFeedback={setFeedback}
-                isOpen={isReviseOpen}
-                onOpenChange={setReviseOpen}
-            />
-            <PersonaDialog
-                isOpen={isAdaptOpen}
-                onOpenChange={setAdaptOpen}
-                setPersonasText={setPersonasText}             
-                personasText={personasText}
-                setUploadedPersonaFileData={setUploadedPersonaFileData} 
-                handleAdaptPersona={handleAdaptPersona}
-            />
-        </>
+        </section>
     );
 }

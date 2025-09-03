@@ -24,11 +24,8 @@ export function useSessionContentGenerator(initialData: any) {
     const [selectedCtas, setSelectedCtas] = useState<number[]>(initialData.ctaIds ?? [])
     const [selectedSocialPlatform, setSelectedSocialPlatform] = useState<number | null>(initialData.socialPlatformId ?? null)
 
-    ////////////////// changes explain comment start ////////////
-    // 1. UPDATED: Initial state now correctly reads from `initialData.referenceFilesData` and `initialData.chatFilesData` to match the new database schema.
     const [referenceFileInfos, setReferenceFileInfos] = useState<any[]>(initialData.referenceFileInfos ?? [])
     const [referenceFilesData, setReferenceFilesData] = useState<string | null>(initialData.referenceFilesData ?? null)
-    ////////////////// changes explain comment end ////////////
 
     const [additionalInstructions, setAdditionalInstructions] = useState(initialData.additionalInstructions ?? "")
     const [contextualAwareness, setContextualAwareness] = useState(initialData.contextualAwareness ?? "")
@@ -64,13 +61,10 @@ export function useSessionContentGenerator(initialData: any) {
         setChatHistory(initialData.chatHistory ?? []);
         setImageReferenceFileInfo(initialData.imageReferenceFileInfo ?? null);
 
-        ////////////////// changes explain comment start ////////////
-        // 2. UPDATED: `useEffect` now correctly hydrates state from the new schema fields when `initialData` changes.
         setReferenceFileInfos(initialData.referenceFileInfos ?? []);
         setReferenceFilesData(initialData.referenceFilesData ?? null);
         setChatFileInfos(initialData.chatFileInfos ?? []);
         setChatFilesData(initialData.chatFilesData ?? null);
-        ////////////////// changes explain comment end ////////////
     }, [initialData]);
 
     const socialPostContentTypeId = contentTypes.find(type => type.label === "Social Media Post")?.id
@@ -100,11 +94,8 @@ export function useSessionContentGenerator(initialData: any) {
         temperature: creativityValue,
         originalContent: contentGenerated,
 
-        ////////////////// changes explain comment start ////////////
-        // 3. UPDATED: The data object sent to the backend now uses the correct keys (`referenceFileInfos` and `referenceFilesData`) that the server action expects.
         referenceFileInfos: referenceFileInfos,
         referenceFilesData: referenceFilesData,
-        ////////////////// changes explain comment end ////////////
     })
 
     const handleGenerate = () => {
@@ -204,14 +195,11 @@ export function useSessionContentGenerator(initialData: any) {
 
         setIsChatLoading(false);
 
-        ////////////////// changes explain comment start ////////////
-        // 4. UPDATED: The object passed to `updateChatForSession` now uses the correct keys (`chatFileInfos` and `chatFilesData`) expected by the backend action.
         await updateChatForSession(initialData.id, {
             chatHistory: finalHistory,
             chatFileInfos: chatFileInfos,
             chatFilesData: chatFilesData,
         });
-        ////////////////// changes explain comment end ////////////
 
     };
 

@@ -14,7 +14,7 @@ const Page = async () => {
     }
 
     return (
-        <div className='sm:w-8/12 w-full flex flex-col sm:px-0 px-4 justify-end mx-auto h-[85vh] '>
+        <div className='div-center-md h-[90vh] '>
             <AI_Prompt user={user} initialChatHistory={initialChatHistory} />
         </div>
     );

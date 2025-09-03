@@ -20,7 +20,6 @@ import remarkGfm from "remark-gfm";
 import Gemini_Live_AIAG from "@/components/gemini-live-api-components/gemini-live-app-shared/gemini-live-aiag";
 import { Skeleton } from "@/components/ui/skeleton";
 
-// Define the component's props
 interface AI_PromptProps {
     user: any;
     initialChatHistory: any[];
@@ -34,11 +33,9 @@ export default function AI_Prompt({ user, initialChatHistory }: AI_PromptProps) 
     });
     const [selectedModel, setSelectedModel] = useState("AI Chat");
 
-    // Hook for AI Chat functionality
     const { chatHistory, isResponding, handleSendMessage } = useKnowledgeBaseChat({ user, initialChatHistory });
-    const chatContainerRef = useRef<HTMLDivElement>(null);
+    const messagesEndRef = useRef<HTMLDivElement>(null);
 
-    // State for TTS functionality
     const [audioUrl, setAudioUrl] = useState<string | null>(null);
     const [isTTSLoading, setTTSLoading] = useState(false);
 
@@ -49,14 +46,13 @@ export default function AI_Prompt({ user, initialChatHistory }: AI_PromptProps) 
         "Genrate TTS": <Speech />,
     };
 
-    // Auto-scroll for chat
+
     useEffect(() => {
-        if (selectedModel === "AI Chat" && chatContainerRef.current) {
-            chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
+        if (selectedModel === "AI Chat") {
+            messagesEndRef.current?.scrollIntoView();
         }
     }, [chatHistory, isResponding, selectedModel]);
 
-    // TTS Audio Generation Logic
     const generateAudio = async () => {
         if (!value.trim()) return;
         setTTSLoading(true);
@@ -104,7 +100,7 @@ export default function AI_Prompt({ user, initialChatHistory }: AI_PromptProps) 
         switch (selectedModel) {
             case "AI Chat":
                 return (
-                    <div ref={chatContainerRef} className="flex flex-col flex-1 overflow-y-auto space-y-4  no-scrollbar">
+                    <div className="flex flex-col flex-1 overflow-y-auto space-y-4">
                         {chatHistory.map((msg: any, index: any) => (
                             <div key={index} className="flex items-start gap-3 w-full">
                                 <Image
@@ -114,7 +110,7 @@ export default function AI_Prompt({ user, initialChatHistory }: AI_PromptProps) 
                                     height={36}
                                     className="w-9 h-9 rounded-md object-cover mt-1"
                                 />
-                                <div className={`w-full p-3 rounded-lg ${msg.role === 'user' ? 'bg-primary text-primary-foreground' : 'bg-black/5 dark:bg-white/5'}`}>
+                                <div className={`w-full p-3 rounded-lg ${msg.role === 'user' ? 'bg-primary text-primary-foreground border' : 'bg-black/5 dark:bg-white/5 border'}`}>
                                     <div className="markdown-body space-y-1 text-[15px]">
                                         <ReactMarkdown remarkPlugins={[remarkGfm]}>{msg.content}</ReactMarkdown>
                                     </div>
@@ -124,12 +120,13 @@ export default function AI_Prompt({ user, initialChatHistory }: AI_PromptProps) 
                         {isResponding && (
                             <div className="flex items-start gap-3 my-2">
                                 <Image src={'https://i.postimg.cc/ZYDgZQyF/aiag-logo.jpg'} alt="assistant avatar" width={36} height={36} className="w-9 h-9 rounded-md object-cover mt-1" />
-                                <div className='w-full space-y-2 p-3 bg-accent rounded-lg'>
+                                <div className='w-full space-y-2 px-2 rounded-lg'>
                                     <Skeleton className='w-[30%] h-4 bg-muted-foreground/20' />
                                     <Skeleton className='w-[70%] h-4 bg-muted-foreground/20' />
                                 </div>
                             </div>
                         )}
+                        <div ref={messagesEndRef} />
                     </div>
                 );
             case "AI Ask":
@@ -148,7 +145,7 @@ export default function AI_Prompt({ user, initialChatHistory }: AI_PromptProps) 
                                     <span >Generate audio</span>
                                 </div>
                             )}
-                           
+
                             {isTTSLoading && (
                                 <div className="flex items-center text-sm gap-2 text-muted-foreground">
                                     <Loader2 className="w-4 h-4 animate-spin" />
@@ -157,7 +154,7 @@ export default function AI_Prompt({ user, initialChatHistory }: AI_PromptProps) 
                             )}
                             {audioUrl && (
                                 <div className="space-y-3 ">
-                                    <audio controls src={audioUrl} className="w-full" />
+                                    <audio controls src={audioUrl} className="w-[400px]" />
                                     <a href={audioUrl} download="tts-output.wav">
                                         <Button size={'xs'}  >
                                             Download
@@ -175,7 +172,7 @@ export default function AI_Prompt({ user, initialChatHistory }: AI_PromptProps) 
 
     return (
         <div className=" flex flex-col h-full">
-            <div className="flex-grow overflow-y-auto" style={{ maxHeight: "calc(100% - 150px)" }}>
+            <div className="flex-grow overflow-y-auto">
                 {renderContent()}
             </div>
             <div className="relative mt-auto pt-4 ">
@@ -184,7 +181,7 @@ export default function AI_Prompt({ user, initialChatHistory }: AI_PromptProps) 
                     value={value}
                     placeholder={selectedModel === "AI Chat" ? "Chat with knowledge base..." : selectedModel === "Genrate TTS" ? "Enter text to generate audio..." : "Microphone is active for AI Ask"}
                     className={cn(
-                        "w-full rounded-xl rounded-b-none px-4 py-3 bg-black/5 dark:bg-white/5 border-none dark:text-white placeholder:text-black/70 dark:placeholder:text-white/70 resize-none focus-visible:ring-0 focus-visible:ring-offset-0",
+                        "w-full rounded-xl  rounded-b-none px-4 py-3 border-none resize-none focus-visible:ring-0 focus-visible:ring-offset-0",
                         "min-h-[72px]"
                     )}
                     ref={textareaRef}
@@ -195,7 +192,7 @@ export default function AI_Prompt({ user, initialChatHistory }: AI_PromptProps) 
                     }}
                     disabled={isTextareaDisabled}
                 />
-                <div className="h-14 bg-black/5 dark:bg-white/5 rounded-b-xl flex items-center px-3">
+                <div className="h-14 bg-black/5 dark:bg-white/5 rounded-b-xl flex items-center px-3 ">
                     <div className="flex items-center justify-between w-full">
                         <DropdownMenu>
                             <DropdownMenuTrigger asChild>

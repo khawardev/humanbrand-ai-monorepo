@@ -212,7 +212,7 @@
   }
 
   .div-center-md {
-    @apply sm:w-8/12 space-y-10 w-full m-auto sm:px-0 px-4 py-10;
+    @apply sm:w-9/12 space-y-10 w-full m-auto sm:px-0 px-4 py-10;
   }
 
 }
@@ -245,6 +245,8 @@
    .font-Inter {
     font-family: 'Inter', sans-serif !important;
   }
-
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
 
 }

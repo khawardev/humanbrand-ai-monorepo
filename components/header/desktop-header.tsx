@@ -19,7 +19,7 @@ const DesktopHeader = async () => {
     });
 
     return (
-        <div className="sm:w-8/12 w-full mx-auto sm:px-0 px-4">
+        <div className="sm:w-9/12 w-full mx-auto sm:px-0 px-4">
             <div className="flex h-22 items-center justify-between gap-4">
                 <Link href="/" suppressHydrationWarning>
                     <FullLogo />
