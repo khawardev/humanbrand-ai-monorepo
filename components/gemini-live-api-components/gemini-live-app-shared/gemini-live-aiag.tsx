@@ -21,7 +21,7 @@ function Gemini_Live_AIAG({ user }: any) {
     <div>
       <LiveAPIProvider options={apiOptions}>
         <KnowledgeBaseAudioPrompt />
-        <ControlTray user={user} />
+        <ControlTray />
       </LiveAPIProvider>
     </div>
   );
