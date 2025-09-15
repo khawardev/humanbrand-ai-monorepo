@@ -2,7 +2,6 @@
 import { generateText } from 'ai';
 import { openai } from '@ai-sdk/openai';
 import { google } from '@ai-sdk/google';
-import { createAmazonBedrock } from '@ai-sdk/amazon-bedrock';
 
 import { GEMINI_MODEL, OPENAI_MODEL, OPENAI_MODEL_5 } from '@/lib/aiag/constants';
 
@@ -26,28 +25,47 @@ async function runGenerateText(model: any, system: string | undefined, prompt: s
     return generateText(options);
 }
 
-const bedrock = createAmazonBedrock({
-    region: process.env.AWS_REGION,
-    accessKeyId: process.env.AWS_ACCESS_KEY_ID,
-    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
-    sessionToken: process.env.AWS_SESSION_TOKEN,
-});
+export async function generateClaudeContent(prompt: string) {
+    try {
+        const formData = new FormData();
+        formData.append("prompt", prompt);
+        formData.append("model_id", "claude-4-1-opus");
+        formData.append("temperature", "0.7");
+        // formData.append("max_tokens", "300");
+
+        const res = await fetch(process.env.CLAUDE_API_KEY!, {
+            method: "POST",
+            headers: { Accept: "application/json" },
+            body: formData,
+        });
+
+        if (!res.ok) {
+            throw new Error(`Failed with status ${res.status}`);
+        }
+
+        const data = await res.json();
+        return data.response; 
+    } catch (err) {
+        console.error("Error generating content:", err);
+        throw err;
+    }
+}
 
 export async function generateNewContent(data: any): Promise<any> {
     try {
         if (data.modelAlias === 'claude') {
-            
-            const { text } = await generateText({
-                model: bedrock("us.anthropic.claude-opus-4-1-20250805-v1:0"),
-                messages: [
-                    { role: 'system', content: data.systemPrompt },
-                    { role: 'user', content: data.userPrompt },
-                ],
-            });
-
+            const mergedPrompt = `System Instructions:
+                                  --------------------
+                                  ${data.systemPrompt}
+                                          
+                                  User Request:
+                                  -------------
+                                  ${data.userPrompt}
+                                  `;
+            const response = await generateClaudeContent(mergedPrompt);
             return {
-                generatedText: text ?? null,
-                errorReason: text ? null : `No text response received from model: ${data.modelAlias}`,
+                generatedText: response ?? null,
+                errorReason: response ? null : `No text response received from model: ${data.modelAlias}`,
             };
         }
 
@@ -85,13 +103,11 @@ export async function generateSessionTitle(data: any): Promise<any> {
                                   -------------
                                   ${data.userPrompt}
                                   `;
-            const { text } = await generateText({
-                model: bedrock("us.anthropic.claude-opus-4-1-20250805-v1:0"),
-                prompt: mergedPrompt,
-            });
+            
+            const response = await generateClaudeContent(mergedPrompt);
             return {
-                generatedText: text ?? null,
-                errorReason: text ? null : `No text response received from model: ${data.modelAlias}`,
+                generatedText: response ?? null,
+                errorReason: response ? null : `No text response received from model: ${data.modelAlias}`,
             };
         }
 
