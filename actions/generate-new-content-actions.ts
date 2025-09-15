@@ -27,7 +27,6 @@ async function runGenerateText(model: any, system: string | undefined, prompt: s
 
 export async function generateClaudeContent(prompt: string) {
     const CLAUDE_API_KEY = process.env.CLAUDE_API_KEY!;
-    console.log(CLAUDE_API_KEY, `<-> CLAUDE_API_KEY <->`);
     
     try {
         const formData = new FormData();
@@ -40,7 +39,6 @@ export async function generateClaudeContent(prompt: string) {
             body: formData,
         });
 
-        console.log(CLAUDE_API_KEY, `<-> CLAUDE_API_KEY <->`);
 
         if (!res.ok) {
             throw new Error(`Failed with status ${res.status}`);
