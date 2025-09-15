@@ -132,7 +132,7 @@ export default function AI_Prompt({ user, initialChatHistory }: AI_PromptProps) 
             case "AI Ask":
                 return (
                     <div className="flex flex-col items-center justify-center text-center h-[60vh]">
-                        <Gemini_Live_AIAG user={user} />
+                        <Gemini_Live_AIAG />
                     </div>
                 );
             case "Genrate TTS":
