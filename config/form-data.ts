@@ -45,9 +45,12 @@ import {
     BadgeDollarSign, 
     Megaphone        
 } from "lucide-react";
+
 export const modelTabs = [
-    { id: 1, label: 'recomended', title: "Core", tooltip:'Best for most content' },
-    { id: 2, label: 'deepthink', title: "Advanced", tooltip: 'Technical content like white papers' },
+    { id: 1, label: 'recomended', title: "Core", tooltip: "Best for most content" },
+    { id: 2, label: 'deepthink', title: "Advanced", tooltip: "Technical content like white papers" },
+    { id: 3, label: 'openai', title: "Test1", tooltip: "TestModel 1" },
+    { id: 4, label: 'claude', title: "Test2", tooltip: "TestModel 2" },
 ];
 
 export const COLOR_PRIMARY = "bg-primary/15 border border-primary/50";

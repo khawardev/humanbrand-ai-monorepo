@@ -1,12 +1,13 @@
-
-
 export const AIAG_VERSION = "25.1";
 export const AIAG_LOGO = "https://i.postimg.cc/ZYDgZQyF/aiag-logo.jpg";
 export const MAX_CHAT_HISTORY_MESSAGES = 20;
 
 
-export const GEMINI_MODEL_NAME = "gemini-2.5-pro-preview-05-06";
-export const OPENAI_MODEL_NAME = "gpt-4.1"; 
+export const OPENAI_MODEL = "gpt-4.1"; 
+export const OPENAI_MODEL_5 = "gpt-5"; 
+export const CLAUDE_MODEL = 'anthropic.claude-opus-4-1-20250805-v1:0';
+export const GEMINI_MODEL = "gemini-2.5-pro-preview-05-06";
+
 
 export const IMAGE_MODEL_TO_USE = "gpt-image-1";
 export const TTS_MODEL_TO_USE = "gpt-4o-mini-tts";

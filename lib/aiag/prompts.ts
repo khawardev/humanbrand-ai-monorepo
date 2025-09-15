@@ -34,7 +34,12 @@ export function getNewGenerationPrompts({
                           * Lexicon & Style: Naturally integrate language, narrative devices, and symbols described in the KB Section 3 (e.g., Sections 3.8, 3.9, 3.11). Avoid legacy buzzwords unless contextually validated (the KB Section 3.15).
                           * Messaging Framework: Draw inspiration from AIAG Messaging Framework (the KB Section 2) for structure and key messages where applicable (e.g., Brand Narrative 2.1, Member Benefits 2.8).
                           * Personas: Consider the 'AIAG PERSONA DEFINITIONS' section in the Knowledge Base. If a defined persona aligns with the 'Target Audience(s)' specified, tailor the content to their characteristics, needs, and goals as described in the KB, particularly using hints from the KB Section 3.11 (Persona-Specific Language).
-                          * Output: Output ONLY the final content, directly. Do not include preambles like "Here is the content:" or "Begin Generated Content".`;
+                          * Output: Output ONLY the final content, directly. Do not include preambles like "Here is the content:" or "Begin Generated Content".
+                          ------------------------------
+                          CRITICAL FORMATTING RULES
+                          ------------------------------
+                          * Always format em dashes (—) with a space before and after (e.g., "word — word").
+                          * Always include a space after colons in lists (e.g., "Tools: Whether you need..." not "Tools:Whether you need..."). `;
 
     const userPrompt = `  ---------------------------------
                           PARAMETERS FOR THIS SPECIFIC TASK
@@ -220,7 +225,7 @@ export function getExistingContentPrompts({
                           * Messaging Framework: Draw inspiration from AIAG Messaging Framework (the KB Section 2) for structure and key messages where applicable.
                           * Output: Output ONLY the final, revised content, directly. Do not include preambles like "Here is the revised content:" or "Begin Generated Content".`;
 
-    const userPrompt = `  ---------------------------------
+    const userPrompt =   `---------------------------------
                           PARAMETERS FOR THIS REVISION TASK
                           ---------------------------------
                           * Additional User Instructions: ${additionalInstructions || 'None. Rely on the KB and the existing content.'}

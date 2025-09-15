@@ -98,7 +98,7 @@ export function GeneratedContent(props: any) {
                     content: (
                         <>
                             {!isPersonaPending && !personaContent && (
-                                <div className="flex items-center  text-center justify-center h-[50vh] text-muted-foreground">
+                                <div className="flex items-center  text-center justify-center h-[30vh] text-muted-foreground">
                                     No persona has been adapted for this content yet.
                                 </div>
                             )}

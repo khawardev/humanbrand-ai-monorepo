@@ -16,14 +16,15 @@ export function ReviseDialog({ isOpen, onOpenChange, handleRevise, feedback, set
 
     return (
         <Dialog open={isOpen} onOpenChange={onOpenChange}>
-            <DialogTrigger >
-                <Button size={'sm'} variant={'ghost'}>
+            <DialogTrigger asChild>
+                <Button  size={'sm'} variant={'ghost'}>
                     <TfiLoop size={16} className="opacity-60" aria-hidden="true" />
                     <span>Revise</span>
                 </Button>
             </DialogTrigger>
             <DialogContent className="sm:max-w-3xl">
                 <section >
+                    <DialogTitle></DialogTitle>
                     <span className=" font-semibold text-accent-foreground tracking-tighter">Provide Feedback for Revision</span>
                     <Label className=" text-sm text-muted-foreground mb-2">Changes requested:</Label>
                     <Textarea

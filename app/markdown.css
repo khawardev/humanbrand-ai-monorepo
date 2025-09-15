@@ -134,6 +134,13 @@
 .markdown-body ul li,
 .markdown-body ol li {
   margin-bottom: 1rem;
+  padding-left: 0.5rem;
+}
+
+.markdown-body ul li::marker,
+.markdown-body ol li::marker {
+  font-weight: bold;
+  margin-right: 0.25rem;
 }
 
 .markdown-body ul li:not(:has(input[type="checkbox"])) {

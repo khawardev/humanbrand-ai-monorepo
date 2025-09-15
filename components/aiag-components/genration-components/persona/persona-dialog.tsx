@@ -28,14 +28,15 @@ export function PersonaDialog({ isOpen, onOpenChange, setPersonasText, setUpload
 
     return (
         <Dialog open={isOpen} onOpenChange={onOpenChange}>
-            <DialogTrigger >
-                <Button size={'sm'} variant={'ghost'}>
+            <DialogTrigger asChild>
+                <Button  size={'sm'} variant={'ghost'}>
                     <RiUserSmileLine size={16} className="opacity-60" aria-hidden="true" />
                     <span>Persona</span>
                 </Button>
             </DialogTrigger>
             <DialogContent className="sm:max-w-3xl">
                 <section>
+                    <DialogTitle></DialogTitle>
                     <span className="font-semibold text-accent-foreground tracking-tighter">Adapt Content for Hyper Relevance</span>
                     <Label className="text-sm text-muted-foreground mb-2">Describe Target Persona(s):</Label>
                     <Textarea

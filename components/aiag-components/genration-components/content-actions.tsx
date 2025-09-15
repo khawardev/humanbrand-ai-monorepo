@@ -57,17 +57,17 @@ export function ContentActions({ content, handleRevise, feedback, setFeedback, s
             />
             <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                    <Button  size={'xs'}>
+                    <Button variant={'outline'}  size={'xs'}>
                         Actions <IoIosArrowDown />
                     </Button>
                 </DropdownMenuTrigger>
-                <DropdownMenuContent className="w-22" align="end">
+                <DropdownMenuContent  align="end">
                     <DropdownMenuItem onClick={handleCopy}>
-                        <Copy size={16} className="opacity-60 mr-2" aria-hidden="true" />
+                        <Copy size={16} className="opacity-60 mr-1" aria-hidden="true" />
                         <span>Copy</span>
                     </DropdownMenuItem>
                     <DropdownMenuItem onClick={handleDownloadTxt}>
-                        <Download size={16} className="opacity-60 mr-2" aria-hidden="true" />
+                        <Download size={16} className="opacity-60 mr-1" aria-hidden="true" />
                         <span>Download .txt</span>
                     </DropdownMenuItem>
                 </DropdownMenuContent>

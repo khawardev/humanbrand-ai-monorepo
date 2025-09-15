@@ -48,7 +48,7 @@ const UserMenu = ({ user }: any) => {
           await signOut();
           router.refresh();
         }}>
-          <LogOutIcon size={16} className="opacity-60 mr-2" />
+          <LogOutIcon size={16} className="opacity-60 mr-1" />
           <span>Logout</span>
         </DropdownMenuItem>
       </DropdownMenuContent>

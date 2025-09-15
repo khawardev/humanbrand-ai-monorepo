@@ -7,7 +7,7 @@ const apiOptions: LiveClientOptions = {
   apiKey: process.env.NEXT_PUBLIC_GOOGLE_GENERATIVE_AI_API_KEY!,
 };
 
-function Gemini_Live_AIAG({ user }: any) {
+function Gemini_Live_AIAG() {
   if (!apiOptions.apiKey) {
     console.error("Gemini API key is missing. Please set NEXT_PUBLIC_GOOGLE_GENERATIVE_AI_API_KEY in your .env.local file.");
     return (
