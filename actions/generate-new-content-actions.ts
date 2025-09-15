@@ -26,6 +26,7 @@ async function runGenerateText(model: any, system: string | undefined, prompt: s
 }
 
 export async function generateClaudeContent(prompt: string) {
+    const CLAUDE_API_KEY =  process.env.CLAUDE_API_KEY!;
     try {
         const formData = new FormData();
         formData.append("prompt", prompt);
@@ -33,7 +34,7 @@ export async function generateClaudeContent(prompt: string) {
         formData.append("temperature", "0.7");
         // formData.append("max_tokens", "300");
 
-        const res = await fetch(process.env.CLAUDE_API_KEY!, {
+        const res = await fetch(CLAUDE_API_KEY , {
             method: "POST",
             headers: { Accept: "application/json" },
             body: formData,
