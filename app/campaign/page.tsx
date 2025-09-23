@@ -174,9 +174,9 @@ export default function Home() {
                     <Textarea placeholder="Enter any specific requirements or instructions..."  />
                 </FormSection>
 
-                <FormSection title="Contextual Awareness (optional)">
+                {/* <FormSection title="Contextual Awareness (optional)">
                     <Textarea placeholder="Provide relevant background information or context..."  />
-                </FormSection>
+                </FormSection> */}
 
             </section>
         </main>
