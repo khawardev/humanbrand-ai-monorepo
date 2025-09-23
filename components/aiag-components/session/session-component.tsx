@@ -119,7 +119,7 @@ export function SessionPageComponent({ initialData, user }: any) {
                                     )}
 
                                     <AdditionalInstructionsSection title={'Additional Instructions (optional)'} value={additionalInstructions} onChange={setAdditionalInstructions} />
-                                    <ContextualAwarenessSection title={'Contextual Awareness (optional)'} value={contextualAwareness} onChange={setContextualAwareness} />
+                                    {/* <ContextualAwarenessSection title={'Contextual Awareness (optional)'} value={contextualAwareness} onChange={setContextualAwareness} /> */}
 
                                     <Generate
                                         isPending={isPending}
