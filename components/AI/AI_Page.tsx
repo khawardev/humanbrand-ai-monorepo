@@ -1,4 +1,5 @@
 "use client";
+
 import { ArrowRight, Bot, Check, ChevronDown, Speech, Download, Loader2 } from "lucide-react";
 import React, { useState, useRef, useEffect } from "react";
 import { Textarea } from "@/components/ui/textarea";
@@ -19,6 +20,7 @@ import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import Gemini_Live_AIAG from "@/components/gemini-live-api-components/gemini-live-app-shared/gemini-live-aiag";
 import { Skeleton } from "@/components/ui/skeleton";
+import RewriteInput from "./Rewrite-Input";
 
 interface AI_PromptProps {
     user: any;
@@ -33,11 +35,17 @@ export default function AI_Page({ user, initialChatHistory }: AI_PromptProps) {
     });
     const [selectedModel, setSelectedModel] = useState("AI Chat");
 
-    const { chatHistory, isResponding, handleSendMessage } = useKnowledgeBaseChat({ user, initialChatHistory });
+    const { chatHistory, isResponding, handleSendMessage, handleRewriteMessage } = useKnowledgeBaseChat({ user, initialChatHistory });
     const messagesEndRef = useRef<HTMLDivElement>(null);
 
     const [audioUrl, setAudioUrl] = useState<string | null>(null);
     const [isTTSLoading, setTTSLoading] = useState(false);
+
+    const [rewriteState, setRewriteState] = useState<{
+        text: string;
+        position: { top: number; left: number };
+        messageIndex: number;
+    } | null>(null);
 
     const AI_MODELS = ["AI Chat", "AI Ask", "Genrate TTS"];
     const MODEL_ICONS: Record<string, React.ReactNode> = {
@@ -46,12 +54,42 @@ export default function AI_Page({ user, initialChatHistory }: AI_PromptProps) {
         "Genrate TTS": <Speech />,
     };
 
-
     useEffect(() => {
         if (selectedModel === "AI Chat") {
             messagesEndRef.current?.scrollIntoView();
         }
     }, [chatHistory, isResponding, selectedModel]);
+
+    const handleSelection = (messageIndex: number) => {
+        const selection = window.getSelection();
+        const selectedText = selection?.toString().trim();
+
+        if (selectedText && selection) {
+            const range = selection.getRangeAt(0);
+            const rect = range.getBoundingClientRect();
+            setRewriteState({
+                text: selectedText,
+                position: {
+                    top: window.scrollY + rect.bottom + 8,
+                    left: window.scrollX + rect.left,
+                },
+                messageIndex: messageIndex,
+            });
+        }
+    };
+
+    const submitRewrite = async (rewritePrompt: string) => {
+        if (!rewriteState) return;
+
+        const { messageIndex, text: selectedText } = rewriteState;
+        const originalContent = chatHistory[messageIndex]?.content;
+
+        if (originalContent) {
+            await handleRewriteMessage(messageIndex, originalContent, selectedText, rewritePrompt);
+        }
+
+        setRewriteState(null);
+    };
 
     const generateAudio = async () => {
         if (!value.trim()) return;
@@ -93,7 +131,7 @@ export default function AI_Page({ user, initialChatHistory }: AI_PromptProps) {
         }
     };
 
-    const isTextareaDisabled = selectedModel === "AI Ask" || isResponding || isTTSLoading;
+    const isTextareaDisabled = selectedModel === "AI Ask" || isResponding || isTTSLoading || !!rewriteState;
     const isSendButtonDisabled = !value.trim() || isTextareaDisabled;
 
     const renderContent = () => {
@@ -101,6 +139,13 @@ export default function AI_Page({ user, initialChatHistory }: AI_PromptProps) {
             case "AI Chat":
                 return (
                     <div className="flex flex-col flex-1 overflow-y-auto space-y-4">
+                        {rewriteState && (
+                            <RewriteInput
+                                position={rewriteState.position}
+                                onSubmit={submitRewrite}
+                                onClose={() => setRewriteState(null)}
+                            />
+                        )}
                         {chatHistory.map((msg: any, index: any) => (
                             <div key={index} className="flex items-start gap-3 w-full">
                                 <Image
@@ -110,7 +155,10 @@ export default function AI_Page({ user, initialChatHistory }: AI_PromptProps) {
                                     height={36}
                                     className="w-9 h-9 rounded-md object-cover mt-1"
                                 />
-                                <div className={`w-full p-3 rounded-lg ${msg.role === 'user' ? 'bg-primary text-primary-foreground border' : 'bg-black/5 dark:bg-white/5 border'}`}>
+                                <div
+                                    className={`w-full p-3 rounded-lg ${msg.role === 'user' ? 'bg-primary text-primary-foreground border' : 'bg-black/5 dark:bg-white/5 border'}`}
+                                    onMouseUp={msg.role === 'assistant' ? () => handleSelection(index) : undefined}
+                                >
                                     <div className="markdown-body space-y-1 text-[15px]">
                                         <ReactMarkdown remarkPlugins={[remarkGfm]}>{msg.content}</ReactMarkdown>
                                     </div>
@@ -156,7 +204,7 @@ export default function AI_Page({ user, initialChatHistory }: AI_PromptProps) {
                                 <div className="space-y-3 ">
                                     <audio controls src={audioUrl} className="w-[400px]" />
                                     <a href={audioUrl} download="tts-output.wav">
-                                        <Button size={'xs'}  >
+                                        <Button size={'xs'} >
                                             Download
                                         </Button>
                                     </a>
@@ -179,9 +227,9 @@ export default function AI_Page({ user, initialChatHistory }: AI_PromptProps) {
                 <Textarea
                     id="ai-input-15"
                     value={value}
-                    placeholder={selectedModel === "AI Chat" ? "Chat with knowledge base..." : selectedModel === "Genrate TTS" ? "Enter text to generate audio..." : "Microphone is active for AI Ask"}
+                    placeholder={isTextareaDisabled ? "Please wait..." : selectedModel === "AI Chat" ? "Chat with knowledge base..." : selectedModel === "Genrate TTS" ? "Enter text to generate audio..." : "Microphone is active for AI Ask"}
                     className={cn(
-                        "w-full rounded-xl  rounded-b-none px-4 py-3 border-none resize-none focus-visible:ring-0 focus-visible:ring-offset-0",
+                        "w-full rounded-xl rounded-b-none px-4 py-3 border-none resize-none focus-visible:ring-0 focus-visible:ring-offset-0",
                         "min-h-[72px]"
                     )}
                     ref={textareaRef}

@@ -5,8 +5,7 @@ import { db } from "@/db"
 import { eq } from "drizzle-orm"
 import { generateNewContent } from "@/actions/generate-new-content-actions"
 import { knowledgeBaseChat } from './../db/schema/knowledge-base-chat-schema';
-import { getKnowledgeBaseSystemPrompt } from "@/lib/aiag/prompts"
-
+import { getKnowledgeBaseSystemPrompt, getRewriteSystemPrompt } from "@/lib/aiag/prompts"
 
 export async function getKnowledgeBaseChat(userId: string) {
     try {
@@ -49,11 +48,60 @@ export async function upsertKnowledgeBaseChat(userId: string, userInput: string,
                 set: { chatHistory: finalHistory, updatedAt: new Date() }
             });
 
-        revalidatePath("/knowledge-base-chat");
+        revalidatePath("/ai");
 
         return { success: true, newHistory: finalHistory };
     } catch (error) {
         console.error("Error updating knowledge base chat:", error);
         return { error: "Could not process your request." };
+    }
+}
+
+export async function rewriteAssistantMessage(
+    userId: string,
+    messageIndex: number,
+    originalContent: string,
+    selectedText: string,
+    rewritePrompt: string
+) {
+    try {
+        const systemPrompt = getRewriteSystemPrompt();
+        const userPrompt = `ORIGINAL CONTENT:\n"""\n${originalContent}\n"""\n\nSELECTED TEXT TO REWRITE:\n"""\n${selectedText}\n"""\n\nINSTRUCTIONS:\n"""\n${rewritePrompt}\n"""`;
+
+        const result = await generateNewContent({
+            modelAlias: 'recomended',
+            temperature: 0.5,
+            systemPrompt,
+            userPrompt,
+        });
+
+        if (!result.generatedText) {
+            throw new Error(result.errorReason || "Failed to generate rewritten content.");
+        }
+
+        const rewrittenSnippet = result.generatedText;
+        const newFullContent = originalContent.replace(selectedText, rewrittenSnippet);
+
+        const chat = await getKnowledgeBaseChat(userId);
+        const currentHistory:any = chat?.chatHistory || [];
+
+        const userRewriteMessage = { role: 'user', content: rewritePrompt };
+        const newAssistantMessage = { role: 'assistant', content: newFullContent };
+
+        const finalHistory = [...currentHistory, userRewriteMessage, newAssistantMessage];
+
+        await db.insert(knowledgeBaseChat)
+            .values({ userId, chatHistory: finalHistory })
+            .onConflictDoUpdate({
+                target: knowledgeBaseChat.userId,
+                set: { chatHistory: finalHistory, updatedAt: new Date() }
+            });
+
+        revalidatePath("/ai");
+
+        return { success: true, newHistory: finalHistory };
+    } catch (error) {
+        console.error("Error rewriting message:", error);
+        return { error: "Could not rewrite your message." };
     }
 }

@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { toast } from "sonner";
-import { upsertKnowledgeBaseChat } from "@/actions/knowledge-base-chat-actions";
+import { upsertKnowledgeBaseChat, rewriteAssistantMessage } from "@/actions/knowledge-base-chat-actions";
 
 export function useKnowledgeBaseChat(initialData: { user: any; initialChatHistory: any[] }) {
     const [user, setUser] = useState<any>(initialData.user);
@@ -39,10 +39,31 @@ export function useKnowledgeBaseChat(initialData: { user: any; initialChatHistor
         setIsResponding(false);
     };
 
+    const handleRewriteMessage = async (messageIndex: number, originalContent: string, selectedText: string, rewritePrompt: string) => {
+        if (!user) {
+            toast.error("Please log in to perform this action.");
+            return;
+        }
+        if (!rewritePrompt.trim() || isResponding) return;
+
+        setIsResponding(true);
+
+        const result = await rewriteAssistantMessage(user.id, messageIndex, originalContent, selectedText, rewritePrompt);
+
+        if (result.success && result.newHistory) {
+            setChatHistory(result.newHistory);
+        } else {
+            toast.error(result.error || "Failed to rewrite the message.");
+        }
+
+        setIsResponding(false);
+    };
+
     return {
         user,
         chatHistory,
         isResponding,
         handleSendMessage,
+        handleRewriteMessage,
     };
 }

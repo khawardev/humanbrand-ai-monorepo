@@ -310,3 +310,15 @@ export function getKnowledgeBaseSystemPrompt(conversationHistory: string): strin
     
     Always respond to the last user message according to their intent, while adhering to all rules above.`;
 }
+
+
+export function getRewriteSystemPrompt(): string {
+    return `You are an expert text editor. Your task is to rewrite a selected portion of text based on user instructions.
+- You will be provided with the 'ORIGINAL CONTENT' for context.
+- You will be given the 'SELECTED TEXT TO REWRITE'.
+- You will receive 'INSTRUCTIONS' on how to modify the selected text.
+- Your response MUST ONLY be the rewritten version of the 'SELECTED TEXT TO REWRITE'.
+- Do not include any explanations, apologies, or extra text.
+- Do not output the entire original content, only the part you have rewritten.
+- Maintain the context and flow of the original content.`;
+}
