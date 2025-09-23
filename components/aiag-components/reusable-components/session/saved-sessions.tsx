@@ -1,41 +1,40 @@
-import React from 'react'
-import {
-    DropdownMenu,
-    DropdownMenuContent,
-    DropdownMenuLabel,
-    DropdownMenuSeparator,
-    DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
+'use client'
+import React, { useState } from "react"
 import { Bookmark } from "lucide-react"
-import { Button } from '@/components/ui/button'
-import SessionsList from './sessions-list';
+import { Button } from "@/components/ui/button"
+import {
+    Sheet,
+    SheetContent,
+    SheetHeader,
+    SheetTitle,
+    SheetDescription,
+    SheetTrigger,
+} from "@/components/ui/sheet"
+import SessionsList from "./sessions-list"
 
 const SavedSessions = ({ savedSessions }: any) => {
+    const [isOpen, setIsOpen] = useState(false)
     return (
-        <DropdownMenu>
-            <DropdownMenuTrigger asChild>
+        <Sheet open={isOpen} onOpenChange={setIsOpen}>
+            <SheetTrigger asChild>
                 <Button variant="outline" size="icon">
                     <Bookmark />
                 </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="end">
-                <DropdownMenuLabel className="flex gap-2 items-center min-w-0">
-                    <div className="flex flex-col">
-                        <span className="text-foreground tracking-tight truncate text-sm font-medium">
-                            Saved Sessions
-                        </span>
-                        <span className="text-muted-foreground truncate text-xs font-normal">
-                            Your previously saved sessions.
-                        </span>
-                    </div>
-                </DropdownMenuLabel>
-                <DropdownMenuSeparator />
-                <section className="h-40 overflow-y-auto">
-                    <SessionsList savedSessions={savedSessions} />
+            </SheetTrigger>
+            <SheetContent side='left' className="w-80 ">
+                <SheetHeader>
+                    <SheetTitle></SheetTitle>
+                    <span className=" font-semibold tracking-tight">Saved Sessions</span>
+                    <SheetDescription>
+                        Your previously saved sessions.
+                    </SheetDescription>
+                </SheetHeader>
+                <section className="mt-4 overflow-y-auto">
+                    <SessionsList setIsOpen={setIsOpen} savedSessions={savedSessions} />
                 </section>
-            </DropdownMenuContent>
-        </DropdownMenu>
+            </SheetContent>
+        </Sheet>
     )
 }
 
-export default SavedSessions;
+export default SavedSessions

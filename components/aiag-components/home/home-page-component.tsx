@@ -42,7 +42,7 @@ export default function HomePageComponent() {
         <>
             <ModelsSection title={'HBAI Models'} selectedValue={selectedModel} onValueChange={setSelectedModel} />
             <AudienceSection title={'Audience(s)'} selectedValues={selectedAudiences} onSelectionChange={setSelectedAudiences} />
-            <SubjectSection title={'Subject focus'} selectedValue={selectedSubjects} onSelectionChange={setSelectedSubjects} />
+            <SubjectSection title={'Subject Focus'} selectedValue={selectedSubjects} onSelectionChange={setSelectedSubjects} />
             <ContentTypeSection title={'Content Type(s)'} selectedValues={selectedContentTypes} onSelectionChange={setSelectedContentTypes} />
             {isSocialPostSelected && (
                 <SocialPlatformSection title={'Social Platform'} selectedValue={selectedSocialPlatform} onSelectionChange={setSelectedSocialPlatform} />
@@ -54,7 +54,7 @@ export default function HomePageComponent() {
                 onFilesChange={handleReferenceFileChange}
             />
             <AdditionalInstructionsSection title={'Additional Instructions (optional)'} value={additionalInstructions} onChange={setAdditionalInstructions} />
-            <ContextualAwarenessSection title={'Contextual Awareness (optional)'} value={contextualAwareness} onChange={setContextualAwareness} />
+            {/* <ContextualAwarenessSection title={'Contextual Awareness (optional)'} value={contextualAwareness} onChange={setContextualAwareness} /> */}
 
             <Generate
                 isPending={isPending}

@@ -1,8 +1,8 @@
-import AI_Prompt from '@/components/ui/ai-prompt';
 import React from 'react';
 import { getUser } from "@/actions/users-actions";
 import { getKnowledgeBaseChat } from "@/actions/knowledge-base-chat-actions";
 import { redirect } from 'next/navigation';
+import AI_Page from '@/components/AI/AI_Page';
 
 const Page = async () => {
     const user = await getUser();
@@ -19,7 +19,7 @@ const Page = async () => {
     }
     return (
         <div className='div-center-md h-[90vh] '>
-            <AI_Prompt user={user} initialChatHistory={initialChatHistory} />
+            <AI_Page user={user} initialChatHistory={initialChatHistory} />
         </div>
     );
 };

@@ -242,11 +242,13 @@
     left: 0;
   }
 
-   .font-Inter {
+  .font-Inter {
     font-family: 'Inter', sans-serif !important;
   }
-.scrollbar-none::-webkit-scrollbar {
-  display: none;
-}
+
+  .scrollbar-none::-webkit-scrollbar {
+    display: none;
+  }
+
 
 }

@@ -79,12 +79,12 @@ export const contentTypes = [
     { id: 4, label: "Press Release", Icon: HiSpeakerphone, color: COLOR_PRIMARY },
     { id: 5, label: "Newsletter Article", Icon: FaBlog, color: COLOR_PRIMARY },
     { id: 6, label: "Video Script", Icon: MdMovie, color: COLOR_PRIMARY },
-    { id: 7, label: "Member Event", Icon: MdCalendarMonth, color: COLOR_PRIMARY },
+    // { id: 7, label: "Member Event", Icon: MdCalendarMonth, color: COLOR_PRIMARY },
     { id: 8, label: "Whitepaper", Icon: FaFileLines, color: COLOR_PRIMARY },
     { id: 9, label: "Executive Speech", Icon: FaMicrophone, color: COLOR_PRIMARY },
     { id: 10, label: "Thought Leadership Article", Icon: FaLightbulb, color: COLOR_PRIMARY },
     { id: 11, label: "Advertising Copy", Icon: MdSell, color: COLOR_PRIMARY },
-    { id: 12, label: "Website Copy Block", Icon: MdContentCopy, color: COLOR_PRIMARY },
+    { id: 12, label: "Website Landing Page", Icon: MdContentCopy, color: COLOR_PRIMARY },
 ];
 
 export const ctas = [
