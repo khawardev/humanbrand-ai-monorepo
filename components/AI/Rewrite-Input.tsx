@@ -66,7 +66,7 @@ export default function RewriteInput({ position, onSubmit, onClose }: RewriteInp
                         onChange={(e) => setPrompt(e.target.value)}
                         onKeyDown={handleKeyDown}
                         placeholder="e.g., Make this more formal..."
-                        className="h-20 w-full resize-none border-0 bg-transparent px-2 py-1 text-sm focus-visible:ring-0 focus-visible:ring-offset-0"
+                        className="h-20 w-full resize-none border-0 shadow-none bg-transparent px-2 py-1 text-sm focus-visible:ring-0 focus-visible:ring-offset-0"
                     />
                 </div>
                 
