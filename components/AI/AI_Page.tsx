@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowRight, Bot, Check, ChevronDown, Speech, Download, Loader2 } from "lucide-react";
+import { ArrowRight, Bot, Check, ChevronDown, Speech, Download, Loader2, Copy } from "lucide-react";
 import React, { useState, useRef, useEffect } from "react";
 import { Textarea } from "@/components/ui/textarea";
 import { cn } from "@/lib/utils";
@@ -21,6 +21,7 @@ import remarkGfm from "remark-gfm";
 import Gemini_Live_AIAG from "@/components/gemini-live-api-components/gemini-live-app-shared/gemini-live-aiag";
 import { Skeleton } from "@/components/ui/skeleton";
 import RewriteInput from "./Rewrite-Input";
+import { toast } from "sonner";
 
 interface AI_PromptProps {
     user: any;
@@ -133,6 +134,7 @@ export default function AI_Page({ user, initialChatHistory }: AI_PromptProps) {
 
     const isTextareaDisabled = selectedModel === "AI Ask" || isResponding || isTTSLoading || !!rewriteState;
     const isSendButtonDisabled = !value.trim() || isTextareaDisabled;
+    const [copiedIndex, setCopiedIndex] = useState<number | null>(null)
 
     const renderContent = () => {
         switch (selectedModel) {
@@ -147,7 +149,7 @@ export default function AI_Page({ user, initialChatHistory }: AI_PromptProps) {
                             />
                         )}
                         {chatHistory.map((msg: any, index: any) => (
-                            <div key={index} className="flex items-start gap-3 w-full">
+                            <div key={index} className="flex items-start gap-3 w-full group">
                                 <Image
                                     src={msg.role === 'user' ? (user?.image || '/default-user.png') : 'https://i.postimg.cc/ZYDgZQyF/aiag-logo.jpg'}
                                     alt={`${msg.role} avatar`}
@@ -156,13 +158,33 @@ export default function AI_Page({ user, initialChatHistory }: AI_PromptProps) {
                                     className="w-9 h-9 rounded-md object-cover mt-1"
                                 />
                                 <div
-                                    className={`w-full p-3 rounded-lg ${msg.role === 'user' ? 'bg-primary text-primary-foreground border' : 'bg-black/5 dark:bg-white/5 border'}`}
+                                    className={`relative w-full p-3 rounded-lg ${msg.role === 'user'
+                                        ? 'bg-primary text-primary-foreground border'
+                                        : 'bg-black/5 dark:bg-white/5 border'
+                                        }`}
                                     onMouseUp={msg.role === 'assistant' ? () => handleSelection(index) : undefined}
                                 >
                                     <div className="markdown-body space-y-1 text-[15px]">
                                         <ReactMarkdown remarkPlugins={[remarkGfm]}>{msg.content}</ReactMarkdown>
                                     </div>
                                 </div>
+                                <Button
+                                    size="icon"
+                                    variant="ghost"
+                                    onClick={() => {
+                                        navigator.clipboard.writeText(msg.content)
+                                        setCopiedIndex(index)
+                                        toast.success("Copied to clipboard")
+                                        setTimeout(() => setCopiedIndex(null), 1500)
+                                    }}
+                                    className="mt-2"
+                                >
+                                    {copiedIndex === index ? (
+                                        <Check className="w-3 h-3" />
+                                    ) : (
+                                        <Copy className="w-3 h-3" />
+                                    )}
+                                </Button>
                             </div>
                         ))}
                         {isResponding && (
