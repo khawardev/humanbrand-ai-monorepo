@@ -44,10 +44,7 @@ export default function RewriteInput({ position, onSubmit, onClose }: RewriteInp
     const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
         if (e.key === "Enter" && !e.shiftKey) {
             e.preventDefault();
-            if (prompt.trim()) {
-                onSubmit(prompt);
-            }
-            onClose()
+            handleSubmit(e as any);
         }
     };
 

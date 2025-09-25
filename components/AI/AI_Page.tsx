@@ -141,13 +141,31 @@ export default function AI_Page({ user, initialChatHistory }: AI_PromptProps) {
             case "AI Chat":
                 return (
                     <div className="flex flex-col flex-1 overflow-y-auto space-y-4">
-                        {rewriteState && (
-                            <RewriteInput
-                                position={rewriteState.position}
-                                onSubmit={submitRewrite}
-                                onClose={() => setRewriteState(null)}
-                            />
-                        )}
+                        <AnimatePresence>
+                            {rewriteState && (
+                                <motion.div
+                                    key="rewrite-modal"
+                                    className="fixed inset-0 flex items-center justify-center bg-black/40 z-50"
+                                    initial={{ opacity: 0 }}
+                                    animate={{ opacity: 1 }}
+                                    exit={{ opacity: 0 }}
+                                    transition={{ duration: 0.2 }}
+                                >
+                                    <motion.div
+                                        initial={{ opacity: 0, scale: 0.9 }}
+                                        animate={{ opacity: 1, scale: 1 }}
+                                        exit={{ opacity: 0, scale: 0.9 }}
+                                        transition={{ duration: 0.2, ease: "easeOut" }}
+                                    >
+                                        <RewriteInput
+                                            position={rewriteState.position}
+                                            onSubmit={submitRewrite}
+                                            onClose={() => setRewriteState(null)}
+                                        />
+                                    </motion.div>
+                                </motion.div>
+                            )}
+                        </AnimatePresence>
                         {chatHistory.map((msg: any, index: any) => (
                             <div key={index} className="flex items-start gap-3 w-full group">
                                 <Image
