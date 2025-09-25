@@ -155,7 +155,7 @@ export default function AI_Page({ user, initialChatHistory }: AI_PromptProps) {
                                     alt={`${msg.role} avatar`}
                                     width={36}
                                     height={36}
-                                    className="w-9 h-9 rounded-md object-cover mt-1"
+                                    className="w-8 h-8 rounded-sm border-2 object-cover mt-1"
                                 />
                                 <div
                                     className={`relative w-full p-3 rounded-lg ${msg.role === 'user'
