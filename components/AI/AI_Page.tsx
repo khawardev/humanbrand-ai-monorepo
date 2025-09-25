@@ -151,44 +151,50 @@ export default function AI_Page({ user, initialChatHistory }: AI_PromptProps) {
                         {chatHistory.map((msg: any, index: any) => (
                             <div key={index} className="flex items-start gap-3 w-full group">
                                 <Image
-                                    src={msg.role === 'user' ? (user?.image || '/default-user.png') : 'https://i.postimg.cc/ZYDgZQyF/aiag-logo.jpg'}
+                                    src={
+                                        msg.role === 'user'
+                                            ? (user?.image || '/default-user.png')
+                                            : 'https://i.postimg.cc/ZYDgZQyF/aiag-logo.jpg'
+                                    }
                                     alt={`${msg.role} avatar`}
                                     width={36}
                                     height={36}
-                                    className="w-8 h-8 rounded-sm border-2 object-cover mt-1"
+                                    className="w-9 h-9 rounded-md border-2 object-cover mt-1"
                                 />
+
                                 <div
-                                    className={`relative w-full p-3 rounded-lg ${msg.role === 'user'
-                                        ? 'bg-primary text-primary-foreground border'
-                                        : 'bg-black/5 dark:bg-white/5 border'
+                                    className={`relative w-full p-3 rounded-lg group ${msg.role === 'user'
+                                        ? 'bg-primary text-primary-foreground'
+                                        : 'bg-black/5 dark:bg-white/5'
                                         }`}
                                     onMouseUp={msg.role === 'assistant' ? () => handleSelection(index) : undefined}
                                 >
                                     <div className="markdown-body space-y-1 text-[15px]">
                                         <ReactMarkdown remarkPlugins={[remarkGfm]}>{msg.content}</ReactMarkdown>
                                     </div>
+
+                                    <Button
+                                        size="icon"
+                                        variant="ghost"
+                                        onClick={() => {
+                                            navigator.clipboard.writeText(msg.content)
+                                            setCopiedIndex(index)
+                                            toast.success("Copied to clipboard")
+                                            setTimeout(() => setCopiedIndex(null), 1500)
+                                        }}
+                                        className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity"
+                                    >
+                                        {copiedIndex === index ? (
+                                            <Check className="w-3 h-3" />
+                                        ) : (
+                                            <Copy className="w-3 h-3" />
+                                        )}
+                                    </Button>
                                 </div>
-                                <Button
-                                    size="icon"
-                                    variant="ghost"
-                                    onClick={() => {
-                                        navigator.clipboard.writeText(msg.content)
-                                        setCopiedIndex(index)
-                                        toast.success("Copied to clipboard")
-                                        setTimeout(() => setCopiedIndex(null), 1500)
-                                    }}
-                                    className="mt-2"
-                                >
-                                    {copiedIndex === index ? (
-                                        <Check className="w-3 h-3" />
-                                    ) : (
-                                        <Copy className="w-3 h-3" />
-                                    )}
-                                </Button>
                             </div>
                         ))}
                         {isResponding && (
-                            <div className="flex items-start gap-3 my-2">
+                            <div className="flex items-start gap-2 my-2">
                                 <Image src={'https://i.postimg.cc/ZYDgZQyF/aiag-logo.jpg'} alt="assistant avatar" width={36} height={36} className="w-9 h-9 rounded-md object-cover mt-1" />
                                 <div className='w-full space-y-2 px-2 rounded-lg'>
                                     <Skeleton className='w-[30%] h-4 bg-muted-foreground/20' />
@@ -262,13 +268,13 @@ export default function AI_Page({ user, initialChatHistory }: AI_PromptProps) {
                     }}
                     disabled={isTextareaDisabled}
                 />
-                <div className="h-14 bg-black/5 dark:bg-white/5 rounded-b-xl flex items-center px-3 ">
+                <div className="h-14 bg-input/20 border-none rounded-b-xl flex items-center px-3 ">
                     <div className="flex items-center justify-between w-full">
                         <DropdownMenu>
                             <DropdownMenuTrigger asChild>
                                 <Button
                                     variant="ghost"
-                                    className="flex items-center gap-1 h-8 pl-1 pr-2 text-xs rounded-md hover:bg-black/10 dark:hover:bg-white/10 focus-visible:ring-1 focus-visible:ring-offset-0 focus-visible:ring-blue-500"
+                                    className="flex items-center gap-1 h-8 px-3 text-xs rounded-md  focus-visible:ring-1 focus-visible:ring-offset-0 "
                                 >
                                     <AnimatePresence mode="wait">
                                         <motion.div
@@ -288,7 +294,7 @@ export default function AI_Page({ user, initialChatHistory }: AI_PromptProps) {
                             </DropdownMenuTrigger>
                             <DropdownMenuContent
                                 className={cn(
-                                    "min-w-[10rem]",
+                                    "min-w-[6rem]",
                                     "border-background/10 dark:border-white/10",
                                     "bg-gradient-to-b from-white via-white to-neutral-100 dark:from-background dark:via-neutral-900 dark:to-neutral-800"
                                 )}
