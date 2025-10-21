@@ -7,7 +7,7 @@ import {
     modelTabs,
 } from "@/config/form-data"
 import { Hero } from "@/components/aiag-components/reusable-components/hero"
-import React, { useState, useRef } from "react"
+import React, { useState, useRef, startTransition, useTransition } from "react"
 import { RadioCard } from "@/components/aiag-components/reusable-components/radio-card"
 import { CheckCircle2, Copy, Download } from "lucide-react"
 import { ReferenceMaterialSection } from "@/components/aiag-components/selection-components/ReferenceMaterialSection"
@@ -25,6 +25,7 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigge
 import { Button } from "@/components/ui/button"
 import { IoIosArrowDown } from "react-icons/io"
 import { toast } from "sonner"
+import { getUser } from "@/actions/users-actions"
 
 
 export default function Home() {
@@ -32,19 +33,19 @@ export default function Home() {
     const [selectedCampaignType, setSelectedCampaignType] = useState<number | null>(null)
     const [referenceFileInfos, setReferenceFileInfos] = useState<any[]>([])
     const [additionalInstructions, setAdditionalInstructions] = useState<string>("")
-    const [isPending, setIsPending] = useState<boolean>(false)
-    const [isGenerateDisabled, setIsGenerateDisabled] = useState<boolean>(false)
     const [referenceFilesData, setReferenceFilesData] = useState<string | null>(null)
     const [genratedContent, setGenratedContent] = useState<any>()
+    const [isPending, startTransition] = useTransition()
 
     const handleReferenceFileChange = ({ fileInfos, parsedText }: any) => {
         setReferenceFileInfos(fileInfos || []);
         setReferenceFilesData(parsedText || null);
     };
 
-    const handleGenerate = async () => {
-        setIsPending(true)
-        setIsGenerateDisabled(true)
+    const isDisabled = selectedCampaignType === null
+
+    const handleGenerate = () => {
+        if (isDisabled) return
 
         const selectedModelObj = modelTabs.find((tab) => tab.id === selectedModel)
         const selectedCampaign = campaignTypes.find((tab) => tab.id === selectedCampaignType)
@@ -54,20 +55,33 @@ export default function Home() {
             additionalInstructions,
             referenceFilesData,
         }
+
         const { systemPrompt, userPrompt } = getCampaignContentPrompts(data)
-        console.log("userPrompt:", userPrompt)
-        console.log("systemPrompt:", systemPrompt)
 
-        const generateData = { modelAlias: selectedModelObj?.label, temperature: 5, systemPrompt, userPrompt };
 
-        const generatedResult = await generateNewContent(generateData);
-        const cleanedMarkdown = cleanAndFlattenBulletsGoogle(generatedResult.generatedText);
-        setGenratedContent(cleanedMarkdown)
+        startTransition(async () => {
+            const user: any = await getUser()
+            if (!user) {
+                toast.warning('Please Login to continue')
+                return;
+            }
+            if (user?.adminVerified === false) {
+                toast.warning('Please wait for the Admin to Approve')
+                return;
+            }
 
-        setIsPending(false)
-        setIsGenerateDisabled(false)
+            const generateData = {
+                modelAlias: selectedModelObj?.label,
+                temperature: 5,
+                systemPrompt,
+                userPrompt
+            }
+
+            const generatedResult = await generateNewContent(generateData)
+            const cleanedMarkdown = cleanAndFlattenBulletsGoogle(generatedResult.generatedText)
+            setGenratedContent(cleanedMarkdown)
+        })
     }
-
     const formRef = useRef<HTMLDivElement>(null)
     const handleCopy = () => {
         navigator.clipboard.writeText(genratedContent);
@@ -156,7 +170,7 @@ export default function Home() {
                 <Generate
                     isPending={isPending}
                     onGenerate={handleGenerate}
-                    isDisabled={isGenerateDisabled}
+                    isDisabled={isDisabled}
                 />
 
                 {isPending && (

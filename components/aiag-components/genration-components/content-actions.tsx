@@ -8,8 +8,7 @@ import {
     DropdownMenuItem,
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Copy, Download, Stars } from "lucide-react";
-import { TfiLoop } from "react-icons/tfi";
+import { Copy, Download } from "lucide-react";
 import { IoIosArrowDown } from "react-icons/io";
 import { ReviseDialog } from "./revise-dialog";
 import { toast } from "sonner";
