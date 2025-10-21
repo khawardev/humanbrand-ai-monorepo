@@ -277,6 +277,7 @@ export function getCampaignContentPrompts(data: any) {
 
     const userPrompt = ` 
         Based on the user's instructions and the knowledge base, generate the content for the campaign Type [${data.selectedCampaign}] for the following platforms:
+        - Newsletter Articles (3x)
         - LinkedIn Posts (3x)
         - Facebook Posts (3x)
         - X (Twitter) Posts (3x)
