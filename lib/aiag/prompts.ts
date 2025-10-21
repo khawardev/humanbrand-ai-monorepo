@@ -286,6 +286,12 @@ export function getCampaignContentPrompts(data: any) {
         - Press Release + Media Kit (1x)
 
 
+    Instructions:
+    
+    Please do not include emojis
+    Please do not include em dashes.
+
+
     **User Uploaded Content:**\n${data.referenceFilesData || "*No content uploaded.*"}\n\n
     **Additional Instructions:**\n${data.additionalInstructions || "*No additional instructions provided.*"}\n\n
     **Knowledge Base Reference:**\n${knowledgeBaseContent || "*No KB content supplied.*"}
