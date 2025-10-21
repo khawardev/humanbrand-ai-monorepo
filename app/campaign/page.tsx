@@ -110,14 +110,14 @@ export default function Home() {
                 {selectedCampaignType && (
                     <FormSection title="Campaign Content">
                         <div className="space-y-6">
-                            <div className="border border-primary/30 rounded-lg p-3 bg-primary/30">
+                            <div className="border  rounded-lg p-3 bg-muted/30">
                                 <p className="flex items-center gap-2 text-lg font-semibold text-primary">
                                     <CheckCircle2 className="size-4 text-primary" />
                                     Newsletter Articles <span className="text-sm">(3x)</span>
                                 </p>
                             </div>
 
-                            <div className="border border-primary/30 rounded-lg p-3 bg-primary/30">
+                            <div className="border  rounded-lg p-3 bg-muted/30">
                                 <p className="flex items-center gap-2 text-lg font-semibold text-primary">
                                     <CheckCircle2 className="size-4 text-primary" />
                                     Social Media Posts
@@ -131,7 +131,7 @@ export default function Home() {
                                 </ul>
                             </div>
 
-                            <div className="border border-primary/30 rounded-lg p-3 bg-primary/30">
+                            <div className="border rounded-lg p-3 bg-muted/30">
                                 <p className="flex items-center gap-2 text-lg font-semibold text-primary">
                                     <CheckCircle2 className="size-4 text-primary" />
                                     Press Release + Media Kit (1x)
