@@ -28,7 +28,7 @@ const UserMenu = ({ user }: any) => {
           <AvatarFallback>{user.name?.slice(0, 1).toUpperCase()}</AvatarFallback>
         </Avatar>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="max-w-58" align="end">
+      <DropdownMenuContent className="max-w-28" align="end">
         <DropdownMenuLabel className="flex gap-2 items-center min-w-0 ">
           <Avatar className="border border-input">
             <AvatarImage src={user.image && user.image || `https://avatar.vercel.sh/${user.email}.png`} alt="Profile image" />
