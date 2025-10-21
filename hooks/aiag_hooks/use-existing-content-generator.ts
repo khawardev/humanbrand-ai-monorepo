@@ -23,6 +23,11 @@ export function useExistingContentGenerator() {
 
     const isGenerateDisabled = !referenceFilesData;
 
+    const handleReferenceFileChange = ({ fileInfos, parsedText }: any) => {
+        setReferenceFileInfos(fileInfos || []);
+        setReferenceFilesData(parsedText || null);
+    };
+
     const handleGenerate = () => {
         if (isGenerateDisabled) return;
 
@@ -55,10 +60,7 @@ export function useExistingContentGenerator() {
         });
     }
 
-    const handleReferenceFileChange = ({ fileInfos, parsedText }: any) => {
-        setReferenceFileInfos(fileInfos || []);
-        setReferenceFilesData(parsedText || null);
-    };
+   
 
     return {
         isPending,
@@ -73,3 +75,4 @@ export function useExistingContentGenerator() {
         handleGenerate,
     }
 }
+

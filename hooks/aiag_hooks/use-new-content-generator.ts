@@ -20,7 +20,6 @@ export function useNewContentGenerator() {
 
     const [referenceFileInfos, setReferenceFileInfos] = useState<any[] | null>([])
     const [referenceFilesData, setReferenceFilesData] = useState<string | null>(null)
-    console.log(referenceFilesData, `<-> referenceFileInfos <->`);
 
     const [additionalInstructions, setAdditionalInstructions] = useState("")
     const [contextualAwareness, setContextualAwareness] = useState("")

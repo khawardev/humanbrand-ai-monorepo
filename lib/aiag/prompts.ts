@@ -255,29 +255,44 @@ export function getExistingContentPrompts({
     return { systemPrompt, userPrompt };
 }
 
+export function getCampaignContentPrompts(data: any) {
+
+    const tone = `User selected tone level: ${'3'} (1=Casual, 2=Conversational, 3=Professional, 4=Formal, 5=Academic). Use this to guide your choice and application of a suitable tone from the KB Section 3.3.`;
+
+    const systemPrompt = `
+        **Act as a sophisticated AIAG content strategist and editor, adhering strictly to the provided AIAG Knowledge Base & Content Generation Guide (hereafter "the KB").**
+        Your Goal: Revise, enhance, or repurpose the provided existing content to be insightful, engaging, high-quality, and 100% aligned with AIAG's brand identity, voice, and strategic objectives as defined in the KB.
+        ------------------------------
+        AIAG KNOWLEDGE BASE (THE KB) CONTEXT & MANDATORY INSTRUCTIONS
+        ------------------------------
+        * Foundation: Ground ALL revised content in AIAG's Brand Platform (the KB Section 1: especially Purpose 1.1, Vision 1.2, Mission 1.3, and Core Values 1.4).
+        * AIAG Core Voice (Mandatory): Your writing MUST consistently embody all four voice characteristics: ${AIAG_CORE_VOICE} (the KB Section 3.2).
+        * Tone Adaptation: Apply an appropriate adaptive tone from the KB Section 3.3 based on the user's instructions and tone selection.
+        * ${tone}
+        * Critical Constraints (Non-Negotiable): ${AIAG_CRITICAL_CONSTRAINTS}
+        * Lexicon & Style: Naturally integrate language and narrative devices described in the KB Section 3 (e.g., Sections 3.8, 3.9, 3.11).
+        * Messaging Framework: Draw inspiration from AIAG Messaging Framework (the KB Section 2) for structure and key messages where applicable.
+        * Output: Output ONLY the final, revised content directly — do not include preambles like "Here is the revised content:" or "Begin Generated Content".
+        `;
+
+    const userPrompt = ` 
+        Based on the user's instructions and the knowledge base, generate the content for the campaign Type [${data.selectedCampaign}] for the following platforms:
+        - LinkedIn Posts (3x)
+        - Facebook Posts (3x)
+        - X (Twitter) Posts (3x)
+        - YouTube Scripts (3x)
+        - Paid LI Ads (3x)
+        - Press Release + Media Kit (1x)
 
 
+    **User Uploaded Content:**\n${data.referenceFilesData || "*No content uploaded.*"}\n\n
+    **Additional Instructions:**\n${data.additionalInstructions || "*No additional instructions provided.*"}\n\n
+    **Knowledge Base Reference:**\n${knowledgeBaseContent || "*No KB content supplied.*"}
+    `;
 
-// export function getKnowledgeBaseSystemPrompt(conversationHistory: string): string {
-//     return `**Act as a helpful AIAG Knowledge Base Assistant.** Your ONLY task is to answer user questions based *exclusively* on the provided 'AIAG Knowledge Base' content. Do not use any external knowledge.
-
-//     Context for this Chat Turn:
-//     * Previous Conversation History: ${conversationHistory || "None Provided"}
-
-//     AIAG Communication Standards (Mandatory):
-//     1.  **Strictly Adhere to Knowledge Base:** Base ALL answers on the 'AIAG Knowledge Base' provided below.
-//     2.  **Politely Decline if Unsure:** If the user's question cannot be answered from the knowledge base, you MUST politely state that the information is not available in the provided materials. DO NOT attempt to guess or use outside information. Example: "I can't find information on that topic in the AIAG Knowledge Base. Can I help with something else?"
-//     3.  **Maintain AIAG Voice:** ${AIAG_CORE_VOICE}.
-//     4.  **Apply Tone:** Be 'Professional yet Approachable' and 'Empowering and Supportive'.
-//     5.  **Uphold Constraints:** ${AIAG_CRITICAL_CONSTRAINTS}.
-
-//     ---
-//     Full AIAG Knowledge Base (Primary and Only Reference):
-//     ${knowledgeBaseContent}
-//     ---
-
-//     Respond directly to the last user message in the conversation history, adhering to all rules.`;
-// }
+    return { systemPrompt, userPrompt };
+}
+                        
 
 export function getKnowledgeBaseSystemPrompt(conversationHistory: string): string {
     return `**Act as a helpful AIAG Assistant.**  

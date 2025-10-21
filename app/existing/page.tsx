@@ -18,9 +18,6 @@ export default function ExistingContentPage() {
     referenceFileInfos,
     handleReferenceFileChange,
     additionalInstructions, setAdditionalInstructions,
-    contextualAwareness, setContextualAwareness,
-    toneValue, setToneValue,
-    creativityValue, setCreativityValue,
     isGenerateDisabled,
     handleGenerate,
   } = useExistingContentGenerator()
@@ -36,7 +33,6 @@ export default function ExistingContentPage() {
           onFilesChange={handleReferenceFileChange}
         />
         <AdditionalInstructionsSection title={'Additional Instructions (optional)'} value={additionalInstructions} onChange={setAdditionalInstructions} />
-        {/* <ContextualAwarenessSection title={'Contextual Awareness (optional)'} value={contextualAwareness} onChange={setContextualAwareness} /> */}
 
         <Generate
           isPending={isPending}

@@ -7,7 +7,7 @@ import { getNewGenerationPrompts, getImageGenerationPrompt, getRevisionPrompts, 
 import { generateNewContent, generateSessionTitle } from "@/actions/generate-new-content-actions"
 import { cleanAndFlattenBulletsGoogle } from "@/lib/cleanMarkdown"
 import { knowledgeBaseContent } from "@/lib/aiag/knowledge_base"
-import { modelTabs, audiences, subjects, contentTypes, ctas, socialPlatforms } from "@/config/form-data"
+import { modelTabs, audiences, subjects, contentTypes, ctas, socialPlatforms, adjustToneAndCreativityData } from "@/config/form-data"
 import { savedSession } from "@/db/schema/saved-session-schema"
 
 
@@ -122,6 +122,56 @@ export async function createExistingContentSession(data: any) {
 
         revalidatePath(`/session/${sessionId}`);
         return { sessionId };
+
+    } catch (error) {
+        console.error("Error creating existing content session:", error);
+        return { error: "Could not create session from existing content." };
+    }
+}
+
+export async function createCampaignContentSession(data: any) {
+    try {
+        const selectedModelObj = modelTabs.find((tab) => tab.id === data.modelId);
+
+        const promptData = {
+            userUploadedContent: data.referenceFilesData || '',
+            additionalInstructions: data.additionalInstructions || '',
+            contextualAwareness: data.contextualAwareness || '',
+            knowledgeBaseContent: knowledgeBaseContent,
+            selectedtone: adjustToneAndCreativityData.tone.defaultValue,
+        };
+
+        const { systemPrompt, userPrompt } = getExistingContentPrompts(promptData);
+        const generateData = { modelAlias: selectedModelObj?.label, temperature: data.temperature, systemPrompt, userPrompt };
+
+        const generatedResult = await generateNewContent(generateData);
+        const cleanedMarkdown = cleanAndFlattenBulletsGoogle(generatedResult.generatedText);
+
+        // const titleResult = await generateSessionTitle({ modelAlias: selectedModelObj?.label, temperature: data.temperature, userPrompt: cleanedMarkdown });
+        // const imagePromptResult = await generateNewContent({ modelAlias: selectedModelObj?.label, temperature: data.temperature, userPrompt: getImageGenerationPrompt({ contentGenerated: cleanedMarkdown }).finalImagePrompt });
+
+        // const sessionPayload = {
+        //     userId: data.userId,
+        //     sessionType: data.sessionType,
+        //     title: titleResult.generatedText,
+        //     modelId: data.modelId,
+        //     referenceFileInfos: data.referenceFileInfos,
+        //     referenceFilesData: data.referenceFilesData,
+        //     additionalInstructions: data.additionalInstructions,
+        //     contextualAwareness: data.contextualAwareness,
+        //     tone: data.tone,
+        //     temperature: data.temperature,
+        //     generatedContent: cleanedMarkdown,
+        //     imagePrompt: imagePromptResult.generatedText,
+        // };
+
+        // const newSession = await db.insert(savedSession).values(sessionPayload).returning({ id: savedSession.id });
+
+        // const sessionId = newSession[0].id;
+        // if (!sessionId) throw new Error("Failed to create existing content session.");
+
+        // revalidatePath(`/session/${sessionId}`);
+        return cleanedMarkdown;
 
     } catch (error) {
         console.error("Error creating existing content session:", error);

@@ -45,6 +45,7 @@ import {
     BadgeDollarSign, 
     Megaphone        
 } from "lucide-react";
+import { TbRouteAltLeft } from "react-icons/tb";
 
 export const modelTabs = [
     { id: 1, label: 'recomended', title: "Core", tooltip: "Best for most content" },
@@ -114,6 +115,7 @@ export const campaignTypes = [
     { id: 2, label: "Product or Service Launch", Icon: MdRocketLaunch, color: COLOR_PRIMARY },
     { id: 3, label: "Training", Icon: MdSchool, color: COLOR_PRIMARY },
     { id: 4, label: "Webinar", Icon: MdOndemandVideo, color: COLOR_PRIMARY },
+    { id: 5, label: "Other", Icon: TbRouteAltLeft, color: COLOR_PRIMARY },
 ];
 export const campaignContent = [
     { id: 1, label: "Newsletter Articles", Icon: Newspaper, color: COLOR_PRIMARY },

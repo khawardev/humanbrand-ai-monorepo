@@ -1,101 +1,94 @@
 'use client'
 
-import { CheckboxCard } from "@/components/aiag-components/reusable-components/checkbox-card"
 import { FormSection } from "@/components/aiag-components/reusable-components/form-section"
 import { ModelsTabs } from "@/components/aiag-components/reusable-components/models-tabs"
-import { campaignContent, campaignElementsData, campaignTypes, audiences, subjects, contentTypes, ctas, modelTabs, socialPlatforms, campaignSocialPlatforms } from "@/config/form-data"
+import {
+    campaignTypes,
+    modelTabs,
+} from "@/config/form-data"
 import { Hero } from "@/components/aiag-components/reusable-components/hero"
-import React, { useState, useEffect, useRef } from "react"
+import React, { useState, useRef } from "react"
 import { RadioCard } from "@/components/aiag-components/reusable-components/radio-card"
-import { Textarea } from "@/components/ui/textarea"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { cn } from "@/lib/utils"
-import { SocialPlatformSection } from "@/components/aiag-components/selection-components/SocialPlatformSection"
-import AdminMailAlert from "@/components/aiag-components/admin-mail-alert"
-import { Alert, AlertTitle } from "@/components/ui/alert"
-import { MdOutlineMailLock } from "react-icons/md"
-import { VscDebugConsole } from "react-icons/vsc";
+import { CheckCircle2, Copy, Download } from "lucide-react"
+import { ReferenceMaterialSection } from "@/components/aiag-components/selection-components/ReferenceMaterialSection"
+import { AdditionalInstructionsSection } from "@/components/aiag-components/selection-components/AdditionalInstructionsSection"
+import { Generate } from "@/components/aiag-components/reusable-components/generate"
+import { LineSpinner } from "@/shared/spinner"
+import { Separator } from "@/components/ui/separator"
+import { getCampaignContentPrompts } from "@/lib/aiag/prompts"
+import { generateNewContent } from "@/actions/generate-new-content-actions"
+import { cleanAndFlattenBulletsGoogle } from "@/lib/cleanMarkdown"
+import { AIAG_VERSION } from "@/lib/aiag/constants"
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
+import { Button } from "@/components/ui/button"
+import { IoIosArrowDown } from "react-icons/io"
+import { toast } from "sonner"
+
 
 export default function Home() {
     const [selectedModel, setSelectedModel] = useState<number>(modelTabs[0].id)
-    const [selectedAudiences, setSelectedAudiences] = useState<number[]>([])
-    const [selectedSubjects, setSelectedSubjects] = useState<number | null>(null)
     const [selectedCampaignType, setSelectedCampaignType] = useState<number | null>(null)
-    const [selectedCampaignContent, setSelectedCampaignContent] = useState<number | null>(null)
-    const [selectedCampaignSocial, setSelectedCampaignSocial] = useState<number | null>(null)
-    const [selectedContentTypes, setSelectedContentTypes] = useState<number[]>([])
-    const [selectedCtas, setSelectedCtas] = useState<number[]>([])
-    const [selectedSocialPlatform, setSelectedSocialPlatform] = useState<number | null>(null)
-    const [uploadedPdfs, setUploadedPdfs] = useState<File[]>([]);
-    const [generatingContent, setgeneratingContent] = useState(false);
-    const [referenceMaterial, setReferenceMaterial] = useState<string>()
+    const [referenceFileInfos, setReferenceFileInfos] = useState<any[]>([])
+    const [additionalInstructions, setAdditionalInstructions] = useState<string>("")
+    const [isPending, setIsPending] = useState<boolean>(false)
+    const [isGenerateDisabled, setIsGenerateDisabled] = useState<boolean>(false)
+    const [referenceFilesData, setReferenceFilesData] = useState<string | null>(null)
+    const [genratedContent, setGenratedContent] = useState<any>()
 
-    const socialPostContentTypeId = campaignContent.find(
-        (type) => type.label === "Social Media Posts"
-    )?.id
+    const handleReferenceFileChange = ({ fileInfos, parsedText }: any) => {
+        setReferenceFileInfos(fileInfos || []);
+        setReferenceFilesData(parsedText || null);
+    };
 
-    const isSocialPostSelected = selectedCampaignContent === socialPostContentTypeId;
+    const handleGenerate = async () => {
+        setIsPending(true)
+        setIsGenerateDisabled(true)
 
-    useEffect(() => {
-        if (!isSocialPostSelected) {
-            setSelectedSocialPlatform(null)
-        }
-    }, [isSocialPostSelected])
-
-
-    const handleGenerate = () => {
         const selectedModelObj = modelTabs.find((tab) => tab.id === selectedModel)
-
-        const selectedAudienceLabels = audiences
-            .filter((audience: any) => selectedAudiences.includes(audience.id))
-            .map((audience: any) => audience.label)
-
-        const selectedSubjectObj = subjects.find((subject) => subject.id === selectedSubjects)
-
-        const selectedContentTypeLabels = contentTypes
-            .filter((contentType) => selectedContentTypes.includes(contentType.id))
-            .map((contentType) => contentType.label)
-
-        const selectedCtaLabels = ctas
-            .filter((cta) => selectedCtas.includes(cta.id))
-            .map((cta) => cta.label)
-
-        const selectedSocialPlatformObj = socialPlatforms.find(
-            (platform) => platform.id === selectedSocialPlatform
-        )
+        const selectedCampaign = campaignTypes.find((tab) => tab.id === selectedCampaignType)
 
         const data = {
-            selectedModel: selectedModelObj?.label || "",
-            selectedAudiences: selectedAudienceLabels,
-            selectedSubject: selectedSubjectObj?.label || "",
-            selectedContentTypes: selectedContentTypeLabels,
-            selectedCtas: selectedCtaLabels,
-            selectedSocialPlatform: selectedSocialPlatformObj?.label || "",
+            selectedCampaign: selectedCampaign?.label || "",
+            additionalInstructions,
+            referenceFilesData,
         }
+        const { systemPrompt, userPrompt } = getCampaignContentPrompts(data)
+        console.log("userPrompt:", userPrompt)
+        console.log("systemPrompt:", systemPrompt)
 
-        console.log(data)
+        const generateData = { modelAlias: selectedModelObj?.label, temperature: 5, systemPrompt, userPrompt };
+
+        const generatedResult = await generateNewContent(generateData);
+        const cleanedMarkdown = cleanAndFlattenBulletsGoogle(generatedResult.generatedText);
+        setGenratedContent(cleanedMarkdown)
+
+        setIsPending(false)
+        setIsGenerateDisabled(false)
     }
 
-    const handleSaveDraft = () => {
-        console.log("Draft saved!")
-    }
+    const formRef = useRef<HTMLDivElement>(null)
+    const handleCopy = () => {
+        navigator.clipboard.writeText(genratedContent);
+        toast.success("Content copied to clipboard!");
+    };
 
-    const formRef = useRef<HTMLDivElement>(null);
-
-    const handleScrollToForm = () => {
-        formRef.current?.scrollIntoView({ behavior: 'smooth' });
+    const handleDownloadTxt = () => {
+        const blob = new Blob([genratedContent], { type: "text/plain" });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = "AIAG_generatedContent.txt";
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
     };
     return (
         <main className="overflow-hidden">
             <Hero />
-            <div className="div-center-md" >
-                <Alert variant={'destructive'}>
-                    <VscDebugConsole />
-                    <AlertTitle>Campaign Page is Under Development</AlertTitle>
-                </Alert>
-            </div>
             <section className="div-center-md">
-
                 <div id="form-start" ref={formRef}>
                     <FormSection title="HBAI Models">
                         <ModelsTabs
@@ -105,6 +98,7 @@ export default function Home() {
                         />
                     </FormSection>
                 </div>
+
                 <FormSection title="Campaign Type(s)">
                     <RadioCard
                         options={campaignTypes}
@@ -112,72 +106,98 @@ export default function Home() {
                         onSelectionChange={setSelectedCampaignType}
                     />
                 </FormSection>
-                <FormSection title="Campaign Content">
-                    <RadioCard
-                        options={campaignContent}
-                        selectedValue={selectedCampaignContent}
-                        onSelectionChange={setSelectedCampaignContent}
-                    />
-                </FormSection>
-                {isSocialPostSelected && (
-                    <FormSection title="Social Platforms">
-                        <RadioCard
-                            options={campaignSocialPlatforms}
-                            selectedValue={selectedCampaignSocial}
-                            onSelectionChange={setSelectedCampaignSocial}
-                        />
+
+                {selectedCampaignType && (
+                    <FormSection title="Campaign Content">
+                        <div className="space-y-6">
+                            <div className="border border-primary/30 rounded-lg p-3 bg-primary/30">
+                                <p className="flex items-center gap-2 text-lg font-semibold text-primary">
+                                    <CheckCircle2 className="size-4 text-primary" />
+                                    Newsletter Articles <span className="text-sm">(3x)</span>
+                                </p>
+                            </div>
+
+                            <div className="border border-primary/30 rounded-lg p-3 bg-primary/30">
+                                <p className="flex items-center gap-2 text-lg font-semibold text-primary">
+                                    <CheckCircle2 className="size-4 text-primary" />
+                                    Social Media Posts
+                                </p>
+                                <ul className="mt-3 ml-6 list-disc text-sm space-y-1">
+                                    <li>LinkedIn Posts (3x)</li>
+                                    <li>Facebook Posts (3x)</li>
+                                    <li>X (Twitter) Posts (3x)</li>
+                                    <li>YouTube Scripts (3x)</li>
+                                    <li>Paid LI Ads (3x)</li>
+                                </ul>
+                            </div>
+
+                            <div className="border border-primary/30 rounded-lg p-3 bg-primary/30">
+                                <p className="flex items-center gap-2 text-lg font-semibold text-primary">
+                                    <CheckCircle2 className="size-4 text-primary" />
+                                    Press Release + Media Kit (1x)
+                                </p>
+                            </div>
+                        </div>
                     </FormSection>
                 )}
-                <FormSection title="Audience(s)">
-                    <CheckboxCard
-                        options={audiences}
-                        selectedValues={selectedAudiences}
-                        onSelectionChange={setSelectedAudiences}
-                    />
-                </FormSection>
 
-                <FormSection title="Subject focus">
-                    <RadioCard
-                        options={subjects}
-                        selectedValue={selectedSubjects}
-                        onSelectionChange={setSelectedSubjects}
-                    />
-                </FormSection>
+                <ReferenceMaterialSection
+                    title="Reference Material"
+                    initialFileInfos={referenceFileInfos}
+                    onFilesChange={handleReferenceFileChange}
+                />
 
+                <AdditionalInstructionsSection
+                    title="Additional Instructions (optional)"
+                    value={additionalInstructions}
+                    onChange={setAdditionalInstructions}
+                />
 
-                <FormSection title="Campaign Elements">
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                        {campaignElementsData.map((typeId: any) => {
-                            return (
-                                <Card key={typeId.title}>
-                                    <CardHeader>
-                                        <CardTitle>{typeId.title}</CardTitle>
-                                    </CardHeader>
-                                    <CardContent>
-                                        <ul className="space-y-2 text-sm text-muted-foreground">
-                                            {typeId.elements.map((item: any, index: any) => (
-                                                <li key={index} className={cn(item.startsWith("  ") && "pl-4")}>
-                                                    {item.trim()}
-                                                </li>
-                                            ))}
-                                        </ul>
-                                    </CardContent>
-                                </Card>
-                            )
-                        })}
-                    </div>
-                </FormSection>
+                <Generate
+                    isPending={isPending}
+                    onGenerate={handleGenerate}
+                    isDisabled={isGenerateDisabled}
+                />
 
+                {isPending && (
+                    <>
+                        <Separator className="my-6" />
+                        <LineSpinner>Generating Content...</LineSpinner>
+                    </>
+                )}
 
-
-                <FormSection title="Additional Instructions (optional)">
-                    <Textarea placeholder="Enter any specific requirements or instructions..."  />
-                </FormSection>
-
-                {/* <FormSection title="Contextual Awareness (optional)">
-                    <Textarea placeholder="Provide relevant background information or context..."  />
-                </FormSection> */}
-
+                {genratedContent &&
+                    <section>
+                        <div>
+                            <div className={"md:flex md:space-y-0 space-y-3 md:items-center items-end justify-between mb-4"}>
+                                <h4>AIAG - Campaign Content Generation Details ({AIAG_VERSION})</h4>
+                                <div className=" flex justify-end ">
+                                    <DropdownMenu>
+                                        <DropdownMenuTrigger asChild>
+                                            <Button variant={'ghost'} size={'sm'}>
+                                                Actions <IoIosArrowDown />
+                                            </Button>
+                                        </DropdownMenuTrigger>
+                                        <DropdownMenuContent align="end">
+                                            <DropdownMenuItem onClick={handleCopy}>
+                                                <Copy size={16} className="opacity-60 mr-1" aria-hidden="true" />
+                                                <span>Copy</span>
+                                            </DropdownMenuItem>
+                                            <DropdownMenuItem onClick={handleDownloadTxt}>
+                                                <Download size={16} className="opacity-60 mr-1" aria-hidden="true" />
+                                                <span>Download .txt</span>
+                                            </DropdownMenuItem>
+                                        </DropdownMenuContent>
+                                    </DropdownMenu>
+                                </div>
+                            </div>
+                            <Separator className="mb-4" />
+                        </div>
+                        <div className="prose prose-neutral max-w-none markdown-body space-y-3 dark:prose-invert">
+                            <ReactMarkdown remarkPlugins={[remarkGfm]}>{genratedContent}</ReactMarkdown>
+                        </div>
+                    </section>
+                }
             </section>
         </main>
     )

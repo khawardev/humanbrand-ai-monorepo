@@ -1,5 +1,3 @@
-
-
 'use client'
 
 import React from "react"
@@ -14,7 +12,6 @@ import { SocialPlatformSection } from "@/components/aiag-components/selection-co
 import { CtaSection } from "@/components/aiag-components/selection-components/CtaSection"
 import { ReferenceMaterialSection } from "@/components/aiag-components/selection-components/ReferenceMaterialSection"
 import { AdditionalInstructionsSection } from "@/components/aiag-components/selection-components/AdditionalInstructionsSection"
-import { ContextualAwarenessSection } from "@/components/aiag-components/selection-components/ContextualAwarenessSection"
 import { useNewContentGenerator } from "@/hooks/aiag_hooks/use-new-content-generator"
 
 
@@ -31,9 +28,6 @@ export default function HomePageComponent() {
         referenceFileInfos,
         handleReferenceFileChange,
         additionalInstructions, setAdditionalInstructions,
-        contextualAwareness, setContextualAwareness,
-        toneValue, setToneValue,
-        creativityValue, setCreativityValue,
         isGenerateDisabled,
         handleGenerate,
     } = useNewContentGenerator()
@@ -54,7 +48,6 @@ export default function HomePageComponent() {
                 onFilesChange={handleReferenceFileChange}
             />
             <AdditionalInstructionsSection title={'Additional Instructions (optional)'} value={additionalInstructions} onChange={setAdditionalInstructions} />
-            {/* <ContextualAwarenessSection title={'Contextual Awareness (optional)'} value={contextualAwareness} onChange={setContextualAwareness} /> */}
 
             <Generate
                 isPending={isPending}
@@ -65,7 +58,7 @@ export default function HomePageComponent() {
             {isPending && (
                 <>
                     <Separator />
-                    < LineSpinner > Generating Content...</LineSpinner>
+                    <LineSpinner > Generating Content...</LineSpinner>
                 </>
             )}
         </>
