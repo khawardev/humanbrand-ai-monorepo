@@ -28,11 +28,14 @@ export default function ExistingContentPage() {
       <section className="div-center-md">
         <ModelsSection title={'HBAI Models'} selectedValue={selectedModel} onValueChange={setSelectedModel} />
         <ReferenceMaterialSection
-          title={'Existing Content'}
+          title={'Upload Document(s)'}
           initialFileInfos={referenceFileInfos}
           onFilesChange={handleReferenceFileChange}
         />
-        <AdditionalInstructionsSection title={'Additional Instructions (optional)'} value={additionalInstructions} onChange={setAdditionalInstructions} />
+        <div className=" text-center text-lg text-muted-foreground">
+          <p>AND / OR</p>
+        </div>
+        <AdditionalInstructionsSection title={'Write / Paste Additional Content'} value={additionalInstructions} onChange={setAdditionalInstructions} />
 
         <Generate
           isPending={isPending}

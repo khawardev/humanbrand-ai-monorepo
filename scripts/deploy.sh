@@ -11,8 +11,9 @@ sudo chown -R ubuntu:ubuntu "$APP_DIR"
 sudo fuser -k 3000/tcp || true
 
 # Install dependencies and build
-npm install
-npm run build || { echo "Build failed"; exit 1; }
+npm install -g pnpm
+pnpm install
+pnpm run build || { echo "Build failed"; exit 1; }
 
 # Create or update Systemd service file
 cat << EOF | sudo tee /etc/systemd/system/aiagcam.service

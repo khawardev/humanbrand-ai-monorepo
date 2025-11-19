@@ -21,7 +21,7 @@ export function useExistingContentGenerator() {
     const [toneValue, setToneValue] = useState<number>(adjustToneAndCreativityData.tone.defaultValue)
     const [creativityValue, setCreativityValue] = useState<number>(adjustToneAndCreativityData.creativity.defaultValue)
 
-    const isGenerateDisabled = !referenceFilesData;
+    const isGenerateDisabled = !referenceFilesData && !additionalInstructions.trim();
 
     const handleReferenceFileChange = ({ fileInfos, parsedText }: any) => {
         setReferenceFileInfos(fileInfos || []);
@@ -60,7 +60,7 @@ export function useExistingContentGenerator() {
         });
     }
 
-   
+
 
     return {
         isPending,

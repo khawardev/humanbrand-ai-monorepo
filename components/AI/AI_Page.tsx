@@ -159,6 +159,7 @@ export default function AI_Page({ user, initialChatHistory }: AI_PromptProps) {
                                     >
                                         <RewriteInput
                                             position={rewriteState.position}
+                                            selectedText={rewriteState.text}
                                             onSubmit={submitRewrite}
                                             onClose={() => setRewriteState(null)}
                                         />

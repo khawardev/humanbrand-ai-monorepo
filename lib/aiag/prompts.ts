@@ -40,7 +40,7 @@ export function getNewGenerationPrompts({
                           ------------------------------
                           CRITICAL FORMATTING RULES
                           ------------------------------
-                          * Always format em dashes (—) with a space before and after (e.g., "word — word").
+                          
                           * Always include a space after colons in lists (e.g., "Tools: Whether you need..." not "Tools:Whether you need..."). `;
 
     const userPrompt = `  ---------------------------------
@@ -225,7 +225,15 @@ export function getExistingContentPrompts({
                           * Critical Constraints (Non-Negotiable): ${AIAG_CRITICAL_CONSTRAINTS}
                           * Lexicon & Style: Naturally integrate language and narrative devices described in the KB Section 3 (e.g., Sections 3.8, 3.9, 3.11).
                           * Messaging Framework: Draw inspiration from AIAG Messaging Framework (the KB Section 2) for structure and key messages where applicable.
-                          * Output: Output ONLY the final, revised content, directly. Do not include preambles like "Here is the revised content:" or "Begin Generated Content".`;
+                          * Output: Output ONLY the final, revised content, directly. Do not include preambles like "Here is the revised content:" or "Begin Generated Content".
+                          * 
+                          - IMPORTANT!! PLEASE DO NOT USE EMOJIS IN THE RESPONSE
+                          
+                           - IMPORTANT!! PLEASE DO NOT USE EMOJIS IN THE RESPONSE
+                           - IMPORTANT!! PLEASE DO NOT USE EMOJIS IN THE RESPONSE
+                           - IMPORTANT!! PLEASE DO NOT USE EMOJIS IN THE RESPONSE
+                           - IMPORTANT!! PLEASE DO NOT USE EMOJIS IN THE RESPONSE
+                           `;
 
     const userPrompt = `---------------------------------
                           PARAMETERS FOR THIS REVISION TASK
@@ -288,9 +296,8 @@ export function getCampaignContentPrompts(data: any) {
 
     Instructions:
     
-    Please do not include emojis
-    Please do not include em dashes.
-
+    - IMPORTANT!! PLEASE DO NOT USE EMOJIS IN THE RESPONSE
+    - IMPORTANT!! PLEASE DONT USE EM DASHES IN THE RESPONSE
 
     **User Uploaded Content:**\n${data.referenceFilesData || "*No content uploaded.*"}\n\n
     **Additional Instructions:**\n${data.additionalInstructions || "*No additional instructions provided.*"}\n\n
@@ -299,7 +306,7 @@ export function getCampaignContentPrompts(data: any) {
 
     return { systemPrompt, userPrompt };
 }
-                        
+
 
 export function getKnowledgeBaseSystemPrompt(conversationHistory: string): string {
     return `**Act as a helpful AIAG Assistant.**  
@@ -325,6 +332,7 @@ export function getKnowledgeBaseSystemPrompt(conversationHistory: string): strin
     4.  **Apply Tone:** Be 'Professional yet Approachable' and 'Empowering and Supportive'.  
     5.  **Uphold Constraints:** ${AIAG_CRITICAL_CONSTRAINTS}.  
     
+    
     ---  
     Full AIAG Knowledge Base (Primary Reference, when applicable):  
     ${knowledgeBaseContent}  
@@ -342,5 +350,7 @@ export function getRewriteSystemPrompt(): string {
 - Your response MUST ONLY be the rewritten version of the 'SELECTED TEXT TO REWRITE'.
 - Do not include any explanations, apologies, or extra text.
 - Do not output the entire original content, only the part you have rewritten.
-- Maintain the context and flow of the original content.`;
+- Maintain the context and flow of the original content.
+
+`;
 }

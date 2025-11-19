@@ -3,18 +3,21 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Textarea } from '@/components/ui/textarea';
 import { Button } from '@/components/ui/button';
-import { ArrowUp, X } from 'lucide-react';
+import { ArrowUp, X, Copy, Check } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { BiRevision } from "react-icons/bi";
+import { toast } from "sonner";
 
 interface RewriteInputProps {
     position: { top: number; left: number };
+    selectedText: string;
     onSubmit: (prompt: string) => void;
     onClose: () => void;
 }
 
-export default function RewriteInput({ position, onSubmit, onClose }: RewriteInputProps) {
+export default function RewriteInput({ position, selectedText, onSubmit, onClose }: RewriteInputProps) {
     const [prompt, setPrompt] = useState('');
+    const [isCopied, setIsCopied] = useState(false);
     const inputRef = useRef<HTMLTextAreaElement>(null);
     const containerRef = useRef<HTMLDivElement>(null);
 
@@ -48,15 +51,47 @@ export default function RewriteInput({ position, onSubmit, onClose }: RewriteInp
         }
     };
 
+    const handleCopy = () => {
+        navigator.clipboard.writeText(selectedText);
+        setIsCopied(true);
+        toast.success("Copied to clipboard");
+        setTimeout(() => setIsCopied(false), 1500);
+    };
 
     return (
         <div
             ref={containerRef}
-            className="absolute z-50 w-100 rounded-xl border bg-background shadow-xl"
+            className="absolute z-50 w-[500px] rounded-xl border bg-background shadow-xl"
             style={{ top: position.top, left: position.left }}
         >
             <form onSubmit={handleSubmit} className="flex flex-col">
-                <div className="p-2">
+                {/* Selected Text Display */}
+                <div className="p-3 border-b bg-muted/30 rounded-xl ">
+                    <div className="flex items-start justify-between gap-2">
+                        <div className="flex-1">
+                            <p className="text-xs text-muted-foreground mb-1">Selected text:</p>
+                            <div className='line-clamp-2 overflow-y-auto'>
+                                <p className="text-sm break-words">{selectedText}</p>
+                            </div>
+                        </div>
+                        <Button
+                            type="button"
+                            variant="ghost"
+                            size="icon"
+                            onClick={handleCopy}
+                            className="h-7 w-7 shrink-0"
+                        >
+                            {isCopied ? (
+                                <Check className="w-3.5 h-3.5" />
+                            ) : (
+                                <Copy className="w-3.5 h-3.5" />
+                            )}
+                        </Button>
+                    </div>
+                </div>
+
+                {/* Prompt Input */}
+                <div className="p-2 ">
                     <Textarea
                         ref={inputRef}
                         value={prompt}
@@ -66,7 +101,7 @@ export default function RewriteInput({ position, onSubmit, onClose }: RewriteInp
                         className="h-20 w-full resize-none border-0 shadow-none bg-transparent px-2 py-1 text-sm focus-visible:ring-0 focus-visible:ring-offset-0"
                     />
                 </div>
-                
+
                 <div className="flex items-center justify-end gap-2  p-2">
                     <Button type="submit" size="xs" disabled={!prompt.trim()}>
                         <BiRevision /> Rewrite
