@@ -82,6 +82,7 @@ export default function Home() {
             setGenratedContent(cleanedMarkdown)
         })
     }
+    
     const formRef = useRef<HTMLDivElement>(null)
     const handleCopy = () => {
         navigator.clipboard.writeText(genratedContent);
@@ -99,6 +100,7 @@ export default function Home() {
         document.body.removeChild(a);
         URL.revokeObjectURL(url);
     };
+    
     return (
         <main className="overflow-hidden">
             <Hero />

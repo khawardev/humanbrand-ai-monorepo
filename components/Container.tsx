@@ -14,7 +14,7 @@ export const ContainerSm = ({ children, className = '' }: ContainerProps) => {
 };
 
 export const ContainerMd = ({ children, className = '' }: ContainerProps) => {
-    return <div className={`md:py-36 py-26 ${className}`}>{children}</div>;
+    return <div className={`md:py-36 py-26  ${className}`}>{children}</div>;
 };
 
 export const ContainerLg = ({ children, className = '' }: ContainerProps) => {
