@@ -189,14 +189,14 @@ export default function AI_Page({ user, initialChatHistory }: AI_PromptProps) {
                                     onMouseUp={msg.role === 'assistant' ? () => handleSelection(index) : undefined}
                                 >
                                     <div className="markdown-body space-y-1 text-[15px]">
-                                        <ReactMarkdown remarkPlugins={[remarkGfm]}>{stripMarkdownBold(msg.content)}</ReactMarkdown>
+                                        <ReactMarkdown remarkPlugins={[remarkGfm]}>{msg.content}</ReactMarkdown>
                                     </div>
 
                                     <Button
                                         size="icon"
                                         variant="ghost"
                                         onClick={() => {
-                                            navigator.clipboard.writeText(msg.content)
+                                            navigator.clipboard.writeText(stripMarkdownBold(msg.content))
                                             setCopiedIndex(index)
                                             toast.success("Copied to clipboard")
                                             setTimeout(() => setCopiedIndex(null), 1500)

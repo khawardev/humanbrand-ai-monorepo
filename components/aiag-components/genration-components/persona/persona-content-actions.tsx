@@ -10,11 +10,12 @@ import {
 import { Copy, Download } from "lucide-react";
 import { IoIosArrowDown } from "react-icons/io";
 import { toast } from "sonner";
+import { stripMarkdownBold } from "@/lib/utils";
 
 export function PersonaContentActions({ content }: any) {
 
     const handleCopy = () => {
-        navigator.clipboard.writeText(content);
+        navigator.clipboard.writeText(stripMarkdownBold(content));
         toast.success("Content copied to clipboard!");
     };
 

@@ -86,7 +86,7 @@ export default function Home() {
     
     const formRef = useRef<HTMLDivElement>(null)
     const handleCopy = () => {
-        navigator.clipboard.writeText(genratedContent);
+        navigator.clipboard.writeText(stripMarkdownBold(genratedContent));
         toast.success("Content copied to clipboard!");
     };
 
@@ -211,7 +211,7 @@ export default function Home() {
                             <Separator className="mb-4" />
                         </div>
                         <div className="prose prose-neutral max-w-none markdown-body space-y-3 dark:prose-invert">
-                            <ReactMarkdown remarkPlugins={[remarkGfm]}>{stripMarkdownBold(genratedContent)}</ReactMarkdown>
+                            <ReactMarkdown remarkPlugins={[remarkGfm]}>{genratedContent}</ReactMarkdown>
                         </div>
                     </section>
                 }

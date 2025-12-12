@@ -48,7 +48,7 @@ export default function KnowledgeBaseChatUI({ user, initialChatHistory }: { user
                                 }`}
                             >
                                 <div className="markdown-body space-y-1 text-[15px]">
-                                    <ReactMarkdown remarkPlugins={[remarkGfm]}>{stripMarkdownBold(msg.content)}</ReactMarkdown>
+                                    <ReactMarkdown remarkPlugins={[remarkGfm]}>{msg.content}</ReactMarkdown>
                                 </div>
                             </div>
                         </div>

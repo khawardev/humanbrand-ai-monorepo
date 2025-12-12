@@ -23,7 +23,7 @@ export function GeneratedPersonaContent({ content }: any) {
                 </div>
 
                 <div className="prose prose-neutral max-w-none markdown-body space-y-3 dark:prose-invert">
-                    <ReactMarkdown remarkPlugins={[remarkGfm]}>{stripMarkdownBold(content)}</ReactMarkdown>
+                    <ReactMarkdown remarkPlugins={[remarkGfm]}>{content}</ReactMarkdown>
                 </div>
                 <Separator className="mt-8" />
             </section>

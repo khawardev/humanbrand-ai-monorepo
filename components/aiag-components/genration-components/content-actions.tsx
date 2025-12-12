@@ -13,13 +13,14 @@ import { IoIosArrowDown } from "react-icons/io";
 import { ReviseDialog } from "./revise-dialog";
 import { toast } from "sonner";
 import { PersonaDialog } from "./persona/persona-dialog";
+import { stripMarkdownBold } from "@/lib/utils";
 
 export function ContentActions({ content, handleRevise, feedback, setFeedback, setPersonasText, personasText, setUploadedPersonaFileData, handleAdaptPersona }: any) {
     const [isReviseOpen, setReviseOpen] = useState(false);
     const [isAdaptOpen, setAdaptOpen] = useState(false);
 
     const handleCopy = () => {
-        navigator.clipboard.writeText(content);
+        navigator.clipboard.writeText(stripMarkdownBold(content));
         toast.success("Content copied to clipboard!");
     };
 

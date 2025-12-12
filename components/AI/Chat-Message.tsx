@@ -37,7 +37,7 @@ export default function ChatMessage({ message, user, messageIndex, onSelectText 
             <div className={`w-full p-3 rounded-lg ${!isAssistant ? 'bg-primary text-primary-foreground border' : 'bg-black/5 dark:bg-white/5 border'}`}>
                 <div className="markdown-body space-y-1 text-[15px]" onMouseUp={isAssistant ? handleMouseUp : undefined}>
                     <ReactMarkdown remarkPlugins={[remarkGfm]}>
-                        {stripMarkdownBold(message.content)}
+                        {message.content}
                     </ReactMarkdown>
                 </div>
             </div>

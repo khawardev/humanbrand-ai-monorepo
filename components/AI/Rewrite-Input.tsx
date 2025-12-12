@@ -4,7 +4,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Textarea } from '@/components/ui/textarea';
 import { Button } from '@/components/ui/button';
 import { ArrowUp, X, Copy, Check } from 'lucide-react';
-import { cn } from '@/lib/utils';
+import { cn, stripMarkdownBold } from '@/lib/utils';
 import { BiRevision } from "react-icons/bi";
 import { toast } from "sonner";
 
@@ -52,7 +52,7 @@ export default function RewriteInput({ position, selectedText, onSubmit, onClose
     };
 
     const handleCopy = () => {
-        navigator.clipboard.writeText(selectedText);
+        navigator.clipboard.writeText(stripMarkdownBold(selectedText));
         setIsCopied(true);
         toast.success("Copied to clipboard");
         setTimeout(() => setIsCopied(false), 1500);
