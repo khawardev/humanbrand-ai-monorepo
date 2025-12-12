@@ -41,7 +41,16 @@ export function getNewGenerationPrompts({
                           CRITICAL FORMATTING RULES
                           ------------------------------
                           
-                          * Always include a space after colons in lists (e.g., "Tools: Whether you need..." not "Tools:Whether you need..."). `;
+                          * Always include a space after colons in lists (e.g., "Tools: Whether you need..." not "Tools:Whether you need...").
+                          
+                          
+                          Instructions:
+    
+    - IMPORTANT!! PLEASE DO NOT USE EMOJIS IN THE RESPONSE
+    - IMPORTANT!! PLEASE DONT USE EM DASHES IN THE RESPONSE
+    - IMPORTANT!! REMOVE ALL ** FROM THE OUTPUT. THE FINAL OUTPUT MUST NEVER INCLUDE ** IN ANY FORM. IF ANY TEXT CONTAINS **, STRIP THE ASTERISKS COMPLETELY AND PRODUCE A CLEAN OUTPUT WITHOUT MENTIONING THEM.
+                          
+                          `;
 
     const userPrompt = `  ---------------------------------
                           PARAMETERS FOR THIS SPECIFIC TASK
@@ -72,7 +81,15 @@ export function getNewGenerationPrompts({
                           ### User-Uploaded Reference Documents (Secondary Context, if provided by user for this generation):
                           ${userUploadedContent || USER_UPLOADED_FALLBACK}
                           ---
-                          Generate the content now based on all instructions.`;
+                          Generate the content now based on all instructions.
+                          
+                          Instructions:
+    
+    - IMPORTANT!! PLEASE DO NOT USE EMOJIS IN THE RESPONSE
+    - IMPORTANT!! PLEASE DONT USE EM DASHES IN THE RESPONSE
+    - IMPORTANT!! REMOVE ALL ** FROM THE OUTPUT. THE FINAL OUTPUT MUST NEVER INCLUDE ** IN ANY FORM. IF ANY TEXT CONTAINS **, STRIP THE ASTERISKS COMPLETELY AND PRODUCE A CLEAN OUTPUT WITHOUT MENTIONING THEM.
+                          
+                          `;
 
     return { systemPrompt, userPrompt };
 }
@@ -105,6 +122,14 @@ export function getRevisionPrompts({
                           * Critical Constraints: ${AIAG_CRITICAL_CONSTRAINTS} (Neutrality, Legal Safety, Accuracy are paramount).
                           * Lexicon & Style: Use language and narrative devices from the KB Section 3 appropriately.
                           * Output: Output ONLY the fully revised content, ready for use, without any introductory or concluding remarks.
+                          
+                          Instructions:
+    
+    - IMPORTANT!! PLEASE DO NOT USE EMOJIS IN THE RESPONSE
+    - IMPORTANT!! PLEASE DONT USE EM DASHES IN THE RESPONSE
+    - IMPORTANT!! REMOVE ALL ** FROM THE OUTPUT. THE FINAL OUTPUT MUST NEVER INCLUDE ** IN ANY FORM. IF ANY TEXT CONTAINS **, STRIP THE ASTERISKS COMPLETELY AND PRODUCE A CLEAN OUTPUT WITHOUT MENTIONING THEM.
+                          
+                          
                           `;
 
     const userPrompt = `
@@ -173,6 +198,14 @@ export function getHyperRelevancePrompts({
                           Full AIAG Knowledge Base (Reference for Brand Standards and Persona Definitions):
                           ${knowledgeBaseContent || KNOWLEDGE_BASE_FALLBACK}
                           ---
+
+
+Instructions:
+    
+    - IMPORTANT!! PLEASE DO NOT USE EMOJIS IN THE RESPONSE
+    - IMPORTANT!! PLEASE DONT USE EM DASHES IN THE RESPONSE
+    - IMPORTANT!! REMOVE ALL ** FROM THE OUTPUT. THE FINAL OUTPUT MUST NEVER INCLUDE ** IN ANY FORM. IF ANY TEXT CONTAINS **, STRIP THE ASTERISKS COMPLETELY AND PRODUCE A CLEAN OUTPUT WITHOUT MENTIONING THEM.
+
                           Begin Hyper-Relevant Content (Personalized for the target persona while strictly adhering to AIAG KB guidelines):
                           `;
     return { systemPrompt, userPrompt };
@@ -199,6 +232,13 @@ export function getChatSystemPrompt({
                                 Full AIAG Knowledge Base (Primary Reference): ${knowledgeBaseContent || KNOWLEDGE_BASE_FALLBACK}
       
                                 ---
+
+Instructions:
+    
+    - IMPORTANT!! PLEASE DO NOT USE EMOJIS IN THE RESPONSE
+    - IMPORTANT!! PLEASE DONT USE EM DASHES IN THE RESPONSE
+    - IMPORTANT!! REMOVE ALL ** FROM THE OUTPUT. THE FINAL OUTPUT MUST NEVER INCLUDE ** IN ANY FORM. IF ANY TEXT CONTAINS **, STRIP THE ASTERISKS COMPLETELY AND PRODUCE A CLEAN OUTPUT WITHOUT MENTIONING THEM.
+
                                 Respond directly to the last user message in the history, considering the full context provided.`;
     return chatSystemPrompt;
 }
@@ -233,6 +273,12 @@ export function getExistingContentPrompts({
                            - IMPORTANT!! PLEASE DO NOT USE EMOJIS IN THE RESPONSE
                            - IMPORTANT!! PLEASE DO NOT USE EMOJIS IN THE RESPONSE
                            - IMPORTANT!! PLEASE DO NOT USE EMOJIS IN THE RESPONSE
+Instructions:
+    
+    - IMPORTANT!! PLEASE DO NOT USE EMOJIS IN THE RESPONSE
+    - IMPORTANT!! PLEASE DONT USE EM DASHES IN THE RESPONSE
+    - IMPORTANT!! REMOVE ALL ** FROM THE OUTPUT. THE FINAL OUTPUT MUST NEVER INCLUDE ** IN ANY FORM. IF ANY TEXT CONTAINS **, STRIP THE ASTERISKS COMPLETELY AND PRODUCE A CLEAN OUTPUT WITHOUT MENTIONING THEM.
+                           
                            `;
 
     const userPrompt = `---------------------------------
@@ -298,10 +344,14 @@ export function getCampaignContentPrompts(data: any) {
     
     - IMPORTANT!! PLEASE DO NOT USE EMOJIS IN THE RESPONSE
     - IMPORTANT!! PLEASE DONT USE EM DASHES IN THE RESPONSE
+    - IMPORTANT!! REMOVE ALL ** FROM THE OUTPUT. THE FINAL OUTPUT MUST NEVER INCLUDE ** IN ANY FORM. IF ANY TEXT CONTAINS **, STRIP THE ASTERISKS COMPLETELY AND PRODUCE A CLEAN OUTPUT WITHOUT MENTIONING THEM.
 
     **User Uploaded Content:**\n${data.referenceFilesData || "*No content uploaded.*"}\n\n
     **Additional Instructions:**\n${data.additionalInstructions || "*No additional instructions provided.*"}\n\n
     **Knowledge Base Reference:**\n${knowledgeBaseContent || "*No KB content supplied.*"}
+    
+    
+    
     `;
 
     return { systemPrompt, userPrompt };
@@ -337,8 +387,16 @@ export function getKnowledgeBaseSystemPrompt(conversationHistory: string): strin
     Full AIAG Knowledge Base (Primary Reference, when applicable):  
     ${knowledgeBaseContent}  
     ---  
+
+    Instructions:
     
+    - IMPORTANT!! PLEASE DO NOT USE EMOJIS IN THE RESPONSE
+    - IMPORTANT!! PLEASE DONT USE EM DASHES IN THE RESPONSE
+    - IMPORTANT!! REMOVE ALL ** FROM THE OUTPUT. THE FINAL OUTPUT MUST NEVER INCLUDE ** IN ANY FORM. IF ANY TEXT CONTAINS **, STRIP THE ASTERISKS COMPLETELY AND PRODUCE A CLEAN OUTPUT WITHOUT MENTIONING THEM.
+
+
     Always respond to the last user message according to their intent, while adhering to all rules above.`;
+    
 }
 
 
@@ -352,5 +410,10 @@ export function getRewriteSystemPrompt(): string {
 - Do not output the entire original content, only the part you have rewritten.
 - Maintain the context and flow of the original content.
 
+Instructions:
+
+    - IMPORTANT!! PLEASE DO NOT USE EMOJIS IN THE RESPONSE
+    - IMPORTANT!! PLEASE DONT USE EM DASHES IN THE RESPONSE
+    - IMPORTANT!! REMOVE ALL ** FROM THE OUTPUT. THE FINAL OUTPUT MUST NEVER INCLUDE ** IN ANY FORM. IF ANY TEXT CONTAINS **, STRIP THE ASTERISKS COMPLETELY AND PRODUCE A CLEAN OUTPUT WITHOUT MENTIONING THEM.
 `;
 }
