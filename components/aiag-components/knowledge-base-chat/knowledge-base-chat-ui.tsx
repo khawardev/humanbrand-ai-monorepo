@@ -8,6 +8,7 @@ import remarkGfm from "remark-gfm";
 import ReactMarkdown from "react-markdown";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useKnowledgeBaseChat } from "@/hooks/aiag_hooks/use-knowledge-base-chat";
+import { stripMarkdownBold } from "@/lib/utils";
 
 export default function KnowledgeBaseChatUI({ user, initialChatHistory }: { user: any, initialChatHistory: any[] }) {
     const { chatHistory, isResponding, handleSendMessage } = useKnowledgeBaseChat({ user, initialChatHistory });
@@ -47,7 +48,7 @@ export default function KnowledgeBaseChatUI({ user, initialChatHistory }: { user
                                 }`}
                             >
                                 <div className="markdown-body space-y-1 text-[15px]">
-                                    <ReactMarkdown remarkPlugins={[remarkGfm]}>{msg.content}</ReactMarkdown>
+                                    <ReactMarkdown remarkPlugins={[remarkGfm]}>{stripMarkdownBold(msg.content)}</ReactMarkdown>
                                 </div>
                             </div>
                         </div>

@@ -26,6 +26,7 @@ import { Button } from "@/components/ui/button"
 import { IoIosArrowDown } from "react-icons/io"
 import { toast } from "sonner"
 import { getUser } from "@/actions/users-actions"
+import { stripMarkdownBold } from "@/lib/utils"
 
 
 export default function Home() {
@@ -210,7 +211,7 @@ export default function Home() {
                             <Separator className="mb-4" />
                         </div>
                         <div className="prose prose-neutral max-w-none markdown-body space-y-3 dark:prose-invert">
-                            <ReactMarkdown remarkPlugins={[remarkGfm]}>{genratedContent}</ReactMarkdown>
+                            <ReactMarkdown remarkPlugins={[remarkGfm]}>{stripMarkdownBold(genratedContent)}</ReactMarkdown>
                         </div>
                     </section>
                 }

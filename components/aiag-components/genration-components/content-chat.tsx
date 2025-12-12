@@ -9,6 +9,7 @@ import remarkGfm from "remark-gfm";
 import ReactMarkdown from "react-markdown";
 import { FileDropzone } from "../reusable-components/uploads/file-dropzone";
 import { Skeleton } from "@/components/ui/skeleton";
+import { stripMarkdownBold } from "@/lib/utils";
 
 
 export function ContentChat({ chatHistory = [], handleChatSend, onChatFileChange, chatFileInfos, isChatLoading, user }: any) {
@@ -55,7 +56,7 @@ export function ContentChat({ chatHistory = [], handleChatSend, onChatFileChange
                                 }`}
                             >
                                 <div className="markdown-body space-y-1 text-[15px]">
-                                    <ReactMarkdown remarkPlugins={[remarkGfm]}>{msg.content}</ReactMarkdown>
+                                    <ReactMarkdown remarkPlugins={[remarkGfm]}>{stripMarkdownBold(msg.content)}</ReactMarkdown>
                                 </div>
                             </div>
                         </div>

@@ -2,6 +2,7 @@ import React from 'react';
 import Image from 'next/image';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
+import { stripMarkdownBold } from '@/lib/utils';
 
 interface ChatMessageProps {
     message: any;
@@ -36,7 +37,7 @@ export default function ChatMessage({ message, user, messageIndex, onSelectText 
             <div className={`w-full p-3 rounded-lg ${!isAssistant ? 'bg-primary text-primary-foreground border' : 'bg-black/5 dark:bg-white/5 border'}`}>
                 <div className="markdown-body space-y-1 text-[15px]" onMouseUp={isAssistant ? handleMouseUp : undefined}>
                     <ReactMarkdown remarkPlugins={[remarkGfm]}>
-                        {message.content}
+                        {stripMarkdownBold(message.content)}
                     </ReactMarkdown>
                 </div>
             </div>

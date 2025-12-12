@@ -10,6 +10,7 @@ import { GeneratedPersonaContent } from "./persona/generated-persona-content";
 import { LineSpinner, Spinner } from "@/shared/spinner";
 import { CustomTabs } from "@/shared/CustomTabs";
 import { RiAiGenerate, RiChatSmileAiLine, RiImageCircleAiFill, RiUserSmileLine } from "react-icons/ri";
+import { stripMarkdownBold } from "@/lib/utils";
 
 export function GeneratedContent(props: any) {
 
@@ -54,7 +55,7 @@ export function GeneratedContent(props: any) {
                                 <Separator className="mb-4" />
                             </div>
                             <div className="prose prose-neutral max-w-none markdown-body space-y-3 dark:prose-invert">
-                                <ReactMarkdown remarkPlugins={[remarkGfm]}>{content}</ReactMarkdown>
+                                <ReactMarkdown remarkPlugins={[remarkGfm]}>{stripMarkdownBold(content)}</ReactMarkdown>
                             </div>
                         </section>
                     ),

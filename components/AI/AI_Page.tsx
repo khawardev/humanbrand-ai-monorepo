@@ -3,7 +3,7 @@
 import { ArrowRight, Bot, Check, ChevronDown, Speech, Download, Loader2, Copy } from "lucide-react";
 import React, { useState, useRef, useEffect } from "react";
 import { Textarea } from "@/components/ui/textarea";
-import { cn } from "@/lib/utils";
+import { cn, stripMarkdownBold } from "@/lib/utils";
 import { useAutoResizeTextarea } from "@/hooks/use-auto-resize-textarea";
 import { Button } from "@/components/ui/button";
 import {
@@ -189,7 +189,7 @@ export default function AI_Page({ user, initialChatHistory }: AI_PromptProps) {
                                     onMouseUp={msg.role === 'assistant' ? () => handleSelection(index) : undefined}
                                 >
                                     <div className="markdown-body space-y-1 text-[15px]">
-                                        <ReactMarkdown remarkPlugins={[remarkGfm]}>{msg.content}</ReactMarkdown>
+                                        <ReactMarkdown remarkPlugins={[remarkGfm]}>{stripMarkdownBold(msg.content)}</ReactMarkdown>
                                     </div>
 
                                     <Button

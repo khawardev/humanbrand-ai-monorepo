@@ -3,6 +3,7 @@ import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { Separator } from "@/components/ui/separator";
 import { PersonaContentActions } from "./persona-content-actions";
+import { stripMarkdownBold } from "@/lib/utils";
 
 export function GeneratedPersonaContent({ content }: any) {
 
@@ -22,7 +23,7 @@ export function GeneratedPersonaContent({ content }: any) {
                 </div>
 
                 <div className="prose prose-neutral max-w-none markdown-body space-y-3 dark:prose-invert">
-                    <ReactMarkdown remarkPlugins={[remarkGfm]}>{content}</ReactMarkdown>
+                    <ReactMarkdown remarkPlugins={[remarkGfm]}>{stripMarkdownBold(content)}</ReactMarkdown>
                 </div>
                 <Separator className="mt-8" />
             </section>
