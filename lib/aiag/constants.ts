@@ -3,8 +3,8 @@ export const AIAG_LOGO = "https://i.postimg.cc/ZYDgZQyF/aiag-logo.jpg";
 export const MAX_CHAT_HISTORY_MESSAGES = 20;
 
 
-export const OPENAI_MODEL = "gpt-4.1"; 
-export const OPENAI_MODEL_5 = "gpt-5"; 
+export const OPENAI_MODEL = "gpt-5.2"; 
+export const OPENAI_MODEL_5 = "gpt-5.2"; 
 export const CLAUDE_MODEL = 'anthropic.claude-opus-4-1-20250805-v1:0';
 export const GEMINI_MODEL = "gemini-2.5-pro-preview-05-06";
 
