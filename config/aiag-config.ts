@@ -25,32 +25,10 @@ export const AIAGConfig: any = {
 };
 
 
-export const OVERALL_ADMIN_EMAILS = [
-  "khawarsultan.developer@gmail.com",
-  "aaron@humanbrand.ai",
-  "john@humanbrand.ai",
-  "rizwaniscoder@gmail.com",
-  "ssampson@aiag.org",
-  "ahernandez@aiag.org",
-  "ssmith@aiag.org",
-  "sosburn@aiag.org",
-  "cwright@aiag.org",
-  "manred118@mirai.re",
-];
-
-
-export const DEV_EMAILS = [
-  "khawarsultan.developer@gmail.com",
-  "aaron@humanbrand.ai",
-  "john@humanbrand.ai",
-  "rizwaniscoder@gmail.com",
-  "manred118@mirai.re",
-];
-
 export const ADMIN_EMAILS = [
-  "ssampson@aiag.org",
-  "ahernandez@aiag.org",
-  "ssmith@aiag.org",
-  "sosburn@aiag.org",
-  "cwright@aiag.org",
+  "khawarsultan.developer@gmail.com",
+  "rizwaniscoder@gmail.com",
+  "riz@humanbrand.ai",
+  "john@humanbrand.ai",
+  "aaron@humanbrand.ai",
 ];
