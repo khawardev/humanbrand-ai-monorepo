@@ -9,6 +9,7 @@ import { useState } from 'react';
 import { Loader2 } from 'lucide-react';
 import { signUp } from '@/lib/better-auth/auth-client';
 import { PasswordInput } from './Password-Input';
+import { useRouter } from 'next/navigation';
 
 interface FormValues {
     name: string;
@@ -17,6 +18,7 @@ interface FormValues {
 }
 
 export default function SignUpForm() {
+    const router = useRouter();
     const [isLoading, setIsLoading] = useState(false);
     const form = useForm<FormValues>({
         defaultValues: { name: "", email: "", password: "" },
@@ -27,6 +29,7 @@ export default function SignUpForm() {
         await signUp.email(data, {
             onSuccess: () => {
                 toast.success("Account created successfully");
+                router.push("/");
             },
             onError: (err: any) => {
                 toast.error(err?.error?.message);

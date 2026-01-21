@@ -11,6 +11,7 @@ import { signIn } from '@/lib/better-auth/auth-client';
 import { PasswordInput } from './Password-Input';
 import ForgotPassword from './ForgotPassword';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 interface FormValues {
     email: string;
@@ -18,6 +19,7 @@ interface FormValues {
 }
 
 export default function SignInForm() {
+    const router = useRouter();
     const [isLoading, setIsLoading] = useState(false);
     const form = useForm<FormValues>({
         defaultValues: { email: "", password: "" },
@@ -28,15 +30,12 @@ export default function SignInForm() {
         await signIn.email(data, {
             onSuccess: () => {
                 toast.success("Signed in successfully!");
+                router.push("/");
             },
             onError: (err: any) => {
-                console.log(err, `<-> err <->`);
-
                 if (err.status === 403) {
                     toast.error("Please verify your email before signing in.");
                 } else {
-
-
                     toast.error(err?.error?.message);
                 }
             }

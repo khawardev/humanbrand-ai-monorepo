@@ -31,7 +31,7 @@ export default function Page() {
     await signUp.email(data, {
       onSuccess: () => {
         toast.success("Account created successfully");
-        router.push('/');
+        router.push('/ai');
       },
       onError: (err: any) => {
         toast.error(err?.error?.message);

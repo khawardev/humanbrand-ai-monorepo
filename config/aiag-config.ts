@@ -1,8 +1,12 @@
 export const AIAGConfig: any = {
   mainNav: [
     {
-      title: "New",
+      title: "AI Chat",
       href: "/",
+    },
+    {
+      title: "New",
+      href: "/new",
     },
     {
       title: "Existing",
@@ -11,10 +15,6 @@ export const AIAGConfig: any = {
     {
       title: "Campaign",
       href: "/campaign",
-    },
-    {
-      title: "AI",
-      href: "/ai",
     },
     {
       title: "Admin",

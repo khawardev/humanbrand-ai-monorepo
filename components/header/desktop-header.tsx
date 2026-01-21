@@ -12,10 +12,14 @@ const DesktopHeader = async () => {
     const user = await getUser();
     const isAdmin = user?.email ? ADMIN_EMAILS.includes(user.email) : false;
 
-    const navLinks = AIAGConfig.mainNav.filter(({ title }:any) => {
-        if (!user) return !['AI', 'Admin'].includes(title);
-        if (title === 'AI') return true;
-        return title !== 'Admin' || isAdmin;
+    const navLinks = AIAGConfig.mainNav.filter((nav:any) => {
+        if (!user) {
+            if (nav.href === '/') return false;
+            if (nav.title === 'Admin') return false;
+            return true;
+        }
+        if (nav.title === 'Admin') return isAdmin;
+        return true;
     });
 
     return (

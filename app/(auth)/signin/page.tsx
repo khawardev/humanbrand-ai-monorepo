@@ -29,7 +29,7 @@ export default function Page() {
     await signIn.email(data, {
       onSuccess: () => {
         toast.success("Signed in successfully!");
-        router.push('/');
+        router.push('/ai');
         router.refresh();
       },
       onError: (err: any) => {

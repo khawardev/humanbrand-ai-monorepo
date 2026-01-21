@@ -1,15 +1,25 @@
-import React from "react"
-import { Hero } from "@/components/aiag-components/reusable-components/hero"
-import AdminMailAlert from "@/components/aiag-components/admin-mail-alert"
-import HomePageComponent from "@/components/aiag-components/home/home-page-component"
-export default function HomePage() {
-  return (
-    <main className="pt-14 relative">
-      <Hero />
-      <section className="div-center-md">
-        <AdminMailAlert />
-        <HomePageComponent />
-      </section>
-    </main>
-  )
-}
+import React from 'react';
+import { getUser } from "@/actions/users-actions";
+import { getKnowledgeBaseChat } from "@/actions/knowledge-base-chat-actions";
+import { redirect } from 'next/navigation';
+import AI_Page from '@/components/AI/AI_Page';
+
+export default async function HomePage() {
+    const user = await getUser();
+    let initialChatHistory = [];
+    if (user) {
+        const chat = await getKnowledgeBaseChat(user.id);
+        if (chat && chat.chatHistory) {
+            initialChatHistory = chat.chatHistory as any[];
+        }
+    }
+
+    if (!user) {
+        redirect('/new')
+    }
+    return (
+        <div className='div-center-md h-[90vh] '>
+            <AI_Page user={user} initialChatHistory={initialChatHistory} />
+        </div>
+    );
+};
