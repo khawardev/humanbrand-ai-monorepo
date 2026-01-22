@@ -28,8 +28,8 @@ const UserMenu = ({ user }: any) => {
           <AvatarFallback>{user.name?.slice(0, 1).toUpperCase()}</AvatarFallback>
         </Avatar>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="max-w-28" align="end">
-        <DropdownMenuLabel className="flex gap-2 items-center min-w-0 ">
+      <DropdownMenuContent className="max-w-4" align="end">
+        <DropdownMenuLabel className="flex gap-2 items-center ">
           <Avatar className="border border-input">
             <AvatarImage src={user.image && user.image || `https://avatar.vercel.sh/${user.email}.png`} alt="Profile image" />
           <AvatarFallback>{user.name?.slice(0, 1).toUpperCase()}</AvatarFallback>
@@ -38,7 +38,7 @@ const UserMenu = ({ user }: any) => {
             <span className="text-foreground tracking-tight truncate text-sm font-medium">
               {user?.name}
             </span>
-            <span className="text-xs  w-[85%] overflow-hidden text-muted-foreground text-ellipsis whitespace-wrap font-normal">
+            <span className="text-xs overflow-hidden text-muted-foreground text-ellipsis whitespace-wrap font-normal">
               {user?.email}
             </span>
           </div>

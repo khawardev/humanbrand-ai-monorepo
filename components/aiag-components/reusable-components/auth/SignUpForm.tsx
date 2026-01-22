@@ -6,9 +6,8 @@ import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { toast } from 'sonner';
 import { useState } from 'react';
-import { Loader2 } from 'lucide-react';
+import { Eye, EyeOff, Loader2 } from 'lucide-react';
 import { signUp } from '@/lib/better-auth/auth-client';
-import { PasswordInput } from './Password-Input';
 import { useRouter } from 'next/navigation';
 
 interface FormValues {
@@ -20,6 +19,7 @@ interface FormValues {
 export default function SignUpForm() {
     const router = useRouter();
     const [isLoading, setIsLoading] = useState(false);
+    const [showPassword, setShowPassword] = useState(false);
     const form = useForm<FormValues>({
         defaultValues: { name: "", email: "", password: "" },
     });
@@ -30,6 +30,7 @@ export default function SignUpForm() {
             onSuccess: () => {
                 toast.success("Account created successfully");
                 router.push("/");
+                router.refresh();
             },
             onError: (err: any) => {
                 toast.error(err?.error?.message);
@@ -86,12 +87,36 @@ export default function SignUpForm() {
                     name="password"
                     rules={{
                         required: "Password is required.",
+                        minLength: {
+                            value: 8,
+                            message: "Password must be at least 8 characters.",
+                        },
                     }}
                     render={({ field }) => (
                         <FormItem>
                             <FormLabel>Password</FormLabel>
                             <FormControl>
-                                <PasswordInput placeholder="••••••••" {...field} />
+                                <div className="relative">
+                                    <Input
+                                        type={showPassword ? "text" : "password"}
+                                        placeholder="••••••••"
+                                        className="pr-10"
+                                        {...field}
+                                    />
+                                    {field.value && (
+                                        <button
+                                            type="button"
+                                            onClick={() => setShowPassword(!showPassword)}
+                                            className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
+                                        >
+                                            {showPassword ? (
+                                                <EyeOff className="h-4 w-4" />
+                                            ) : (
+                                                <Eye className="h-4 w-4" />
+                                            )}
+                                        </button>
+                                    )}
+                                </div>
                             </FormControl>
                             <FormMessage />
                         </FormItem>
