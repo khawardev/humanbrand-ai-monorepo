@@ -9,7 +9,7 @@ const AdminMailAlert = async () => {
 
     if (!user) return <Alert variant={'destructive'}>
         <MdOutlineMailLock />
-        <AlertTitle>Please Login to Access AIAG CAM 25.1</AlertTitle>
+        <AlertTitle>Please Login to Access AIAG CAM 26.1</AlertTitle>
     </Alert>;
 
     return (
