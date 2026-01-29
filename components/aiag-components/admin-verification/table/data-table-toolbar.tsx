@@ -142,7 +142,7 @@ export function DataTableToolbar<TData>({
                 {selectedRowCount > 0 && onDeleteRows && (
                     <AlertDialog open={deleteDialogOpen} onOpenChange={setDeleteDialogOpen}>
                         <AlertDialogTrigger asChild>
-                            <Button variant="destructive" size="sm">
+                            <Button variant="destructive" >
                                 <TrashIcon className="mr-2 h-4 w-4" />
                                 Delete ({selectedRowCount})
                             </Button>

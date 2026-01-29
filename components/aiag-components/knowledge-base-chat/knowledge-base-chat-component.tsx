@@ -1,5 +1,5 @@
-import { getUser } from "@/actions/users-actions";
-import { getKnowledgeBaseChat } from "@/actions/knowledge-base-chat-actions";
+import { getUser } from "@/server/actions/users-actions";
+import { getKnowledgeBaseChat } from "@/server/actions/knowledge-base-chat-actions";
 import KnowledgeBaseChatUI from "./knowledge-base-chat-ui";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { RiChatSmileAiLine, RiChatVoiceAiFill, RiChatVoiceAiLine, RiVoiceAiLine } from "react-icons/ri";

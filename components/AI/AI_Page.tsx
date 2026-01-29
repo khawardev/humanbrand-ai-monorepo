@@ -15,7 +15,7 @@ import {
 import { motion, AnimatePresence } from "framer-motion";
 import { RiChatSmileAiLine, RiVoiceAiLine } from "react-icons/ri";
 import Image from "next/image";
-import { useKnowledgeBaseChat } from "@/hooks/aiag_hooks/use-knowledge-base-chat";
+import { useKnowledgeBaseChat } from "@/hooks/aiagHooks/use-knowledge-base-chat";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import Gemini_Live_AIAG from "@/components/gemini-live-api-components/gemini-live-app-shared/gemini-live-aiag";

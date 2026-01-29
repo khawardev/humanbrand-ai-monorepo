@@ -3,8 +3,8 @@ import SavedSessions from "../aiag-components/reusable-components/session/saved-
 import { SigninButtonDesktop } from "../aiag-components/reusable-components/auth/signin-button";
 import MobileHeader from "./mobile-header";
 import { Suspense } from "react";
-import { getSession } from "@/lib/get-session";
-import { getUserWithSavedSessions } from "@/actions/users-actions";
+import { getSession } from "@/server/actions/get-session";
+import { getUserWithSavedSessions } from "@/server/actions/users-actions";
 import AuthButtons from "../aiag-components/reusable-components/auth/AuthButtons";
 
 export const revalidate = 0;
@@ -15,7 +15,7 @@ const Skeleton = () => (
     </div>
 );
 
-const AuthenticatedContent = async ({navLinks}:any) => {
+const AuthenticatedContent = async ({ navLinks }: any) => {
     const rawUser: any = await getUserWithSavedSessions();
 
     if (!rawUser) {
@@ -35,7 +35,7 @@ const AuthenticatedContent = async ({navLinks}:any) => {
     );
 };
 
-const DesktopHeaderServer = async ({navLinks}:any) => {
+const DesktopHeaderServer = async ({ navLinks }: any) => {
     const session = await getSession();
     if (!session) {
         return <AuthButtons />;

@@ -7,7 +7,7 @@ import { LuLoaderCircle } from "react-icons/lu";
 import remarkGfm from "remark-gfm";
 import ReactMarkdown from "react-markdown";
 import { Skeleton } from "@/components/ui/skeleton";
-import { useKnowledgeBaseChat } from "@/hooks/aiag_hooks/use-knowledge-base-chat";
+import { useKnowledgeBaseChat } from "@/hooks/aiagHooks/use-knowledge-base-chat";
 import { stripMarkdownBold } from "@/lib/utils";
 
 export default function KnowledgeBaseChatUI({ user, initialChatHistory }: { user: any, initialChatHistory: any[] }) {

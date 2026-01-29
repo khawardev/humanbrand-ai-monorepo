@@ -12,7 +12,7 @@ import { SocialPlatformSection } from "@/components/aiag-components/selection-co
 import { CtaSection } from "@/components/aiag-components/selection-components/CtaSection"
 import { ReferenceMaterialSection } from "@/components/aiag-components/selection-components/ReferenceMaterialSection"
 import { AdditionalInstructionsSection } from "@/components/aiag-components/selection-components/AdditionalInstructionsSection"
-import { useNewContentGenerator } from "@/hooks/aiag_hooks/use-new-content-generator"
+import { useNewContentGenerator } from "@/hooks/aiagHooks/use-new-content-generator"
 
 
 export default function HomePageComponent() {

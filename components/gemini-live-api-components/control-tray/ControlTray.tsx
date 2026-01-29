@@ -2,7 +2,7 @@
 import cn from "classnames";
 import { memo, ReactNode, useEffect, useRef, useState } from "react";
 import { useLiveAPIContext } from "../../../contexts/LiveAPIContext";
-import { AudioRecorder } from "../../../lib/gemini-live-api/audio-recorder";
+import { AudioRecorder } from "../../../lib/geminiApi/audio-recorder";
 import AudioPulse from "../audio-pulse/AudioPulse";
 import "./control-tray.scss";
 import { MdMic, MdMicOff, MdPause, MdPlayArrow } from "react-icons/md";

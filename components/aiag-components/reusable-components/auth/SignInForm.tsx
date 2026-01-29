@@ -7,7 +7,7 @@ import { Button } from '@/components/ui/button';
 import { toast } from 'sonner';
 import { useState } from 'react';
 import { Eye, EyeOff, Loader2 } from 'lucide-react';
-import { signIn } from '@/lib/better-auth/auth-client';
+import { signIn } from '@/lib/auth/auth-client';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 

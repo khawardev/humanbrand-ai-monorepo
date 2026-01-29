@@ -4,7 +4,7 @@ import React, { useMemo, useTransition } from 'react';
 import { getUsersColumns } from './columns';
 import { toast } from 'sonner';
 import { UserStatusFilter } from './user-status-filter';
-import { deleteUserById, updateUserVerification } from '@/actions/users-actions';
+import { deleteUserById, updateUserVerification } from '@/server/actions/users-actions';
 import { DataTable } from '../table/data-table';
 
 export default function UsersTable({ users }: any) {

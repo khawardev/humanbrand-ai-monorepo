@@ -1,9 +1,9 @@
 'use client'
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { GenAILiveClient } from "../lib/gemini-live-api/genai-live-client";
-import { AudioStreamer } from "../lib/gemini-live-api/audio-streamer";
-import { audioContext } from "../lib/gemini-live-api/utils";
-import VolMeterWorket from "../lib/gemini-live-api/worklets/vol-meter";
+import { GenAILiveClient } from "../lib/geminiApi/genai-live-client";
+import { AudioStreamer } from "../lib/geminiApi/audio-streamer";
+import { audioContext } from "../lib/geminiApi/utils";
+import VolMeterWorket from "../lib/geminiApi/worklets/vol-meter";
 import { LiveConnectConfig } from "@google/genai";
 
 export type UseLiveAPIResults = {

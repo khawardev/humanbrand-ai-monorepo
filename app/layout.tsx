@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
-import "./globals.css";
+import "@/app/(styles)/globals.css";
 import DesktopHeader from "@/components/header/desktop-header";
 import { Toaster } from "@/components/ui/sonner";
 import { ThemeProvider } from "next-themes";
@@ -48,7 +48,7 @@ export default async function RootLayout({
           </div>
           <DesktopHeader />
           {children}
-          <Toaster />
+          <Toaster position="bottom-center" />
         </ThemeProvider>
       </body>
     </html>

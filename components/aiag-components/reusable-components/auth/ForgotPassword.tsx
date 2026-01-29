@@ -3,7 +3,7 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { authClient } from "@/lib/better-auth/auth-client";
+import { authClient } from "@/lib/auth/auth-client";
 import { useState } from "react";
 
 export default function ForgotPassword() {
@@ -29,7 +29,7 @@ export default function ForgotPassword() {
             <form onSubmit={handleSubmit} className="space-y-3">
                 <div className="space-y-2">
                     <Label>Email</Label>
-                    <Input  
+                    <Input
                         type="email"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}

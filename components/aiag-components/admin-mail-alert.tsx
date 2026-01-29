@@ -1,4 +1,4 @@
-import { getUser } from '@/actions/users-actions'
+import { getUser } from '@/server/actions/users-actions'
 import React from 'react'
 import { Alert, AlertTitle } from "@/components/ui/alert";
 import { MdOutlineMailLock } from "react-icons/md"

@@ -13,7 +13,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { LogOutIcon } from 'lucide-react'
-import { signOut } from '@/lib/better-auth/auth-client'
+import { signOut } from '@/lib/auth/auth-client'
 import { useRouter } from "next/navigation"
 import { Skeleton } from "../ui/skeleton"
 
@@ -28,21 +28,21 @@ const UserMenu = ({ user }: any) => {
           <AvatarFallback>{user.name?.slice(0, 1).toUpperCase()}</AvatarFallback>
         </Avatar>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="max-w-4" align="end">
-        <DropdownMenuLabel className="flex gap-2 items-center ">
+      <DropdownMenuContent className="max-w-48" align="end">
+        <DropdownMenuItem className="flex gap-2 items-center ">
           <Avatar className="border border-input">
             <AvatarImage src={user.image && user.image || `https://avatar.vercel.sh/${user.email}.png`} alt="Profile image" />
-          <AvatarFallback>{user.name?.slice(0, 1).toUpperCase()}</AvatarFallback>
-        </Avatar>
-          <div className="flex flex-col ">
-            <span className="text-foreground tracking-tight truncate text-sm font-medium">
+            <AvatarFallback>{user.name?.slice(0, 1).toUpperCase()}</AvatarFallback>
+          </Avatar>
+          <div className="flex flex-col overflow-hidden min-w-0">
+            <span title={user?.name} className="text-foreground tracking-tight truncate text-sm font-medium">
               {user?.name}
             </span>
-            <span className="text-xs overflow-hidden text-muted-foreground text-ellipsis whitespace-wrap font-normal">
+            <span title={user?.email} className="text-sm text-muted-foreground  truncate font-normal">
               {user?.email}
             </span>
           </div>
-        </DropdownMenuLabel>
+        </DropdownMenuItem>
         <DropdownMenuSeparator />
         <DropdownMenuItem onClick={async () => {
           await signOut();

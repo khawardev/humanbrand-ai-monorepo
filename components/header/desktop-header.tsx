@@ -3,7 +3,7 @@ import { ThemeSwitcher } from "../ui/theme-switcher";
 import { FullLogo, HalfLogo } from "@/shared/logo";
 import NavigationMenuComp from "./navigation-menu";
 import DesktopHeaderServer from "./desktop-header-server";
-import { getUser } from "@/actions/users-actions";
+import { getUser } from "@/server/actions/users-actions";
 import { ADMIN_EMAILS, AIAGConfig } from "@/config/aiag-config";
 import MobileHeader from "./mobile-header";
 
@@ -12,15 +12,12 @@ const DesktopHeader = async () => {
     const user = await getUser();
     const isAdmin = user?.email ? ADMIN_EMAILS.includes(user.email) : false;
 
-    const navLinks = AIAGConfig.mainNav.filter((nav:any) => {
-        if (!user) {
-            if (nav.href === '/') return false;
-            if (nav.title === 'Admin') return false;
+    const navLinks = user 
+        ? AIAGConfig.mainNav.filter((nav: any) => {
+            if (nav.title === 'Admin') return isAdmin;
             return true;
-        }
-        if (nav.title === 'Admin') return isAdmin;
-        return true;
-    });
+        })
+        : [];
 
     return (
         <div className="sm:w-9/12 w-full mx-auto sm:px-0 px-4">

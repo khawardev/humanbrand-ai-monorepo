@@ -9,6 +9,12 @@
 !.yarn/plugins
 !.yarn/releases
 !.yarn/versions
+/.agent
+/.gemini
+/.source
+/.vscode
+/.idea
+/.agents
 
 # testing
 /coverage
@@ -35,7 +41,9 @@ yarn-error.log*
 
 # vercel
 .vercel
+.gemini
 
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+.source

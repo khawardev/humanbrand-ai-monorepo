@@ -1,7 +1,7 @@
 'use client'
 
 import { Button } from "@/components/ui/button"
-import { signIn, signOut } from "@/lib/better-auth/auth-client"
+import { signIn, signOut } from "@/lib/auth/auth-client"
 import { useRouter } from "next/navigation"
 import { FcGoogle } from "react-icons/fc"
 
@@ -43,7 +43,7 @@ export function SignoutButtonMobile() {
                 await signOut();
                 router.refresh();
             }} size={'sm'} variant={'destructive'}>
-                Sign out 
+                Sign out
             </Button>
         </section>
     )

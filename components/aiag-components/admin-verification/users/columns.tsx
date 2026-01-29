@@ -11,14 +11,14 @@ import { TiCancel } from "react-icons/ti";
 import { TbLockCancel } from "react-icons/tb";
 import { MdCancel } from "react-icons/md";
 import { Delete, Trash } from "lucide-react";
-import { deleteUserById } from "@/actions/users-actions";
+import { deleteUserById } from "@/server/actions/users-actions";
 import { startTransition } from "react";
 import { toast } from "sonner";
 
 export const getUsersColumns = (
     onVerificationToggle: (userId: string, currentStatus: boolean) => void,
     isPending: boolean,
-    handleDeleteUser:any
+    handleDeleteUser: any
 ): any => [
         {
             id: "select",

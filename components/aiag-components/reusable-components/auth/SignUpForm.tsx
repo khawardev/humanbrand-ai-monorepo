@@ -7,7 +7,7 @@ import { Button } from '@/components/ui/button';
 import { toast } from 'sonner';
 import { useState } from 'react';
 import { Eye, EyeOff, Loader2 } from 'lucide-react';
-import { signUp } from '@/lib/better-auth/auth-client';
+import { signUp } from '@/lib/auth/auth-client';
 import { useRouter } from 'next/navigation';
 
 interface FormValues {
