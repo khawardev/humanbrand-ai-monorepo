@@ -18,11 +18,11 @@ import { useSearchParams, useRouter } from 'next/navigation'
 import { Hero } from "@/components/aiag-components/reusable-components/hero"
 import { Generate } from "@/components/aiag-components/reusable-components/generate"
 import { Separator } from "@/components/ui/separator"
-import { LineSpinner, Spinner } from "@/shared/spinner"
-import { useSessionContentGenerator } from "@/hooks/aiagHooks/use-session-content-generator"
+import { LineSpinner, Spinner } from "@/components/shared/Spinner"
+import { useSessionContentGenerator } from "@/hooks/aiagHooks/useSessionContentGenerator"
 import { PiBrain } from "react-icons/pi"
 import { RiAiGenerate } from "react-icons/ri"
-import { CustomTabs } from "@/shared/CustomTabs"
+import { CustomTabs } from "@/components/shared/CustomTabs"
 
 
 export function SessionPageComponent({ initialData, user }: any) {

@@ -5,7 +5,7 @@ import { Drawer } from 'vaul';
 import { Button } from '../ui/button';
 import Link from 'next/link';
 import { cn } from '@/lib/utils';
-import { AIAGConfig } from '@/config/aiag-config';
+import { AIAGConfig } from '@/config/aiagConfig';
 import { usePathname } from 'next/navigation';
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { SigninButtonMobile, SignoutButtonMobile } from '../aiag-components/reusable-components/auth/signin-button';

@@ -3,8 +3,8 @@
 import { revalidatePath } from "next/cache"
 import { db } from "@/server/db"
 import { eq } from "drizzle-orm"
-import { generateNewContent } from "@/server/actions/generate-new-content-actions"
-import { knowledgeBaseChat } from '../db/schema/knowledge-base-chat-schema';
+import { generateNewContent } from "@/server/actions/generateNewContentActions"
+import { knowledgeBaseChat } from '../db/schema/knowledgeBaseChatSchema';
 import { getKnowledgeBaseSystemPrompt, getRewriteSystemPrompt } from "@/lib/aiag/prompts"
 
 export async function getKnowledgeBaseChat(userId: string) {

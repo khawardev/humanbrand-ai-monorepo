@@ -1,6 +1,6 @@
 import { FormSection } from "@/components/aiag-components/reusable-components/form-section"
 import { CheckboxCard } from "@/components/aiag-components/reusable-components/checkbox-card"
-import { ctas } from "@/config/form-data"
+import { ctas } from "@/config/formData"
 
 interface CtaSectionProps {
     selectedValues: number[];

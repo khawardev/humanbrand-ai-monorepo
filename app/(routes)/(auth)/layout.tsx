@@ -1,4 +1,4 @@
-import { ContainerSm } from "@/components/Container";
+import { ContainerSm } from "@/components/shared/Container";
 
 export default async function AuthLayout({ children }: { children: React.ReactNode }) {
   return (

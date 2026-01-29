@@ -3,7 +3,7 @@ import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
 import React from "react";
 import { useTheme } from "next-themes";
-import { Icons } from "@/shared/icons";
+import { Icons } from "@/components/shared/Icons";
 
 const ThemeSwitcher = React.forwardRef<
     HTMLButtonElement,

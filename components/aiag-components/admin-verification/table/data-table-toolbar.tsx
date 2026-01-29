@@ -23,7 +23,7 @@ import {
 import { CircleXIcon, Columns3Icon, ListFilterIcon, TrashIcon } from "lucide-react";
 import { toast } from "sonner";
 import { cn } from "@/lib/utils";
-import { Spinner } from "@/shared/spinner";
+import { Spinner } from "@/components/shared/Spinner";
 
 export interface SearchableColumn<TData> {
     id: keyof TData | string;
@@ -88,7 +88,7 @@ export function DataTableToolbar<TData>({
         if (!onDeleteRows) return;
         setIsDeleting(true);
         try {
-            const selectedData = table.getFilteredSelectedRowModel().rows.map((row:any) => row.original);
+            const selectedData = table.getFilteredSelectedRowModel().rows.map((row: any) => row.original);
             await onDeleteRows(selectedData);
             table.resetRowSelection();
             setDeleteDialogOpen(false);
@@ -122,7 +122,7 @@ export function DataTableToolbar<TData>({
                         </div>
                         {Boolean(primarySearchValue) && (
                             <button
-                                
+
                                 className="text-muted-foreground/80 hover:text-foreground focus-visible:border-ring focus-visible:ring-ring/50 absolute inset-y-0 right-0 flex h-full w-9 items-center justify-center rounded-r-md transition-[color,box-shadow] outline-none focus:z-10 focus-visible:ring-[3px] disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50"
                                 aria-label="Clear search"
                                 onClick={handleClearSearch}

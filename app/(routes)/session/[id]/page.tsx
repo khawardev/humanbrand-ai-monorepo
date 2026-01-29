@@ -1,5 +1,5 @@
-import { getSessionById } from "@/server/actions/saved-session-actions"
-import { getUser } from "@/server/actions/users-actions";
+import { getSessionById } from "@/server/actions/savedSessionActions"
+import { getUser } from "@/server/actions/usersActions";
 import { SessionPageComponent } from "@/components/aiag-components/session/session-component";
 
 const page = async ({ params }: any) => {

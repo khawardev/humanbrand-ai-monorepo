@@ -5,7 +5,7 @@ import { ModelsTabs } from "@/components/aiag-components/reusable-components/mod
 import {
     campaignTypes,
     modelTabs,
-} from "@/config/form-data"
+} from "@/config/formData"
 import { Hero } from "@/components/aiag-components/reusable-components/hero"
 import React, { useState, useRef, startTransition, useTransition } from "react"
 import { RadioCard } from "@/components/aiag-components/reusable-components/radio-card"
@@ -13,10 +13,10 @@ import { CheckCircle2, Copy, Download } from "lucide-react"
 import { ReferenceMaterialSection } from "@/components/aiag-components/selection-components/ReferenceMaterialSection"
 import { AdditionalInstructionsSection } from "@/components/aiag-components/selection-components/AdditionalInstructionsSection"
 import { Generate } from "@/components/aiag-components/reusable-components/generate"
-import { LineSpinner } from "@/shared/spinner"
+import { LineSpinner } from "@/components/shared/Spinner"
 import { Separator } from "@/components/ui/separator"
 import { getCampaignContentPrompts } from "@/lib/aiag/prompts"
-import { generateNewContent } from "@/server/actions/generate-new-content-actions"
+import { generateNewContent } from "@/server/actions/generateNewContentActions"
 import { cleanAndFlattenBulletsGoogle } from "@/lib/cleanMarkdown"
 import { AIAG_VERSION } from "@/lib/aiag/constants"
 import ReactMarkdown from "react-markdown";
@@ -25,7 +25,7 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigge
 import { Button } from "@/components/ui/button"
 import { IoIosArrowDown } from "react-icons/io"
 import { toast } from "sonner"
-import { getUser } from "@/server/actions/users-actions"
+import { getUser } from "@/server/actions/usersActions"
 import { stripMarkdownBold } from "@/lib/utils"
 
 

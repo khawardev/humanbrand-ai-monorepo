@@ -1,6 +1,6 @@
 import { FormSection } from "@/components/aiag-components/reusable-components/form-section"
 import { CheckboxCard } from "@/components/aiag-components/reusable-components/checkbox-card"
-import { audiences } from "@/config/form-data"
+import { audiences } from "@/config/formData"
 
 interface AudienceSectionProps {
     selectedValues: number[];

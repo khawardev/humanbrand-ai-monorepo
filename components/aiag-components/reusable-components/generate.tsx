@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button"
-import { ButtonSpinner } from "@/shared/spinner";
+import { ButtonSpinner } from "@/components/shared/Spinner";
 
 type GenerateProps = {
     onGenerate: () => void;

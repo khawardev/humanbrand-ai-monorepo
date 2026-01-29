@@ -1,6 +1,6 @@
 import { FormSection } from "@/components/aiag-components/reusable-components/form-section"
 import { CheckboxCard } from "@/components/aiag-components/reusable-components/checkbox-card"
-import { contentTypes } from "@/config/form-data"
+import { contentTypes } from "@/config/formData"
 
 interface ContentTypeSectionProps {
     selectedValues: number[];

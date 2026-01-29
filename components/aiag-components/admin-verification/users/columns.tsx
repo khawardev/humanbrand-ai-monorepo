@@ -4,14 +4,14 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import Image from "next/image";
 import { Checkbox } from "@/components/ui/checkbox";
-import { Spinner } from "@/shared/spinner";
+import { Spinner } from "@/components/shared/Spinner";
 import { DataTableColumnHeader } from "../table/data-table";
 import { IoIosCheckmarkCircle } from "react-icons/io";
 import { TiCancel } from "react-icons/ti";
 import { TbLockCancel } from "react-icons/tb";
 import { MdCancel } from "react-icons/md";
 import { Delete, Trash } from "lucide-react";
-import { deleteUserById } from "@/server/actions/users-actions";
+import { deleteUserById } from "@/server/actions/usersActions";
 import { startTransition } from "react";
 import { toast } from "sonner";
 

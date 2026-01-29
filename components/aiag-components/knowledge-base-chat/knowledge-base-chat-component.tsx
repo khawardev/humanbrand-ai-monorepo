@@ -1,12 +1,12 @@
-import { getUser } from "@/server/actions/users-actions";
-import { getKnowledgeBaseChat } from "@/server/actions/knowledge-base-chat-actions";
+import { getUser } from "@/server/actions/usersActions";
+import { getKnowledgeBaseChat } from "@/server/actions/knowledgeBaseChatActions";
 import KnowledgeBaseChatUI from "./knowledge-base-chat-ui";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { RiChatSmileAiLine, RiChatVoiceAiFill, RiChatVoiceAiLine, RiVoiceAiLine } from "react-icons/ri";
-import { CustomTabs } from "@/shared/CustomTabs";
+import { CustomTabs } from "@/components/shared/CustomTabs";
 import Gemini_Live_AIAG from "@/components/gemini-live-api-components/gemini-live-app-shared/gemini-live-aiag";
 import { Button } from "@/components/ui/button";
-import TTSPage from "@/components/tts/TTS-Page";
+import TTSPage from "@/components/aiag-components/knowledge-base-chat/TTS-Page";
 
 export default async function KnowledgeBaseChatComponent() {
     const user = await getUser();

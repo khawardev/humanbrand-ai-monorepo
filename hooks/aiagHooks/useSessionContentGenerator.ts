@@ -2,12 +2,12 @@
 
 import { useState, useEffect, useTransition } from "react"
 import { toast } from "sonner"
-import { contentTypes, modelTabs } from "@/config/form-data"
-import { updateSessionContent, adaptPersonaForSession, manageImageForSession, updateChatForSession } from "@/server/actions/saved-session-actions"
-import { generateImageAction } from "@/server/actions/generate-image-actions"
-import { generateNewContent } from "@/server/actions/generate-new-content-actions"
+import { contentTypes, modelTabs } from "@/config/formData"
+import { updateSessionContent, adaptPersonaForSession, manageImageForSession, updateChatForSession } from "@/server/actions/savedSessionActions"
+import { generateImageAction } from "@/server/actions/generateImageActions"
+import { generateNewContent } from "@/server/actions/generateNewContentActions"
 import { getChatSystemPrompt } from "@/lib/aiag/prompts"
-import { knowledgeBaseContent } from "@/lib/aiag/knowledge_base"
+import { knowledgeBaseContent } from "@/lib/aiag/knowledgeBase"
 import { uploadImageToSupabase } from "@/lib/supabase/uploadImageToSupabase"
 
 export function useSessionContentGenerator(initialData: any) {

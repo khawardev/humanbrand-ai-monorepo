@@ -1,6 +1,6 @@
 import { FormSection } from "@/components/aiag-components/reusable-components/form-section"
 import { RadioCard } from "@/components/aiag-components/reusable-components/radio-card"
-import { socialPlatforms } from "@/config/form-data"
+import { socialPlatforms } from "@/config/formData"
 
 interface SocialPlatformSectionProps {
     selectedValue: number | null;

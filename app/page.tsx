@@ -1,7 +1,7 @@
 import React from 'react';
-import { getUser } from "@/server/actions/users-actions";
-import { getKnowledgeBaseChat } from "@/server/actions/knowledge-base-chat-actions";
-import AI_Page from '@/components/AI/AI_Page';
+import { getUser } from "@/server/actions/usersActions";
+import { getKnowledgeBaseChat } from "@/server/actions/knowledgeBaseChatActions";
+import AI_Page from '@/components/AI/AiPage';
 
 export default async function HomePage() {
     const user = await getUser();

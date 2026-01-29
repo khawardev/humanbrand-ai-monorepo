@@ -3,7 +3,7 @@
 import { Button } from '@/components/ui/button';
 import { toast } from 'sonner';
 import Link from 'next/link';
-import { signIn } from '@/lib/auth/auth-client';
+import { signIn } from '@/lib/auth/authClient';
 import { FcGoogle } from 'react-icons/fc';
 import SignUpForm from '@/components/aiag-components/reusable-components/auth/SignUpForm';
 

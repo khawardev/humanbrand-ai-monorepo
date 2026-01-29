@@ -1,6 +1,6 @@
 import { FormSection } from "@/components/aiag-components/reusable-components/form-section"
 import { RadioCard } from "@/components/aiag-components/reusable-components/radio-card"
-import { subjects } from "@/config/form-data"
+import { subjects } from "@/config/formData"
 
 interface SubjectSectionProps {
     selectedValue: number | null;

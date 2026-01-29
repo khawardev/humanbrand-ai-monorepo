@@ -1,6 +1,6 @@
 'use client'
 
-import { formatCompactTime } from '@/shared/server-functions'
+import { formatCompactTime } from '@/components/shared/ServerFunctions'
 import Link from 'next/link'
 import React from 'react'
 import { HiOutlineChatAlt } from 'react-icons/hi'

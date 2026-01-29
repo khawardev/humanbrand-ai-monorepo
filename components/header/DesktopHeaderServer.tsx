@@ -1,10 +1,10 @@
-import UserMenu from "@/components/header/user-menu";
+import UserMenu from "@/components/header/UserMenu";
 import SavedSessions from "../aiag-components/reusable-components/session/saved-sessions";
 import { SigninButtonDesktop } from "../aiag-components/reusable-components/auth/signin-button";
-import MobileHeader from "./mobile-header";
+import MobileHeader from "./MobileHeader";
 import { Suspense } from "react";
-import { getSession } from "@/server/actions/get-session";
-import { getUserWithSavedSessions } from "@/server/actions/users-actions";
+import { getSession } from "@/server/actions/getSession";
+import { getUserWithSavedSessions } from "@/server/actions/usersActions";
 import AuthButtons from "../aiag-components/reusable-components/auth/AuthButtons";
 
 export const revalidate = 0;

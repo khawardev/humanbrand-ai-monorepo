@@ -7,8 +7,8 @@ import { ContentActions } from "./content-actions";
 import { ImageGenerator } from "./image/image-generator";
 import { ContentChat } from "./content-chat";
 import { GeneratedPersonaContent } from "./persona/generated-persona-content";
-import { LineSpinner, Spinner } from "@/shared/spinner";
-import { CustomTabs } from "@/shared/CustomTabs";
+import { LineSpinner, Spinner } from "@/components/shared/Spinner";
+import { CustomTabs } from "@/components/shared/CustomTabs";
 import { RiAiGenerate, RiChatSmileAiLine, RiImageCircleAiFill, RiUserSmileLine } from "react-icons/ri";
 import { stripMarkdownBold } from "@/lib/utils";
 

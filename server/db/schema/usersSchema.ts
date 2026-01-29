@@ -1,8 +1,8 @@
 import { relations } from 'drizzle-orm';
 import { text, timestamp, boolean, pgSchema } from 'drizzle-orm/pg-core';
-import { savedSession } from './saved-session-schema';
-import { aiag_schema } from './aiag-schema';
-import { knowledgeBaseChat } from './knowledge-base-chat-schema';
+import { savedSession } from './savedSessionSchema';
+import { aiag_schema } from './aiagSchema';
+import { knowledgeBaseChat } from './knowledgeBaseChatSchema';
 
 export const user = aiag_schema.table('user', {
     id: text('id').primaryKey(),

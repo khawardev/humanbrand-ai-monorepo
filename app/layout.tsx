@@ -1,7 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import "@/app/(styles)/globals.css";
-import DesktopHeader from "@/components/header/desktop-header";
+import DesktopHeader from "@/components/header/DesktopHeader";
 import { Toaster } from "@/components/ui/sonner";
 import { ThemeProvider } from "next-themes";
 

@@ -1,6 +1,6 @@
 import { FormSection } from "@/components/aiag-components/reusable-components/form-section"
 import { ModelsTabs } from "@/components/aiag-components/reusable-components/models-tabs"
-import { modelTabs } from "@/config/form-data"
+import { modelTabs } from "@/config/formData"
 
 interface ModelsSectionProps {
     selectedValue: number;

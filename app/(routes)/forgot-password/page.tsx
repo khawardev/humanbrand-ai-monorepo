@@ -4,7 +4,7 @@ import { FormSection } from "@/components/aiag-components/reusable-components/fo
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { authClient } from "@/lib/auth/auth-client";
+import { authClient } from "@/lib/auth/authClient";
 import { useState } from "react";
 
 

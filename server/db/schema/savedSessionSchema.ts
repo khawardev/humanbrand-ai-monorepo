@@ -5,9 +5,9 @@ import {
     jsonb,
     numeric,
 } from "drizzle-orm/pg-core"
-import { user } from "./users-schema"
+import { user } from "./usersSchema"
 import { relations } from "drizzle-orm";
-import { aiag_schema } from "./aiag-schema";
+import { aiag_schema } from "./aiagSchema";
 
 
 export const savedSession = aiag_schema.table("saved_sessions", {

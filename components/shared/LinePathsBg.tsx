@@ -269,13 +269,13 @@ const AnimatedTitle = memo(function AnimatedTitle({
     );
 });
 
-export default memo(function BackgroundPaths({
+export default function BackgroundPaths({
     title = "Background Paths",
 }: {
     title?: string;
 }) {
     return (
-        <div className="relative min-h-screen w-full flex items-center justify-center overflow-hidden bg-white dark:bg-neutral-950">
+        <div className="relative min-h-screen w-full flex items-center justify-center overflow-hidden ">
             <div className="absolute inset-0">
                 <FloatingPaths position={1} />
             </div>
@@ -292,4 +292,4 @@ export default memo(function BackgroundPaths({
             </div>
         </div>
     );
-});
+};

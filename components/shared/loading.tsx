@@ -1,5 +1,5 @@
-import { HalfLogo } from '@/shared/logo'
-import { Spinner } from '@/shared/spinner'
+import { HalfLogo } from '@/components/shared/Logo'
+import { Spinner } from '@/components/shared/Spinner'
 import React from 'react'
 import { LuLoaderCircle } from 'react-icons/lu'
 

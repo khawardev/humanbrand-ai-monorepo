@@ -4,11 +4,11 @@ import { revalidatePath } from "next/cache"
 import { db } from "@/server/db"
 import { eq } from "drizzle-orm"
 import { getNewGenerationPrompts, getImageGenerationPrompt, getRevisionPrompts, getHyperRelevancePrompts, getExistingContentPrompts } from "@/lib/aiag/prompts"
-import { generateNewContent, generateSessionTitle } from "@/server/actions/generate-new-content-actions"
+import { generateNewContent, generateSessionTitle } from "@/server/actions/generateNewContentActions"
 import { cleanAndFlattenBulletsGoogle } from "@/lib/cleanMarkdown"
-import { knowledgeBaseContent } from "@/lib/aiag/knowledge_base"
-import { modelTabs, audiences, subjects, contentTypes, ctas, socialPlatforms, adjustToneAndCreativityData } from "@/config/form-data"
-import { savedSession } from "@/server/db/schema/saved-session-schema"
+import { knowledgeBaseContent } from "@/lib/aiag/knowledgeBase"
+import { modelTabs, audiences, subjects, contentTypes, ctas, socialPlatforms, adjustToneAndCreativityData } from "@/config/formData"
+import { savedSession } from "@/server/db/schema/savedSessionSchema"
 
 
 export async function createSession(data: any) {

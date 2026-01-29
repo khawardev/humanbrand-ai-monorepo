@@ -3,7 +3,7 @@
 import React from "react"
 import { Generate } from "@/components/aiag-components/reusable-components/generate"
 import { Separator } from "@/components/ui/separator"
-import { LineSpinner } from "@/shared/spinner"
+import { LineSpinner } from "@/components/shared/Spinner"
 import { ModelsSection } from "@/components/aiag-components/selection-components/ModelsSection"
 import { AudienceSection } from "@/components/aiag-components/selection-components/AudienceSection"
 import { SubjectSection } from "@/components/aiag-components/selection-components/SubjectSection"
@@ -12,7 +12,7 @@ import { SocialPlatformSection } from "@/components/aiag-components/selection-co
 import { CtaSection } from "@/components/aiag-components/selection-components/CtaSection"
 import { ReferenceMaterialSection } from "@/components/aiag-components/selection-components/ReferenceMaterialSection"
 import { AdditionalInstructionsSection } from "@/components/aiag-components/selection-components/AdditionalInstructionsSection"
-import { useNewContentGenerator } from "@/hooks/aiagHooks/use-new-content-generator"
+import { useNewContentGenerator } from "@/hooks/aiagHooks/useNewContentGenerator"
 
 
 export default function HomePageComponent() {

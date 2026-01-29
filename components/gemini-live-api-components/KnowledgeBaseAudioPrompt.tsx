@@ -8,7 +8,7 @@ import {
     Type,
 } from "@google/genai";
 import { useLiveAPIContext } from "../../contexts/LiveAPIContext";
-import { knowledgeBaseContent } from "@/lib/aiag/knowledge_base";
+import { knowledgeBaseContent } from "@/lib/aiag/knowledgeBase";
 
 const knowledgeBaseToolDeclaration: FunctionDeclaration = {
     name: "search_aiag_knowledge_base",

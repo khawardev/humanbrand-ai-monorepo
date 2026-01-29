@@ -28,7 +28,7 @@ import {
 import { DataTablePagination } from "./data-table-pagination";
 import { DataTableToolbar, DataTableToolbarProps } from "./data-table-toolbar";
 import { cn } from "@/lib/utils";
-import { Spinner } from "@/shared/spinner";
+import { Spinner } from "@/components/shared/Spinner";
 
 interface DataTableProps<TData, TValue> extends Omit<DataTableToolbarProps<TData>, 'table'> {
     columns: any;

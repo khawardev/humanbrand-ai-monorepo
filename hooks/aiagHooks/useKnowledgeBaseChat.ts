@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { toast } from "sonner";
-import { upsertKnowledgeBaseChat, rewriteAssistantMessage } from "@/server/actions/knowledge-base-chat-actions";
+import { upsertKnowledgeBaseChat, rewriteAssistantMessage } from "@/server/actions/knowledgeBaseChatActions";
 
 export function useKnowledgeBaseChat(initialData: { user: any; initialChatHistory: any[] }) {
     const [user, setUser] = useState<any>(initialData.user);

@@ -1,7 +1,7 @@
 import {
   createWorketFromSrc,
   registeredWorklets,
-} from "./audioworklet-registry";
+} from "./audioworkletRegistry";
 
 export class AudioStreamer {
   private sampleRate: number = 24000;

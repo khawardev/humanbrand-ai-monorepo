@@ -1,7 +1,7 @@
 'use client'
 
 import { Button } from "@/components/ui/button"
-import { signIn, signOut } from "@/lib/auth/auth-client"
+import { signIn, signOut } from "@/lib/auth/authClient"
 import { useRouter } from "next/navigation"
 import { FcGoogle } from "react-icons/fc"
 

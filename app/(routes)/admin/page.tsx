@@ -1,4 +1,4 @@
-import { getAllUsers } from '@/server/actions/users-actions';
+import { getAllUsers } from '@/server/actions/usersActions';
 import UsersTable from '@/components/aiag-components/admin-verification/users/users-table';
 import React from 'react';
 

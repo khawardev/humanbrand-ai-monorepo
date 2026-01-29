@@ -6,7 +6,7 @@ import { MdOutlineFileUpload } from "react-icons/md";
 import { IoClose } from "react-icons/io5";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
-import { LineSpinner } from "@/shared/spinner";
+import { LineSpinner } from "@/components/shared/Spinner";
 import { PiFilePdfFill } from "react-icons/pi";
 
 type FileInfo = {

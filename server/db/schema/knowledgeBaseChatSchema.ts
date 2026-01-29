@@ -3,9 +3,9 @@ import {
     timestamp,
     jsonb,
 } from "drizzle-orm/pg-core"
-import { user } from "./users-schema"
+import { user } from "./usersSchema"
 import { relations } from "drizzle-orm";
-import { aiag_schema } from "./aiag-schema";
+import { aiag_schema } from "./aiagSchema";
 
 export const knowledgeBaseChat = aiag_schema.table("knowledge_base_chat", {
     id: text("id")

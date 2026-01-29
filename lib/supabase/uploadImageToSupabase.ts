@@ -1,4 +1,4 @@
-import { supabaseClient } from "@/lib/supabase/supabase-admin";
+import { supabaseClient } from "@/lib/supabase/supabaseAdmin";
 
 export async function uploadImageToSupabase(file: File): Promise<string> {
   const filePath = `${Date.now()}-${file.name}`;

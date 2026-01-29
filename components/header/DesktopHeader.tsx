@@ -1,18 +1,18 @@
 import Link from "next/link";
 import { ThemeSwitcher } from "../ui/theme-switcher";
-import { FullLogo, HalfLogo } from "@/shared/logo";
-import NavigationMenuComp from "./navigation-menu";
-import DesktopHeaderServer from "./desktop-header-server";
-import { getUser } from "@/server/actions/users-actions";
-import { ADMIN_EMAILS, AIAGConfig } from "@/config/aiag-config";
-import MobileHeader from "./mobile-header";
+import { FullLogo, HalfLogo } from "@/components/shared/Logo";
+import NavigationMenuComp from "./NavigationMenu";
+import DesktopHeaderServer from "./DesktopHeaderServer";
+import { getUser } from "@/server/actions/usersActions";
+import { ADMIN_EMAILS, AIAGConfig } from "@/config/aiagConfig";
+import MobileHeader from "./MobileHeader";
 
 
 const DesktopHeader = async () => {
     const user = await getUser();
     const isAdmin = user?.email ? ADMIN_EMAILS.includes(user.email) : false;
 
-    const navLinks = user 
+    const navLinks = user
         ? AIAGConfig.mainNav.filter((nav: any) => {
             if (nav.title === 'Admin') return isAdmin;
             return true;

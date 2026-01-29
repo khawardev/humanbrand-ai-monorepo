@@ -1,3 +1,3 @@
-export * from "./users-schema";
-export * from "./saved-session-schema";
-export * from "./knowledge-base-chat-schema";
+export * from "./usersSchema";
+export * from "./savedSessionSchema";
+export * from "./knowledgeBaseChatSchema";

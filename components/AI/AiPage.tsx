@@ -4,7 +4,7 @@ import { ArrowRight, Bot, Check, ChevronDown, Speech, Download, Loader2, Copy } 
 import React, { useState, useRef, useEffect } from "react";
 import { Textarea } from "@/components/ui/textarea";
 import { cn, stripMarkdownBold } from "@/lib/utils";
-import { useAutoResizeTextarea } from "@/hooks/use-auto-resize-textarea";
+import { useAutoResizeTextarea } from "@/hooks/useAutoResizeTextarea";
 import { Button } from "@/components/ui/button";
 import {
     DropdownMenu,
@@ -15,12 +15,12 @@ import {
 import { motion, AnimatePresence } from "framer-motion";
 import { RiChatSmileAiLine, RiVoiceAiLine } from "react-icons/ri";
 import Image from "next/image";
-import { useKnowledgeBaseChat } from "@/hooks/aiagHooks/use-knowledge-base-chat";
+import { useKnowledgeBaseChat } from "@/hooks/aiagHooks/useKnowledgeBaseChat";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import Gemini_Live_AIAG from "@/components/gemini-live-api-components/gemini-live-app-shared/gemini-live-aiag";
 import { Skeleton } from "@/components/ui/skeleton";
-import RewriteInput from "./Rewrite-Input";
+import RewriteInput from "./RewriteInput";
 import { toast } from "sonner";
 
 interface AI_PromptProps {

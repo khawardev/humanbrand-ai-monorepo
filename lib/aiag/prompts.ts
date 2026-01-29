@@ -4,7 +4,7 @@ import {
     KNOWLEDGE_BASE_FALLBACK,
     USER_UPLOADED_FALLBACK,
 } from "./constants";
-import { knowledgeBaseContent } from "@/lib/aiag/knowledge_base"
+import { knowledgeBaseContent } from "@/lib/aiag/knowledgeBase"
 
 
 export function getNewGenerationPrompts({
@@ -396,7 +396,7 @@ export function getKnowledgeBaseSystemPrompt(conversationHistory: string): strin
 
 
     Always respond to the last user message according to their intent, while adhering to all rules above.`;
-    
+
 }
 
 

@@ -6,7 +6,7 @@ import { MdOutlineFileUpload } from "react-icons/md";
 import { IoClose } from "react-icons/io5";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
-import { LineSpinner } from "@/shared/spinner";
+import { LineSpinner } from "@/components/shared/Spinner";
 import { PiFile, PiFilePdfFill, PiFileDocFill, PiFileXlsFill, PiFilePptFill, PiFileCsvFill, PiFileFill } from "react-icons/pi";
 
 type FileInfo = {
@@ -92,7 +92,7 @@ export function FileDropzone({ onFilesChange, initialFileInfos }: FileDropzonePr
     //     }
     // };
 
-    const MAX_TOKENS = 1_000_000; 
+    const MAX_TOKENS = 1_000_000;
 
     function estimateTokens(text: string): number {
         return Math.ceil(text.length / 4);
@@ -116,7 +116,7 @@ export function FileDropzone({ onFilesChange, initialFileInfos }: FileDropzonePr
                 const { parsedText } = await response.json();
 
                 const tokenCount = estimateTokens(parsedText);
-                
+
                 if (tokenCount > MAX_TOKENS) {
                     toast.warning(
                         `Your file content is about ${tokenCount.toLocaleString()} tokens, which exceeds the model's ${MAX_TOKENS.toLocaleString()} token limit. Please upload a smaller file.`

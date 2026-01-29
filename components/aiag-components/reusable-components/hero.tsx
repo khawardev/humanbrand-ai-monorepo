@@ -1,11 +1,13 @@
 'use client'
 import Image from "next/image"
 import { AIAG_VERSION } from "@/lib/aiag/constants"
+import BackgroundPaths from "@/components/shared/LinePathsBg"
 
 export const Hero = () => {
 
     return (
-            <div className=" md:py-12">
+        <div className=" md:py-12">
+            <BackgroundPaths />
                 <div className="div-center-md md:py-12 py-0">
                     <div className="md:w-2/3 select-none">
                         <div>

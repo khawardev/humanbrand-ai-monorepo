@@ -1,9 +1,9 @@
-import AudioRecordingWorklet from "./worklets/audio-processing";
-import VolMeterWorket from "./worklets/vol-meter";
+import AudioRecordingWorklet from "./worklets/audioProcessing";
+import VolMeterWorket from "./worklets/volMeter";
 
 import EventEmitter from "eventemitter3";
 import { audioContext } from "./utils";
-import { createWorketFromSrc } from "./audioworklet-registry";
+import { createWorketFromSrc } from "./audioworkletRegistry";
 
 function arrayBufferToBase64(buffer: ArrayBuffer) {
   var binary = "";

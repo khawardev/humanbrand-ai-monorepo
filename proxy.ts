@@ -1,6 +1,6 @@
 import { type NextRequest, NextResponse } from 'next/server'
-import { getSession } from './server/actions/get-session'
-import { ADMIN_EMAILS } from './config/aiag-config'
+import { getSession } from './server/actions/getSession'
+import { ADMIN_EMAILS } from './config/aiagConfig'
 
 export async function proxy(request: NextRequest) {
 	const session = await getSession()

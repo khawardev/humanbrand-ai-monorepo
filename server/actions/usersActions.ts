@@ -1,10 +1,10 @@
 "use server";
 
 import { db } from "@/server/db";
-import { getSession } from "@/server/actions/get-session";
+import { getSession } from "@/server/actions/getSession";
 import { desc, eq } from "drizzle-orm";
-import { user } from "@/server/db/schema/users-schema";
-import { savedSession } from "@/server/db/schema/saved-session-schema";
+import { user } from "@/server/db/schema/usersSchema";
+import { savedSession } from "@/server/db/schema/savedSessionSchema";
 import { cache } from "react";
 import { revalidatePath } from "next/cache";
 
