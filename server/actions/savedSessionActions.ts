@@ -10,7 +10,6 @@ import { knowledgeBaseContent } from "@/lib/aiag/knowledgeBase"
 import { modelTabs, audiences, subjects, contentTypes, ctas, socialPlatforms, adjustToneAndCreativityData } from "@/config/formData"
 import { savedSession } from "@/server/db/schema/savedSessionSchema"
 
-
 export async function createSession(data: any) {
     try {
         const selectedModelObj = modelTabs.find((tab) => tab.id === data.modelId)
@@ -20,7 +19,6 @@ export async function createSession(data: any) {
         const selectedContentTypeLabels = contentTypes.filter((c) => data.contentTypeIds.includes(c.id)).map((c) => c.label)
         const selectedCtaLabels = ctas.filter((c) => data.ctaIds.includes(c.id)).map((c) => c.label)
         const selectedSocialPlatformObj = socialPlatforms.find((p) => p.id === data.socialPlatformId)
-
 
         const promptData = {
             selectedAudiences: selectedAudienceLabels,
@@ -70,14 +68,14 @@ export async function createSession(data: any) {
         const sessionId = newSession[0].id
         if (!sessionId) throw new Error("Failed to create session.")
 
-        revalidatePath(`/session/${sessionId}`)
+        revalidatePath(`/dashboard/session/${sessionId}`)
+        revalidatePath("/dashboard", "layout")
         return { sessionId }
     } catch (error) {
         console.error("Error creating session:", error)
         return { error: "Could not create session." }
     }
 }
-
 
 export async function createExistingContentSession(data: any) {
     try {
@@ -120,7 +118,8 @@ export async function createExistingContentSession(data: any) {
         const sessionId = newSession[0].id;
         if (!sessionId) throw new Error("Failed to create existing content session.");
 
-        revalidatePath(`/session/${sessionId}`);
+        revalidatePath(`/dashboard/session/${sessionId}`);
+        revalidatePath("/dashboard", "layout")
         return { sessionId };
 
     } catch (error) {
@@ -147,30 +146,6 @@ export async function createCampaignContentSession(data: any) {
         const generatedResult = await generateNewContent(generateData);
         const cleanedMarkdown = cleanAndFlattenBulletsGoogle(generatedResult.generatedText);
 
-        // const titleResult = await generateSessionTitle({ modelAlias: selectedModelObj?.label, temperature: data.temperature, userPrompt: cleanedMarkdown });
-        // const imagePromptResult = await generateNewContent({ modelAlias: selectedModelObj?.label, temperature: data.temperature, userPrompt: getImageGenerationPrompt({ contentGenerated: cleanedMarkdown }).finalImagePrompt });
-
-        // const sessionPayload = {
-        //     userId: data.userId,
-        //     sessionType: data.sessionType,
-        //     title: titleResult.generatedText,
-        //     modelId: data.modelId,
-        //     referenceFileInfos: data.referenceFileInfos,
-        //     referenceFilesData: data.referenceFilesData,
-        //     additionalInstructions: data.additionalInstructions,
-        //     contextualAwareness: data.contextualAwareness,
-        //     tone: data.tone,
-        //     temperature: data.temperature,
-        //     generatedContent: cleanedMarkdown,
-        //     imagePrompt: imagePromptResult.generatedText,
-        // };
-
-        // const newSession = await db.insert(savedSession).values(sessionPayload).returning({ id: savedSession.id });
-
-        // const sessionId = newSession[0].id;
-        // if (!sessionId) throw new Error("Failed to create existing content session.");
-
-        // revalidatePath(`/session/${sessionId}`);
         return cleanedMarkdown;
 
     } catch (error) {
@@ -178,7 +153,6 @@ export async function createCampaignContentSession(data: any) {
         return { error: "Could not create session from existing content." };
     }
 }
-
 
 export async function getSessionById(sessionId: string) {
     try {
@@ -246,7 +220,7 @@ export async function updateSessionContent(sessionId: string, data: any) {
             imagePrompt: imagePromptResult.generatedText,
         }).where(eq(savedSession.id, sessionId));
 
-        revalidatePath(`/session/${sessionId}`);
+        revalidatePath(`/dashboard/session/${sessionId}`);
         return { success: true };
     } catch (error) {
         console.error("Error updating session content:", error);
@@ -268,7 +242,7 @@ export async function adaptPersonaForSession(sessionId: string, data: any) {
         const cleanedMarkdown = cleanAndFlattenBulletsGoogle(result.generatedText);
 
         await db.update(savedSession).set({ personaContent: cleanedMarkdown }).where(eq(savedSession.id, sessionId));
-        revalidatePath(`/session/${sessionId}`);
+        revalidatePath(`/dashboard/session/${sessionId}`);
         return { success: true };
     } catch (error) {
         console.error("Error adapting persona:", error);
@@ -285,7 +259,7 @@ export async function manageImageForSession(sessionId: string, data: any) {
             imageReferenceFileInfo: data.imageReferenceFileInfo
         }).where(eq(savedSession.id, sessionId));
 
-        revalidatePath(`/session/${sessionId}`);
+        revalidatePath(`/dashboard/session/${sessionId}`);
         return { success: true };
     } catch (error) {
         console.error("Error managing image:", error);
@@ -301,7 +275,7 @@ export async function updateChatForSession(sessionId: string, data: any) {
             chatFilesData: data.chatFilesData,
         }).where(eq(savedSession.id, sessionId));
 
-        revalidatePath(`/session/${sessionId}`);
+        revalidatePath(`/dashboard/session/${sessionId}`);
         return { success: true };
     } catch (error) {
         console.error("Error updating chat:", error);

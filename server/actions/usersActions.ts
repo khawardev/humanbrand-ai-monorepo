@@ -66,20 +66,19 @@ export async function updateUserVerification(userId: string, isVerified: boolean
       .set({ adminVerified: isVerified, updatedAt: new Date() })
       .where(eq(user.id, userId));
 
-    revalidatePath("/admin");
-    revalidatePath('/', 'layout');
+    revalidatePath("/dashboard/admin");
+    revalidatePath("/dashboard", "layout");
   } catch (error) {
     console.error("Error updating user verification status:", error);
     throw new Error("Failed to update user status.");
   }
 }
 
-
 export async function deleteUserById(userId: string) {
   try {
     await db.delete(savedSession).where(eq(savedSession.userId, userId));
     await db.delete(user).where(eq(user.id, userId));
-    revalidatePath("/admin");
+    revalidatePath("/dashboard/admin");
     return { success: true };
   } catch (error) {
     console.error("Error deleting user:", error);

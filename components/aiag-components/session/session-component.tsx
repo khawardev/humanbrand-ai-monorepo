@@ -23,6 +23,7 @@ import { useSessionContentGenerator } from "@/hooks/aiagHooks/useSessionContentG
 import { PiBrain } from "react-icons/pi"
 import { RiAiGenerate } from "react-icons/ri"
 import { CustomTabs } from "@/components/shared/CustomTabs"
+import { DashboardInnerLayout } from "@/components/shared/DashboardComponents"
 
 
 export function SessionPageComponent({ initialData, user }: any) {
@@ -80,111 +81,109 @@ export function SessionPageComponent({ initialData, user }: any) {
     const isNewContentType = initialData.sessionType === 'new';
 
     return (
-        <main className="overflow-hidden pt-12">
+        <DashboardInnerLayout>
             <Hero />
-            <section className="div-center-md">
-                <CustomTabs
-                    triggerMaxWidthClass="max-w-40"
-                    defaultValue="content_generate"
-                    tabs={[
-                        {
-                            label: "Selections",
-                            value: "selections",
-                            icon: <PiBrain />,
-                            content: (
-                                <section className="space-y-10">
-                                    <ModelsSection title={'HBAI Models'} selectedValue={selectedModel} onValueChange={setSelectedModel} />
+            <CustomTabs
+                triggerMaxWidthClass="max-w-40"
+                defaultValue="content_generate"
+                tabs={[
+                    {
+                        label: "Selections",
+                        value: "selections",
+                        icon: <PiBrain />,
+                        content: (
+                            <section className="space-y-10">
+                                <ModelsSection title={'HBAI Models'} selectedValue={selectedModel} onValueChange={setSelectedModel} />
 
-                                    {isNewContentType ? (
-                                        <>
-                                            <AudienceSection title={'Audience(s)'} selectedValues={selectedAudiences} onSelectionChange={setSelectedAudiences} />
-                                            <SubjectSection title={'Subject focus'} selectedValue={selectedSubjects} onSelectionChange={setSelectedSubjects} />
-                                            <ContentTypeSection title={'Content Type(s)'} selectedValues={selectedContentTypes} onSelectionChange={setSelectedContentTypes} />
-                                            {isSocialPostSelected && (
-                                                <SocialPlatformSection title={'Social Platform'} selectedValue={selectedSocialPlatform} onSelectionChange={setSelectedSocialPlatform} />
-                                            )}
-                                            <CtaSection title={'Call to Action(s)'} selectedValues={selectedCtas} onSelectionChange={setSelectedCtas} />
-                                            <ReferenceMaterialSection
-                                                title={'Reference Materials (optional)'}
-                                                initialFileInfos={referenceFileInfos}
-                                                onFilesChange={handleReferenceFileChange}
-                                            />
-                                        </>
-                                    ) : (
+                                {isNewContentType ? (
+                                    <>
+                                        <AudienceSection title={'Audience(s)'} selectedValues={selectedAudiences} onSelectionChange={setSelectedAudiences} />
+                                        <SubjectSection title={'Subject focus'} selectedValue={selectedSubjects} onSelectionChange={setSelectedSubjects} />
+                                        <ContentTypeSection title={'Content Type(s)'} selectedValues={selectedContentTypes} onSelectionChange={setSelectedContentTypes} />
+                                        {isSocialPostSelected && (
+                                            <SocialPlatformSection title={'Social Platform'} selectedValue={selectedSocialPlatform} onSelectionChange={setSelectedSocialPlatform} />
+                                        )}
+                                        <CtaSection title={'Call to Action(s)'} selectedValues={selectedCtas} onSelectionChange={setSelectedCtas} />
                                         <ReferenceMaterialSection
-                                            title={'Existing Content'}
+                                            title={'Reference Materials (optional)'}
                                             initialFileInfos={referenceFileInfos}
                                             onFilesChange={handleReferenceFileChange}
                                         />
-                                    )}
-
-                                    <AdditionalInstructionsSection title={'Additional Instructions (optional)'} value={additionalInstructions} onChange={setAdditionalInstructions} />
-                                    {/* <ContextualAwarenessSection title={'Contextual Awareness (optional)'} value={contextualAwareness} onChange={setContextualAwareness} /> */}
-
-                                    <Generate
-                                        isPending={isPending}
-                                        onGenerate={handleGenerate}
-                                        isDisabled={isGenerateDisabled}
+                                    </>
+                                ) : (
+                                    <ReferenceMaterialSection
+                                        title={'Existing Content'}
+                                        initialFileInfos={referenceFileInfos}
+                                        onFilesChange={handleReferenceFileChange}
                                     />
+                                )}
 
-                                    {isContentPending && (
+                                <AdditionalInstructionsSection title={'Additional Instructions (optional)'} value={additionalInstructions} onChange={setAdditionalInstructions} />
+                                {/* <ContextualAwarenessSection title={'Contextual Awareness (optional)'} value={contextualAwareness} onChange={setContextualAwareness} /> */}
+
+                                <Generate
+                                    isPending={isPending}
+                                    onGenerate={handleGenerate}
+                                    isDisabled={isGenerateDisabled}
+                                />
+
+                                {isContentPending && (
+                                    <>
+                                        <Separator />
+                                        <LineSpinner>Generating Content...</LineSpinner>
+                                    </>
+                                )}
+                            </section>
+                        ),
+                    },
+                    {
+                        label: "AIAG Content",
+                        value: "content_generate",
+                        icon: isContentPending ? <Spinner /> : <RiAiGenerate />,
+                        content: (
+                            <div className="space-y-10" >
+                                {isContentPending ? (
+                                    <>
+                                        <LineSpinner>Generating Content...</LineSpinner>
+                                    </>
+                                ) :
+                                    contentGenerated && (
                                         <>
-                                            <Separator />
-                                            <LineSpinner>Generating Content...</LineSpinner>
+                                            <h2>{initialData.title}</h2>
+                                            <GeneratedContent
+                                                user={user}
+                                                isPersonaPending={isPersonaPending}
+                                                isImagePending={isImagePending}
+                                                content={contentGenerated}
+                                                imagePrompt={imagePrompt}
+                                                imageUrls={imageUrls}
+                                                imageReferenceFileInfo={imageReferenceFileInfo}
+                                                onImageFileChange={handleImageFileChange}
+                                                personaContent={personaContent}
+                                                chatHistory={chatHistory}
+                                                chatFileInfos={chatFileInfos}
+                                                onChatFileChange={handleChatFileChange}
+                                                feedback={feedback}
+                                                setFeedback={setFeedback}
+                                                personasText={personasText}
+                                                setPersonasText={setPersonasText}
+                                                setUploadedPersonaFileData={setUploadedPersonaFileData}
+                                                handleRevise={handleRevise}
+                                                handleAdaptPersona={handleAdaptPersona}
+                                                handleImageAction={handleImageAction}
+                                                handleChatSend={handleChatSend}
+                                                isChatLoading={isChatLoading}
+                                                modelAlias={modelAlias}
+                                                temperature={creativityValue}
+                                            />
                                         </>
-                                    )}
-                                </section>
-                            ),
-                        },
-                        {
-                            label: "AIAG Content",
-                            value: "content_generate",
-                            icon: isContentPending ? <Spinner /> : <RiAiGenerate />,
-                            content: (
-                                <div className="space-y-10" >
-                                    {isContentPending ? (
-                                        <>
-                                            <LineSpinner>Generating Content...</LineSpinner>
-                                        </>
-                                    ) :
-                                        contentGenerated && (
-                                            <>
-                                                <h2>{initialData.title}</h2>
-                                                <GeneratedContent
-                                                    user={user}
-                                                    isPersonaPending={isPersonaPending}
-                                                    isImagePending={isImagePending}
-                                                    content={contentGenerated}
-                                                    imagePrompt={imagePrompt}
-                                                    imageUrls={imageUrls}
-                                                    imageReferenceFileInfo={imageReferenceFileInfo}
-                                                    onImageFileChange={handleImageFileChange}
-                                                    personaContent={personaContent}
-                                                    chatHistory={chatHistory}
-                                                    chatFileInfos={chatFileInfos}
-                                                    onChatFileChange={handleChatFileChange}
-                                                    feedback={feedback}
-                                                    setFeedback={setFeedback}
-                                                    personasText={personasText}
-                                                    setPersonasText={setPersonasText}
-                                                    setUploadedPersonaFileData={setUploadedPersonaFileData}
-                                                    handleRevise={handleRevise}
-                                                    handleAdaptPersona={handleAdaptPersona}
-                                                    handleImageAction={handleImageAction}
-                                                    handleChatSend={handleChatSend}
-                                                    isChatLoading={isChatLoading}
-                                                    modelAlias={modelAlias}
-                                                    temperature={creativityValue}
-                                                />
-                                            </>
-                                        )
-                                    }
-                                </div>
-                            ),
-                        },
-                    ]}
-                />
-            </section>
-        </main>
+                                    )
+                                }
+                            </div>
+                        ),
+                    },
+                ]}
+            />
+        </DashboardInnerLayout>
     )
 }

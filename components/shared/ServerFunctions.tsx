@@ -15,13 +15,16 @@ export function formatCompactTime(date: string | Date) {
     });
 
     return formatted
-        .replace(" minutes", " min")
-        .replace(" minute", " min")
-        .replace(" hours", " hr")
-        .replace(" hour", " hr")
-        .replace(" seconds", " sec")
-        .replace(" second", " sec")
-        .replace(" days", " day")
-        .replace(" day", " day")
-        ;
+        .replace(" years", "y")
+        .replace(" year", "y")
+        .replace(" months", "mo")
+        .replace(" month", "mo")
+        .replace(" days", "d")
+        .replace(" day", "d")
+        .replace(" hours", "h")
+        .replace(" hour", "h")
+        .replace(" minutes", "m")
+        .replace(" minute", "m")
+        .replace(" seconds", "s")
+        .replace(" second", "s");
 }

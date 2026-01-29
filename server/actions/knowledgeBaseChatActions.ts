@@ -48,7 +48,7 @@ export async function upsertKnowledgeBaseChat(userId: string, userInput: string,
                 set: { chatHistory: finalHistory, updatedAt: new Date() }
             });
 
-        revalidatePath("/");
+        revalidatePath("/dashboard/ai-chat");
 
         return { success: true, newHistory: finalHistory };
     } catch (error) {
@@ -97,7 +97,7 @@ export async function rewriteAssistantMessage(
                 set: { chatHistory: finalHistory, updatedAt: new Date() }
             });
 
-        revalidatePath("/");
+        revalidatePath("/dashboard/ai-chat");
 
         return { success: true, newHistory: finalHistory };
     } catch (error) {

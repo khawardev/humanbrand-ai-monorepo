@@ -29,7 +29,7 @@ export default function SignUpForm() {
         await signUp.email(data, {
             onSuccess: () => {
                 toast.success("Account created successfully");
-                router.push("/");
+                router.push("/dashboard/ai-chat");
                 router.refresh();
             },
             onError: (err: any) => {

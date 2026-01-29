@@ -25,14 +25,14 @@ const DesktopHeader = async () => {
                 <Link href="/" suppressHydrationWarning>
                     <FullLogo />
                 </Link>
-                <NavigationMenuComp navLinks={navLinks} />
+                {/* <NavigationMenuComp navLinks={navLinks} /> */}
                 <div className="flex items-center justify-end gap-2">
-                    <DesktopHeaderServer navLinks={navLinks} />
-                    {!user && (
+                    {/* <DesktopHeaderServer navLinks={navLinks} /> */}
+                    {/* {!user && (
                         <div className="sm:hidden block pl-2 border-l">
                             <MobileHeader navLinks={navLinks} user={null} />
                         </div>
-                    )}
+                    )} */}
                     <div className="md:pl-2 md:border-l">
                         <ThemeSwitcher />
                     </div>

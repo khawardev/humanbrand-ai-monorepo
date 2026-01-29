@@ -6,72 +6,36 @@ export async function proxy(request: NextRequest) {
 	const session = await getSession()
 	const path = request.nextUrl.pathname
 
-	const authRoutes = ['/signin', '/signup']
-
-	const publicRoutes = [
-		'/signin',
-		'/signup',
-		'/forgot-password',
-		'/reset-password',
-		'/sitemap.xml',
-		'/robots.txt',
-		'/manifest.webmanifest',
-		'/opengraph-image',
-		'/twitter-image',
-		'/favicon.ico',
-		'/googleae766bd4b0840054.html',
-	]
-
-	const protectedRoutes = [
-		'/new',
-		'/existing',
-		'/campaign',
-		'/session',
-	]
-
-	const adminRoutes = ['/admin']
-
-	const isAuthRoute = authRoutes.includes(path)
-
-	const isPublicRoute =
-		publicRoutes.includes(path) ||
-		path.startsWith('/opengraph-image') ||
-		path.startsWith('/twitter-image') ||
+	const isAuthRoute =
+		path === '/signin' ||
+		path === '/signup' ||
 		path.startsWith('/forgot-password') ||
-		path.startsWith('/reset-password') ||
-		path.endsWith('.html') ||
-		path.endsWith('.xml') ||
-		path.endsWith('.txt') ||
-		path.endsWith('.ico') ||
-		path.endsWith('.png') ||
-		path.endsWith('.jpg') ||
-		path.endsWith('.svg')
+		path.startsWith('/reset-password')
 
-	const isProtectedRoute = protectedRoutes.some(route => path.startsWith(route))
-	const isAdminRoute = adminRoutes.some(route => path.startsWith(route))
 	const isDashboardRoute = path.startsWith('/dashboard')
+	const isAdminRoute = path.startsWith('/dashboard/admin')
 
 	if (!session) {
-		if (isProtectedRoute || isAdminRoute || isDashboardRoute || path === '/') {
-			return NextResponse.redirect(new URL('/signin', request.url))
+		if (isAuthRoute) {
+			return NextResponse.next()
 		}
-		return NextResponse.next()
+		return NextResponse.redirect(new URL('/signin', request.url))
 	}
 
-	if (session) {
-		if (isAuthRoute) {
-			return NextResponse.redirect(new URL('/new', request.url))
-		}
+	if (isAuthRoute) {
+		return NextResponse.redirect(new URL('/dashboard/ai-chat', request.url))
+	}
 
-		if (isAdminRoute) {
-			const userEmail = session?.user?.email
-			const isAdmin = userEmail ? ADMIN_EMAILS.includes(userEmail) : false
-			if (!isAdmin) {
-				return NextResponse.redirect(new URL('/new', request.url))
-			}
-		}
+	if (!isDashboardRoute) {
+		return NextResponse.redirect(new URL('/dashboard/ai-chat', request.url))
+	}
 
-		return NextResponse.next()
+	if (isAdminRoute) {
+		const userEmail = session?.user?.email
+		const isAdmin = userEmail ? ADMIN_EMAILS.includes(userEmail) : false
+		if (!isAdmin) {
+			return NextResponse.redirect(new URL('/dashboard/ai-chat', request.url))
+		}
 	}
 
 	return NextResponse.next()

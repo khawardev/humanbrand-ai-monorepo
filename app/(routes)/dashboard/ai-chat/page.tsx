@@ -1,7 +1,7 @@
-import React from 'react';
 import { getUser } from "@/server/actions/usersActions";
 import { getKnowledgeBaseChat } from "@/server/actions/knowledgeBaseChatActions";
 import AI_Page from '@/components/AI/AiPage';
+import { DashboardInnerLayout } from "@/components/shared/DashboardComponents";
 
 export default async function HomePage() {
     const user = await getUser();
@@ -15,8 +15,8 @@ export default async function HomePage() {
     }
 
     return (
-        <div className='div-center-md h-[90vh] '>
+        <DashboardInnerLayout>
             <AI_Page user={user} initialChatHistory={initialChatHistory} />
-        </div>
+        </DashboardInnerLayout>
     );
 }

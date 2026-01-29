@@ -1,6 +1,7 @@
 import { getAllUsers } from '@/server/actions/usersActions';
 import UsersTable from '@/components/aiag-components/admin-verification/users/users-table';
-import React from 'react';
+import { DashboardInnerLayout } from '@/components/shared/DashboardComponents';
+import { Hero } from '@/components/aiag-components/reusable-components/hero';
 
 const AdminUsersPage = async () => {
     const users = await getAllUsers();
@@ -11,9 +12,10 @@ const AdminUsersPage = async () => {
     });
 
     return (
-        <div className='div-center-md'>
+        <DashboardInnerLayout>
+            <Hero/>
             <UsersTable users={filteredUsers} />
-        </div>
+        </DashboardInnerLayout>
     );
 }
 

@@ -10,6 +10,7 @@ import { ModelsSection } from "@/components/aiag-components/selection-components
 import { ReferenceMaterialSection } from "@/components/aiag-components/selection-components/ReferenceMaterialSection"
 import { AdditionalInstructionsSection } from "@/components/aiag-components/selection-components/AdditionalInstructionsSection"
 import { ContextualAwarenessSection } from "@/components/aiag-components/selection-components/ContextualAwarenessSection"
+import { DashboardInnerLayout } from "@/components/shared/DashboardComponents"
 
 export default function ExistingContentPage() {
   const {
@@ -23,9 +24,8 @@ export default function ExistingContentPage() {
   } = useExistingContentGenerator()
 
   return (
-    <main className="overflow-hidden pt-14">
+    <DashboardInnerLayout>
       <Hero />
-      <section className="div-center-md">
         <ModelsSection title={'HBAI Models'} selectedValue={selectedModel} onValueChange={setSelectedModel} />
         <ReferenceMaterialSection
           title={'Upload Document(s)'}
@@ -49,7 +49,6 @@ export default function ExistingContentPage() {
             <LineSpinner>Enhancing Content & Creating Session...</LineSpinner>
           </>
         )}
-      </section>
-    </main>
+    </DashboardInnerLayout>
   )
 }

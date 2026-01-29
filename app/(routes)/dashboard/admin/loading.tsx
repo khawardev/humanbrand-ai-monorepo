@@ -1,5 +1,5 @@
+import { DashboardInnerLayout } from '@/components/shared/DashboardComponents'
 import Loading from '@/components/shared/loading'
-import React from 'react'
 
 const loading = () => {
     return (

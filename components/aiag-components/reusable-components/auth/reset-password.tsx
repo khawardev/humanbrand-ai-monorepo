@@ -25,7 +25,7 @@ export default function ResetPasswordPage() {
         try {
             await authClient.resetPassword({ newPassword: password, token });
             setMsg("Password updated. Redirecting...");
-            setTimeout(() => router.push("/login"), 1200);
+            setTimeout(() => router.push("/signin"), 1200);
         } catch {
             setMsg("Failed to reset password.");
         }

@@ -53,7 +53,7 @@ export function useExistingContentGenerator() {
             const res = await createExistingContentSession(sessionData);
 
             if (res?.sessionId) {
-                router.push(`/session/${res.sessionId}?new=true`);
+                router.push(`/dashboard/session/${res.sessionId}?new=true`);
             } else {
                 toast.error(res.error || "An unexpected error occurred.");
             }

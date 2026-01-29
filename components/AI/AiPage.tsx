@@ -22,6 +22,8 @@ import Gemini_Live_AIAG from "@/components/gemini-live-api-components/gemini-liv
 import { Skeleton } from "@/components/ui/skeleton";
 import RewriteInput from "./RewriteInput";
 import { toast } from "sonner";
+import { ScrollArea } from "../ui/scroll-area";
+import { RiUserVoiceLine } from "react-icons/ri";
 
 interface AI_PromptProps {
     user: any;
@@ -52,7 +54,7 @@ export default function AI_Page({ user, initialChatHistory }: AI_PromptProps) {
     const MODEL_ICONS: Record<string, React.ReactNode> = {
         "AI Chat": <RiChatSmileAiLine />,
         "AI Ask": <RiVoiceAiLine />,
-        "Genrate TTS": <Speech />,
+        "Genrate TTS": <RiUserVoiceLine />,
     };
 
     useEffect(() => {
@@ -267,16 +269,16 @@ export default function AI_Page({ user, initialChatHistory }: AI_PromptProps) {
 
     return (
         <div className=" flex flex-col h-full">
-            <div className="flex-grow overflow-y-auto">
+            <ScrollArea className="grow h-[75vh] overflow-y-auto">
                 {renderContent()}
-            </div>
-            <div className="relative mt-auto pt-4 ">
+            </ScrollArea>
+            <div className="relative mt-auto pt-4">
                 <Textarea
                     id="ai-input-15"
                     value={value}
                     placeholder={isTextareaDisabled ? "Please wait..." : selectedModel === "AI Chat" ? "Chat with knowledge base..." : selectedModel === "Genrate TTS" ? "Enter text to generate audio..." : "Microphone is active for AI Ask"}
                     className={cn(
-                        "w-full rounded-xl rounded-b-none px-4 py-3 border-none resize-none focus-visible:ring-0 focus-visible:ring-offset-0",
+                        "w-full rounded-xl border border-b-0 border-input rounded-b-none px-4 py-3 resize-none focus-visible:ring-0 focus-visible:ring-offset-0",
                         "min-h-[72px]"
                     )}
                     ref={textareaRef}
@@ -287,7 +289,7 @@ export default function AI_Page({ user, initialChatHistory }: AI_PromptProps) {
                     }}
                     disabled={isTextareaDisabled}
                 />
-                <div className="h-14 bg-input/20 border-none rounded-b-xl flex items-center px-3 ">
+                <div className="h-14 bg-input/20 border border-t-0 border-input rounded-b-xl flex items-center px-3">
                     <div className="flex items-center justify-between w-full">
                         <DropdownMenu>
                             <DropdownMenuTrigger asChild>
@@ -311,13 +313,7 @@ export default function AI_Page({ user, initialChatHistory }: AI_PromptProps) {
                                     </AnimatePresence>
                                 </Button>
                             </DropdownMenuTrigger>
-                            <DropdownMenuContent
-                                className={cn(
-                                    "min-w-[6rem]",
-                                    "border-background/10 dark:border-white/10",
-                                    "bg-gradient-to-b from-white via-white to-neutral-100 dark:from-background dark:via-neutral-900 dark:to-neutral-800"
-                                )}
-                            >
+                            <DropdownMenuContent>
                                 {AI_MODELS.map((model) => (
                                     <DropdownMenuItem
                                         key={model}
