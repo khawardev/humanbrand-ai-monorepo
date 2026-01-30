@@ -1,9 +1,9 @@
 import { getCompanyUsers } from '@/server/actions/usersActions';
 import { DashboardInnerLayout } from '@/components/shared/DashboardComponents';
 import { Hero } from '@/components/shared/reusable/Hero';
-import AdminPageComponent from '@/components/AIAGComponents/admin/users/AdminPageComponent';
+import AdminPageComponent from '@/components/routes/admin/users/AdminPageComponent';
 
-const AdminUsersPage = async () => {
+const AdminPage = async () => {
     const users = await getCompanyUsers();
 
     return (
@@ -14,4 +14,4 @@ const AdminUsersPage = async () => {
     );
 }
 
-export default AdminUsersPage;
+export default AdminPage;

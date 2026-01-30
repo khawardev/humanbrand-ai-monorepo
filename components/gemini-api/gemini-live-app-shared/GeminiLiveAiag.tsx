@@ -1,13 +1,13 @@
-import ControlTray from "@/components/GeminiAPIComponents/control-tray/ControlTray";
+import ControlTray from "@/components/gemini-api/control-tray/ControlTray";
 import { LiveClientOptions } from "./Types";
-import { KnowledgeBaseAudioPrompt } from "@/components/GeminiAPIComponents/KnowledgeBaseAudioPrompt";
+import { KnowledgeBaseAudioPrompt } from "@/components/gemini-api/KnowledgeBaseAudioPrompt";
 import { LiveAPIProvider } from "@/contexts/LiveAPIContext";
 
 const apiOptions: LiveClientOptions = {
   apiKey: process.env.NEXT_PUBLIC_GOOGLE_GENERATIVE_AI_API_KEY!,
 };
 
-function Gemini_Live_AIAG() {
+function GeminiLiveAiag() {
   if (!apiOptions.apiKey) {
     console.error("Gemini API key is missing. Please set NEXT_PUBLIC_GOOGLE_GENERATIVE_AI_API_KEY in your .env.local file.");
     return (
@@ -27,4 +27,4 @@ function Gemini_Live_AIAG() {
   );
 }
 
-export default Gemini_Live_AIAG;
+export default GeminiLiveAiag;

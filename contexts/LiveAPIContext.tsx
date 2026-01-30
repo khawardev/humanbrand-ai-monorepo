@@ -2,7 +2,7 @@
 
 import { createContext, FC, ReactNode, useContext } from "react";
 import { useLiveAPI, UseLiveAPIResults } from "../hooks/useLiveApi";
-import { LiveClientOptions } from "@/components/GeminiAPIComponents/gemini-live-app-shared/Types";
+import { LiveClientOptions } from "@/components/gemini-api/gemini-live-app-shared/Types";
 
 const LiveAPIContext = createContext<UseLiveAPIResults | undefined>(undefined);
 

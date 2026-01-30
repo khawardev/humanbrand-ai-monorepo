@@ -15,7 +15,7 @@ import {
 import { EventEmitter } from "eventemitter3";
 import { difference } from "lodash";
 import { base64ToArrayBuffer } from "./utils";
-import { LiveClientOptions, StreamingLog } from "@/components/GeminiAPIComponents/gemini-live-app-shared/Types";
+import { LiveClientOptions, StreamingLog } from "@/components/gemini-api/gemini-live-app-shared/Types";
 
 
 export interface LiveClientEventTypes {

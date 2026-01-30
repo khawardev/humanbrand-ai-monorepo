@@ -15,7 +15,7 @@ import { AdditionalInstructionsSection } from "@/components/shared/selections/Ad
 import { useNewContentGenerator } from "@/hooks/aiagHooks/useNewContentGenerator"
 
 
-export default function HomePageComponent() {
+export default function NewPageComponent() {
     const {
         isPending,
         selectedModel, setSelectedModel,

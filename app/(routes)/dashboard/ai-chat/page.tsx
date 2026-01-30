@@ -1,9 +1,9 @@
 import { getUser } from "@/server/actions/usersActions";
 import { getKnowledgeBaseChat } from "@/server/actions/knowledgeBaseChatActions";
 import { DashboardInnerLayout } from "@/components/shared/DashboardComponents";
-import AiChatPageComponent from "@/components/AIAGComponents/ai-chat/AiChatPageComponent";
+import AiChatPageComponent from "@/components/routes/ai-chat/AiChatPageComponent";
 
-export default async function HomePage() {
+export default async function AIChatPage() {
     const user = await getUser();
     let initialChatHistory: any[] = [];
 

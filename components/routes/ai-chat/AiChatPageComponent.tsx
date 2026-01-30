@@ -6,11 +6,11 @@ import { Textarea } from "@/components/ui/textarea"
 import { cn } from "@/lib/utils"
 import { useAutoResizeTextarea } from "@/hooks/useAutoResizeTextarea"
 import { useKnowledgeBaseChat } from "@/hooks/aiagHooks/useKnowledgeBaseChat"
-import Gemini_Live_AIAG from "@/components/GeminiAPIComponents/gemini-live-app-shared/GeminiLiveAiag"
 import { ScrollArea } from "../../ui/scroll-area"
 import AiChatView from "./AiChatView"
 import { useTTS, TTSContent } from "./AiTTSView"
 import AiModelSelector from "./AiModelSelector"
+import GeminiLiveAiag from "@/components/gemini-api/gemini-live-app-shared/GeminiLiveAiag"
 
 type AI_PromptProps = {
     user: any
@@ -73,7 +73,7 @@ export default function AiChatPageComponent({ user, initialChatHistory }: AI_Pro
             case "AI Ask":
                 return (
                     <div className="flex flex-col items-center justify-center text-center h-[60vh]">
-                        <Gemini_Live_AIAG />
+                        <GeminiLiveAiag />
                     </div>
                 )
             case "Genrate TTS":

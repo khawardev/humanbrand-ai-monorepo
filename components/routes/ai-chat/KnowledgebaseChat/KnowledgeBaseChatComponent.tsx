@@ -4,9 +4,9 @@ import KnowledgeBaseChatUI from "./KnowledgeBaseChatUi";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { RiChatSmileAiLine, RiChatVoiceAiFill, RiChatVoiceAiLine, RiVoiceAiLine } from "react-icons/ri";
 import { CustomTabs } from "@/components/shared/CustomTabs";
-import Gemini_Live_AIAG from "@/components/GeminiAPIComponents/gemini-live-app-shared/GeminiLiveAiag";
 import { Button } from "@/components/ui/button";
-import TTSPage from "@/components/AIAGComponents/knowledge-base-chat/TtsPage";
+import TTSPage from "@/components/routes/ai-chat/KnowledgebaseChat/TtsPage";
+import GeminiLiveAiag from "@/components/gemini-api/gemini-live-app-shared/GeminiLiveAiag";
 
 export default async function KnowledgeBaseChatComponent() {
     const user = await getUser();
@@ -48,7 +48,7 @@ export default async function KnowledgeBaseChatComponent() {
                             content: (
                                 <div className="text-center items-center flex space-y-1 justify-center flex-col">
                                     <span className="text-muted-foreground">Ask from knowledge base</span>
-                                    <Gemini_Live_AIAG />
+                                    <GeminiLiveAiag />
                                 </div>
                             ),
                         },

@@ -2,7 +2,7 @@
 
 import { Button } from '@/components/ui/button';
 import React, { useState } from 'react';
-import { Textarea } from '../../ui/textarea';
+import { Textarea } from '../../../ui/textarea';
 
 export default function TTSPage() {
     const [text, setText] = useState('');
