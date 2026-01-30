@@ -1,20 +1,15 @@
-import { getAllUsers } from '@/server/actions/usersActions';
-import UsersTable from '@/components/aiag-components/admin-verification/users/users-table';
+import { getCompanyUsers } from '@/server/actions/usersActions';
 import { DashboardInnerLayout } from '@/components/shared/DashboardComponents';
-import { Hero } from '@/components/aiag-components/reusable-components/hero';
+import { Hero } from '@/components/shared/reusable/Hero';
+import AdminPageComponent from '@/components/AIAGComponents/admin/users/AdminPageComponent';
 
 const AdminUsersPage = async () => {
-    const users = await getAllUsers();
-
-    const filteredUsers = users?.filter(user => {
-        const email = user.email || '';
-        return email.endsWith('@aiag.org');
-    });
+    const users = await getCompanyUsers();
 
     return (
         <DashboardInnerLayout>
-            <Hero/>
-            <UsersTable users={filteredUsers} />
+            <Hero />
+            <AdminPageComponent users={users} />
         </DashboardInnerLayout>
     );
 }

@@ -1,78 +1,64 @@
 'use client'
 
-import { useState, useTransition } from "react"
 import { useRouter } from "next/navigation"
 import { toast } from "sonner"
-import { modelTabs, adjustToneAndCreativityData } from "@/config/formData"
+import { useBaseContentGenerator } from "./useBaseContentGenerator"
 import { getUser } from "@/server/actions/usersActions"
 import { createExistingContentSession } from "@/server/actions/savedSessionActions"
 
 export function useExistingContentGenerator() {
-    const router = useRouter();
-    const [isPending, startTransition] = useTransition();
+    const router = useRouter()
+    const base = useBaseContentGenerator()
 
-    const [selectedModel, setSelectedModel] = useState<number>(modelTabs[0].id)
-
-    const [referenceFileInfos, setReferenceFileInfos] = useState<any[] | null>([])
-    const [referenceFilesData, setReferenceFilesData] = useState<string | null>(null)
-
-    const [additionalInstructions, setAdditionalInstructions] = useState("")
-    const [contextualAwareness, setContextualAwareness] = useState("")
-    const [toneValue, setToneValue] = useState<number>(adjustToneAndCreativityData.tone.defaultValue)
-    const [creativityValue, setCreativityValue] = useState<number>(adjustToneAndCreativityData.creativity.defaultValue)
-
-    const isGenerateDisabled = !referenceFilesData && !additionalInstructions.trim();
-
-    const handleReferenceFileChange = ({ fileInfos, parsedText }: any) => {
-        setReferenceFileInfos(fileInfos || []);
-        setReferenceFilesData(parsedText || null);
-    };
+    const isGenerateDisabled = !base.referenceFilesData && !base.additionalInstructions.trim()
 
     const handleGenerate = () => {
-        if (isGenerateDisabled) return;
+        if (isGenerateDisabled) return
 
-        startTransition(async () => {
-            const user: any = await getUser();
+        base.startTransition(async () => {
+            const user: any = await getUser()
             if (!user) {
-                toast.warning('Please Login first');
-                return;
+                toast.warning('Please Login first')
+                return
             }
 
             const sessionData = {
                 sessionType: "existing",
                 userId: user?.id,
-                modelId: selectedModel,
-                referenceFileInfos: referenceFileInfos,
-                referencePdfData: referenceFilesData,
-                additionalInstructions: additionalInstructions,
-                contextualAwareness: contextualAwareness,
-                tone: toneValue,
-                temperature: creativityValue,
-            };
+                modelId: base.selectedModel,
+                referenceFileInfos: base.referenceFileInfos,
+                referencePdfData: base.referenceFilesData,
+                additionalInstructions: base.additionalInstructions,
+                contextualAwareness: base.contextualAwareness,
+                tone: base.toneValue,
+                temperature: base.creativityValue,
+            }
 
-            const res = await createExistingContentSession(sessionData);
+            const res = await createExistingContentSession(sessionData)
 
             if (res?.sessionId) {
-                router.push(`/dashboard/session/${res.sessionId}?new=true`);
+                router.push(`/dashboard/session/${res.sessionId}?new=true`)
             } else {
-                toast.error(res.error || "An unexpected error occurred.");
+                toast.error(res.error || "An unexpected error occurred.")
             }
-        });
+        })
     }
 
-
-
     return {
-        isPending,
-        selectedModel, setSelectedModel,
-        referenceFileInfos,
-        handleReferenceFileChange,
-        additionalInstructions, setAdditionalInstructions,
-        contextualAwareness, setContextualAwareness,
-        toneValue, setToneValue,
-        creativityValue, setCreativityValue,
+        isPending: base.isPending,
+        selectedModel: base.selectedModel,
+        setSelectedModel: base.setSelectedModel,
+        referenceFileInfos: base.referenceFileInfos,
+        handleReferenceFileChange: base.handleReferenceFileChange,
+        additionalInstructions: base.additionalInstructions,
+        setAdditionalInstructions: base.setAdditionalInstructions,
+        contextualAwareness: base.contextualAwareness,
+        setContextualAwareness: base.setContextualAwareness,
+        toneValue: base.toneValue,
+        setToneValue: base.setToneValue,
+        creativityValue: base.creativityValue,
+        setCreativityValue: base.setCreativityValue,
         isGenerateDisabled,
         handleGenerate,
     }
 }
-

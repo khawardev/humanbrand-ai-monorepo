@@ -8,9 +8,9 @@ import { cn } from '@/lib/utils';
 import { AIAGConfig } from '@/config/aiagConfig';
 import { usePathname } from 'next/navigation';
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { SigninButtonMobile, SignoutButtonMobile } from '../aiag-components/reusable-components/auth/signin-button';
+import { SigninButtonMobile, SignoutButtonMobile } from '../shared/reusable/auth/SigninButton';
 
-export default function MobileHeader({ user, navLinks }:any) {
+export default function MobileHeader({ user, navLinks }: any) {
     const pathname = usePathname()
     const [open, setOpen] = React.useState(false)
 
@@ -48,7 +48,7 @@ export default function MobileHeader({ user, navLinks }:any) {
                 <Drawer.Overlay className="fixed z-45 inset-0  bg-background/60 " />
                 <Drawer.Content className="bg-gradient-to-tr from-background/80 to-card/40 p-4 z-50 flex flex-col backdrop-blur-xl dark:from-background/90 dark:to-card/30 border rounded-t-[20px] h-fit fixed bottom-0 left-0 right-0 outline-none">
                     <Drawer.Title>
-                    <div aria-hidden className="mx-auto w-12 h-2 flex-shrink-0 rounded-full bg-gray-300 mb-8" />
+                        <div aria-hidden className="mx-auto w-12 h-2 flex-shrink-0 rounded-full bg-gray-300 mb-8" />
                     </Drawer.Title>
                     <div className="w-full">
                         <ScrollArea className="h-[calc(50vh-8rem)] ">
@@ -69,7 +69,7 @@ export default function MobileHeader({ user, navLinks }:any) {
                             </div>
                         </ScrollArea>
                     </div>
-                    {user ? <SignoutButtonMobile />   : <SigninButtonMobile /> }
+                    {user ? <SignoutButtonMobile /> : <SigninButtonMobile />}
                 </Drawer.Content>
             </Drawer.Portal>
         </Drawer.Root>

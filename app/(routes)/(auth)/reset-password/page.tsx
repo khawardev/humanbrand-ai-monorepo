@@ -6,7 +6,7 @@ import { authClient } from "@/lib/auth/authClient";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { FormSection } from "@/components/aiag-components/reusable-components/form-section";
+import { FormSection } from "@/components/shared/reusable/FormSection";
 
 export default function ResetPasswordPage() {
     const router = useRouter();

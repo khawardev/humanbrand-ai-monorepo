@@ -2,7 +2,7 @@
 
 import { db } from "@/server/db";
 import { getSession } from "@/server/actions/getSession";
-import { desc, eq } from "drizzle-orm";
+import { desc, eq, like } from "drizzle-orm";
 import { user } from "@/server/db/schema/usersSchema";
 import { savedSession } from "@/server/db/schema/savedSessionSchema";
 import { cache } from "react";
@@ -55,6 +55,19 @@ export async function getAllUsers() {
     return allUsers;
   } catch (error) {
     console.error("Error fetching all users:", error);
+    return [];
+  }
+}
+
+export async function getCompanyUsers() {
+  try {
+    const companyUsers = await db.query.user.findMany({
+      where: like(user.email, "%@aiag.org"),
+      orderBy: [desc(user.createdAt)],
+    });
+    return companyUsers;
+  } catch (error) {
+    console.error("Error fetching company users:", error);
     return [];
   }
 }

@@ -15,7 +15,7 @@ import {
 import { EventEmitter } from "eventemitter3";
 import { difference } from "lodash";
 import { base64ToArrayBuffer } from "./utils";
-import { LiveClientOptions, StreamingLog } from "@/components/gemini-live-api-components/gemini-live-app-shared/types";
+import { LiveClientOptions, StreamingLog } from "@/components/GeminiAPIComponents/gemini-live-app-shared/Types";
 
 
 export interface LiveClientEventTypes {
@@ -243,10 +243,10 @@ export class GenAILiveClient extends EventEmitter<LiveClientEventTypes> {
       hasAudio && hasVideo
         ? "audio + video"
         : hasAudio
-        ? "audio"
-        : hasVideo
-        ? "video"
-        : "unknown";
+          ? "audio"
+          : hasVideo
+            ? "video"
+            : "unknown";
     this.log(`client.realtimeInput`, message);
   }
 

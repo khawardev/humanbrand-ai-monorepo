@@ -2,35 +2,37 @@
 
 import { useState, useEffect, useTransition } from "react"
 import { toast } from "sonner"
-import { contentTypes, modelTabs } from "@/config/formData"
 import { updateSessionContent, adaptPersonaForSession, manageImageForSession, updateChatForSession } from "@/server/actions/savedSessionActions"
 import { generateImageAction } from "@/server/actions/generateImageActions"
 import { generateNewContent } from "@/server/actions/generateNewContentActions"
 import { getChatSystemPrompt } from "@/lib/aiag/prompts"
 import { knowledgeBaseContent } from "@/lib/aiag/knowledgeBase"
 import { uploadImageToSupabase } from "@/lib/supabase/uploadImageToSupabase"
+import { useBaseContentGenerator } from "./useBaseContentGenerator"
+import { getModelAlias, isSocialPostContentType } from "@/lib/aiag/formDataHelpers"
 
 export function useSessionContentGenerator(initialData: any) {
+    const base = useBaseContentGenerator({
+        selectedModel: initialData.modelId,
+        referenceFileInfos: initialData.referenceFileInfos,
+        referenceFilesData: initialData.referenceFilesData,
+        additionalInstructions: initialData.additionalInstructions,
+        contextualAwareness: initialData.contextualAwareness,
+        toneValue: initialData.tone,
+        creativityValue: initialData.temperature ? Number(initialData.temperature) : undefined
+    })
+
     const [isContentPending, startContentTransition] = useTransition();
     const [isPersonaPending, startPersonaTransition] = useTransition();
     const [isImagePending, startImageTransition] = useTransition();
 
-    const isPending = isContentPending || isPersonaPending || isImagePending;
+    const isPending = base.isPending || isContentPending || isPersonaPending || isImagePending;
 
-    const [selectedModel, setSelectedModel] = useState<number>(initialData.modelId ?? 1)
     const [selectedAudiences, setSelectedAudiences] = useState<number[]>(initialData.audienceIds ?? [])
     const [selectedSubjects, setSelectedSubjects] = useState<number | null>(initialData.subjectId ?? null)
     const [selectedContentTypes, setSelectedContentTypes] = useState<number[]>(initialData.contentTypeIds ?? [])
     const [selectedCtas, setSelectedCtas] = useState<number[]>(initialData.ctaIds ?? [])
     const [selectedSocialPlatform, setSelectedSocialPlatform] = useState<number | null>(initialData.socialPlatformId ?? null)
-
-    const [referenceFileInfos, setReferenceFileInfos] = useState<any[]>(initialData.referenceFileInfos ?? [])
-    const [referenceFilesData, setReferenceFilesData] = useState<string | null>(initialData.referenceFilesData ?? null)
-
-    const [additionalInstructions, setAdditionalInstructions] = useState(initialData.additionalInstructions ?? "")
-    const [contextualAwareness, setContextualAwareness] = useState(initialData.contextualAwareness ?? "")
-    const [toneValue, setToneValue] = useState<number>(initialData.tone ?? 3)
-    const [creativityValue, setCreativityValue] = useState<number>(Number(initialData.temperature ?? "0.5"))
 
     const [contentGenerated, setContentGenerated] = useState<string>(initialData.generatedContent ?? "")
     const [imagePrompt, setImagePrompt] = useState<string>(initialData.imagePrompt ?? "")
@@ -44,14 +46,13 @@ export function useSessionContentGenerator(initialData: any) {
     const [chatFileInfos, setChatFileInfos] = useState<any[]>(initialData.chatFileInfos ?? []);
     const [chatFilesData, setChatFilesData] = useState<string | null>(initialData.chatFilesData ?? null);
 
-
     const [feedback, setFeedback] = useState("")
     const [personasText, setPersonasText] = useState("")
     const [uploadedPersonaFileData, setUploadedPersonaFileData] = useState<any>(null)
-
     const [isChatLoading, setIsChatLoading] = useState(false);
 
-    const modelAlias = modelTabs.find(tab => tab.id === selectedModel)?.label
+    const modelAlias = getModelAlias(base.selectedModel)
+    const isSocialPostSelected = isSocialPostContentType(selectedContentTypes)
 
     useEffect(() => {
         setContentGenerated(initialData.generatedContent ?? "");
@@ -61,14 +62,12 @@ export function useSessionContentGenerator(initialData: any) {
         setChatHistory(initialData.chatHistory ?? []);
         setImageReferenceFileInfo(initialData.imageReferenceFileInfo ?? null);
 
-        setReferenceFileInfos(initialData.referenceFileInfos ?? []);
-        setReferenceFilesData(initialData.referenceFilesData ?? null);
+        base.setReferenceFileInfos(initialData.referenceFileInfos ?? []);
+        base.setReferenceFilesData(initialData.referenceFilesData ?? null);
         setChatFileInfos(initialData.chatFileInfos ?? []);
         setChatFilesData(initialData.chatFilesData ?? null);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [initialData]);
-
-    const socialPostContentTypeId = contentTypes.find(type => type.label === "Social Media Post")?.id
-    const isSocialPostSelected = socialPostContentTypeId !== undefined && selectedContentTypes.includes(socialPostContentTypeId)
 
     useEffect(() => {
         if (!isSocialPostSelected) setSelectedSocialPlatform(null)
@@ -82,20 +81,19 @@ export function useSessionContentGenerator(initialData: any) {
         (isSocialPostSelected && selectedSocialPlatform === null)
 
     const prepareUpdateData = () => ({
-        modelId: selectedModel,
+        modelId: base.selectedModel,
         audienceIds: selectedAudiences,
         subjectId: selectedSubjects,
         contentTypeIds: selectedContentTypes,
         ctaIds: selectedCtas,
         socialPlatformId: selectedSocialPlatform,
-        additionalInstructions: additionalInstructions,
-        contextualAwareness: contextualAwareness,
-        tone: toneValue,
-        temperature: creativityValue,
+        additionalInstructions: base.additionalInstructions,
+        contextualAwareness: base.contextualAwareness,
+        tone: base.toneValue,
+        temperature: base.creativityValue,
         originalContent: contentGenerated,
-
-        referenceFileInfos: referenceFileInfos,
-        referenceFilesData: referenceFilesData,
+        referenceFileInfos: base.referenceFileInfos,
+        referenceFilesData: base.referenceFilesData,
     })
 
     const handleGenerate = () => {
@@ -109,9 +107,7 @@ export function useSessionContentGenerator(initialData: any) {
     }
 
     const handleRevise = () => {
-        if (!feedback) {
-            return;
-        }
+        if (!feedback) return;
         startContentTransition(async () => {
             const data = { ...prepareUpdateData(), feedback };
             const result = await updateSessionContent(initialData.id, data)
@@ -127,7 +123,7 @@ export function useSessionContentGenerator(initialData: any) {
     const handleAdaptPersona = () => {
         if (!personasText.trim()) return;
         startPersonaTransition(async () => {
-            const data = { originalContent: contentGenerated, personasText, uploadedPersonaFileData, modelAlias, temperature: creativityValue };
+            const data = { originalContent: contentGenerated, personasText, uploadedPersonaFileData, modelAlias, temperature: base.creativityValue };
             const result = await adaptPersonaForSession(initialData.id, data);
             if (result.error) toast.error(result.error);
             else {
@@ -169,10 +165,10 @@ export function useSessionContentGenerator(initialData: any) {
             } catch (error) {
                 console.error("Unexpected error occurred.", error);
                 toast.error("Unexpected error occurred.");
-                console.error(error);
             }
         });
     };
+
     const handleChatSend = async (userInput: string) => {
         setIsChatLoading(true);
 
@@ -187,7 +183,7 @@ export function useSessionContentGenerator(initialData: any) {
             knowledgeBaseContent,
         });
 
-        const result = await generateNewContent({ modelAlias, temperature: creativityValue, systemPrompt, userPrompt: userInput });
+        const result = await generateNewContent({ modelAlias, temperature: base.creativityValue, systemPrompt, userPrompt: userInput });
 
         const assistantMessage = { role: 'assistant', content: result.generatedText || "Sorry, an error occurred." };
         const finalHistory = [...newHistory, assistantMessage];
@@ -200,12 +196,6 @@ export function useSessionContentGenerator(initialData: any) {
             chatFileInfos: chatFileInfos,
             chatFilesData: chatFilesData,
         });
-
-    };
-
-    const handleReferenceFileChange = ({ fileInfos, parsedText }: any) => {
-        setReferenceFileInfos(fileInfos || []);
-        setReferenceFilesData(parsedText || null);
     };
 
     const handleImageFileChange = (file: File | null) => {
@@ -227,35 +217,35 @@ export function useSessionContentGenerator(initialData: any) {
         isContentPending,
         isPersonaPending,
         isImagePending,
-        selectedModel, setSelectedModel,
+        selectedModel: base.selectedModel,
+        setSelectedModel: base.setSelectedModel,
         selectedAudiences, setSelectedAudiences,
         selectedSubjects, setSelectedSubjects,
         selectedContentTypes, setSelectedContentTypes,
         isSocialPostSelected,
         selectedSocialPlatform, setSelectedSocialPlatform,
         selectedCtas, setSelectedCtas,
-
-        referenceFileInfos,
-        handleReferenceFileChange,
-
-        additionalInstructions, setAdditionalInstructions,
-        contextualAwareness, setContextualAwareness,
-        toneValue, setToneValue,
-        creativityValue, setCreativityValue,
+        referenceFileInfos: base.referenceFileInfos,
+        handleReferenceFileChange: base.handleReferenceFileChange,
+        additionalInstructions: base.additionalInstructions,
+        setAdditionalInstructions: base.setAdditionalInstructions,
+        contextualAwareness: base.contextualAwareness,
+        setContextualAwareness: base.setContextualAwareness,
+        toneValue: base.toneValue,
+        setToneValue: base.setToneValue,
+        creativityValue: base.creativityValue,
+        setCreativityValue: base.setCreativityValue,
         isGenerateDisabled,
         handleGenerate,
         handleRevise,
         handleAdaptPersona,
-
         handleImageAction,
         handleImageFileChange,
         imageReferenceFileInfo,
-
         handleChatSend,
         isChatLoading,
         handleChatFileChange,
         chatFileInfos,
-
         contentGenerated,
         imagePrompt,
         personaContent,

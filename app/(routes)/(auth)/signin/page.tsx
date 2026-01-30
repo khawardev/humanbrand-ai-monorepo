@@ -5,7 +5,7 @@ import { toast } from 'sonner';
 import Link from 'next/link';
 import { signIn } from '@/lib/auth/authClient';
 import { FcGoogle } from 'react-icons/fc';
-import SignInForm from '@/components/aiag-components/reusable-components/auth/SignInForm';
+import SignInForm from '@/components/shared/reusable/auth/SignInForm';
 
 export default function Page() {
   const handleGoogleSignIn = async () => {

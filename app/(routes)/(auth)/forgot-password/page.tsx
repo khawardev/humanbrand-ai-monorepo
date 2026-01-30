@@ -1,6 +1,6 @@
 "use client";
 
-import { FormSection } from "@/components/aiag-components/reusable-components/form-section";
+import { FormSection } from "@/components/shared/reusable/FormSection";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";

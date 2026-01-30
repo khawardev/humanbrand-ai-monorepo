@@ -1,33 +1,24 @@
 'use client'
 
-import { useState, useEffect, useTransition } from "react"
+import { useState, useEffect } from "react"
 import { useRouter } from "next/navigation"
 import { toast } from "sonner"
-import { modelTabs, contentTypes, adjustToneAndCreativityData } from "@/config/formData"
+import { useBaseContentGenerator } from "./useBaseContentGenerator"
+import { isSocialPostContentType } from "@/lib/aiag/formDataHelpers"
 import { getUser } from "@/server/actions/usersActions"
 import { createSession } from "@/server/actions/savedSessionActions"
 
 export function useNewContentGenerator() {
     const router = useRouter()
-    const [isPending, startTransition] = useTransition()
+    const base = useBaseContentGenerator()
 
-    const [selectedModel, setSelectedModel] = useState<number>(modelTabs[0].id)
     const [selectedAudiences, setSelectedAudiences] = useState<number[]>([])
     const [selectedSubjects, setSelectedSubjects] = useState<number | null>(null)
     const [selectedContentTypes, setSelectedContentTypes] = useState<number[]>([])
     const [selectedCtas, setSelectedCtas] = useState<number[]>([])
     const [selectedSocialPlatform, setSelectedSocialPlatform] = useState<number | null>(null)
 
-    const [referenceFileInfos, setReferenceFileInfos] = useState<any[] | null>([])
-    const [referenceFilesData, setReferenceFilesData] = useState<string | null>(null)
-
-    const [additionalInstructions, setAdditionalInstructions] = useState("")
-    const [contextualAwareness, setContextualAwareness] = useState("")
-    const [toneValue, setToneValue] = useState<number>(adjustToneAndCreativityData.tone.defaultValue)
-    const [creativityValue, setCreativityValue] = useState<number>(adjustToneAndCreativityData.creativity.defaultValue)
-
-    const socialPostContentTypeId = contentTypes.find((type) => type.label === "Social Media Post")?.id
-    const isSocialPostSelected = socialPostContentTypeId !== undefined && selectedContentTypes.includes(socialPostContentTypeId)
+    const isSocialPostSelected = isSocialPostContentType(selectedContentTypes)
 
     useEffect(() => {
         if (!isSocialPostSelected) {
@@ -40,37 +31,37 @@ export function useNewContentGenerator() {
         selectedSubjects === null ||
         selectedContentTypes.length === 0 ||
         selectedCtas.length === 0 ||
-        (isSocialPostSelected && selectedSocialPlatform === null);
+        (isSocialPostSelected && selectedSocialPlatform === null)
 
     const handleGenerate = async () => {
-        if (isGenerateDisabled) return;
+        if (isGenerateDisabled) return
 
-        startTransition(async () => {
+        base.startTransition(async () => {
             const user: any = await getUser()
             if (!user) {
                 toast.warning('Please Login to continue')
-                return;
+                return
             }
             if (user?.adminVerified === false) {
                 toast.warning('Please wait for the Admin to Approve')
-                return;
+                return
             }
 
             const sessionData = {
                 sessionType: "new",
                 userId: user?.id,
-                modelId: selectedModel,
+                modelId: base.selectedModel,
                 audienceIds: selectedAudiences,
                 subjectId: selectedSubjects,
                 contentTypeIds: selectedContentTypes,
                 ctaIds: selectedCtas,
                 socialPlatformId: selectedSocialPlatform,
-                referenceFileInfos: referenceFileInfos,
-                referenceFilesData: referenceFilesData,
-                additionalInstructions: additionalInstructions,
-                contextualAwareness: contextualAwareness,
-                tone: toneValue,
-                temperature: creativityValue,
+                referenceFileInfos: base.referenceFileInfos,
+                referenceFilesData: base.referenceFilesData,
+                additionalInstructions: base.additionalInstructions,
+                contextualAwareness: base.contextualAwareness,
+                tone: base.toneValue,
+                temperature: base.creativityValue,
             }
 
             const res = await createSession(sessionData)
@@ -83,26 +74,31 @@ export function useNewContentGenerator() {
         })
     }
 
-    const handleReferenceFileChange = ({ fileInfos, parsedText }: any) => {
-        setReferenceFileInfos(fileInfos || []);
-        setReferenceFilesData(parsedText || null);
-    };
-
     return {
-        isPending,
-        selectedModel, setSelectedModel,
-        selectedAudiences, setSelectedAudiences,
-        selectedSubjects, setSelectedSubjects,
-        selectedContentTypes, setSelectedContentTypes,
-        selectedCtas, setSelectedCtas,
+        isPending: base.isPending,
+        selectedModel: base.selectedModel,
+        setSelectedModel: base.setSelectedModel,
+        selectedAudiences,
+        setSelectedAudiences,
+        selectedSubjects,
+        setSelectedSubjects,
+        selectedContentTypes,
+        setSelectedContentTypes,
+        selectedCtas,
+        setSelectedCtas,
         isSocialPostSelected,
-        selectedSocialPlatform, setSelectedSocialPlatform,
-        referenceFileInfos,
-        handleReferenceFileChange,
-        additionalInstructions, setAdditionalInstructions,
-        contextualAwareness, setContextualAwareness,
-        toneValue, setToneValue,
-        creativityValue, setCreativityValue,
+        selectedSocialPlatform,
+        setSelectedSocialPlatform,
+        referenceFileInfos: base.referenceFileInfos,
+        handleReferenceFileChange: base.handleReferenceFileChange,
+        additionalInstructions: base.additionalInstructions,
+        setAdditionalInstructions: base.setAdditionalInstructions,
+        contextualAwareness: base.contextualAwareness,
+        setContextualAwareness: base.setContextualAwareness,
+        toneValue: base.toneValue,
+        setToneValue: base.setToneValue,
+        creativityValue: base.creativityValue,
+        setCreativityValue: base.setCreativityValue,
         isGenerateDisabled,
         handleGenerate,
     }

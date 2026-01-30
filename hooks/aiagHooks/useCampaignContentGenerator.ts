@@ -1,8 +1,10 @@
 'use client'
 
-import { useState, useTransition, useRef } from "react"
+import { useState, useRef } from "react"
 import { toast } from "sonner"
-import { modelTabs, campaignTypes } from "@/config/formData"
+import { campaignTypes } from "@/config/formData"
+import { useBaseContentGenerator } from "./useBaseContentGenerator"
+import { getModelAlias } from "@/lib/aiag/formDataHelpers"
 import { getUser } from "@/server/actions/usersActions"
 import { getCampaignContentPrompts } from "@/lib/aiag/prompts"
 import { generateNewContent } from "@/server/actions/generateNewContentActions"
@@ -10,39 +12,29 @@ import { cleanAndFlattenBulletsGoogle } from "@/lib/cleanMarkdown"
 import { stripMarkdownBold } from "@/lib/utils"
 
 export function useCampaignContentGenerator() {
-    const [isPending, startTransition] = useTransition()
-
-    const [selectedModel, setSelectedModel] = useState<number>(modelTabs[0].id)
-    const [selectedCampaignType, setSelectedCampaignType] = useState<number | null>(null)
-    const [referenceFileInfos, setReferenceFileInfos] = useState<any[]>([])
-    const [referenceFilesData, setReferenceFilesData] = useState<string | null>(null)
-    const [additionalInstructions, setAdditionalInstructions] = useState<string>("")
-    const [generatedContent, setGeneratedContent] = useState<string | null>(null)
-
+    const base = useBaseContentGenerator()
     const formRef = useRef<HTMLDivElement>(null)
 
-    const isGenerateDisabled = selectedCampaignType === null
+    const [selectedCampaignType, setSelectedCampaignType] = useState<number | null>(null)
+    const [generatedContent, setGeneratedContent] = useState<string | null>(null)
 
-    const handleReferenceFileChange = ({ fileInfos, parsedText }: any) => {
-        setReferenceFileInfos(fileInfos || [])
-        setReferenceFilesData(parsedText || null)
-    }
+    const isGenerateDisabled = selectedCampaignType === null
 
     const handleGenerate = () => {
         if (isGenerateDisabled) return
 
-        const selectedModelObj = modelTabs.find((tab) => tab.id === selectedModel)
+        const modelAlias = getModelAlias(base.selectedModel)
         const selectedCampaign = campaignTypes.find((tab) => tab.id === selectedCampaignType)
 
         const data = {
             selectedCampaign: selectedCampaign?.label || "",
-            additionalInstructions,
-            referenceFilesData,
+            additionalInstructions: base.additionalInstructions,
+            referenceFilesData: base.referenceFilesData,
         }
 
         const { systemPrompt, userPrompt } = getCampaignContentPrompts(data)
 
-        startTransition(async () => {
+        base.startTransition(async () => {
             const user: any = await getUser()
             if (!user) {
                 toast.warning('Please Login to continue')
@@ -54,7 +46,7 @@ export function useCampaignContentGenerator() {
             }
 
             const generateData = {
-                modelAlias: selectedModelObj?.label,
+                modelAlias,
                 temperature: 5,
                 systemPrompt,
                 userPrompt
@@ -86,15 +78,15 @@ export function useCampaignContentGenerator() {
     }
 
     return {
-        isPending,
-        selectedModel,
-        setSelectedModel,
+        isPending: base.isPending,
+        selectedModel: base.selectedModel,
+        setSelectedModel: base.setSelectedModel,
         selectedCampaignType,
         setSelectedCampaignType,
-        referenceFileInfos,
-        handleReferenceFileChange,
-        additionalInstructions,
-        setAdditionalInstructions,
+        referenceFileInfos: base.referenceFileInfos,
+        handleReferenceFileChange: base.handleReferenceFileChange,
+        additionalInstructions: base.additionalInstructions,
+        setAdditionalInstructions: base.setAdditionalInstructions,
         generatedContent,
         isGenerateDisabled,
         handleGenerate,
