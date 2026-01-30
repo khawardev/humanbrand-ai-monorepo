@@ -59,7 +59,7 @@ export function SidebarSessionsList({ savedSessions }: SidebarSessionsListProps)
 									<Badge variant='secondary' className="truncate text-[10px] capitalize">
 										{session.sessionType}
 									</Badge>
-									<span className="text-xs text-muted-foreground shrink-0 transition-opacity ease-in delay-200 duration-200 group-hover/menu-item:opacity-0">
+									<span className="text-xs text-muted-foreground shrink-0 transition-opacity ease-in delay-50 duration-200 group-hover/menu-item:opacity-0">
 										{formatCompactTime(session?.updatedAt)}
 									</span>
 									<span className="ml-px">{isActive && <BreadcrumbSeparator />}</span>
