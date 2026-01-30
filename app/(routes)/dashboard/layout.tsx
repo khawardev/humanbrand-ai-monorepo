@@ -1,23 +1,26 @@
 import { Suspense } from 'react'
 import { LeftSidebar } from '@/components/shared/sidebar/LeftSidebar'
 import { SidebarListSkeleton } from '@/components/shared/sidebar/SidebarListSkeleton'
-import { SidebarSessionsList } from '@/components/shared/sidebar/SidebarSessionsList'
+import { SidebarUserSkeleton } from '@/components/shared/sidebar/SidebarUserSkeleton'
+import { AsyncSidebarSessionsList } from '@/components/shared/sidebar/AsyncSidebarSessionsList'
+import { AsyncSidebarUser } from '@/components/shared/sidebar/AsyncSidebarUser'
 import { SidebarInset, SidebarProvider } from '@/components/ui/sidebar'
 import { DashboardHeader } from '../../../components/shared/DashboardHeader'
-import { getUserWithSavedSessions } from '@/server/actions/usersActions'
 
 export default async function DashboardLayout({ children }: { children: React.ReactNode }) {
-	const userWithData: any = await getUserWithSavedSessions()
-
 	return (
 		<SidebarProvider>
 			<LeftSidebar
 				sessionsList={
 					<Suspense fallback={<SidebarListSkeleton />}>
-						<SidebarSessionsList savedSessions={userWithData?.savedSessions ?? []} />
+						<AsyncSidebarSessionsList />
 					</Suspense>
 				}
-				user={userWithData}
+				userItem={
+					<Suspense fallback={<SidebarUserSkeleton />}>
+						<AsyncSidebarUser />
+					</Suspense>
+				}
 			/>
 			<SidebarInset className="relative">
 				<DashboardHeader />

@@ -4,7 +4,7 @@ import Link from "next/link";
 export default function AuthButtons() {
     return (
         <>
-            <Button asChild size={'xs'} className="rounded-full">
+            <Button asChild className="rounded-full">
                 <Link href={'/signin'}>
                     Sign In
                 </Link>

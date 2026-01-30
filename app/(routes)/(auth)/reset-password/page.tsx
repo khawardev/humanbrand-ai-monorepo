@@ -50,7 +50,7 @@ export default function ResetPasswordPage() {
                             required
                         />
                     </div>
-                    <Button size="sm" type="submit">Update Password</Button>
+                    <Button type="submit">Update Password</Button>
                 </form>
                 {msg && <p className="text-sm">{msg}</p>}
             </FormSection>

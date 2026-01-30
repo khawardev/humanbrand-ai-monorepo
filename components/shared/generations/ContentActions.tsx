@@ -10,6 +10,8 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Copy, Download } from "lucide-react";
 import { IoIosArrowDown } from "react-icons/io";
+import { TfiLoop } from "react-icons/tfi";
+import { RiUserSmileLine } from "react-icons/ri";
 import { ReviseDialog } from "./ReviseDialog";
 import { toast } from "sonner";
 import { PersonaDialog } from "./persona/PersonaDialog";
@@ -57,19 +59,28 @@ export function ContentActions({ content, handleRevise, feedback, setFeedback, s
             />
             <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                    <Button variant={'outline'}  size={'xs'}>
+                    <Button variant={'ghost'}  >
                         Actions <IoIosArrowDown />
                     </Button>
                 </DropdownMenuTrigger>
-                <DropdownMenuContent  align="end">
+                <DropdownMenuContent align="end">
                     <DropdownMenuItem onClick={handleCopy}>
-                        <Copy size={16} className="opacity-60 mr-1" aria-hidden="true" />
-                        <span>Copy</span>
+                        <Copy size={16} aria-hidden="true" />
+                        <span>Copy </span>
                     </DropdownMenuItem>
                     <DropdownMenuItem onClick={handleDownloadTxt}>
-                        <Download size={16} className="opacity-60 mr-1" aria-hidden="true" />
-                        <span>Download .txt</span>
+                        <Download size={16} aria-hidden="true" />
+                        <span>Download</span>
                     </DropdownMenuItem>
+                    <DropdownMenuItem onClick={() => setReviseOpen(true)}>
+                        <TfiLoop size={16}  aria-hidden="true" />
+                        <span>Revise </span>
+                    </DropdownMenuItem>
+                    <DropdownMenuItem onClick={() => setAdaptOpen(true)}>
+                        <RiUserSmileLine size={16}  aria-hidden="true" />
+                        <span>Adapt Persona</span>
+                    </DropdownMenuItem>
+                    
                 </DropdownMenuContent>
             </DropdownMenu>
         </section>

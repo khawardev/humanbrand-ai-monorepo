@@ -1,7 +1,7 @@
 import { getCompanyUsers } from '@/server/actions/usersActions';
 import { DashboardInnerLayout } from '@/components/shared/DashboardComponents';
 import { Hero } from '@/components/shared/reusable/Hero';
-import AdminPageComponent from '@/components/routes/admin/users/AdminPageComponent';
+import { UsersTable } from '@/components/routes/admin/users/UsersTable';
 
 const AdminPage = async () => {
     const users = await getCompanyUsers();
@@ -9,7 +9,7 @@ const AdminPage = async () => {
     return (
         <DashboardInnerLayout>
             <Hero />
-            <AdminPageComponent users={users} />
+            <UsersTable users={users} />
         </DashboardInnerLayout>
     );
 }

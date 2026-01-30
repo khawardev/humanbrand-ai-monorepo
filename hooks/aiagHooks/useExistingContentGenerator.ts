@@ -3,7 +3,6 @@
 import { useRouter } from "next/navigation"
 import { toast } from "sonner"
 import { useBaseContentGenerator } from "./useBaseContentGenerator"
-import { getUser } from "@/server/actions/usersActions"
 import { createExistingContentSession } from "@/server/actions/savedSessionActions"
 
 export function useExistingContentGenerator() {
@@ -16,18 +15,15 @@ export function useExistingContentGenerator() {
         if (isGenerateDisabled) return
 
         base.startTransition(async () => {
-            const user: any = await getUser()
-            if (!user) {
-                toast.warning('Please Login first')
-                return
-            }
+            const user = await base.validateUser()
+            if (!user) return
 
             const sessionData = {
                 sessionType: "existing",
                 userId: user?.id,
                 modelId: base.selectedModel,
                 referenceFileInfos: base.referenceFileInfos,
-                referencePdfData: base.referenceFilesData,
+                referenceFilesData: base.referenceFilesData,
                 additionalInstructions: base.additionalInstructions,
                 contextualAwareness: base.contextualAwareness,
                 tone: base.toneValue,

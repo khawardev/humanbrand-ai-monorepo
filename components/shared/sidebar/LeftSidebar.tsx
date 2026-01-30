@@ -15,11 +15,12 @@ import SidebarUser from './SidebarUser'
 import { FullLogo, HalfLogo } from '../Logo'
 
 type LeftSidebarProps = {
-	user: any
+	user?: any
+	userItem?: React.ReactNode
 	sessionsList?: React.ReactNode
 }
 
-export function LeftSidebar({ user, sessionsList, ...props }: LeftSidebarProps) {
+export function LeftSidebar({ user, userItem, sessionsList, ...props }: LeftSidebarProps) {
 	return (
 		<Sidebar collapsible="icon" variant="inset" {...props}>
 			<SidebarHeader>
@@ -41,7 +42,7 @@ export function LeftSidebar({ user, sessionsList, ...props }: LeftSidebarProps) 
 			<SidebarFooter>
 				<SidebarMenu>
 					<SidebarMenuItem>
-						<SidebarUser user={user} />
+						{userItem || <SidebarUser user={user} />}
 					</SidebarMenuItem>
 				</SidebarMenu>
 				<SidebarMenu>

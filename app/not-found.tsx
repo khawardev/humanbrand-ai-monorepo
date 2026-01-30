@@ -8,7 +8,7 @@ export default function NotFound() {
         <h1 className="tracking-tighter">404</h1>
         <p className="my-3">Could not find requested resource</p>
         <Link href="/dashboard/ai-chat">
-          <Button size="sm">Return Home</Button>
+          <Button >Return Home</Button>
         </Link>
       </div>
     </div>

@@ -14,7 +14,7 @@ export function SigninButtonDesktop() {
     }
     return (
         <section className="md:inline-block hidden ">
-            <Button onClick={signInGoogle} variant={'outline'} size={'sm'}>
+            <Button onClick={signInGoogle} variant={'outline'}>
                 <FcGoogle /> Sign In
             </Button>
         </section>
@@ -29,7 +29,7 @@ export function SigninButtonMobile() {
     }
     return (
         <section className="md:hidden inline-block  ">
-            <Button className=" w-full" onClick={signInGoogle} size={'sm'}>
+            <Button className=" w-full" onClick={signInGoogle} >
                 <FcGoogle /> Sign In
             </Button>
         </section>
@@ -42,7 +42,7 @@ export function SignoutButtonMobile() {
             <Button className=" w-full" onClick={async () => {
                 await signOut();
                 router.refresh();
-            }} size={'sm'} variant={'destructive'}>
+            }} variant={'destructive'}>
                 Sign out
             </Button>
         </section>

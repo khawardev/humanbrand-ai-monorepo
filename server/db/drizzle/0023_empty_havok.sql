@@ -1,0 +1,1 @@
+ALTER TABLE "aiag_schema"."saved_sessions" RENAME COLUMN "campaign_type" TO "campaign_id";

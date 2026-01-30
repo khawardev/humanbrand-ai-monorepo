@@ -5,7 +5,6 @@ import { useRouter } from "next/navigation"
 import { toast } from "sonner"
 import { useBaseContentGenerator } from "./useBaseContentGenerator"
 import { isSocialPostContentType } from "@/lib/aiag/formDataHelpers"
-import { getUser } from "@/server/actions/usersActions"
 import { createSession } from "@/server/actions/savedSessionActions"
 
 export function useNewContentGenerator() {
@@ -37,15 +36,8 @@ export function useNewContentGenerator() {
         if (isGenerateDisabled) return
 
         base.startTransition(async () => {
-            const user: any = await getUser()
-            if (!user) {
-                toast.warning('Please Login to continue')
-                return
-            }
-            if (user?.adminVerified === false) {
-                toast.warning('Please wait for the Admin to Approve')
-                return
-            }
+            const user = await base.validateUser()
+            if (!user) return
 
             const sessionData = {
                 sessionType: "new",

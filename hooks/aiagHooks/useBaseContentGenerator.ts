@@ -1,7 +1,9 @@
 'use client'
 
 import { useState, useTransition } from "react"
+import { toast } from "sonner"
 import { modelTabs, adjustToneAndCreativityData } from "@/config/formData"
+import { getUser } from "@/server/actions/usersActions"
 
 export type BaseContentGeneratorState = {
     selectedModel: number
@@ -22,6 +24,7 @@ export type BaseContentGeneratorActions = {
     setToneValue: (value: number) => void
     setCreativityValue: (value: number) => void
     handleReferenceFileChange: (data: { fileInfos?: any[]; parsedText?: string | null }) => void
+    validateUser: () => Promise<any>
 }
 
 export type BaseContentGeneratorResult = {
@@ -59,6 +62,19 @@ export function useBaseContentGenerator(initialValues?: Partial<BaseContentGener
         setReferenceFilesData(parsedText || null)
     }
 
+    const validateUser = async () => {
+        const user: any = await getUser()
+        if (!user) {
+            toast.warning('Please Login to continue')
+            return null
+        }
+        if (user?.adminVerified === false) {
+            toast.warning('Please wait for the Admin to Approve')
+            return null
+        }
+        return user
+    }
+
     return {
         isPending,
         startTransition,
@@ -77,5 +93,6 @@ export function useBaseContentGenerator(initialValues?: Partial<BaseContentGener
         creativityValue,
         setCreativityValue,
         handleReferenceFileChange,
+        validateUser,
     }
 }

@@ -28,12 +28,7 @@ export function PersonaDialog({ isOpen, onOpenChange, setPersonasText, setUpload
 
     return (
         <Dialog open={isOpen} onOpenChange={onOpenChange}>
-            <DialogTrigger asChild>
-                <Button size={'sm'} variant={'ghost'}>
-                    <RiUserSmileLine size={16} className="opacity-60" aria-hidden="true" />
-                    <span>Persona</span>
-                </Button>
-            </DialogTrigger>
+
             <DialogContent className="sm:max-w-3xl">
                 <section>
                     <DialogTitle></DialogTitle>
@@ -60,7 +55,7 @@ export function PersonaDialog({ isOpen, onOpenChange, setPersonasText, setUpload
                     />
                 </section>
                 <DialogFooter>
-                    <Button size={'sm'} onClick={handleSubmit} disabled={!personasText?.trim()}>Generate</Button>
+                    <Button  onClick={handleSubmit} disabled={!personasText?.trim()}>Generate</Button>
                 </DialogFooter>
             </DialogContent>
         </Dialog>

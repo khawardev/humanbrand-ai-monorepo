@@ -1,22 +1,19 @@
 'use client'
 
 import { useState, useRef } from "react"
+import { useRouter } from "next/navigation"
 import { toast } from "sonner"
 import { campaignTypes } from "@/config/formData"
 import { useBaseContentGenerator } from "./useBaseContentGenerator"
 import { getModelAlias } from "@/lib/aiag/formDataHelpers"
-import { getUser } from "@/server/actions/usersActions"
-import { getCampaignContentPrompts } from "@/lib/aiag/prompts"
-import { generateNewContent } from "@/server/actions/generateNewContentActions"
-import { cleanAndFlattenBulletsGoogle } from "@/lib/cleanMarkdown"
-import { stripMarkdownBold } from "@/lib/utils"
+import { createCampaignContentSession } from "@/server/actions/savedSessionActions"
 
 export function useCampaignContentGenerator() {
+    const router = useRouter()
     const base = useBaseContentGenerator()
     const formRef = useRef<HTMLDivElement>(null)
 
     const [selectedCampaignType, setSelectedCampaignType] = useState<number | null>(null)
-    const [generatedContent, setGeneratedContent] = useState<string | null>(null)
 
     const isGenerateDisabled = selectedCampaignType === null
 
@@ -26,55 +23,28 @@ export function useCampaignContentGenerator() {
         const modelAlias = getModelAlias(base.selectedModel)
         const selectedCampaign = campaignTypes.find((tab) => tab.id === selectedCampaignType)
 
-        const data = {
-            selectedCampaign: selectedCampaign?.label || "",
-            additionalInstructions: base.additionalInstructions,
-            referenceFilesData: base.referenceFilesData,
-        }
-
-        const { systemPrompt, userPrompt } = getCampaignContentPrompts(data)
-
         base.startTransition(async () => {
-            const user: any = await getUser()
-            if (!user) {
-                toast.warning('Please Login to continue')
-                return
-            }
-            if (user?.adminVerified === false) {
-                toast.warning('Please wait for the Admin to Approve')
-                return
-            }
+            const user = await base.validateUser()
+            if (!user) return
 
-            const generateData = {
+            const sessionData = {
+                userId: user.id,
+                modelId: base.selectedModel,
                 modelAlias,
-                temperature: 5,
-                systemPrompt,
-                userPrompt
+                selectedCampaignLabel: selectedCampaign?.label || "",
+                additionalInstructions: base.additionalInstructions,
+                referenceFilesData: base.referenceFilesData,
+                temperature: base.creativityValue,
             }
 
-            const generatedResult = await generateNewContent(generateData)
-            const cleanedMarkdown = cleanAndFlattenBulletsGoogle(generatedResult.generatedText)
-            setGeneratedContent(cleanedMarkdown)
+            const res = await createCampaignContentSession(sessionData)
+            
+            if (res.sessionId) {
+                 router.push(`/dashboard/session/${res.sessionId}?new=true`)
+            } else {
+                 toast.error(res.error || "An unexpected error occurred.")
+            }
         })
-    }
-
-    const handleCopy = () => {
-        if (!generatedContent) return
-        navigator.clipboard.writeText(stripMarkdownBold(generatedContent))
-        toast.success("Content copied to clipboard!")
-    }
-
-    const handleDownloadTxt = () => {
-        if (!generatedContent) return
-        const blob = new Blob([generatedContent], { type: "text/plain" })
-        const url = URL.createObjectURL(blob)
-        const a = document.createElement("a")
-        a.href = url
-        a.download = "AIAG_generatedContent.txt"
-        document.body.appendChild(a)
-        a.click()
-        document.body.removeChild(a)
-        URL.revokeObjectURL(url)
     }
 
     return {
@@ -87,11 +57,8 @@ export function useCampaignContentGenerator() {
         handleReferenceFileChange: base.handleReferenceFileChange,
         additionalInstructions: base.additionalInstructions,
         setAdditionalInstructions: base.setAdditionalInstructions,
-        generatedContent,
         isGenerateDisabled,
         handleGenerate,
-        handleCopy,
-        handleDownloadTxt,
         formRef,
     }
 }

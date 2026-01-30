@@ -22,7 +22,7 @@ export default function RewriteButton({ position, onClick }: RewriteButtonProps)
             exit={{ opacity: 0, scale: 0.8, y: 10 }}
             transition={{ duration: 0.15 }}
         >
-            <Button onClick={onClick} size="sm" className="shadow-lg">
+            <Button onClick={onClick}  className="shadow-lg">
                 Rewrite
             </Button>
         </motion.div>

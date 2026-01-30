@@ -37,7 +37,7 @@ export function PersonaContentActions({ content }: any) {
         <>
             <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                    <Button variant={'outline'} size={'xs'}>
+                    <Button variant={'outline'} >
                         Actions <IoIosArrowDown />
                     </Button>
                 </DropdownMenuTrigger>

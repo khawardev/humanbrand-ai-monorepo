@@ -1,6 +1,8 @@
-import { SessionPageComponent } from "@/components/routes/session/SessionPageComponent";
+import { SessionPageComponent } from "@/components/routes/session/SessionPageComponent"
+import { DashboardInnerLayout } from "@/components/shared/DashboardComponents"
+import { Hero } from "@/components/shared/reusable/Hero"
 import { getSessionById } from "@/server/actions/savedSessionActions"
-import { getUser } from "@/server/actions/usersActions";
+import { getUser } from "@/server/actions/usersActions"
 
 const SessionPage = async ({ params }: any) => {
     const resolvedParams = await params;
@@ -8,7 +10,12 @@ const SessionPage = async ({ params }: any) => {
     const sessionData = await getSessionById(sessionId)
     const user = await getUser()
 
-    return <SessionPageComponent user={user} initialData={sessionData} />
+    return (
+        <DashboardInnerLayout>
+            <Hero />
+            <SessionPageComponent user={user} initialData={sessionData} />
+        </DashboardInnerLayout>
+    )
 }
 
 export default SessionPage

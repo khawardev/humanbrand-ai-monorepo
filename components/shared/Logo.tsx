@@ -36,32 +36,32 @@ export const FullLogo = () => {
     return (
         <div className="flex items-center " suppressHydrationWarning={true}>
             <span className="inline dark:hidden">
-                <img
+                {/* <img
                     src="https://i.postimg.cc/nzx83C4D/HB-logo.png"
                     width={40}
                     alt="Logo"
                     className="cursor-pointer block lg:hidden"
-                />
+                /> */}
                 <img
                     src="https://i.postimg.cc/yY06gqFK/HB-logo-name-mark-side-black-1.png"
-                    width={150}
+                    width={140}
                     alt="Logo"
-                    className="cursor-pointer hidden lg:block"
+                    className="cursor-pointer "
                 />
             </span>
 
             <span className="hidden dark:inline">
-                <img
+                {/* <img
                     src="https://i.postimg.cc/5ythqc3x/HB-Green-Halflogo-name-mark-side-green-1.png"
                     width={40}
                     alt="Logo"
                     className="cursor-pointer block lg:hidden"
-                />
+                /> */}
                 <img
                     src="https://i.postimg.cc/c1jwNRnH/HB-logo-name-mark-side-green-1.png"
-                    width={150}
+                    width={140}
                     alt="Logo"
-                    className="cursor-pointer hidden lg:block"
+                    className="cursor-pointer "
                 />
             </span>
         </div>

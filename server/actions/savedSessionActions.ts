@@ -2,14 +2,15 @@
 
 import { revalidatePath } from "next/cache"
 import { db } from "@/server/db"
-import { eq } from "drizzle-orm"
-import { getNewGenerationPrompts, getImageGenerationPrompt, getRevisionPrompts, getHyperRelevancePrompts, getExistingContentPrompts } from "@/lib/aiag/prompts"
+import { eq, desc } from "drizzle-orm"
+import { getNewGenerationPrompts, getImageGenerationPrompt, getRevisionPrompts, getHyperRelevancePrompts, getExistingContentPrompts, getCampaignContentPrompts } from "@/lib/aiag/prompts"
 import { generateNewContent, generateSessionTitle } from "@/server/actions/generateNewContentActions"
 import { cleanAndFlattenBulletsGoogle } from "@/lib/cleanMarkdown"
 import { knowledgeBaseContent } from "@/lib/aiag/knowledgeBase"
 import { adjustToneAndCreativityData } from "@/config/formData"
 import { savedSession } from "@/server/db/schema/savedSessionSchema"
 import { lookupFormData, buildPromptData } from "@/lib/aiag/formDataHelpers"
+import { getSession } from "@/server/actions/getSession"
 
 async function generateContentWithTitle(
     modelLabel: string | undefined,
@@ -83,7 +84,7 @@ export async function createSession(data: any) {
 
         const sessionPayload = {
             userId: data.userId,
-            sessionType: data.sessionType,
+            sessionType: "New",
             title,
             modelId: data.modelId,
             audienceIds: data.audienceIds,
@@ -142,7 +143,7 @@ export async function createExistingContentSession(data: any) {
 
         const sessionPayload = {
             userId: data.userId,
-            sessionType: data.sessionType,
+            sessionType: "Existing",
             title,
             modelId: data.modelId,
             referenceFileInfos: data.referenceFileInfos,
@@ -170,26 +171,42 @@ export async function createExistingContentSession(data: any) {
 
 export async function createCampaignContentSession(data: any) {
     try {
-        const lookup = lookupFormData({ modelId: data.modelId })
+        const { systemPrompt, userPrompt } = getCampaignContentPrompts({
+            selectedCampaign: data.selectedCampaignLabel,
+            additionalInstructions: data.additionalInstructions,
+            referenceFilesData: data.referenceFilesData,
+        })
+        
+        const { cleanedMarkdown, title } = await generateContentWithTitle(
+            data.modelAlias,
+            data.temperature,
+            systemPrompt,
+            userPrompt
+        )
 
-        const promptData = {
-            userUploadedContent: data.referenceFilesData || '',
-            additionalInstructions: data.additionalInstructions || '',
-            contextualAwareness: data.contextualAwareness || '',
-            knowledgeBaseContent,
-            selectedtone: adjustToneAndCreativityData.tone.defaultValue,
+        const sessionPayload = {
+            userId: data.userId,
+            sessionType: "Campaign",
+            title,
+            modelId: data.modelId,
+            referenceFileInfos: data.referenceFileInfos,
+            referenceFilesData: data.referenceFilesData,
+            additionalInstructions: data.additionalInstructions,
+            generatedContent: cleanedMarkdown,
+            temperature: data.temperature,
         }
 
-        const { systemPrompt, userPrompt } = getExistingContentPrompts(promptData)
-        const generateData = { modelAlias: lookup.selectedModelObj?.label, temperature: data.temperature, systemPrompt, userPrompt }
+        const newSession = await db.insert(savedSession).values(sessionPayload).returning({ id: savedSession.id })
+        const sessionId = newSession[0].id
+         if (!sessionId) throw new Error("Failed to create campaign content session.")
 
-        const generatedResult = await generateNewContent(generateData)
-        const cleanedMarkdown = cleanAndFlattenBulletsGoogle(generatedResult.generatedText)
+        revalidatePath(`/dashboard/session/${sessionId}`)
+        revalidatePath("/dashboard", "layout")
 
-        return cleanedMarkdown
+        return { sessionId, generatedContent: cleanedMarkdown }
     } catch (error) {
-        console.error("Error creating existing content session:", error)
-        return { error: "Could not create session from existing content." }
+        console.error("Error creating campaign content session:", error)
+        return { error: "Could not create session from campaign content." }
     }
 }
 
@@ -311,6 +328,34 @@ export async function manageImageForSession(sessionId: string, data: any) {
     } catch (error) {
         console.error("Error managing image:", error)
         return { error: "Could not manage image." }
+    }
+}
+
+export async function deleteSession(sessionId: string) {
+    try {
+        await db.delete(savedSession).where(eq(savedSession.id, sessionId))
+        revalidatePath("/dashboard")
+        revalidatePath("/dashboard", "layout")
+        return { success: true }
+    } catch (error) {
+        console.error("Error deleting session:", error)
+        return { error: "Could not delete session." }
+    }
+}
+
+export async function getSavedSessions() {
+    try {
+        const session: any = await getSession();
+         if (!session?.user?.id) return []
+
+        const sessions = await db.query.savedSession.findMany({
+            where: eq(savedSession.userId, session.user.id),
+            orderBy: [desc(savedSession.updatedAt)],
+        })
+        return sessions
+    } catch (error) {
+        console.error("Error fetching sessions:", error)
+        return []
     }
 }
 

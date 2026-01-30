@@ -46,7 +46,6 @@ export default function TTSPage() {
 
             <div className="mt-3">
                 <Button
-                    size={'sm'}
                     onClick={generateAudio}
                     disabled={loading}
                 >
@@ -59,7 +58,7 @@ export default function TTSPage() {
                     <audio controls src={audioUrl} className="w-full" />
                     <div className="mt-3">
                         <a href={audioUrl} download="tts-output.wav">
-                            <Button size={'sm'}>
+                            <Button >
                                 Download Audio
                             </Button>
                         </a>

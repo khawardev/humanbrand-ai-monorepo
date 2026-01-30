@@ -16,12 +16,7 @@ export function ReviseDialog({ isOpen, onOpenChange, handleRevise, feedback, set
 
     return (
         <Dialog open={isOpen} onOpenChange={onOpenChange}>
-            <DialogTrigger asChild>
-                <Button  size={'sm'} variant={'ghost'}>
-                    <TfiLoop size={16} className="opacity-60" aria-hidden="true" />
-                    <span>Revise</span>
-                </Button>
-            </DialogTrigger>
+
             <DialogContent className="sm:max-w-3xl">
                 <section >
                     <DialogTitle></DialogTitle>
@@ -44,7 +39,7 @@ export function ReviseDialog({ isOpen, onOpenChange, handleRevise, feedback, set
                     />
                 </section>
                 <DialogFooter>
-                    <Button size={'sm'} onClick={handleRevise} disabled={!feedback.trim()}>Revise</Button>
+                    <Button onClick={handleRevise} disabled={!feedback.trim()}>Revise</Button>
                 </DialogFooter>
             </DialogContent>
         </Dialog>

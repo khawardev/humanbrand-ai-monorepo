@@ -149,7 +149,6 @@ export function ImageGenerator({
                 />
                 <Button
                     className='w-full'
-                    size={'sm'}
                     onClick={handleGenerateClick}
                     disabled={isPending || !prompt.trim()}
                 >
