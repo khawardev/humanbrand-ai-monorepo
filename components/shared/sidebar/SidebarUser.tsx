@@ -1,10 +1,7 @@
 'use client'
 
 import { ChevronsUpDown, LogOut } from 'lucide-react'
-import Link from 'next/link'
 import { useState } from 'react'
-import { AiTwotoneSetting } from 'react-icons/ai'
-import { LuHeartHandshake } from 'react-icons/lu'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import {
 	DropdownMenu,
@@ -53,7 +50,7 @@ export default function SidebarUser({ user, hasFeeds }: any) {
 				</SidebarMenuButton>
 			</DropdownMenuTrigger>
 
-			<DropdownMenuContent align="center" className="ml-0 w-60 md:ml-3" side="top" sideOffset={4}>
+			<DropdownMenuContent align="center" className="w-64" side="top" sideOffset={4}>
 				<DropdownMenuLabel label="Account" rootOpenSetter={setOpen} />
 				<DropdownMenuSeparator />
 
@@ -71,26 +68,6 @@ export default function SidebarUser({ user, hasFeeds }: any) {
 					</div>
 					<div className="ml-auto size-2 rounded-full bg-primary" />
 				</DropdownMenuItem>
-				{/* <DropdownMenuSeparator />
-
-				<DropdownMenuItem asChild>
-					<Link href="/dashboard/changelog" onClick={handleMobileClose}>
-						<AiTwotoneSetting />
-						Changelog
-					</Link>
-				</DropdownMenuItem>
-				<DropdownMenuItem asChild>
-					<Link href="/dashboard/settings" onClick={handleMobileClose}>
-						<AiTwotoneSetting />
-						Settings
-					</Link>
-				</DropdownMenuItem>
-				<DropdownMenuItem asChild>
-					<Link href="/dashboard/pricing" onClick={handleMobileClose}>
-						<LuHeartHandshake />
-						Billing
-					</Link>
-				</DropdownMenuItem> */}
 				<DropdownMenuSeparator />
 				<DropdownMenuItem
 					onClick={() => {

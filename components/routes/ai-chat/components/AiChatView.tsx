@@ -14,7 +14,6 @@ import RewriteInput from "./RewriteInput"
 
 type RewriteState = {
     text: string
-    position: { top: number; left: number }
     messageIndex: number
 } | null
 
@@ -39,14 +38,8 @@ export default function AiChatView({ user, chatHistory, isResponding, handleRewr
         const selectedText = selection?.toString().trim()
 
         if (selectedText && selection) {
-            const range = selection.getRangeAt(0)
-            const rect = range.getBoundingClientRect()
             setRewriteState({
                 text: selectedText,
-                position: {
-                    top: window.scrollY + rect.bottom + 8,
-                    left: window.scrollX + rect.left,
-                },
                 messageIndex,
             })
         }
@@ -74,32 +67,14 @@ export default function AiChatView({ user, chatHistory, isResponding, handleRewr
 
     return (
         <div className="flex flex-col flex-1 overflow-y-auto space-y-4">
-            <AnimatePresence>
-                {rewriteState && (
-                    <motion.div
-                        key="rewrite-modal"
-                        className="fixed inset-0 flex items-center justify-center bg-black/40 z-50"
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        exit={{ opacity: 0 }}
-                        transition={{ duration: 0.2 }}
-                    >
-                        <motion.div
-                            initial={{ opacity: 0, scale: 0.9 }}
-                            animate={{ opacity: 1, scale: 1 }}
-                            exit={{ opacity: 0, scale: 0.9 }}
-                            transition={{ duration: 0.2, ease: "easeOut" }}
-                        >
-                            <RewriteInput
-                                position={rewriteState.position}
-                                selectedText={rewriteState.text}
-                                onSubmit={submitRewrite}
-                                onClose={() => setRewriteState(null)}
-                            />
-                        </motion.div>
-                    </motion.div>
-                )}
-            </AnimatePresence>
+            {rewriteState && (
+                <RewriteInput
+                    open={!!rewriteState}
+                    onOpenChange={() => setRewriteState(null)}
+                    selectedText={rewriteState.text}
+                    onSubmit={submitRewrite}
+                />
+            )}
 
             {chatHistory.map((msg: any, index: number) => (
                 <div key={index} className="flex items-start gap-3 w-full group">

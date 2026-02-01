@@ -8,7 +8,7 @@ import { savedSession } from "@/server/db/schema/savedSessionSchema";
 import { cache } from "react";
 import { revalidatePath } from "next/cache";
 
-export async function getUser() {
+export const getUser = cache(async () => {
   const session: any = await getSession();
 
   if (!session?.user?.id) {
@@ -21,7 +21,7 @@ export async function getUser() {
     .where(eq(user.id, session.user.id));
 
   return currentUser[0] ?? null;
-}
+});
 
 export const getUserWithSavedSessions = cache(async () => {
   const session: any = await getSession();

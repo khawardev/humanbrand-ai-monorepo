@@ -32,7 +32,7 @@ export function PersonaDialog({ isOpen, onOpenChange, setPersonasText, setUpload
             <DialogContent className="sm:max-w-3xl">
                 <section>
                     <DialogTitle></DialogTitle>
-                    <span className="font-semibold text-accent-foreground tracking-tighter">Adapt Content for Hyper Relevance</span>
+                    <span className="font-medium text-accent-foreground  tracking-tighter">Adapt Content for Hyper Relevance</span>
                     <Label className="text-sm text-muted-foreground mb-2">Describe Target Persona(s):</Label>
                     <Textarea
                         onKeyDown={(e) => {

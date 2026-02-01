@@ -10,35 +10,43 @@ import {
 	SidebarMenuItem,
 	useSidebar,
 } from '@/components/ui/sidebar'
-import { AIAGConfig } from '@/config/aiagConfig'
+import { AIAGConfig, ADMIN_EMAILS } from '@/config/aiagConfig'
 
-export function SidebarNavigation() {
+export function SidebarNavigation({ user }: { user?: any }) {
 	const pathname = usePathname()
 	const { isMobile, setOpenMobile } = useSidebar()
 
 	return (
 		<SidebarGroup>
 			<SidebarMenu>
-				{AIAGConfig.mainNav.map((item: any) => {
-					const isActive = pathname === item.href
-					const Icon = isActive && item.fillIcon ? item.fillIcon : item.icon
-					return (
-						<SidebarMenuItem key={item.title}>
-							<SidebarMenuButton asChild isActive={isActive} tooltip={item.title}>
-								<Link
-									className="flex w-full items-center gap-2"
-									href={item.href}
-									onClick={() => isMobile && setOpenMobile(false)}
-								>
-									{Icon && <Icon className="size-4" />}
-									<span>{item.title}</span>
-									<span className="ml-auto">{isActive && <BreadcrumbSeparator />}</span>
-								</Link>
-							</SidebarMenuButton>
-						</SidebarMenuItem>
-					)
-				})}
+				{AIAGConfig.mainNav
+					.filter((item: any) => {
+						if (item.title === 'Admin') {
+							return user?.email && ADMIN_EMAILS.includes(user.email)
+						}
+						return true
+					})
+					.map((item: any) => {
+						const isActive = pathname === item.href
+						const Icon = isActive && item.fillIcon ? item.fillIcon : item.icon
+						return (
+							<SidebarMenuItem key={item.title}>
+								<SidebarMenuButton asChild isActive={isActive} tooltip={item.title}>
+									<Link
+										className="flex w-full items-center gap-2"
+										href={item.href}
+										onClick={() => isMobile && setOpenMobile(false)}
+									>
+										{Icon && <Icon className="size-4" />}
+										<span>{item.title}</span>
+										<span className="ml-auto">{isActive && <BreadcrumbSeparator />}</span>
+									</Link>
+								</SidebarMenuButton>
+							</SidebarMenuItem>
+						)
+					})}
 			</SidebarMenu>
 		</SidebarGroup>
 	)
 }
+

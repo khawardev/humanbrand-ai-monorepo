@@ -18,7 +18,7 @@ export default function RewriteTarget({ text, onCancel }: RewriteTargetProps) {
             className="bg-primary/10 border-l-4 border-primary p-2 pl-3 rounded-t-lg flex items-center justify-between gap-4 text-sm"
         >
             <div className="flex items-baseline gap-2 overflow-hidden">
-                <span className="font-semibold text-primary flex-shrink-0">Rewrite:</span>
+                <span className="font-medium text-primary flex-shrink-0">Rewrite:</span>
                 <p className="text-primary/80 truncate">"{text}"</p>
             </div>
             <button

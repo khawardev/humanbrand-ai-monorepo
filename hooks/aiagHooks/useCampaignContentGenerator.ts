@@ -32,6 +32,7 @@ export function useCampaignContentGenerator() {
                 modelId: base.selectedModel,
                 modelAlias,
                 selectedCampaignLabel: selectedCampaign?.label || "",
+                campaignTypeId: selectedCampaignType,
                 additionalInstructions: base.additionalInstructions,
                 referenceFilesData: base.referenceFilesData,
                 temperature: base.creativityValue,

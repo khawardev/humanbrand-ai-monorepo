@@ -1,8 +1,6 @@
 import React from 'react';
 import Image from 'next/image';
-import ReactMarkdown from 'react-markdown';
-import remarkGfm from 'remark-gfm';
-import { stripMarkdownBold } from '@/lib/utils';
+import { Markdown } from '@/components/ui/markdown';
 
 interface ChatMessageProps {
     message: any;
@@ -26,19 +24,22 @@ export default function ChatMessage({ message, user, messageIndex, onSelectText 
     const avatarAlt = `${message.role} avatar`;
 
     return (
-        <div className="flex items-start gap-3 w-full">
+        <div className="flex items-start gap-4 w-full group">
             <Image
                 src={isAssistant ? 'https://i.postimg.cc/ZYDgZQyF/aiag-logo.jpg' : (user?.image || '/default-user.png')}
                 alt={avatarAlt}
                 width={36}
                 height={36}
-                className="w-9 h-9 rounded-md object-cover mt-1"
+                className="w-9 h-9 rounded-md object-cover mt-1 shrink-0"
             />
-            <div className={`w-full p-3 rounded-lg ${!isAssistant ? 'bg-primary text-primary-foreground border' : 'bg-black/5 dark:bg-white/5 border'}`}>
-                <div className="markdown-body space-y-1 text-[15px]" onMouseUp={isAssistant ? handleMouseUp : undefined}>
-                    <ReactMarkdown remarkPlugins={[remarkGfm]}>
+            <div className={`w-full overflow-hidden ${!isAssistant ? 'bg-primary text-primary-foreground p-3 rounded-lg' : ''}`}>
+                <div 
+                    className={`text-[15px] leading-relaxed ${isAssistant ? '' : 'prose-invert'}`} 
+                    onMouseUp={isAssistant ? handleMouseUp : undefined}
+                >
+                    <Markdown>
                         {message.content}
-                    </ReactMarkdown>
+                    </Markdown>
                 </div>
             </div>
         </div>

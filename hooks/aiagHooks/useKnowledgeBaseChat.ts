@@ -2,41 +2,84 @@
 
 import { useState, useEffect } from "react";
 import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 import { upsertKnowledgeBaseChat, rewriteAssistantMessage } from "@/server/actions/knowledgeBaseChatActions";
+import { saveUserMessage, generateChatResponse, rewriteSessionAssistantMessage, deleteSessionMessage, editUserMessage, rateSessionMessage } from "@/server/actions/savedSessionActions";
 
-export function useKnowledgeBaseChat(initialData: { user: any; initialChatHistory: any[] }) {
+export function useKnowledgeBaseChat(initialData: { user: any; initialChatHistory: any[]; sessionId?: string }) {
     const [user, setUser] = useState<any>(initialData.user);
     const [chatHistory, setChatHistory] = useState<any[]>(initialData.initialChatHistory || []);
+    const [sessionId, setSessionId] = useState<string | undefined>(initialData.sessionId);
     const [isResponding, setIsResponding] = useState(false);
+    const router = useRouter();
 
     useEffect(() => {
         setUser(initialData.user);
     }, [initialData.user]);
 
+    // Check if we need to auto-generate a response (e.g. after redirect or page load with pending user message)
+    useEffect(() => {
+        const lastMessage = chatHistory[chatHistory.length - 1];
+        if (sessionId && user && !isResponding && chatHistory.length > 0 && lastMessage?.role === 'user') {
+            triggerResponse(sessionId, chatHistory);
+        }
+    }, [chatHistory, sessionId, user]);
+
+    const triggerResponse = async (currentSessionId: string, currentHistory: any[]) => {
+        setIsResponding(true);
+        try {
+            const result = await generateChatResponse(currentSessionId, user.id, currentHistory);
+            if (result.success && result.newHistory) {
+                setChatHistory(result.newHistory);
+            } else {
+                toast.error(result.error || "Failed to generate response.");
+            }
+        } catch (error) {
+            console.error(error);
+            toast.error("Error generating response.");
+        }
+        setIsResponding(false);
+    }
+
     const handleSendMessage = async (userInput: string) => {
         if (!user) {
-            toast.error("Please log in to use the chat.");
-            return;
+             toast.error("Please log in to use the chat.");
+             return;
         }
-        if (user?.adminVerified === false) {
-            toast.error('Please wait for the Admin to Approve')
-            return;
-        }
+
         if (!userInput.trim() || isResponding) return;
 
         setIsResponding(true);
         const optimisticHistory = [...chatHistory, { role: 'user', content: userInput }];
         setChatHistory(optimisticHistory);
 
-        const result = await upsertKnowledgeBaseChat(user.id, userInput, chatHistory);
+        try {
+            // 1. Save User Message
+            const result = await saveUserMessage(sessionId || null, user.id, userInput, chatHistory);
 
-        if (result.success && result.newHistory) {
-            setChatHistory(result.newHistory);
-        } else {
-            toast.error(result.error || "An unexpected error occurred.");
-            setChatHistory(chatHistory);
+            if (result.success && result.sessionId) {
+                // If it was a new session, redirect immediately
+                if (!sessionId && result.sessionId) {
+                    setSessionId(result.sessionId);
+                    router.replace(`/dashboard/ai-chat/${result.sessionId}`);
+                    return; // Stop here, let the new page handle the generation
+                } 
+                
+                // If existing session, continue to generate response
+                if (result.history) {
+                    await triggerResponse(result.sessionId, result.history);
+                }
+            } else {
+                toast.error(result.error || "Failed to save message.");
+                setChatHistory(chatHistory); // Revert
+                setIsResponding(false);
+            }
+        } catch (error) {
+            console.error(error);
+            toast.error("Failed to send message");
+            setChatHistory(chatHistory); // Revert
+            setIsResponding(false);
         }
-        setIsResponding(false);
     };
 
     const handleRewriteMessage = async (messageIndex: number, originalContent: string, selectedText: string, rewritePrompt: string) => {
@@ -48,7 +91,13 @@ export function useKnowledgeBaseChat(initialData: { user: any; initialChatHistor
 
         setIsResponding(true);
 
-        const result = await rewriteAssistantMessage(user.id, messageIndex, originalContent, selectedText, rewritePrompt);
+        let result;
+        if (sessionId) {
+            result = await rewriteSessionAssistantMessage(sessionId, messageIndex, originalContent, selectedText, rewritePrompt);
+        } else {
+            // Fallback to legacy structure if separate from session (unlikely in new flow)
+             result = await rewriteAssistantMessage(user.id, messageIndex, originalContent, selectedText, rewritePrompt);
+        }
 
         if (result.success && result.newHistory) {
             setChatHistory(result.newHistory);
@@ -59,11 +108,85 @@ export function useKnowledgeBaseChat(initialData: { user: any; initialChatHistor
         setIsResponding(false);
     };
 
+    const handleDeleteMessage = async (messageIndex: number) => {
+        if (!sessionId) return;
+        
+        // Optimistic update
+        const targetMessage = chatHistory[messageIndex];
+        let optimisticHistory = [...chatHistory];
+        if (targetMessage.role === 'user') {
+             if (messageIndex + 1 < optimisticHistory.length && optimisticHistory[messageIndex + 1].role === 'assistant') {
+                 optimisticHistory.splice(messageIndex, 2);
+             } else {
+                 optimisticHistory.splice(messageIndex, 1);
+             }
+        } else {
+            optimisticHistory.splice(messageIndex, 1);
+        }
+        setChatHistory(optimisticHistory);
+
+        const result = await deleteSessionMessage(sessionId, messageIndex);
+        if (result.success && result.newHistory) {
+             setChatHistory(result.newHistory);
+        } else {
+            toast.error("Failed to delete message");
+            setChatHistory(chatHistory); // Revert
+        }
+    }
+
+    const handleEditUserMessage = async (messageIndex: number, newContent: string) => {
+        if (!sessionId) return;
+        if (!newContent.trim()) return;
+
+        setIsResponding(true);
+        // Optimistic update
+        // Truncate history after edited message
+        const truncated = chatHistory.slice(0, messageIndex);
+        const optimisticHistory = [...truncated, { role: 'user', content: newContent }];
+        setChatHistory(optimisticHistory);
+
+        try {
+            const result = await editUserMessage(sessionId, messageIndex, newContent);
+            if (result.success && result.history) {
+                 // Trigger response immediately
+                 await triggerResponse(sessionId, result.history);
+            } else {
+                toast.error("Failed to edit message");
+                setChatHistory(chatHistory); // Revert
+                setIsResponding(false);
+            }
+        } catch (e) {
+            console.error(e);
+            setChatHistory(chatHistory);
+            setIsResponding(false);
+        }
+    }
+
+    const handleRateMessage = async (messageIndex: number, feedback: 'up' | 'down' | null) => {
+        if (!sessionId) return;
+        
+        // Optimistic update
+        const updatedHistory = [...chatHistory];
+        updatedHistory[messageIndex] = { ...updatedHistory[messageIndex], feedback };
+        setChatHistory(updatedHistory);
+
+        const result = await rateSessionMessage(sessionId, messageIndex, feedback);
+        if (result.success && result.newHistory) {
+             setChatHistory(result.newHistory);
+        } else {
+            toast.error("Failed to rate message");
+            setChatHistory(chatHistory); // Revert
+        }
+    }
+
     return {
         user,
         chatHistory,
         isResponding,
         handleSendMessage,
         handleRewriteMessage,
+        handleDeleteMessage,
+        handleEditUserMessage,
+        handleRateMessage
     };
 }

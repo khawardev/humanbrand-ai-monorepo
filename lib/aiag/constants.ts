@@ -1,4 +1,4 @@
-export const AIAG_VERSION = "26.1";
+export const AIAG_VERSION = "26.2";
 export const AIAG_LOGO = "https://i.postimg.cc/ZYDgZQyF/aiag-logo.jpg";
 export const MAX_CHAT_HISTORY_MESSAGES = 20;
 

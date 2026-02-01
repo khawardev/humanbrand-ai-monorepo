@@ -38,6 +38,7 @@ export function SessionPageComponent({ initialData, user }: SessionPageComponent
     isSocialPostSelected,
     selectedSocialPlatform,
     setSelectedSocialPlatform,
+    selectedCampaignTypeId,
     selectedCtas,
     setSelectedCtas,
     referenceFileInfos,
@@ -107,6 +108,7 @@ export function SessionPageComponent({ initialData, user }: SessionPageComponent
                 isSocialPostSelected={isSocialPostSelected}
                 selectedSocialPlatform={selectedSocialPlatform}
                 setSelectedSocialPlatform={setSelectedSocialPlatform}
+                selectedCampaignTypeId={selectedCampaignTypeId}
                 selectedCtas={selectedCtas}
                 setSelectedCtas={setSelectedCtas}
                 referenceFileInfos={referenceFileInfos}

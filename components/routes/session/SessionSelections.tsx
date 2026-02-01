@@ -40,6 +40,9 @@ const ReferenceMaterialSection = dynamic(() =>
 import { LineSpinner } from "@/components/shared/Spinner"
 import { Separator } from "@/components/ui/separator"
 
+import { CampaignTypeDetails } from "@/components/routes/campaign/CampaignTypeDetails"
+import { campaignTypes } from "@/config/formData"
+
 interface SessionSelectionsProps {
   sessionType: string
   isPending: boolean
@@ -55,6 +58,7 @@ interface SessionSelectionsProps {
   isSocialPostSelected: boolean
   selectedSocialPlatform: any
   setSelectedSocialPlatform: (val: any) => void
+  selectedCampaignTypeId?: number | null
   selectedCtas: any
   setSelectedCtas: (val: any) => void
   referenceFileInfos: any
@@ -80,6 +84,7 @@ export function SessionSelections({
   isSocialPostSelected,
   selectedSocialPlatform,
   setSelectedSocialPlatform,
+  selectedCampaignTypeId,
   selectedCtas,
   setSelectedCtas,
   referenceFileInfos,
@@ -90,9 +95,12 @@ export function SessionSelections({
   handleGenerate,
 }: SessionSelectionsProps) {
   
-  const isNew = sessionType === 'new'
-  const isExisting = sessionType === 'existing'
+  const isNew = sessionType === 'New'
+  const isExisting = sessionType === 'Existing'
   const isCampaign = sessionType === 'Campaign'
+
+  // Helper to get campaign label
+  const campaignLabel = campaignTypes.find(c => c.id === selectedCampaignTypeId)?.label
 
   return (
     <section className="space-y-10">
@@ -102,6 +110,18 @@ export function SessionSelections({
         onValueChange={setSelectedModel}
       />
 
+      {isCampaign && selectedCampaignTypeId && (
+        <div className="space-y-4">
+          <div className="flex flex-col gap-2">
+            <h3 className="text-lg font-medium">Selected Campaign</h3>
+             <div className="border rounded-lg p-4 bg-background">
+                <p className="font-semibold text-primary">{campaignLabel}</p>
+             </div>
+          </div>
+          <CampaignTypeDetails selectedCampaignType={selectedCampaignTypeId} />
+        </div>
+      )}
+
       {isNew && (
         <>
           <AudienceSection
@@ -110,7 +130,7 @@ export function SessionSelections({
             onSelectionChange={setSelectedAudiences}
           />
           <SubjectSection
-            title="Subject focus"
+            title="Subject Focus"
             selectedValue={selectedSubjects}
             onSelectionChange={setSelectedSubjects}
           />

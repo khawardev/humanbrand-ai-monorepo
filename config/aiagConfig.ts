@@ -7,6 +7,12 @@ import { MdAdminPanelSettings } from "react-icons/md";
 export const AIAGConfig: any = {
   sidebarTitle: "Saved Sessions",
   mainNav: [
+    // {
+    //   title: "Prompt Kit",
+    //   href: "/dashboard/prompt-kit",
+    //   icon: RiChatAiLine,
+    //   fillIcon: RiChatAiFill,
+    // },
     {
       title: "AI Chat",
       href: "/dashboard/ai-chat",

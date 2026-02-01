@@ -1,6 +1,6 @@
 @import url("./markdown.css");
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
-@import url("./typography.css");
+/* @import url("./typography.css"); */
 @import url("./mixins.css");
 @import "tailwindcss";
 @import "tw-animate-css";
@@ -123,7 +123,6 @@
   --sidebar-ring: oklch(0.556 0 0);
 }
 
-
 @layer base {
   * {
     box-sizing: border-box;
@@ -178,6 +177,5 @@
   .scrollbar-none::-webkit-scrollbar {
     display: none;
   }
-
 
 }

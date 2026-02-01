@@ -125,7 +125,6 @@ export const getUsersColumns = (
         <div className="text-right flex justify-end gap-2">
           <Button
             variant={user.adminVerified ? "outline" : "default"}
-            size="xs"
             onClick={() => onVerificationToggle(user.id, user.adminVerified)}
             disabled={isPending}
           >
@@ -140,7 +139,6 @@ export const getUsersColumns = (
           </Button>
           <Button
             variant="destructive"
-            size="xs"
             onClick={() => handleDeleteUser(user.name || "Unknown", user.id)}
             disabled={isPending}
           >

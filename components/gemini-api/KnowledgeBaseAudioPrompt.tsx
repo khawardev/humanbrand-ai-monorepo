@@ -115,10 +115,9 @@ function KnowledgeBaseAudioPromptComponent() {
                                 • If USER asks for the information about any persona or person which is present in the KB then do give him the requested information but keep in mind that while give him information in natural paragrpah sentences , do not use too much name of persona in the sentence.
                                 • Make Natural sentences while responding.
 
-                                ---
-
-                                AIAG Knowledge Base Content:  
-                                ${knowledgeBaseContent}
+                                IMPORTANT: The detailed AIAG Knowledge Base Content is available to you via the "search_aiag_knowledge_base" tool.
+                                You MUST use this tool to access the knowledge base for any user query.
+                                Do NOT rely on internal knowledge for AIAG specific topics; always query the tool.
                                 `
                     },
                 ],
@@ -135,10 +134,47 @@ function KnowledgeBaseAudioPromptComponent() {
 
             const functionResponses = toolCall.functionCalls.map((fc) => {
                 if (fc.name === knowledgeBaseToolDeclaration.name) {
+                    const args = fc.args as any;
+                    const query = args?.query;
+
+                    const searchKB = (searchQuery: string, content: string) => {
+                        if (!searchQuery) return content.slice(0, 5000); // Return first chunk if no query
+                        
+                        const terms = searchQuery.toLowerCase().split(/\s+/).filter(t => t.length > 3);
+                        if (terms.length === 0) return content.slice(0, 5000);
+
+                        // Split by logical sections or paragraphs
+                        const chunks = content.split(/\n\n+/);
+                        
+                        const scoredChunks = chunks.map(chunk => {
+                            const lowerChunk = chunk.toLowerCase();
+                            let score = 0;
+                            terms.forEach(term => {
+                                if (lowerChunk.includes(term)) score += 1;
+                            });
+                            return { chunk, score };
+                        });
+
+                        // Filter and sort
+                        const relevantChunks = scoredChunks
+                            .filter(ch => ch.score > 0)
+                            .sort((a, b) => b.score - a.score)
+                            .slice(0, 5) // Return top 5 relevant chunks
+                            .map(ch => ch.chunk);
+
+                        if (relevantChunks.length === 0) {
+                            return "No specific information found in the knowledge base for this query. The query was: " + searchQuery;
+                        }
+
+                        return relevantChunks.join("\n\n---\n\n");
+                    };
+
+                    const result = searchKB(query, knowledgeBaseContent);
+
                     return {
                         response: {
                             output: {
-                                content: knowledgeBaseContent,
+                                content: result,
                             },
                         },
                         id: fc.id,

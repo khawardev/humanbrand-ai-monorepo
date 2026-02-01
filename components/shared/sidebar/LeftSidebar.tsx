@@ -18,9 +18,10 @@ type LeftSidebarProps = {
 	user?: any
 	userItem?: React.ReactNode
 	sessionsList?: React.ReactNode
+	adminAlert?: React.ReactNode
 }
 
-export function LeftSidebar({ user, userItem, sessionsList, ...props }: LeftSidebarProps) {
+export function LeftSidebar({ user, userItem, sessionsList, adminAlert, ...props }: LeftSidebarProps) {
 	return (
 		<Sidebar collapsible="icon" variant="inset" {...props}>
 			<SidebarHeader>
@@ -32,14 +33,16 @@ export function LeftSidebar({ user, userItem, sessionsList, ...props }: LeftSide
 						<FullLogo />
 					</div>
 				</section>
+				
 			</SidebarHeader>
 
 			<SidebarContent>
-				<SidebarNavigation />
+				<SidebarNavigation user={user} />
 				{sessionsList}
 			</SidebarContent>
 
 			<SidebarFooter>
+				{adminAlert}
 				<SidebarMenu>
 					<SidebarMenuItem>
 						{userItem || <SidebarUser user={user} />}

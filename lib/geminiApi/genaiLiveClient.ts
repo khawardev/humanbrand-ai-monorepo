@@ -148,6 +148,7 @@ export class GenAILiveClient extends EventEmitter<LiveClientEventTypes> {
   }
 
   protected onclose(e: CloseEvent) {
+    this._status = "disconnected";
     this.log(
       `server.close`,
       `disconnected ${e.reason ? `with reason: ${e.reason}` : ``}`
@@ -224,19 +225,34 @@ export class GenAILiveClient extends EventEmitter<LiveClientEventTypes> {
   /**
    * send realtimeInput, this is base64 chunks of "audio/pcm" and/or "image/jpg"
    */
-  sendRealtimeInput(chunks: Array<{ mimeType: string; data: string }>) {
+  async sendRealtimeInput(chunks: Array<{ mimeType: string; data: string }>) {
+    if (this._status !== "connected") {
+      console.warn("GenAILiveClient: Cannot send input, client is not connected.");
+      return;
+    }
+
     let hasAudio = false;
     let hasVideo = false;
     for (const ch of chunks) {
-      this.session?.sendRealtimeInput({ media: ch });
-      if (ch.mimeType.includes("audio")) {
-        hasAudio = true;
-      }
-      if (ch.mimeType.includes("image")) {
-        hasVideo = true;
-      }
-      if (hasAudio && hasVideo) {
-        break;
+      try {
+        await this.session?.sendRealtimeInput({ media: ch });
+        if (ch.mimeType.includes("audio")) {
+          hasAudio = true;
+        }
+        if (ch.mimeType.includes("image")) {
+          hasVideo = true;
+        }
+        if (hasAudio && hasVideo) {
+          break;
+        }
+      } catch (e: any) {
+        if (e.message?.includes("CLOSING") || e.message?.includes("CLOSED")) {
+           console.warn("GenAILiveClient: Socket closed while sending input.");
+           this._status = "disconnected";
+           this.emit("close", new CloseEvent("close", { reason: "Socket closed while sending input" }));
+        } else {
+           console.error("GenAILiveClient: Error sending realtime input:", e);
+        }
       }
     }
     const message =

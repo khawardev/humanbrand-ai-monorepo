@@ -17,7 +17,7 @@ import { CgToolbarRight } from "react-icons/cg";
 
 const SIDEBAR_COOKIE_NAME = 'sidebar_state'
 const SIDEBAR_COOKIE_MAX_AGE = 60 * 60 * 24 * 7
-const SIDEBAR_WIDTH = '20rem'
+const SIDEBAR_WIDTH = '18rem'
 const SIDEBAR_WIDTH_MOBILE = '18rem'
 const SIDEBAR_WIDTH_ICON = '3rem'
 const SIDEBAR_KEYBOARD_SHORTCUT = 'b'
@@ -332,7 +332,7 @@ function SidebarInset({ className, ...props }: React.ComponentProps<'main'>) {
   return (
     <main
       className={cn(
-        'relative flex min-h-svh min-w-0 flex-1 flex-col border bg-accent/50 transition-transform duration-300 ease-out',
+        'relative flex min-h-svh min-w-0 flex-1 flex-col border dark:bg-accent/40 bg-background transition-transform duration-300 ease-out',
         'peer-data-[variant=inset]:min-h-[calc(100svh-theme(spacing.4))] md:peer-data-[variant=inset]:m-2 md:peer-data-[variant=inset]:ml-0 md:peer-data-[variant=inset]:rounded-2xl md:peer-data-[variant=inset]:shadow-sm',
         isMobile && openMobile && 'pointer-events-none overflow-hidden',
         className

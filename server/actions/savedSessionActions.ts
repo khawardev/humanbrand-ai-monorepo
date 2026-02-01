@@ -3,12 +3,13 @@
 import { revalidatePath } from "next/cache"
 import { db } from "@/server/db"
 import { eq, desc } from "drizzle-orm"
-import { getNewGenerationPrompts, getImageGenerationPrompt, getRevisionPrompts, getHyperRelevancePrompts, getExistingContentPrompts, getCampaignContentPrompts } from "@/lib/aiag/prompts"
+import { getNewGenerationPrompts, getImageGenerationPrompt, getRevisionPrompts, getHyperRelevancePrompts, getExistingContentPrompts, getCampaignContentPrompts, getKnowledgeBaseSystemPrompt, getRewriteSystemPrompt } from "@/lib/aiag/prompts"
 import { generateNewContent, generateSessionTitle } from "@/server/actions/generateNewContentActions"
 import { cleanAndFlattenBulletsGoogle } from "@/lib/cleanMarkdown"
 import { knowledgeBaseContent } from "@/lib/aiag/knowledgeBase"
 import { adjustToneAndCreativityData } from "@/config/formData"
 import { savedSession } from "@/server/db/schema/savedSessionSchema"
+import { knowledgeBaseChat } from "@/server/db/schema/knowledgeBaseChatSchema"
 import { lookupFormData, buildPromptData } from "@/lib/aiag/formDataHelpers"
 import { getSession } from "@/server/actions/getSession"
 
@@ -189,6 +190,7 @@ export async function createCampaignContentSession(data: any) {
             sessionType: "Campaign",
             title,
             modelId: data.modelId,
+            campaignTypeId: data.campaignTypeId,
             referenceFileInfos: data.referenceFileInfos,
             referenceFilesData: data.referenceFilesData,
             additionalInstructions: data.additionalInstructions,
@@ -348,6 +350,10 @@ export async function getSavedSessions() {
         const session: any = await getSession();
          if (!session?.user?.id) return []
 
+        // Attempt migration of legacy chat if it exists
+        await migrateLegacyChatIfNeeded(session.user.id);
+
+
         const sessions = await db.query.savedSession.findMany({
             where: eq(savedSession.userId, session.user.id),
             orderBy: [desc(savedSession.updatedAt)],
@@ -372,5 +378,304 @@ export async function updateChatForSession(sessionId: string, data: any) {
     } catch (error) {
         console.error("Error updating chat:", error)
         return { error: "Could not update chat." }
+    }
+}
+export async function saveUserMessage(
+    sessionId: string | null,
+    userId: string,
+    userInput: string,
+    existingHistory: any[]
+) {
+    try {
+        const newHistory = [...existingHistory, { role: 'user', content: userInput }];
+        
+        let finalSessionId = sessionId;
+
+        if (!sessionId) {
+             const newSession = await db.insert(savedSession).values({
+                 userId,
+                 sessionType: 'ai_chat',
+                 title: 'New AI Chat',
+                 chatHistory: newHistory,
+                 updatedAt: new Date()
+             }).returning({ id: savedSession.id });
+             
+             finalSessionId = newSession[0].id;
+        } else {
+             await db.update(savedSession).set({
+                 chatHistory: newHistory,
+                 updatedAt: new Date()
+             }).where(eq(savedSession.id, sessionId));
+        }
+
+        if (finalSessionId) {
+            revalidatePath(`/dashboard/ai-chat/${finalSessionId}`);
+            revalidatePath("/dashboard", "layout");
+        }
+
+        return { success: true, sessionId: finalSessionId, history: newHistory };
+    } catch (error) {
+        console.error("Error saving user message:", error);
+        return { error: "Could not save message." };
+    }
+}
+
+export async function generateChatResponse(
+    sessionId: string,
+    userId: string,
+    currentHistory: any[]
+) {
+    try {
+        // Construct conversation history for prompt
+        const conversationHistory = currentHistory
+            .map(msg => `${msg.role}: ${msg.content}`)
+            .join('\n');
+
+        const systemPrompt = getKnowledgeBaseSystemPrompt(conversationHistory);
+
+        // Call LLM
+        const result = await generateNewContent({
+            modelAlias: 'recomended',
+            temperature: 0.7,
+            systemPrompt,
+            userPrompt: currentHistory[currentHistory.length - 1].content || "Continue", // Use last user message
+        });
+
+        if (!result.generatedText) {
+            throw new Error(result.errorReason || "Failed to generate a response.");
+        }
+
+        const assistantMessage = { role: 'assistant', content: result.generatedText };
+        const finalHistory = [...currentHistory, assistantMessage];
+
+        // Update DB with AI response
+        await db.update(savedSession).set({
+            chatHistory: finalHistory,
+            updatedAt: new Date()
+        }).where(eq(savedSession.id, sessionId));
+
+        // Generate title if it's the first exchange (e.g. length is 2: User + AI)
+        if (finalHistory.length <= 2) {
+             generateSessionTitle({ modelAlias: 'recomended', temperature: 0.7, userPrompt: currentHistory[0].content })
+                .then(async (titleRes) => {
+                    const title = titleRes.generatedText || "AI Chat";
+                    await db.update(savedSession).set({ title }).where(eq(savedSession.id, sessionId));
+                    revalidatePath("/dashboard", "layout");
+                }).catch(err => console.error("Error generating title:", err));
+        }
+
+        revalidatePath(`/dashboard/ai-chat/${sessionId}`);
+        
+        return { success: true, newHistory: finalHistory };
+
+    } catch (error) {
+        console.error("Error generating chat response:", error);
+        return { error: "Could not generate response." };
+    }
+}
+
+
+async function migrateLegacyChatIfNeeded(userId: string) {
+    try {
+        const legacyChat = await db.query.knowledgeBaseChat.findFirst({
+            where: eq(knowledgeBaseChat.userId, userId),
+        });
+
+        if (legacyChat && legacyChat.chatHistory && (legacyChat.chatHistory as any[]).length > 0) {
+            // Migrate to savedSession
+            await db.insert(savedSession).values({
+                userId,
+                sessionType: 'ai_chat',
+                title: 'Legacy Chat Archive',
+                chatHistory: legacyChat.chatHistory,
+                updatedAt: legacyChat.updatedAt || new Date(),
+                createdAt: legacyChat.createdAt || new Date(),
+            });
+
+            // Delete legacy chat
+            await db.delete(knowledgeBaseChat).where(eq(knowledgeBaseChat.userId, userId));
+            
+            return true;
+        }
+    } catch (error) {
+        console.error("Error migrating legacy chat:", error);
+    }
+    return false;
+}
+
+export async function rewriteSessionAssistantMessage(
+    sessionId: string,
+    messageIndex: number,
+    originalContent: string,
+    selectedText: string,
+    rewritePrompt: string
+) {
+    try {
+        const systemPrompt = getRewriteSystemPrompt();
+        const userPrompt = `ORIGINAL CONTENT:\n"""\n${originalContent}\n"""\n\nSELECTED TEXT TO REWRITE:\n"""\n${selectedText}\n"""\n\nINSTRUCTIONS:\n"""\n${rewritePrompt}\n"""`;
+
+        const result = await generateNewContent({
+            modelAlias: 'recomended',
+            temperature: 0.5,
+            systemPrompt,
+            userPrompt,
+        });
+
+        if (!result.generatedText) {
+            throw new Error(result.errorReason || "Failed to generate rewritten content.");
+        }
+
+        const rewrittenSnippet = result.generatedText;
+        const newFullContent = originalContent.replace(selectedText, rewrittenSnippet);
+
+        const session = await getSessionById(sessionId);
+        if (!session) throw new Error("Session not found");
+
+        const currentHistory: any = session.chatHistory || [];
+        
+        // Ensure index is valid
+        if (messageIndex < 0 || messageIndex >= currentHistory.length) {
+            throw new Error("Invalid message index");
+        }
+
+        const updatedHistory = [...currentHistory];
+        updatedHistory[messageIndex] = { ...updatedHistory[messageIndex], content: newFullContent };
+
+        // Optionally, one could append the rewrite instruction as a user message, but here we just update in place as requested 
+        // "rewrite the content in assistant message"
+        
+        await db.update(savedSession).set({
+            chatHistory: updatedHistory,
+            updatedAt: new Date()
+        }).where(eq(savedSession.id, sessionId));
+
+        revalidatePath(`/dashboard/ai-chat/${sessionId}`);
+
+        return { success: true, newHistory: updatedHistory };
+    } catch (error) {
+        console.error("Error rewriting session message:", error);
+        return { error: "Could not rewrite your message." };
+    }
+}
+
+export async function editUserMessage(
+    sessionId: string,
+    messageIndex: number,
+    newContent: string
+) {
+    try {
+        const session = await getSessionById(sessionId);
+        if (!session) throw new Error("Session not found");
+
+        const currentHistory: any = session.chatHistory || [];
+
+        // Truncate history up to the edited message
+        // Keep messages 0 to messageIndex (exclusive), then add edited message
+        const truncatedHistory = currentHistory.slice(0, messageIndex);
+        const newHistory = [...truncatedHistory, { role: 'user', content: newContent }];
+
+        // Update DB with truncated history
+        await db.update(savedSession).set({
+            chatHistory: newHistory,
+            updatedAt: new Date()
+        }).where(eq(savedSession.id, sessionId));
+
+        revalidatePath(`/dashboard/ai-chat/${sessionId}`);
+
+        // Trigger regeneration logic similar to generateChatResponse
+        // We can just return success here and let the client trigger generation, 
+        // OR call generateChatResponse internally.
+        // Calling generateChatResponse is better for single-action flow, 
+        // but generateChatResponse expects history to be in DB. We just put it there.
+        
+        // However, generateChatResponse generates response based on LAST message.
+        // So passing the sessionId is enough.
+
+        // We return the new history so client can update state immediately
+        return { success: true, history: newHistory };
+
+    } catch (error) {
+         console.error("Error editing user message:", error);
+         return { error: "Could not edit message." };
+    }
+}
+
+export async function deleteSessionMessage(
+    sessionId: string,
+    messageIndex: number
+) {
+    try {
+         const session = await getSessionById(sessionId);
+         if (!session) throw new Error("Session not found");
+ 
+         const currentHistory: any = session.chatHistory || [];
+        
+         // If deleting a user message, we likely want to delete the following assistant message too
+         // If deleting an assistant message, just delete that? 
+         // Typically in chat interfaces:
+         // - Delete User Msg -> Delete that msg AND the subsequent assistant response.
+         // - Delete Assistant Msg -> Just delete that msg (or maybe not allowed usually).
+         
+         // Assuming user wants to delete their query and the response.
+         
+         const targetMessage = currentHistory[messageIndex];
+         let newHistory = [...currentHistory];
+
+         if (targetMessage.role === 'user') {
+             // Check if next is assistant
+             if (messageIndex + 1 < newHistory.length && newHistory[messageIndex + 1].role === 'assistant') {
+                 newHistory.splice(messageIndex, 2); // Remove user msg and next assistant msg
+             } else {
+                 newHistory.splice(messageIndex, 1); // Just remove user msg
+             }
+         } else {
+             // Deleting assistant message
+             newHistory.splice(messageIndex, 1);
+         }
+
+         await db.update(savedSession).set({
+             chatHistory: newHistory,
+             updatedAt: new Date()
+         }).where(eq(savedSession.id, sessionId));
+ 
+         revalidatePath(`/dashboard/ai-chat/${sessionId}`);
+ 
+         return { success: true, newHistory };
+
+    } catch (error) {
+         console.error("Error deleting message:", error);
+         return { error: "Could not delete message." };
+    }
+}
+
+export async function rateSessionMessage(
+    sessionId: string,
+    messageIndex: number,
+    feedback: 'up' | 'down' | null
+) {
+    try {
+        const session = await getSessionById(sessionId);
+        if (!session) throw new Error("Session not found");
+
+        const currentHistory: any = session.chatHistory || [];
+        
+        if (messageIndex < 0 || messageIndex >= currentHistory.length) {
+            throw new Error("Invalid message index");
+        }
+
+        const updatedHistory = [...currentHistory];
+        updatedHistory[messageIndex] = { ...updatedHistory[messageIndex], feedback };
+
+        await db.update(savedSession).set({
+            chatHistory: updatedHistory,
+            updatedAt: new Date()
+        }).where(eq(savedSession.id, sessionId));
+
+        revalidatePath(`/dashboard/ai-chat/${sessionId}`);
+
+        return { success: true, newHistory: updatedHistory };
+    } catch (error) {
+        console.error("Error rating message:", error);
+        return { error: "Could not rate message." };
     }
 }

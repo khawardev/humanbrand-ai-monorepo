@@ -6,11 +6,17 @@ import { AsyncSidebarSessionsList } from '@/components/shared/sidebar/AsyncSideb
 import { AsyncSidebarUser } from '@/components/shared/sidebar/AsyncSidebarUser'
 import { SidebarInset, SidebarProvider } from '@/components/ui/sidebar'
 import { DashboardHeader } from '../../../components/shared/DashboardHeader'
+import AdminMailAlert from '@/components/shared/AdminMailAlert'
+import { getUser } from '@/server/actions/usersActions'
 
 export default async function DashboardLayout({ children }: { children: React.ReactNode }) {
+	const user: any = await getUser()
+
 	return (
 		<SidebarProvider>
 			<LeftSidebar
+				user={user}
+				adminAlert={<AdminMailAlert />}
 				sessionsList={
 					<Suspense fallback={<SidebarListSkeleton />}>
 						<AsyncSidebarSessionsList />

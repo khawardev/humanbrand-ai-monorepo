@@ -33,6 +33,7 @@ export function useSessionContentGenerator(initialData: any) {
     const [selectedContentTypes, setSelectedContentTypes] = useState<number[]>(initialData.contentTypeIds ?? [])
     const [selectedCtas, setSelectedCtas] = useState<number[]>(initialData.ctaIds ?? [])
     const [selectedSocialPlatform, setSelectedSocialPlatform] = useState<number | null>(initialData.socialPlatformId ?? null)
+    const [selectedCampaignTypeId, setSelectedCampaignTypeId] = useState<number | null>(initialData.campaignTypeId ?? null)
 
     const [contentGenerated, setContentGenerated] = useState<string>(initialData.generatedContent ?? "")
     const [imagePrompt, setImagePrompt] = useState<string>(initialData.imagePrompt ?? "")
@@ -224,6 +225,7 @@ export function useSessionContentGenerator(initialData: any) {
         selectedContentTypes, setSelectedContentTypes,
         isSocialPostSelected,
         selectedSocialPlatform, setSelectedSocialPlatform,
+        selectedCampaignTypeId, setSelectedCampaignTypeId,
         selectedCtas, setSelectedCtas,
         referenceFileInfos: base.referenceFileInfos,
         handleReferenceFileChange: base.handleReferenceFileChange,

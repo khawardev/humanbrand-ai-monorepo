@@ -20,6 +20,7 @@ export const savedSession = aiag_schema.table("saved_sessions", {
 
     modelId: integer("model_id"),
     audienceIds: jsonb("audience_ids"),
+    campaignTypeId: integer("campaign_type_id"),
     subjectId: integer("subject_id"),
     contentTypeIds: jsonb("content_type_ids"),
     ctaIds: jsonb("cta_ids"),

@@ -1,140 +1,136 @@
 "use client"
 
-import { ArrowRight } from "lucide-react"
-import React, { useState } from "react"
-import { Textarea } from "@/components/ui/textarea"
-import { cn } from "@/lib/utils"
-import { useAutoResizeTextarea } from "@/hooks/useAutoResizeTextarea"
+import {
+    PromptInput,
+    PromptInputAction,
+    PromptInputActions,
+    PromptInputTextarea,
+} from "@/components/ui/prompt-input"
+import { Button } from "@/components/ui/button"
+import {
+    ArrowUp,
+} from "lucide-react"
+import { useState } from "react"
+import { FaStop } from "react-icons/fa6"
 import { useKnowledgeBaseChat } from "@/hooks/aiagHooks/useKnowledgeBaseChat"
-import { ScrollArea } from "../../ui/scroll-area"
-import AiChatView from "./AiChatView"
-import { useTTS, TTSContent } from "./AiTTSView"
-import AiModelSelector from "./AiModelSelector"
+import { useTTS, TTSContent } from "./components/AiTTSView"
+import AiModelSelector from "./components/AiModelSelector"
+import AiChatList from "./components/AiChatList"
 import GeminiLiveAiag from "@/components/gemini-api/gemini-live-app-shared/GeminiLiveAiag"
+import { RiChatAiLine } from "react-icons/ri";
 
 type AI_PromptProps = {
     user: any
     initialChatHistory: any[]
+    sessionId?: string
 }
 
-export default function AiChatPageComponent({ user, initialChatHistory }: AI_PromptProps) {
+export default function AiChatPageComponent({ user, initialChatHistory, sessionId }: AI_PromptProps) {
     const [value, setValue] = useState("")
-    const { textareaRef, adjustHeight } = useAutoResizeTextarea({
-        minHeight: 72,
-        maxHeight: 300,
-    })
     const [selectedModel, setSelectedModel] = useState("AI Chat")
 
-    const { chatHistory, isResponding, handleSendMessage, handleRewriteMessage } = useKnowledgeBaseChat({
+    const { chatHistory, isResponding, handleSendMessage, handleRewriteMessage, handleDeleteMessage, handleEditUserMessage, handleRateMessage } = useKnowledgeBaseChat({
         user,
         initialChatHistory,
+        sessionId,
     })
 
     const { audioUrl, isTTSLoading, generateAudio } = useTTS(value)
 
     const handlePrimaryAction = () => {
+        if (!value.trim() && selectedModel === "AI Chat") return
+
         if (selectedModel === "AI Chat") {
             handleSendMessage(value)
             setValue("")
-            adjustHeight(true)
-        } else if (selectedModel === "Genrate TTS") {
+        } else if (selectedModel === "AI Audio") {
             generateAudio()
         }
-    }
-
-    const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
-        if (e.key === "Enter" && !e.shiftKey) {
-            e.preventDefault()
-            handlePrimaryAction()
-        }
-    }
-
-    const isTextareaDisabled = selectedModel === "AI Ask" || isResponding || isTTSLoading
-    const isSendButtonDisabled = !value.trim() || isTextareaDisabled
-
-    const getPlaceholder = () => {
-        if (isTextareaDisabled) return "Please wait..."
-        if (selectedModel === "AI Chat") return "Chat with knowledge base..."
-        if (selectedModel === "Genrate TTS") return "Enter text to generate audio..."
-        return "Microphone is active for AI Ask"
     }
 
     const renderContent = () => {
         switch (selectedModel) {
             case "AI Chat":
-                return (
-                    <AiChatView
-                        user={user}
-                        chatHistory={chatHistory}
-                        isResponding={isResponding}
-                        handleRewriteMessage={handleRewriteMessage}
-                    />
-                )
+                return <AiChatList
+                    chatHistory={chatHistory}
+                    isResponding={isResponding}
+                    handleRewriteMessage={handleRewriteMessage}
+                    handleDeleteMessage={handleDeleteMessage}
+                    handleEditUserMessage={handleEditUserMessage}
+                    handleRateMessage={handleRateMessage}
+                />
             case "AI Ask":
-                return (
-                    <div className="flex flex-col items-center justify-center text-center h-[60vh]">
-                        <GeminiLiveAiag />
-                    </div>
-                )
-            case "Genrate TTS":
+                return <GeminiLiveAiag />
+            case "AI Audio":
                 return <TTSContent audioUrl={audioUrl} isTTSLoading={isTTSLoading} />
             default:
                 return null
         }
     }
 
+    const isLoading = isResponding || isTTSLoading
+
     return (
-        <div className="flex flex-col h-full">
-            <ScrollArea className="grow h-[75vh] overflow-y-auto">
-                {renderContent()}
-            </ScrollArea>
-
-            <div className="relative mt-auto pt-4">
-                <Textarea
-                    id="ai-input-15"
-                    value={value}
-                    placeholder={getPlaceholder()}
-                    className={cn(
-                        "w-full rounded-xl border border-b-0 border-input rounded-b-none px-4 py-3 resize-none focus-visible:ring-0 focus-visible:ring-offset-0",
-                        "min-h-[72px]"
-                    )}
-                    ref={textareaRef}
-                    onKeyDown={handleKeyDown}
-                    onChange={(e) => {
-                        setValue(e.target.value)
-                        adjustHeight()
-                    }}
-                    disabled={isTextareaDisabled}
-                />
-
-                <div className="h-14 bg-input/20 border border-t-0 border-input rounded-b-xl flex items-center px-3">
-                    <div className="flex items-center justify-between w-full">
-                        <AiModelSelector
-                            selectedModel={selectedModel}
-                            onModelChange={setSelectedModel}
-                        />
-
-                        <button
-                            type="button"
-                            className={cn(
-                                "rounded-lg p-2 bg-black/5 dark:bg-white/5 cursor-pointer",
-                                "hover:bg-black/10 dark:hover:bg-white/10 focus-visible:ring-1 focus-visible:ring-offset-0 focus-visible:ring-blue-500",
-                                "text-black/40 dark:text-white/40 hover:text-black dark:hover:text-white"
-                            )}
-                            aria-label="Send message"
-                            onClick={handlePrimaryAction}
-                            disabled={isSendButtonDisabled}
-                        >
-                            <ArrowRight
-                                className={cn(
-                                    "w-4 h-4 transition-opacity duration-200",
-                                    !isSendButtonDisabled ? "opacity-100" : "opacity-30"
-                                )}
-                            />
-                        </button>
+        <main className="flex h-[86vh] flex-col overflow-hidden">
+            {chatHistory.length === 0 && selectedModel === "AI Chat" && (
+                <div className="absolute inset-0 flex flex-col items-center justify-center text-center pointer-events-none">
+                    <div className="flex flex-col items-center text-xl gap-2 text-muted-foreground">
+                        <RiChatAiLine className="w-12 h-12" />
+                        <span className="font-medium">Ask Anything</span>
                     </div>
                 </div>
+            )}
+            <div className="relative flex-1 overflow-hidden">
+                {renderContent()}
             </div>
-        </div>
+
+            <div className="z-10 shrink-0 px-3 pb-3 md:px-5 md:pb-5">
+                <div className="mx-auto max-w-4xl">
+                    <PromptInput
+                        isLoading={isLoading}
+                        value={value}
+                        onValueChange={setValue}
+                        onSubmit={handlePrimaryAction}
+                        disabled={isLoading}
+                    >
+                        <div className="flex flex-col">
+                            <PromptInputTextarea
+                                placeholder={
+                                    selectedModel === "AI Ask"
+                                        ? "Microphone is active for AI Ask"
+                                        : "Ask anything"
+                                }
+                                className="min-h-[44px] pt-3 pl-4 text-base leading-[1.3]"
+                                disabled={selectedModel === "AI Ask"}
+                            />
+
+                            <PromptInputActions className="mt-5 flex w-full items-center justify-between gap-2 px-3 pb-3">
+                                <div className="flex items-center gap-2">
+                                    <AiModelSelector
+                                        selectedModel={selectedModel}
+                                        onModelChange={setSelectedModel}
+                                        tooltip="Select a Mode"
+                                    />
+                                </div>
+                                <div className="flex items-center gap-2">
+                                    <Button
+                                        size="icon"
+                                        disabled={!value.trim() || isLoading}
+                                        onClick={handlePrimaryAction}
+                                        className="size-9 rounded-full"
+                                    >
+                                        {!isLoading ? (
+                                            <ArrowUp size={18} />
+                                        ) : (
+                                            <FaStop size={18} />
+                                        )}
+                                    </Button>
+                                </div>
+                            </PromptInputActions>
+                        </div>
+                    </PromptInput>
+                </div>
+            </div>
+        </main>
     )
 }

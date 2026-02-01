@@ -1,83 +1,65 @@
 'use client'
-import { useTheme } from 'next-themes'
+import { useRouter } from 'next/navigation'
 import React from 'react'
-export const HalfBlackLogo = () => {
+export const FullLogo = ({ className }: { className?: string }) => {
+    const router = useRouter()
     return (
-        <div className={`flex size-10 items-center  `} suppressHydrationWarning={true}>
-            <img src={'https://i.postimg.cc/nzx83C4D/HB-logo.png'} width={1000} alt={`Logo`}
-            />
-        </div>
-    )
-}
-export const HalfLogo = () => {
-    const theme = useTheme()
-    return (
-        <div className={`flex size-9 items-center  `} suppressHydrationWarning={true}>
-            {theme.resolvedTheme === 'light' ? <img src={'https://i.postimg.cc/nzx83C4D/HB-logo.png'} width={1000} alt={`Logo`}
-                className=' cursor-pointer  '
-            /> : <img src={'https://i.postimg.cc/5ythqc3x/HB-Green-Halflogo-name-mark-side-green-1.png'} width={1000} alt={`Logo`}
-                className=' cursor-pointer  '
-            />}
-        </div>
-    )
-}
-export const FullGreenLogo = () => {
-    return (
-        <div className={`flex size-42 items-center  `} suppressHydrationWarning={true}>
-            <img src={'https://i.postimg.cc/c1jwNRnH/HB-logo-name-mark-side-green-1.png'} width={1000} alt={`Logo`}
-                className=' cursor-pointer  '
-            />
-        </div>
-    )
-}
-
-
-export const FullLogo = () => {
-    return (
-        <div className="flex items-center " suppressHydrationWarning={true}>
+        <button onClick={() => (router.push('/'))} className={`flex items-center ${className}`} suppressHydrationWarning={true}>
             <span className="inline dark:hidden">
-                {/* <img
+                <img
                     src="https://i.postimg.cc/nzx83C4D/HB-logo.png"
                     width={40}
                     alt="Logo"
                     className="cursor-pointer block lg:hidden"
-                /> */}
+                />
                 <img
                     src="https://i.postimg.cc/yY06gqFK/HB-logo-name-mark-side-black-1.png"
                     width={140}
+                    alt="Logo"
+                    className="cursor-pointer hidden lg:block"
+                />
+            </span>
+
+            <span className="hidden dark:inline">
+                <img
+                    src="https://i.postimg.cc/5ythqc3x/HB-Green-Halflogo-name-mark-side-green-1.png"
+                    width={40}
+                    alt="Logo"
+                    className="cursor-pointer block lg:hidden"
+                />
+                <img
+                    src="https://i.postimg.cc/c1jwNRnH/HB-logo-name-mark-side-green-1.png"
+                    width={140}
+                    alt="Logo"
+                    className="cursor-pointer hidden lg:block"
+                />
+            </span>
+        </button>
+    )
+}
+
+
+export const HalfLogo = () => {
+    const router = useRouter()
+    return (
+        <button onClick={() => (router.push('/'))} className="flex items-center " suppressHydrationWarning={true}>
+            <span className="inline dark:hidden">
+                <img
+                    src="https://i.postimg.cc/nzx83C4D/HB-logo.png"
+                    width={40}
                     alt="Logo"
                     className="cursor-pointer "
                 />
             </span>
 
             <span className="hidden dark:inline">
-                {/* <img
+                <img
                     src="https://i.postimg.cc/5ythqc3x/HB-Green-Halflogo-name-mark-side-green-1.png"
                     width={40}
                     alt="Logo"
-                    className="cursor-pointer block lg:hidden"
-                /> */}
-                <img
-                    src="https://i.postimg.cc/c1jwNRnH/HB-logo-name-mark-side-green-1.png"
-                    width={140}
-                    alt="Logo"
-                    className="cursor-pointer "
+                    className="cursor-pointer"
                 />
             </span>
-        </div>
-    )
-}
-
-
-export const FullLogoMobile = () => {
-    const theme = useTheme()
-    return (
-        <div className={`flex items-center   `} suppressHydrationWarning={true}>
-            {theme.resolvedTheme === 'light' ? <img src={'https://i.postimg.cc/yY06gqFK/HB-logo-name-mark-side-black-1.png'} width={150} alt={`Logo`}
-                className=' cursor-pointer   '
-            /> : <img src={'https://i.postimg.cc/c1jwNRnH/HB-logo-name-mark-side-green-1.png'} width={150} alt={`Logo`}
-                    className=' cursor-pointer '
-            />}
-        </div>
+        </button>
     )
 }

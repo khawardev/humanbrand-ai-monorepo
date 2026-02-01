@@ -11,6 +11,7 @@ import { LineSpinner, Spinner } from "@/components/shared/Spinner";
 import { CustomTabs } from "@/components/shared/CustomTabs";
 import { RiAiGenerate, RiChatSmileAiLine, RiImageCircleAiFill, RiUserSmileLine } from "react-icons/ri";
 import { stripMarkdownBold } from "@/lib/utils";
+import { RiChatAiLine } from "react-icons/ri";
 
 export function GeneratedContent(props: any) {
 
@@ -78,7 +79,7 @@ export function GeneratedContent(props: any) {
                 {
                     label: "Chat",
                     value: "chat",
-                    icon: <RiChatSmileAiLine />,
+                    icon: <RiChatAiLine />,
                     content: (
                         <ContentChat
                             chatHistory={chatHistory}
