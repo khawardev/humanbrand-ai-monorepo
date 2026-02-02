@@ -13,12 +13,13 @@ import { motion, AnimatePresence } from "framer-motion"
 import { RiVoiceAiLine, RiMic2AiLine, RiChatAiLine } from "react-icons/ri";
 import { PromptInputAction } from "@/components/ui/prompt-input"
 
-const AI_MODELS = ["AI Chat", "AI Ask", "AI Audio"] as const
+const AI_MODELS = ["AI Chat", "AI Audio"] as const
+// const AI_MODELS = ["AI Chat", "AI Ask", "AI Audio"] as const
 type AIModel = typeof AI_MODELS[number]
 
 const MODEL_ICONS: Record<AIModel, React.ReactNode> = {
     "AI Chat": <RiChatAiLine />,
-    "AI Ask": <RiMic2AiLine />,
+    // "AI Ask": <RiMic2AiLine />,
     "AI Audio": <RiVoiceAiLine />,
 }
 

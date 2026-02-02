@@ -41,8 +41,8 @@ export function useTTS(value: string) {
 
 export function TTSContent({ audioUrl, isTTSLoading }: { audioUrl: string | null; isTTSLoading: boolean }) {
     return (
-        <div className="flex flex-col items-center justify-center text-center h-[60vh]">
-            <div className="p-4 space-y-3">
+        <div className="flex flex-col items-center justify-center text-center h-[75vh] w-full px-4">
+            <div className="p-4 space-y-3 w-full flex flex-col items-center">
                 {!audioUrl && !isTTSLoading && (
                     <div className="flex flex-col items-center text-xl gap-2 text-muted-foreground">
                         <RiVoiceAiLine className="w-10 h-10" />
@@ -51,17 +51,17 @@ export function TTSContent({ audioUrl, isTTSLoading }: { audioUrl: string | null
                 )}
 
                 {isTTSLoading && (
-                    <div className="flex flex-col items-center text-xl gap-2 text-muted-foreground">
-                        <Loader2 className="w-6 h-6 animate-spin" />
-                        <span>Generating audio...</span>
+                    <div className="flex items-center justify-center text-xl gap-2 text-muted-foreground">
+                        <Loader2 className="w-4 h-4 animate-spin" />
+                        <span>Generating audio</span>
                     </div>
                 )}
 
                 {audioUrl && (
-                    <div className="space-y-3 flex gap-3 items-center">
-                        <audio controls src={audioUrl} className="w-[400px]" />
-                        <a href={audioUrl} download="tts-output.wav">
-                            <Button size={'lg'} className="rounded-full h-12 mb-3" >
+                    <div className="flex flex-col md:flex-row gap-4 items-center w-full justify-center max-w-3xl">
+                        <audio controls src={audioUrl} className="w-full max-w-[300px] md:max-w-[400px]" />
+                        <a href={audioUrl} download="tts-output.wav" className="w-full max-w-[300px] md:w-auto">
+                            <Button size={'lg'} className="rounded-full h-12 w-full md:w-auto" >
                                 Download
                             </Button>
                         </a>

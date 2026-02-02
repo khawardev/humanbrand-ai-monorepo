@@ -17,7 +17,7 @@ import { useTTS, TTSContent } from "./components/AiTTSView"
 import AiModelSelector from "./components/AiModelSelector"
 import AiChatList from "./components/AiChatList"
 import GeminiLiveAiag from "@/components/gemini-api/gemini-live-app-shared/GeminiLiveAiag"
-import { RiChatAiLine } from "react-icons/ri";
+
 
 type AI_PromptProps = {
     user: any
@@ -60,8 +60,8 @@ export default function AiChatPageComponent({ user, initialChatHistory, sessionI
                     handleEditUserMessage={handleEditUserMessage}
                     handleRateMessage={handleRateMessage}
                 />
-            case "AI Ask":
-                return <GeminiLiveAiag />
+            // case "AI Ask":
+            //     return <GeminiLiveAiag />
             case "AI Audio":
                 return <TTSContent audioUrl={audioUrl} isTTSLoading={isTTSLoading} />
             default:
@@ -73,14 +73,6 @@ export default function AiChatPageComponent({ user, initialChatHistory, sessionI
 
     return (
         <main className="flex h-[86vh] flex-col overflow-hidden">
-            {chatHistory.length === 0 && selectedModel === "AI Chat" && (
-                <div className="absolute inset-0 flex flex-col items-center justify-center text-center pointer-events-none">
-                    <div className="flex flex-col items-center text-xl gap-2 text-muted-foreground">
-                        <RiChatAiLine className="w-12 h-12" />
-                        <span className="font-medium">Ask Anything</span>
-                    </div>
-                </div>
-            )}
             <div className="relative flex-1 overflow-hidden">
                 {renderContent()}
             </div>

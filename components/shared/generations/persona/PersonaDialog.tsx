@@ -31,9 +31,8 @@ export function PersonaDialog({ isOpen, onOpenChange, setPersonasText, setUpload
 
             <DialogContent className="sm:max-w-3xl">
                 <section>
-                    <DialogTitle></DialogTitle>
-                    <span className="font-medium text-accent-foreground  tracking-tighter">Adapt Content for Hyper Relevance</span>
-                    <Label className="text-sm text-muted-foreground mb-2">Describe Target Persona(s):</Label>
+                    <DialogTitle className="mb-4">Adapt Content for Hyper Relevance</DialogTitle>
+                    <Label className="text-sm text-muted-foreground mb-2 ">Describe Target Persona(s):</Label>
                     <Textarea
                         onKeyDown={(e) => {
                             if (e.key === 'Enter' && !e.shiftKey) {

@@ -26,6 +26,7 @@ import {
     Check,
     ArrowUp
 } from "lucide-react"
+import { RiChatAiLine } from "react-icons/ri"
 import { toast } from "sonner"
 import RewriteInput from "./RewriteInput"
 
@@ -44,121 +45,6 @@ type RewriteState = {
     messageIndex: number
 } | null
 
-const AiChatList = ({ user, chatHistory, isResponding, handleRewriteMessage, handleDeleteMessage, handleEditUserMessage, handleRateMessage }: AiChatListProps) => {
-    const [rewriteState, setRewriteState] = useState<RewriteState>(null)
-    const [activeRewriteMessageIndex, setActiveRewriteMessageIndex] = useState<number | null>(null)
-
-    const handleSelection = (messageIndex: number) => {
-        if (activeRewriteMessageIndex !== messageIndex) return;
-
-        const selection = window.getSelection()
-        const selectedText = selection?.toString().trim()
-
-        if (selectedText && selection && selectedText.length > 0) {
-            setRewriteState({
-                text: selectedText,
-                messageIndex,
-            })
-        } 
-    }
-
-    const submitRewrite = async (rewritePrompt: string) => {
-        if (!rewriteState) return
-
-        const { messageIndex, text: selectedText } = rewriteState
-        const originalContent = chatHistory[messageIndex]?.content
-
-        if (originalContent) {
-            await handleRewriteMessage(messageIndex, originalContent, selectedText, rewritePrompt)
-        }
-
-        setRewriteState(null)
-        setActiveRewriteMessageIndex(null) // Turn off rewrite mode after submission
-    }
-
-    const toggleRewriteMode = (index: number) => {
-        const isActive = activeRewriteMessageIndex === index
-        if (!isActive) {
-             toast("Rewrite mode enabled", {
-                 description: "Select the specific text you want to rewrite within the message.",
-                 duration: 4000
-             })
-             setActiveRewriteMessageIndex(index)
-        } else {
-             setActiveRewriteMessageIndex(null)
-        }
-    }
-
-    return (
-        <ChatContainerRoot className="h-full">
-            <ChatContainerContent className="space-y-0 py-12">
-                {rewriteState && (
-                    <RewriteInput
-                        open={!!rewriteState}
-                        onOpenChange={(open) => {
-                            if (!open) setRewriteState(null)
-                        }}
-                        selectedText={rewriteState.text}
-                        onSubmit={submitRewrite}
-                    />
-                )}
-
-                {chatHistory.map((message: any, index: number) => {
-                    const isLastMessage = index === chatHistory.length - 1;
-                    
-                    if (message.role === 'assistant') {
-                        return (
-                            <AssistantMessage
-                                key={index}
-                                message={message}
-                                index={index}
-                                isLastMessage={isLastMessage}
-                                isRewriteActive={activeRewriteMessageIndex === index}
-                                onToggleRewrite={() => toggleRewriteMode(index)}
-                                onSelection={() => handleSelection(index)}
-                                onRate={(feedback) => handleRateMessage(index, feedback)}
-                            />
-                        )
-                    } else {
-                         return (
-                             <UserMessage
-                                 key={index}
-                                 user={user}
-                                 message={message}
-                                 index={index}
-                                 isLastMessage={isLastMessage}
-                                 onDelete={() => handleDeleteMessage(index)}
-                                 onEdit={(newContent) => handleEditUserMessage(index, newContent)}
-                             />
-                         )
-                    }
-                })}
-
-                {isResponding && (
-                    <Message className="mx-auto mt-3 flex w-full max-w-4xl gap-4 px-6 items-start">
-                        <Image
-                            className="h-9 w-9 border object-cover rounded-full mt-0.5"
-                            src="https://i.postimg.cc/ZYDgZQyF/aiag-logo.jpg"
-                            alt="Assistant Avatar"
-                            width={36}
-                            height={36}
-                        />
-                        <div className="flex w-full flex-col gap-2">
-                            <Skeleton className="h-4 w-3/4 rounded-full" />
-                            <Skeleton className="h-4 w-1/2 rounded-full" />
-                        </div>
-                    </Message>
-                )}
-            </ChatContainerContent>
-            <div className="absolute bottom-4 left-1/2 flex w-full max-w-4xl -translate-x-1/2 justify-end px-5">
-                <ScrollButton variant="secondary" className="shadow-sm border" />
-            </div>
-        </ChatContainerRoot>
-    )
-}
-
-export default AiChatList
-
 
 interface AssistantMessageProps {
     message: any
@@ -169,6 +55,18 @@ interface AssistantMessageProps {
     onSelection: () => void
     onRate: (feedback: 'up' | 'down' | null) => void
 }
+
+
+interface UserMessageProps {
+    user: any
+    message: any
+    index: number
+    isLastMessage: boolean
+    onDelete: () => void
+    onEdit: (newContent: string) => void
+}
+
+
 
 const AssistantMessage = ({ message, index, isLastMessage, isRewriteActive, onToggleRewrite, onSelection, onRate }: AssistantMessageProps) => {
     const [isCopied, setIsCopied] = useState(false)
@@ -195,7 +93,7 @@ const AssistantMessage = ({ message, index, isLastMessage, isRewriteActive, onTo
     }
 
     return (
-        <Message className="mx-auto flex w-full max-w-4xl gap-4 px-6 items-start">
+        <Message className="mx-auto flex w-full max-w-4xl gap-4 px-3 items-start">
             <Image
                 className="h-9 w-9 border object-cover rounded-full mt-0.5"
                 src="https://i.postimg.cc/ZYDgZQyF/aiag-logo.jpg"
@@ -208,7 +106,7 @@ const AssistantMessage = ({ message, index, isLastMessage, isRewriteActive, onTo
                     <div
                         onMouseUp={handleMouseUp}
                         className={cn(
-                            "rounded-lg transition-all border-2 border-transparent select-text", 
+                            "rounded-lg transition-all border-2 border-transparent select-text",
                             isRewriteActive && "cursor-text border-primary/20 bg-muted/20 p-2 -m-2 shadow-sm"
                         )}
                     >
@@ -262,7 +160,7 @@ const AssistantMessage = ({ message, index, isLastMessage, isRewriteActive, onTo
                                 variant="ghost"
                                 size="icon"
                                 onClick={() => toggleRate('down')}
-                                 className={cn(message.feedback === 'down' && "text-destructive")}
+                                className={cn(message.feedback === 'down' && "text-destructive")}
                             >
                                 <ThumbsDown className={cn("w-4 h-4", message.feedback === 'down' && "fill-current")} />
                             </Button>
@@ -274,14 +172,6 @@ const AssistantMessage = ({ message, index, isLastMessage, isRewriteActive, onTo
     )
 }
 
-interface UserMessageProps {
-    user: any
-    message: any
-    index: number
-    isLastMessage: boolean
-    onDelete: () => void
-    onEdit: (newContent: string) => void
-}
 
 const UserMessage = ({ user, message, index, isLastMessage, onDelete, onEdit }: UserMessageProps) => {
     const [isCopied, setIsCopied] = useState(false)
@@ -309,10 +199,10 @@ const UserMessage = ({ user, message, index, isLastMessage, onDelete, onEdit }: 
     }
 
     const handleSaveEdit = () => {
-         if (editContent.trim() !== message.content) {
-             onEdit(editContent)
-         }
-         setIsEditing(false)
+        if (editContent.trim() !== message.content) {
+            onEdit(editContent)
+        }
+        setIsEditing(false)
     }
 
     const handleKeyDown = (e: React.KeyboardEvent) => {
@@ -325,7 +215,7 @@ const UserMessage = ({ user, message, index, isLastMessage, onDelete, onEdit }: 
             setEditContent(message.content)
         }
     }
-    
+
     // Auto-resize textarea
     const handleInput = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
         setEditContent(e.target.value);
@@ -344,8 +234,8 @@ const UserMessage = ({ user, message, index, isLastMessage, onDelete, onEdit }: 
     }
 
     return (
-        <Message className="mx-auto flex w-full max-w-4xl gap-4 px-6 items-start flex-row-reverse">
-             <Image
+        <Message className="mx-auto flex w-full max-w-4xl gap-4 px-3 items-start flex-row-reverse">
+            <Image
                 className="h-9 w-9 border object-cover rounded-full mt-0.5"
                 src={user?.image || '/default-user.png'}
                 alt="User Avatar"
@@ -355,7 +245,7 @@ const UserMessage = ({ user, message, index, isLastMessage, onDelete, onEdit }: 
             <div className="flex flex-col gap-2 w-full min-w-0 items-end">
                 <div className="group flex flex-col items-end gap-1 w-full relative">
                     <div className={cn(
-                        "max-w-[85%] rounded-3xl sm:max-w-[75%]", 
+                        "max-w-[85%] rounded-3xl sm:max-w-[75%]",
                         isEditing ? "w-full bg-muted/50 p-2" : "bg-muted px-5 py-2.5"
                     )}>
                         {isEditing ? (
@@ -426,3 +316,128 @@ const UserMessage = ({ user, message, index, isLastMessage, onDelete, onEdit }: 
         </Message>
     )
 }
+
+
+const AiChatList = ({ user, chatHistory, isResponding, handleRewriteMessage, handleDeleteMessage, handleEditUserMessage, handleRateMessage }: AiChatListProps) => {
+    const [rewriteState, setRewriteState] = useState<RewriteState>(null)
+    const [activeRewriteMessageIndex, setActiveRewriteMessageIndex] = useState<number | null>(null)
+
+    const handleSelection = (messageIndex: number) => {
+        if (activeRewriteMessageIndex !== messageIndex) return;
+
+        const selection = window.getSelection()
+        const selectedText = selection?.toString().trim()
+
+        if (selectedText && selection && selectedText.length > 0) {
+            setRewriteState({
+                text: selectedText,
+                messageIndex,
+            })
+        } 
+    }
+
+    const submitRewrite = async (rewritePrompt: string) => {
+        if (!rewriteState) return
+
+        const { messageIndex, text: selectedText } = rewriteState
+        const originalContent = chatHistory[messageIndex]?.content
+
+        if (originalContent) {
+            await handleRewriteMessage(messageIndex, originalContent, selectedText, rewritePrompt)
+        }
+
+        setRewriteState(null)
+        setActiveRewriteMessageIndex(null) // Turn off rewrite mode after submission
+    }
+
+    const toggleRewriteMode = (index: number) => {
+        const isActive = activeRewriteMessageIndex === index
+        if (!isActive) {
+             toast("Rewrite mode enabled", {
+                 description: "Select the specific text you want to rewrite within the message.",
+                 duration: 4000
+             })
+             setActiveRewriteMessageIndex(index)
+        } else {
+             setActiveRewriteMessageIndex(null)
+        }
+    }
+
+    return (
+        <ChatContainerRoot className="h-full relative">
+            {chatHistory.length === 0 && (
+                <div className="absolute inset-0 flex flex-col items-center justify-center text-center pointer-events-none">
+                    <div className="flex flex-col items-center text-xl gap-2 text-muted-foreground">
+                        <RiChatAiLine className="w-12 h-12" />
+                        <span className="font-medium">Ask Anything</span>
+                    </div>
+                </div>
+            )}
+            <ChatContainerContent className="space-y-0 py-12">
+                {rewriteState && (
+                    <RewriteInput
+                        open={!!rewriteState}
+                        onOpenChange={(open) => {
+                            if (!open) setRewriteState(null)
+                        }}
+                        selectedText={rewriteState.text}
+                        onSubmit={submitRewrite}
+                    />
+                )}
+
+                {chatHistory.map((message: any, index: number) => {
+                    const isLastMessage = index === chatHistory.length - 1;
+                    
+                    if (message.role === 'assistant') {
+                        return (
+                            <AssistantMessage
+                                key={index}
+                                message={message}
+                                index={index}
+                                isLastMessage={isLastMessage}
+                                isRewriteActive={activeRewriteMessageIndex === index}
+                                onToggleRewrite={() => toggleRewriteMode(index)}
+                                onSelection={() => handleSelection(index)}
+                                onRate={(feedback) => handleRateMessage(index, feedback)}
+                            />
+                        )
+                    } else {
+                         return (
+                             <UserMessage
+                                 key={index}
+                                 user={user}
+                                 message={message}
+                                 index={index}
+                                 isLastMessage={isLastMessage}
+                                 onDelete={() => handleDeleteMessage(index)}
+                                 onEdit={(newContent) => handleEditUserMessage(index, newContent)}
+                             />
+                         )
+                    }
+                })}
+
+                {isResponding && (
+                    <Message className="mx-auto mt-4 flex w-full max-w-4xl gap-4 px-3 items-start">
+                        <Image
+                            className="h-9 w-9 border object-cover rounded-full mt-0.5"
+                            src="https://i.postimg.cc/ZYDgZQyF/aiag-logo.jpg"
+                            alt="Assistant Avatar"
+                            width={36}
+                            height={36}
+                        />
+                        <div className="flex w-full flex-col gap-2">
+                            <Skeleton className="h-4 w-3/4 rounded-full" />
+                            <Skeleton className="h-4 w-1/2 rounded-full" />
+                        </div>
+                    </Message>
+                )}
+            </ChatContainerContent>
+            <div className="absolute bottom-4 left-1/2 flex w-full max-w-4xl -translate-x-1/2 justify-end px-5">
+                <ScrollButton variant="secondary" className="shadow-sm border" />
+            </div>
+        </ChatContainerRoot>
+    )
+}
+
+export default AiChatList
+
