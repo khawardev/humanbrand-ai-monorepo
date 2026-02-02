@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import { upsertKnowledgeBaseChat, rewriteAssistantMessage } from "@/server/actions/knowledgeBaseChatActions";
@@ -17,13 +17,34 @@ export function useKnowledgeBaseChat(initialData: { user: any; initialChatHistor
         setUser(initialData.user);
     }, [initialData.user]);
 
+    // Track processed history length to prevent double-firing in Strict Mode
+    const processedRef = useRef(0);
+
+    // Sync processedRef with history length when not responding or when last is not user
+    useEffect(() => {
+        const lastMessage = chatHistory[chatHistory.length - 1];
+        if (chatHistory.length > 0 && lastMessage?.role !== 'user') {
+            processedRef.current = chatHistory.length;
+        }
+    }, [chatHistory]);
+
     // Check if we need to auto-generate a response (e.g. after redirect or page load with pending user message)
     useEffect(() => {
         const lastMessage = chatHistory[chatHistory.length - 1];
-        if (sessionId && user && !isResponding && chatHistory.length > 0 && lastMessage?.role === 'user') {
-            triggerResponse(sessionId, chatHistory);
+        if (
+            sessionId && 
+            user && 
+            !isResponding && 
+            chatHistory.length > 0 && 
+            lastMessage?.role === 'user'
+        ) {
+            // Only trigger if we haven't processed this exact history state yet
+            if (chatHistory.length !== processedRef.current) {
+                processedRef.current = chatHistory.length;
+                triggerResponse(sessionId, chatHistory);
+            }
         }
-    }, [chatHistory, sessionId, user]);
+    }, [chatHistory, sessionId, user, isResponding]);
 
     const triggerResponse = async (currentSessionId: string, currentHistory: any[]) => {
         setIsResponding(true);
@@ -60,15 +81,13 @@ export function useKnowledgeBaseChat(initialData: { user: any; initialChatHistor
             if (result.success && result.sessionId) {
                 // If it was a new session, redirect immediately
                 if (!sessionId && result.sessionId) {
-                    setSessionId(result.sessionId);
+                    // setSessionId(result.sessionId); // removed to prevent triggering useEffect before redirect
                     router.replace(`/dashboard/ai-chat/${result.sessionId}`);
                     return; // Stop here, let the new page handle the generation
                 } 
                 
-                // If existing session, continue to generate response
-                if (result.history) {
-                    await triggerResponse(result.sessionId, result.history);
-                }
+                // For existing session, the useEffect will handle the triggerResponse based on state update
+                // We don't need to manually call triggerResponse here anymore
             } else {
                 toast.error(result.error || "Failed to save message.");
                 setChatHistory(chatHistory); // Revert

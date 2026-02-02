@@ -52,6 +52,7 @@ export default function AiChatPageComponent({ user, initialChatHistory, sessionI
         switch (selectedModel) {
             case "AI Chat":
                 return <AiChatList
+                    user={user}
                     chatHistory={chatHistory}
                     isResponding={isResponding}
                     handleRewriteMessage={handleRewriteMessage}

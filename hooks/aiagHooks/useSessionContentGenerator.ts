@@ -98,7 +98,7 @@ export function useSessionContentGenerator(initialData: any) {
     })
 
     const handleGenerate = () => {
-        if (isGenerateDisabled) return
+        if (isGenerateDisabled || isContentPending) return
         startContentTransition(async () => {
             const data = prepareUpdateData();
             const result = await updateSessionContent(initialData.id, data)
@@ -108,7 +108,7 @@ export function useSessionContentGenerator(initialData: any) {
     }
 
     const handleRevise = () => {
-        if (!feedback) return;
+        if (!feedback || isContentPending) return;
         startContentTransition(async () => {
             const data = { ...prepareUpdateData(), feedback };
             const result = await updateSessionContent(initialData.id, data)
@@ -122,7 +122,7 @@ export function useSessionContentGenerator(initialData: any) {
     }
 
     const handleAdaptPersona = () => {
-        if (!personasText.trim()) return;
+        if (!personasText.trim() || isPersonaPending) return;
         startPersonaTransition(async () => {
             const data = { originalContent: contentGenerated, personasText, uploadedPersonaFileData, modelAlias, temperature: base.creativityValue };
             const result = await adaptPersonaForSession(initialData.id, data);
@@ -136,6 +136,7 @@ export function useSessionContentGenerator(initialData: any) {
     };
 
     const handleImageAction = (newPrompt: string) => {
+        if (isImagePending) return;
         startImageTransition(async () => {
             try {
                 const formData = new FormData();
@@ -171,6 +172,7 @@ export function useSessionContentGenerator(initialData: any) {
     };
 
     const handleChatSend = async (userInput: string) => {
+        if (isChatLoading) return;
         setIsChatLoading(true);
 
         const userMessage = { role: 'user', content: userInput };

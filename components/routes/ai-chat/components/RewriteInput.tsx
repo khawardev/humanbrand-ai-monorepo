@@ -60,7 +60,7 @@ export default function RewriteInput({ open, onOpenChange, selectedText, onSubmi
                     <DialogTitle>Rewrite Text</DialogTitle>
                 </DialogHeader>
                 <form onSubmit={handleSubmit} className="flex flex-col">
-                    <div className="p-4 border-b bg-muted/30">
+                    <div className="p-4 bg-muted/30">
                         <div className="flex items-start justify-between gap-2">
                             <div className="flex-1 min-w-0">
                                 <p className='mb-2'>Selected text</p>

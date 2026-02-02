@@ -33,7 +33,7 @@ export const Hero = () => {
         <div className="md:py-20 py-14">
             <div className="md:w-2/3 select-none">
                 <div>
-                    <h1 className="text-balance  font-extrabold">
+                    <h1 className="text-balance text-5xl tracking-tighter  font-bold">
                         <span className=" md:flex  hidden items-start gap-8"> <Image className=" rounded-full" src={'https://i.postimg.cc/ZYDgZQyF/aiag-logo.jpg'} alt="" width={90} height={90} />AIAG Content <br /> Action Model {AIAG_VERSION}</span>
                         <span className=" md:hidden flex items-start gap-8"> <Image className=" rounded-full" src={'https://i.postimg.cc/ZYDgZQyF/aiag-logo.jpg'} alt="" width={70} height={70} /> AIAG <br /> CAM {AIAG_VERSION}</span>
                     </h1>

@@ -1,9 +1,9 @@
 import { type NextRequest, NextResponse } from 'next/server'
-import { getSession } from './server/actions/getSession'
 import { ADMIN_EMAILS } from './config/aiagConfig'
+import { getUser } from './server/actions/usersActions'
 
 export async function proxy(request: NextRequest) {
-	const session = await getSession()
+	const user = await getUser()
 	const path = request.nextUrl.pathname
 
 	const isAuthRoute =
@@ -17,7 +17,7 @@ export async function proxy(request: NextRequest) {
 	const isUnverifiedRoute = path === '/dashboard/unverified'
 
 	// 1. Handle Unauthenticated Users
-	if (!session) {
+	if (!user) {
 		if (isAuthRoute) {
 			return NextResponse.next()
 		}
@@ -26,7 +26,7 @@ export async function proxy(request: NextRequest) {
 
 	// 2. Handle Unverified Users
 	// Strict check: if adminVerified is not exactly true, consider unverified
-	const isVerified = (session?.user as any)?.adminVerified === true
+	const isVerified = (user as any)?.adminVerified === true
 
 	if (!isVerified) {
 		if (isUnverifiedRoute) {
@@ -38,9 +38,11 @@ export async function proxy(request: NextRequest) {
 	}
 
 	// 3. Handle Verified Users
-	
-	// Verified users should NOT access the unverified page
-	if (isUnverifiedRoute) {
+	// Verified users should NOT access:
+	// - /dashboard/unverified
+	// - Auth routes (signin/signup)
+	// - Non-dashboard routes (root, etc.)
+	if (isUnverifiedRoute || isAuthRoute || !isDashboardRoute) {
 		return NextResponse.redirect(new URL('/dashboard/ai-chat', request.url))
 	}
 
@@ -56,7 +58,7 @@ export async function proxy(request: NextRequest) {
 
 	// Admin Check
 	if (isAdminRoute) {
-		const userEmail = session?.user?.email
+		const userEmail = user?.email
 		const isAdmin = userEmail ? ADMIN_EMAILS.includes(userEmail) : false
 		if (!isAdmin) {
 			return NextResponse.redirect(new URL('/dashboard/ai-chat', request.url))
