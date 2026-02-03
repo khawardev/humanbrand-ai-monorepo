@@ -1,15 +1,17 @@
 import { getAllUsers } from '@/server/actions/usersActions';
+import { getAllSupportTickets } from '@/server/actions/supportActions';
 import { DashboardInnerLayout } from '@/components/shared/DashboardComponents';
+import { AdminDashboard } from '@/components/routes/admin/AdminDashboard';
 import { Hero } from '@/components/shared/reusable/Hero';
-import { UsersTable } from '@/components/routes/admin/users/UsersTable';
 
 const AdminPage = async () => {
     const users = await getAllUsers();
+    const tickets = await getAllSupportTickets();
 
     return (
         <DashboardInnerLayout>
             <Hero />
-            <UsersTable users={users} />
+            <AdminDashboard users={users} tickets={tickets as any} />
         </DashboardInnerLayout>
     );
 }

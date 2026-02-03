@@ -100,7 +100,6 @@ export function DataTable<TData, TValue>({
 
   return (
     <div className={cn("w-full space-y-8", containerClassName)}>
-      {title && <h2 className="text-3xl font-bold tracking-tight">{title}</h2>}
       <div className="md:space-y-10">
         <DataTableToolbar
           table={table}

@@ -1,4 +1,4 @@
-import { FilePlus, FileText, Megaphone} from "lucide-react";
+import { FilePlus, FileText, Megaphone, LifeBuoy} from "lucide-react";
 import { RiChatAiLine } from "react-icons/ri";
 import { RiChatAiFill } from "react-icons/ri";
 import { MdOutlineAdminPanelSettings } from "react-icons/md";
@@ -38,6 +38,12 @@ export const AIAGConfig: any = {
       fillIcon: Megaphone,
     },
     {
+      title: "Support",
+      href: "/dashboard/support",
+      icon: LifeBuoy,
+      fillIcon: LifeBuoy,
+    },
+    {
       title: "Admin",
       href: "/dashboard/admin",
       icon: MdOutlineAdminPanelSettings,
@@ -52,4 +58,9 @@ export const ADMIN_EMAILS = [
   "riz@humanbrand.ai",
   "john@humanbrand.ai",
   "aaron@humanbrand.ai",
+];
+
+export const ADMIN_SUPPORT_EMAILS = [
+  "khawar@humanbrand.ai",
+  "riz@humanbrand.ai",
 ];

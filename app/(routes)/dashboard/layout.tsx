@@ -8,14 +8,17 @@ import { SidebarInset, SidebarProvider } from '@/components/ui/sidebar'
 import { DashboardHeader } from '../../../components/shared/DashboardHeader'
 import AdminMailAlert from '@/components/shared/AdminMailAlert'
 import { getUser } from '@/server/actions/usersActions'
+import { checkNewSupportTickets } from '@/server/actions/supportActions'
 
 export default async function DashboardLayout({ children }: { children: React.ReactNode }) {
 	const user: any = await getUser()
+    const newTicketStatus = await checkNewSupportTickets()
 
 	return (
 		<SidebarProvider>
 			<LeftSidebar
 				user={user}
+                newTicketStatus={newTicketStatus}
 				adminAlert={<AdminMailAlert />}
 				sessionsList={
 					<Suspense fallback={<SidebarListSkeleton />}>

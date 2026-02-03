@@ -146,7 +146,7 @@ export function DataTableToolbar<TData>({
           >
             <AlertDialogTrigger asChild>
               <Button variant="destructive">
-                <TrashIcon className="mr-2 h-4 w-4" />
+                <TrashIcon />
                 Delete ({selectedRowCount})
               </Button>
             </AlertDialogTrigger>

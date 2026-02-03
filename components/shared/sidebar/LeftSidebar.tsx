@@ -19,9 +19,10 @@ type LeftSidebarProps = {
 	userItem?: React.ReactNode
 	sessionsList?: React.ReactNode
 	adminAlert?: React.ReactNode
+    newTicketStatus?: { hasNewUserTickets: boolean, hasNewAdminTickets: boolean }
 }
 
-export function LeftSidebar({ user, userItem, sessionsList, adminAlert, ...props }: LeftSidebarProps) {
+export function LeftSidebar({ user, userItem, sessionsList, adminAlert, newTicketStatus, ...props }: LeftSidebarProps) {
 	return (
 		<Sidebar collapsible="icon" variant="inset" {...props}>
 			<SidebarHeader>
@@ -37,7 +38,7 @@ export function LeftSidebar({ user, userItem, sessionsList, adminAlert, ...props
 			</SidebarHeader>
 
 			<SidebarContent>
-				<SidebarNavigation user={user} />
+				<SidebarNavigation user={user} newTicketStatus={newTicketStatus} />
 				{sessionsList}
 			</SidebarContent>
 
