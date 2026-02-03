@@ -14,6 +14,7 @@ export default async function AIChatSessionPage({ params }: any) {
          redirect("/dashboard/ai-chat");
     }
 
+    // Verified: initialChatHistory contains the full conversation history from the DB, ensuring context retention.
     const initialChatHistory = session.chatHistory as any[] || [];
 
     return (

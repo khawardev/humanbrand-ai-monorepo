@@ -427,7 +427,11 @@ export async function generateChatResponse(
 ) {
     try {
         // Construct conversation history for prompt
-        const conversationHistory = currentHistory
+        // Construct conversation history for prompt (excluding the latest user message)
+        const historyContext = currentHistory.slice(0, -1);
+        const lastUserMessage = currentHistory[currentHistory.length - 1];
+
+        const conversationHistory = historyContext
             .map(msg => `${msg.role}: ${msg.content}`)
             .join('\n');
 
@@ -437,7 +441,7 @@ export async function generateChatResponse(
             modelAlias: 'recomended',
             temperature: 0.7,
             conversationHistory,
-            userPrompt: currentHistory[currentHistory.length - 1].content || "Continue", // Use last user message
+            userPrompt: lastUserMessage.content || "Continue", // Use last user message
         });
 
         if (!result.generatedText) {

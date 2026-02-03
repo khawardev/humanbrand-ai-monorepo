@@ -92,6 +92,43 @@ const AssistantMessage = ({ message, index, isLastMessage, isRewriteActive, onTo
         }
     }
 
+    const [displayedContent, setDisplayedContent] = useState(isLastMessage ? "" : message.content);
+
+    useEffect(() => {
+        if (!isLastMessage) {
+            setDisplayedContent(message.content);
+            return;
+        }
+
+        // If content is already fully displayed, do nothing
+        if (displayedContent === message.content) return;
+
+        let index = 0;
+        const interval = setInterval(() => {
+             // Speed up slightly for long content or just constant speed
+             const chunkSize = 3; 
+             if (index < message.content.length) {
+                 setDisplayedContent((prev: string) => message.content.slice(0, prev.length + chunkSize));
+                 index += chunkSize;
+             } else {
+                 clearInterval(interval);
+                 setDisplayedContent(message.content);
+             }
+        }, 10);
+
+        return () => clearInterval(interval);
+    }, [message.content, isLastMessage]);
+    
+    // Fallback ensuring we eventually show everything if effect unmounts or other race conditions
+    useEffect(() => {
+        if (isLastMessage && displayedContent !== message.content) {
+             const timer = setTimeout(() => {
+                 setDisplayedContent(message.content);
+             }, 2000 + (message.content.length * 5)); // generous timeout
+             return () => clearTimeout(timer);
+        }
+    }, [message.content, isLastMessage]);
+
     return (
         <Message className="mx-auto flex w-full max-w-4xl gap-4 px-3 items-start">
             <Image
@@ -111,10 +148,10 @@ const AssistantMessage = ({ message, index, isLastMessage, isRewriteActive, onTo
                         )}
                     >
                         <MessageContent
-                            className="w-full space-y-6 flex-1 rounded-lg flex-col [&_p]:text-base! [&_li]:text-base! bg-transparent p-0 select-text"
+                            className="w-full space-y-6 flex-1 rounded-lg flex-col [&_p]:text-base! [&_li]:text-base! [&_h1]:text-xl! [&_h2]:text-xl! [&_h3]:text-xl! [&_h4]:text-xl! [&_h5]:text-xl! [&_h6]:text-xl! [&_h1]:font-semibold [&_h2]:font-semibold [&_h3]:font-semibold bg-transparent p-0 select-text"
                             markdown
                         >
-                            {message.content}
+                            {isLastMessage ? displayedContent : message.content}
                         </MessageContent>
                     </div>
 
@@ -371,7 +408,7 @@ const AiChatList = ({ user, chatHistory, isResponding, handleRewriteMessage, han
     }
 
     return (
-        <ChatContainerRoot className="h-full relative">
+        <ChatContainerRoot className="h-full relative ">
             {chatHistory.length === 0 && (
                 <div className="absolute inset-0 flex flex-col items-center justify-center text-center pointer-events-none">
                     <div className="flex flex-col items-center text-xl gap-2 text-muted-foreground">
