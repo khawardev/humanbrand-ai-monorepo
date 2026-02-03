@@ -15,7 +15,8 @@ fi
 # Remove old files (but keep .env)
 if [ -d /opt/app ]; then
     echo "Removing old application files..."
-    sudo find /opt/app -mindepth 1 ! -name '.env' -delete
+    cd /opt/app
+    sudo find . -mindepth 1 -maxdepth 1 ! -name '.env' -exec rm -rf {} +
 fi
 
 # Create directory if it doesn't exist
