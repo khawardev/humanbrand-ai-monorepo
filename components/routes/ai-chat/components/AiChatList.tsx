@@ -321,6 +321,13 @@ const UserMessage = ({ user, message, index, isLastMessage, onDelete, onEdit }: 
 const AiChatList = ({ user, chatHistory, isResponding, handleRewriteMessage, handleDeleteMessage, handleEditUserMessage, handleRateMessage }: AiChatListProps) => {
     const [rewriteState, setRewriteState] = useState<RewriteState>(null)
     const [activeRewriteMessageIndex, setActiveRewriteMessageIndex] = useState<number | null>(null)
+    const endOfMessagesRef = useRef<HTMLDivElement>(null)
+
+    useEffect(() => {
+        if (endOfMessagesRef.current) {
+            endOfMessagesRef.current.scrollIntoView({ behavior: "smooth" })
+        }
+    }, [chatHistory, isResponding])
 
     const handleSelection = (messageIndex: number) => {
         if (activeRewriteMessageIndex !== messageIndex) return;
@@ -431,6 +438,8 @@ const AiChatList = ({ user, chatHistory, isResponding, handleRewriteMessage, han
                         </div>
                     </Message>
                 )}
+
+                <div ref={endOfMessagesRef} />
             </ChatContainerContent>
             <div className="absolute bottom-4 left-1/2 flex w-full max-w-4xl -translate-x-1/2 justify-end px-5">
                 <ScrollButton variant="secondary" className="shadow-sm border" />

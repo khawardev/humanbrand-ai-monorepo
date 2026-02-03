@@ -431,13 +431,12 @@ export async function generateChatResponse(
             .map(msg => `${msg.role}: ${msg.content}`)
             .join('\n');
 
-        const systemPrompt = getKnowledgeBaseSystemPrompt(conversationHistory);
-
         // Call LLM
         const result = await generateNewContent({
+            type: 'ai_chat',
             modelAlias: 'recomended',
             temperature: 0.7,
-            systemPrompt,
+            conversationHistory,
             userPrompt: currentHistory[currentHistory.length - 1].content || "Continue", // Use last user message
         });
 
@@ -464,7 +463,7 @@ export async function generateChatResponse(
                 }).catch(err => console.error("Error generating title:", err));
         }
 
-        revalidatePath(`/dashboard/ai-chat/${sessionId}`);
+
         
         return { success: true, newHistory: finalHistory };
 

@@ -2,8 +2,12 @@
 import { generateText } from 'ai';
 import { openai } from '@ai-sdk/openai';
 import { google } from '@ai-sdk/google';
+import { getKnowledgeBaseSystemPrompt } from "@/lib/aiag/prompts/chat";
 
 import { GEMINI_MODEL, OPENAI_MODEL, OPENAI_MODEL_5 } from '@/lib/aiag/constants';
+import { getChatSystemPrompt } from "@/lib/aiag/prompts/chat";
+import { knowledgeBaseContent } from "@/lib/aiag/knowledgeBase";
+
 
 function getModel(modelAlias: string) {
     if (modelAlias === 'recomended') return openai(OPENAI_MODEL);
@@ -73,9 +77,24 @@ export async function generateNewContent(data: any): Promise<any> {
         const model = getModel(data.modelAlias);
         const skipTemperature = data.modelAlias === 'openai';
 
+        let systemPrompt = data.systemPrompt;
+
+        if (data.type === 'chat') {
+            systemPrompt = getChatSystemPrompt({
+                originalContent: data.originalContent,
+                conversationHistory: data.conversationHistory,
+                uploadedFileText: data.uploadedFileText,
+                knowledgeBaseContent
+            });
+        }
+        
+        if (data.type === 'ai_chat') {
+             systemPrompt = getKnowledgeBaseSystemPrompt(data.conversationHistory, knowledgeBaseContent);
+        }
+
         const result = await runGenerateText(
             model,
-            data.systemPrompt ?? undefined,
+            systemPrompt ?? undefined,
             data.userPrompt,
             skipTemperature
         );

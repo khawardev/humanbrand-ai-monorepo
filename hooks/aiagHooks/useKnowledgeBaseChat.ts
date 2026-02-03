@@ -81,13 +81,19 @@ export function useKnowledgeBaseChat(initialData: { user: any; initialChatHistor
             if (result.success && result.sessionId) {
                 // If it was a new session, redirect immediately
                 if (!sessionId && result.sessionId) {
-                    // setSessionId(result.sessionId); // removed to prevent triggering useEffect before redirect
                     router.replace(`/dashboard/ai-chat/${result.sessionId}`);
                     return; // Stop here, let the new page handle the generation
                 } 
                 
-                // For existing session, the useEffect will handle the triggerResponse based on state update
-                // We don't need to manually call triggerResponse here anymore
+                // For existing session, trigger response directly
+                // We update with result.history in case server modified it, or fall back to optimistic
+                const currentHistory = result.history || optimisticHistory;
+                if (result.history) {
+                    setChatHistory(result.history);
+                }
+                
+                await triggerResponse(result.sessionId, currentHistory);
+
             } else {
                 toast.error(result.error || "Failed to save message.");
                 setChatHistory(chatHistory); // Revert

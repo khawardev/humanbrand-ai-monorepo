@@ -37,15 +37,14 @@ Respond directly to the last user message in the history, considering the full c
     return chatSystemPrompt;
 }
 
-export function getKnowledgeBaseSystemPrompt(conversationHistory: string): string {
+export function getKnowledgeBaseSystemPrompt(conversationHistory: string, knowledgeBaseContent?: string): string {
     return `
 **Act as a helpful AIAG Assistant.**  
 You have two main responsibilities depending on user intent:
 
 1. **Knowledge Base Queries:**  
-   - If the user is asking a question that can be answered directly from the 'AIAG Knowledge Base', answer *exclusively* using that content.  
-   - If the answer is not available in the knowledge base, politely state that the information is not present. Example:  
-     "I can't find information on that topic in the AIAG Knowledge Base. Can I help with something else?"
+   - If the user is asking a question that can be answered directly from the 'AIAG Knowledge Base', provide that answer.
+   - If the exact answer is not available but related information exists (e.g., similar personas, topics), **provide that related information directly.** Do not start by saying "I can't find info" if you are about to provide relevant details found in the KB.
 
 2. **Content Generation Requests:**  
    - If the user requests new content (e.g., web page copy, articles, campaign content, or short-form posts), generate it creatively and flexibly.  
@@ -64,7 +63,7 @@ AIAG Communication Standards (Mandatory):
 
 ---  
 Full AIAG Knowledge Base (Primary Reference, when applicable):  
-(Knowledge Base content is injected via RAG or context if provided)
+${knowledgeBaseContent || KNOWLEDGE_BASE_FALLBACK}
 
 ---  
 

@@ -5,8 +5,7 @@ import { toast } from "sonner"
 import { updateSessionContent, adaptPersonaForSession, manageImageForSession, updateChatForSession } from "@/server/actions/savedSessionActions"
 import { generateImageAction } from "@/server/actions/generateImageActions"
 import { generateNewContent } from "@/server/actions/generateNewContentActions"
-import { getChatSystemPrompt } from "@/lib/aiag/prompts"
-import { knowledgeBaseContent } from "@/lib/aiag/knowledgeBase"
+
 import { uploadImageToSupabase } from "@/lib/supabase/uploadImageToSupabase"
 import { useBaseContentGenerator } from "./useBaseContentGenerator"
 import { getModelAlias, isSocialPostContentType } from "@/lib/aiag/formDataHelpers"
@@ -179,14 +178,15 @@ export function useSessionContentGenerator(initialData: any) {
         const newHistory = [...chatHistory, userMessage];
         setChatHistory(newHistory);
 
-        const systemPrompt = getChatSystemPrompt({
+        const result = await generateNewContent({
+            type: 'chat',
+            modelAlias,
+            temperature: base.creativityValue,
+            userPrompt: userInput,
             originalContent: contentGenerated,
             conversationHistory: newHistory.map(m => `${m.role}: ${m.content}`).join('\n'),
-            uploadedFileText: chatFilesData,
-            knowledgeBaseContent,
+            uploadedFileText: chatFilesData
         });
-
-        const result = await generateNewContent({ modelAlias, temperature: base.creativityValue, systemPrompt, userPrompt: userInput });
 
         const assistantMessage = { role: 'assistant', content: result.generatedText || "Sorry, an error occurred." };
         const finalHistory = [...newHistory, assistantMessage];
