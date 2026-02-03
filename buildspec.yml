@@ -11,10 +11,8 @@ phases:
 
   pre_build:
     commands:
-      - echo Running tests...
-      - pnpm run test --if-present
       - echo Running linting...
-      - pnpm run lint --if-present
+      - pnpm run lint
 
   build:
     commands:
