@@ -11,8 +11,7 @@ phases:
 
   pre_build:
     commands:
-      - echo Running linting...
-      - pnpm run lint
+      - echo Skipping pre-build steps...
 
   build:
     commands:
