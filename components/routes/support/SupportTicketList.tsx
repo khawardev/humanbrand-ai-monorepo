@@ -69,7 +69,7 @@ export function SupportTicketList({ tickets }: SupportTicketListProps) {
           View the status of your support requests.
         </p>
       </div>
-      <div className="rounded-md border">
+      <div className="rounded-xl shadow-sm border p-2">
         <Table>
           <TableHeader>
             <TableRow>
