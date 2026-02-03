@@ -1,6 +1,4 @@
 import { NextRequest, NextResponse } from "next/server";
-// @ts-ignore
-import pdf from "pdf-parse";
 import * as mammoth from "mammoth";
 import * as XLSX from "xlsx";
 import * as Papa from "papaparse";
@@ -27,6 +25,8 @@ function getFileType(mimeType: string): string | null {
 // PDF Parser
 async function parsePDF(buffer: Buffer): Promise<string> {
     try {
+        // @ts-ignore
+        const pdf = (await import("pdf-parse")).default;
         const data = await pdf(buffer);
         return data.text;
     } catch (error) {
