@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import PDFParser from "pdf2json";
 import * as mammoth from "mammoth";
 import * as XLSX from "xlsx";
 import * as Papa from "papaparse";
@@ -24,15 +25,21 @@ function getFileType(mimeType: string): string | null {
 
 // PDF Parser
 async function parsePDF(buffer: Buffer): Promise<string> {
-    try {
-        // @ts-ignore
-        const pdf = (await import("pdf-parse")).default;
-        const data = await pdf(buffer);
-        return data.text;
-    } catch (error) {
-        console.error("PDF parsing error:", error);
-        throw new Error("Failed to parse PDF");
-    }
+    const pdfParser = new (PDFParser as any)(null, 1);
+
+    return new Promise((resolve, reject) => {
+        pdfParser.on("pdfParser_dataError", (errData: any) => {
+            console.error("PDF parsing error:", errData.parserError);
+            reject(new Error("Failed to parse PDF"));
+        });
+
+        pdfParser.on("pdfParser_dataReady", () => {
+            const parsedText = pdfParser.getRawTextContent();
+            resolve(parsedText);
+        });
+
+        pdfParser.parseBuffer(buffer);
+    });
 }
 
 // DOCX Parser

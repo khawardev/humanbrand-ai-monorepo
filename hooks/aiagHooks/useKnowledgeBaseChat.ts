@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import { upsertKnowledgeBaseChat, rewriteAssistantMessage } from "@/server/actions/knowledgeBaseChatActions";
@@ -62,7 +62,7 @@ export function useKnowledgeBaseChat(initialData: { user: any; initialChatHistor
         setIsResponding(false);
     }
 
-    const handleSendMessage = async (userInput: string) => {
+    const handleSendMessage = useCallback(async (userInput: string) => {
         if (!user) {
              toast.error("Please log in to use the chat.");
              return;
@@ -105,9 +105,9 @@ export function useKnowledgeBaseChat(initialData: { user: any; initialChatHistor
             setChatHistory(chatHistory); // Revert
             setIsResponding(false);
         }
-    };
+    }, [user, isResponding, chatHistory, sessionId, router]);
 
-    const handleRewriteMessage = async (messageIndex: number, originalContent: string, selectedText: string, rewritePrompt: string) => {
+    const handleRewriteMessage = useCallback(async (messageIndex: number, originalContent: string, selectedText: string, rewritePrompt: string) => {
         if (!user) {
             toast.error("Please log in to perform this action.");
             return;
@@ -131,9 +131,9 @@ export function useKnowledgeBaseChat(initialData: { user: any; initialChatHistor
         }
 
         setIsResponding(false);
-    };
+    }, [user, isResponding, sessionId]);
 
-    const handleDeleteMessage = async (messageIndex: number) => {
+    const handleDeleteMessage = useCallback(async (messageIndex: number) => {
         if (!sessionId) return;
         
         // Optimistic update
@@ -157,9 +157,9 @@ export function useKnowledgeBaseChat(initialData: { user: any; initialChatHistor
             toast.error("Failed to delete message");
             setChatHistory(chatHistory); // Revert
         }
-    }
+    }, [sessionId, chatHistory]);
 
-    const handleEditUserMessage = async (messageIndex: number, newContent: string) => {
+    const handleEditUserMessage = useCallback(async (messageIndex: number, newContent: string) => {
         if (!sessionId) return;
         if (!newContent.trim()) return;
 
@@ -185,9 +185,9 @@ export function useKnowledgeBaseChat(initialData: { user: any; initialChatHistor
             setChatHistory(chatHistory);
             setIsResponding(false);
         }
-    }
+    }, [sessionId, chatHistory]);
 
-    const handleRateMessage = async (messageIndex: number, feedback: 'up' | 'down' | null) => {
+    const handleRateMessage = useCallback(async (messageIndex: number, feedback: 'up' | 'down' | null) => {
         if (!sessionId) return;
         
         // Optimistic update
@@ -202,7 +202,7 @@ export function useKnowledgeBaseChat(initialData: { user: any; initialChatHistor
             toast.error("Failed to rate message");
             setChatHistory(chatHistory); // Revert
         }
-    }
+    }, [sessionId, chatHistory]);
 
     return {
         user,

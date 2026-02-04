@@ -1,5 +1,4 @@
 import { type NextRequest, NextResponse } from 'next/server'
-import { ADMIN_EMAILS } from './config/aiagConfig'
 import { getUser } from './server/actions/usersActions'
 
 export async function proxy(request: NextRequest) {
@@ -58,10 +57,9 @@ export async function proxy(request: NextRequest) {
 
 	// Admin Check
 	if (isAdminRoute) {
-		const userEmail = user?.email
-		const isAdmin = userEmail ? ADMIN_EMAILS.includes(userEmail) : false
+		const isAdmin = (user as any)?.isAdmin === true
 		if (!isAdmin) {
-			return NextResponse.redirect(new URL('/dashboard/ai-chat', request.url))
+				return NextResponse.redirect(new URL('/dashboard/ai-chat', request.url))
 		}
 	}
 

@@ -79,13 +79,13 @@ export function ImageFileDropzone({ onFileChange, initialFileInfo }: ImageFileDr
 
     if (file) {
         return (
-            <div className="relative w-full flex items-center justify-between p-2 pl-2 border rounded-md bg-accent">
+            <div className="relative w-full flex items-center justify-between p-2 pl-2 border rounded-xl bg-accent">
                 <div className="flex items-center gap-4 flex-grow min-w-0">
                     {file.preview && (
                         <img
                             src={file.preview}
                             alt={file.name}
-                            className="h-12 w-12 object-cover bg-accent border rounded-md flex-shrink-0"
+                            className="h-12 w-12 object-cover bg-accent border rounded-xl flex-shrink-0"
                             onError={(e) => {
                                 console.error('Failed to load image:', file.preview);
                                 e.currentTarget.style.display = 'none';
@@ -108,7 +108,7 @@ export function ImageFileDropzone({ onFileChange, initialFileInfo }: ImageFileDr
     }
 
     return (
-        <div {...getRootProps()} className={`flex flex-col items-center justify-center w-full h-32 border-2 border-dashed rounded-lg cursor-pointer transition-colors ${isDragActive ? "border-primary bg-primary/10" : "border-border hover:border-primary/20 hover:bg-primary/5"}`}>
+        <div {...getRootProps()} className={`flex flex-col items-center justify-center w-full h-32 border-2 border-dashed rounded-xl cursor-pointer transition-colors ${isDragActive ? "border-primary bg-primary/10" : "border-border hover:border-primary/20 hover:bg-primary/5"}`}>
             <input {...getInputProps()} />
             <MdOutlineFileUpload className="w-10 h-10 text-muted-foreground/50" />
             <p className="mt-2 px-10 text-sm text-center text-muted-foreground">

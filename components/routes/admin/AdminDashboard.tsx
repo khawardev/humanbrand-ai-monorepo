@@ -18,25 +18,25 @@ export function AdminDashboard({ users, tickets }: AdminDashboardProps) {
     <div className="space-y-6">
       <Tabs defaultValue="users" className="w-full">
         <div className="flex items-center justify-between">
-            <h2 className="text-3xl font-bold tracking-tight">Admin Dashboard</h2>
+          <h2 className="text-4xl font-medium tracking-tight">Admin Dashboard</h2>
           <TabsList>
-                <TabsTrigger value="users">Manage Users</TabsTrigger>
-                <TabsTrigger value="support" className="flex items-center gap-2">
-                    User Support
-                     {hasNewTickets && (
-                        <span className="relative flex h-2 w-2">
-                           <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary/80 opacity-75"></span>
-                           <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
-                        </span>
-                     )}
-                </TabsTrigger>
-            </TabsList>
+            <TabsTrigger value="users">Manage Users</TabsTrigger>
+            <TabsTrigger value="support" className="flex items-center gap-2">
+              User Support
+              {hasNewTickets && (
+                <span className="relative flex h-2 w-2">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary/80 opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
+                </span>
+              )}
+            </TabsTrigger>
+          </TabsList>
         </div>
-        
-        <TabsContent value="users" className="mt-6">
+
+        <TabsContent value="users" >
           <UsersTable users={users} />
         </TabsContent>
-        <TabsContent value="support" className="mt-6">
+        <TabsContent value="support" >
           <SupportTicketsTable tickets={tickets} />
         </TabsContent>
       </Tabs>

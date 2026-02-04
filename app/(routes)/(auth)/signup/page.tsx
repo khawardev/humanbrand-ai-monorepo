@@ -24,7 +24,7 @@ export default function Page() {
   return (
     <div>
       <div className="mb-10">
-        <h1 className=' md:text-4xl text-3xl font-bold tracking-tight'>Create <br /> your account</h1>
+        <h1 className=' md:text-5xl text-3xl font-bold tracking-tight'>Create <br /> your account</h1>
       </div>
 
       <SignUpForm />

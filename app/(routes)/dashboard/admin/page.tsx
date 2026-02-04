@@ -5,7 +5,7 @@ import { AdminDashboard } from '@/components/routes/admin/AdminDashboard';
 import { Hero } from '@/components/shared/reusable/Hero';
 
 const AdminPage = async () => {
-    const users = await getCompanyUsers();
+    const users = await getAllUsers();
     const tickets = await getAllSupportTickets();
 
     return (

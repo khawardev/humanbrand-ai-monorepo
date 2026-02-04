@@ -144,9 +144,9 @@ export function SupportTicketsTable({ tickets }: SupportTicketsTableProps) {
               </div>
 
               <DialogFooter>
-                <Button variant="outline" onClick={() => setIsDialogOpen(false)}>Cancel</Button>
+                <Button variant="ghost" onClick={() => setIsDialogOpen(false)}>Cancel</Button>
                 <Button onClick={handleSave} disabled={isPending}>
-                    {isPending ? "Saving..." : "Save Changes"}
+                    {isPending ? "Saving" : "Save"}
                 </Button>
               </DialogFooter>
             </div>

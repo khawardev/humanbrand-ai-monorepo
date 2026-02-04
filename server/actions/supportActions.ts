@@ -2,11 +2,12 @@
 
 import { db } from "@/server/db";
 import { getSession } from "@/server/actions/getSession";
+import { getUser } from "@/server/actions/usersActions";
 import { supportTicket } from "@/server/db/schema/supportSchema";
 import { eq, desc, gt, or } from "drizzle-orm";
 import { revalidatePath } from "next/cache";
 import { sendEmail } from "@/lib/email";
-import { ADMIN_EMAILS, ADMIN_SUPPORT_EMAILS } from "@/config/aiagConfig";
+import { ADMIN_SUPPORT_EMAILS } from "@/config/aiagConfig";
 
 export async function createSupportTicket(data: {
   subject: string;
@@ -200,10 +201,12 @@ export async function createSupportTicket(data: {
 </html>
 `;
 
-    // Send email with CC
+    // Send email with CC only for company users
+    const isCompanyUser = session.user.email?.endsWith("@aiag.org");
+
     await sendEmail({
       to: ADMIN_SUPPORT_EMAILS.join(", "),
-      cc: ["john@humanbrand.ai", "aaron@humanbrand.ai"],
+      cc: isCompanyUser ? ["john@humanbrand.ai", "aaron@humanbrand.ai"] : undefined,
       subject: `[Support Ticket] ${data.subject} - ${session.user.name}`,
       html,
     });
@@ -238,8 +241,8 @@ export async function getUserSupportTickets() {
 export async function getAllSupportTickets() {
   // Add admin check here if needed, but usually handled by route protection/UI hiding
   // For safety, let's check if user is admin
-  const session: any = await getSession();
-   if (!session?.user?.email || !ADMIN_EMAILS.includes(session.user.email)) {
+  const user = await getUser();
+   if (!user?.isAdmin) {
      // Return empty or throw, but let's return empty to avoid breaking UI if called erroneously
      return [];
    }
@@ -263,8 +266,8 @@ export async function updateSupportTicketStatus(
   status: "pending" | "in_progress" | "completed" | "rejected",
   remarks?: string
 ) {
-     const session: any = await getSession();
-   if (!session?.user?.email || !ADMIN_EMAILS.includes(session.user.email)) {
+     const user = await getUser();
+   if (!user?.isAdmin) {
       throw new Error("Unauthorized");
    }
 
@@ -288,30 +291,47 @@ export async function updateSupportTicketStatus(
 }
 
 export async function checkNewSupportTickets() {
-    const session: any = await getSession();
-    if (!session?.user?.id) return { hasNewUserTickets: false, hasNewAdminTickets: false };
+  const user = await getUser();
+  if (!user?.id) return { user: {}, admin: {} };
 
-    // Calculate time 24 hours ago
-    const oneDayAgo = new Date(Date.now() - 24 * 60 * 60 * 1000);
+  try {
+    const userTickets = await db.query.supportTicket.findMany({
+      where: eq(supportTicket.userId, user.id),
+      columns: { status: true },
+    });
 
-    try {
-        const userNewTickets = await db.query.supportTicket.findFirst({
-            where: (tickets, { and, eq, gt }) => and(
-                eq(tickets.userId, session.user.id),
-                gt(tickets.createdAt, oneDayAgo)
-            )
-        });
+    const userCounts = userTickets.reduce(
+      (acc: Record<string, number>, curr) => {
+        const status = curr.status || "pending";
+        acc[status] = (acc[status] || 0) + 1;
+        return acc;
+      },
+      {}
+    );
 
-        const adminNewTickets = await db.query.supportTicket.findFirst({
-            where: (tickets, { gt }) => gt(tickets.createdAt, oneDayAgo)
-        });
+    let adminCounts: Record<string, number> = {};
 
-        return {
-            hasNewUserTickets: !!userNewTickets,
-            hasNewAdminTickets: !!adminNewTickets
-        };
-    } catch (error) {
-        console.error("Error checking new support tickets:", error);
-        return { hasNewUserTickets: false, hasNewAdminTickets: false };
+    if (user.isAdmin) {
+      const adminTickets = await db.query.supportTicket.findMany({
+        columns: { status: true },
+      });
+
+      adminCounts = adminTickets.reduce(
+        (acc: Record<string, number>, curr) => {
+          const status = curr.status || "pending";
+          acc[status] = (acc[status] || 0) + 1;
+          return acc;
+        },
+        {}
+      );
     }
+
+    return {
+      user: userCounts,
+      admin: adminCounts,
+    };
+  } catch (error) {
+    console.error("Error checking new support tickets:", error);
+    return { user: {}, admin: {} };
+  }
 }

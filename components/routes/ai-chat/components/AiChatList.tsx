@@ -54,6 +54,7 @@ interface AssistantMessageProps {
     onToggleRewrite: () => void
     onSelection: () => void
     onRate: (feedback: 'up' | 'down' | null) => void
+    shouldAnimate?: boolean
 }
 
 
@@ -68,7 +69,7 @@ interface UserMessageProps {
 
 
 
-const AssistantMessage = ({ message, index, isLastMessage, isRewriteActive, onToggleRewrite, onSelection, onRate }: AssistantMessageProps) => {
+const AssistantMessage = ({ message, index, isLastMessage, isRewriteActive, onToggleRewrite, onSelection, onRate, shouldAnimate = false }: AssistantMessageProps) => {
     const [isCopied, setIsCopied] = useState(false)
 
     const handleCopyMessage = (content: string) => {
@@ -92,10 +93,12 @@ const AssistantMessage = ({ message, index, isLastMessage, isRewriteActive, onTo
         }
     }
 
-    const [displayedContent, setDisplayedContent] = useState(isLastMessage ? "" : message.content);
+    const [displayedContent, setDisplayedContent] = useState(
+        (shouldAnimate && isLastMessage) ? "" : message.content
+    );
 
     useEffect(() => {
-        if (!isLastMessage) {
+        if (!shouldAnimate || !isLastMessage) {
             setDisplayedContent(message.content);
             return;
         }
@@ -117,17 +120,17 @@ const AssistantMessage = ({ message, index, isLastMessage, isRewriteActive, onTo
         }, 10);
 
         return () => clearInterval(interval);
-    }, [message.content, isLastMessage]);
+    }, [message.content, isLastMessage, shouldAnimate]);
     
     // Fallback ensuring we eventually show everything if effect unmounts or other race conditions
     useEffect(() => {
-        if (isLastMessage && displayedContent !== message.content) {
+        if (shouldAnimate && isLastMessage && displayedContent !== message.content) {
              const timer = setTimeout(() => {
                  setDisplayedContent(message.content);
              }, 2000 + (message.content.length * 5)); // generous timeout
              return () => clearTimeout(timer);
         }
-    }, [message.content, isLastMessage]);
+    }, [message.content, isLastMessage, shouldAnimate]);
 
     return (
         <Message className="mx-auto flex w-full max-w-4xl gap-4 px-3 items-start">
@@ -151,7 +154,7 @@ const AssistantMessage = ({ message, index, isLastMessage, isRewriteActive, onTo
                             className="w-full space-y-6 flex-1 rounded-lg flex-col [&_p]:text-base! [&_li]:text-base! [&_h1]:text-xl! [&_h2]:text-xl! [&_h3]:text-xl! [&_h4]:text-xl! [&_h5]:text-xl! [&_h6]:text-xl! [&_h1]:font-semibold [&_h2]:font-semibold [&_h3]:font-semibold bg-transparent p-0 select-text"
                             markdown
                         >
-                            {isLastMessage ? displayedContent : message.content}
+                            {shouldAnimate && isLastMessage ? displayedContent : message.content}
                         </MessageContent>
                     </div>
 
@@ -359,6 +362,8 @@ const AiChatList = ({ user, chatHistory, isResponding, handleRewriteMessage, han
     const [rewriteState, setRewriteState] = useState<RewriteState>(null)
     const [activeRewriteMessageIndex, setActiveRewriteMessageIndex] = useState<number | null>(null)
     const endOfMessagesRef = useRef<HTMLDivElement>(null)
+    // Track initial history length to avoid animating existing messages
+    const initialMessageCountRef = useRef(chatHistory.length);
 
     useEffect(() => {
         if (endOfMessagesRef.current) {
@@ -431,6 +436,7 @@ const AiChatList = ({ user, chatHistory, isResponding, handleRewriteMessage, han
 
                 {chatHistory.map((message: any, index: number) => {
                     const isLastMessage = index === chatHistory.length - 1;
+                    const shouldAnimate = index >= initialMessageCountRef.current;
                     
                     if (message.role === 'assistant') {
                         return (
@@ -443,6 +449,7 @@ const AiChatList = ({ user, chatHistory, isResponding, handleRewriteMessage, han
                                 onToggleRewrite={() => toggleRewriteMode(index)}
                                 onSelection={() => handleSelection(index)}
                                 onRate={(feedback) => handleRateMessage(index, feedback)}
+                                shouldAnimate={shouldAnimate}
                             />
                         )
                     } else {
@@ -478,12 +485,12 @@ const AiChatList = ({ user, chatHistory, isResponding, handleRewriteMessage, han
 
                 <div ref={endOfMessagesRef} />
             </ChatContainerContent>
-            <div className="absolute bottom-4 left-1/2 flex w-full max-w-4xl -translate-x-1/2 justify-end px-5">
+            <div className="absolute bottom-4 left-1/2 flex w-full max-w-4xl -translate-x-1/2 justify-end px-3">
                 <ScrollButton variant="secondary" className="shadow-sm border" />
             </div>
         </ChatContainerRoot>
     )
 }
 
-export default AiChatList
+export default React.memo(AiChatList)
 

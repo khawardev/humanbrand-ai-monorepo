@@ -38,7 +38,7 @@ export const CustomTabs: React.FC<CustomTabsProps> = ({
                             aria-controls={`${baseId}-content-${value}`}
                             className={cn(
                                 "relative h-9 rounded-none data-[state=active]:border-t-0 data-[state=active]:border-r-0 data-[state=active]:border-l-0 border-b-2 border-b-transparent bg-transparent px-4 pb-3 pt-2 font-medium text-muted-foreground shadow-none transition-none",
-                                "data-[state=active]:border-b-primary data-[state=active]:text-foreground data-[state=active]:hover:text-foreground data-[state=active]:shadow-none data-[state=active]:bg-transparent",
+                                "data-[state=active]:border-b-primary data-[state=active]:border-b-2 data-[state=active]:text-foreground data-[state=active]:hover:text-foreground data-[state=active]:shadow-none data-[state=active]:bg-transparent",
                                 "hover:bg-transparent hover:text-muted-foreground",
                                 "flex items-center gap-2 justify-start",
                                 triggerMaxWidthClass

@@ -3,12 +3,13 @@
 import React, { useMemo, useTransition } from "react";
 import { toast } from "sonner";
 
-import { updateUserVerification, deleteUserById } from "@/server/actions/usersActions";
+import { updateUserVerification, deleteUserById, toggleUserAdminStatus } from "@/server/actions/usersActions";
 import { DataTable } from "@/components/shared/data-table/DataTable";
 import { SearchableColumn, FilterComponent } from "@/components/shared/data-table/DataTableToolbar";
 
 import { getUsersColumns, User } from "./Columns";
 import { UserStatusFilter } from "./UserStatusFilter";
+import { UserTypeFilter } from "./UserTypeFilter";
 
 interface UsersTableProps {
   users: User[];
@@ -25,6 +26,18 @@ export function UsersTable({ users }: UsersTableProps) {
       } catch (error) {
         toast.error("Failed to update user status.");
         console.error("Failed to update user status.", error);
+      }
+    });
+  };
+
+  const handleAdminToggle = (userId: string, currentStatus: boolean) => {
+    startTransition(async () => {
+      try {
+        await toggleUserAdminStatus(userId, !currentStatus);
+        toast.success("User admin status updated successfully.");
+      } catch (error) {
+        toast.error("Failed to update user admin status.");
+        console.error("Failed to update user admin status.", error);
       }
     });
   };
@@ -53,7 +66,7 @@ export function UsersTable({ users }: UsersTableProps) {
 
   const columns = useMemo(
     () =>
-      getUsersColumns(handleVerificationToggle, isPending, handleDeleteUser),
+      getUsersColumns(handleVerificationToggle, isPending, handleDeleteUser, handleAdminToggle),
     [isPending]
   );
 
@@ -63,6 +76,7 @@ export function UsersTable({ users }: UsersTableProps) {
 
   const filterComponents: FilterComponent<User>[] = [
     { id: "statusFilter", component: UserStatusFilter },
+    { id: "typeFilter", component: UserTypeFilter },
   ];
 
   return (
@@ -73,6 +87,8 @@ export function UsersTable({ users }: UsersTableProps) {
       searchableColumns={searchableColumns}
       filterComponents={filterComponents}
       viewOptions={true}
+      initialColumnFilters={[{ id: "userType", value: ["company"] }]}
+      initialColumnVisibility={{ userType: false }}
     />
   );
 }

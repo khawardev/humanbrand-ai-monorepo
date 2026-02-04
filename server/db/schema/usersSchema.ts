@@ -15,6 +15,7 @@ export const user = aiag_schema.table('user', {
     username: text('username').unique(),
     displayUsername: text('displayUsername'),
     adminVerified: boolean('adminVerified').default(false).notNull(),
+    isAdmin: boolean('isAdmin').default(false).notNull(),
 });
 
 export const session = aiag_schema.table('session', {

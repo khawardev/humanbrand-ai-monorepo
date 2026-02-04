@@ -54,7 +54,6 @@ export const AIAGConfig: any = {
 
 export const ADMIN_EMAILS = [
   "khawarsultan.developer@gmail.com",
-  "rizwaniscoder@gmail.com",
   "riz@humanbrand.ai",
   "john@humanbrand.ai",
   "aaron@humanbrand.ai",

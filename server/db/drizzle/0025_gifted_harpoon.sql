@@ -1,0 +1,1 @@
+ALTER TABLE "aiag_schema"."user" ADD COLUMN "isAdmin" boolean DEFAULT false NOT NULL;

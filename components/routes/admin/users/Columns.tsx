@@ -27,6 +27,7 @@ export type User = {
   email?: string | null;
   image?: string | null;
   adminVerified: boolean;
+  isAdmin: boolean;
 };
 
 // We can pass handlers as an object or separate arguments.
@@ -34,7 +35,8 @@ export type User = {
 export const getUsersColumns = (
   onVerificationToggle: (userId: string, currentStatus: boolean) => void,
   isPending: boolean,
-  handleDeleteUser: (userName: string, userId: string) => void
+  handleDeleteUser: (userName: string, userId: string) => void,
+  onAdminToggle: (userId: string, currentStatus: boolean) => void
 ): ColumnDef<User>[] => [
   {
     id: "select",
@@ -60,6 +62,26 @@ export const getUsersColumns = (
     size: 40,
   },
   {
+    accessorKey: "userType",
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title="Type" />
+    ),
+    cell: ({ row }) => {
+      const type = row.getValue("userType") as string;
+      return (
+        <Badge variant={type === "company" ? "default" : "secondary"}>
+          {type === "company" ? "Company" : "External"}
+        </Badge>
+      );
+    },
+    accessorFn: (row) => (row.email?.endsWith("@aiag.org") ? "company" : "external"),
+    filterFn: (row, id, value) => {
+      if (!value || value.length === 0) return true;
+      return (value as string[]).includes(row.getValue(id));
+    },
+    size: 100,
+  },
+  {
     accessorKey: "name",
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="User" />
@@ -73,7 +95,7 @@ export const getUsersColumns = (
             alt={user.name || "User avatar"}
             width={40}
             height={40}
-            className="rounded-md border object-cover"
+            className="rounded-lg border object-cover"
           />
           <div className="flex flex-col">
             <span className="font-medium truncate">{user.name}</span>
@@ -90,13 +112,12 @@ export const getUsersColumns = (
   {
     accessorKey: "adminVerified",
     header: ({ column }) => (
-      <DataTableColumnHeader column={column} title="Status" />
+      <DataTableColumnHeader column={column} title="Verification" />
     ),
     cell: ({ row }) => {
       const isVerified = row.getValue("adminVerified");
       return (
         <Badge
-          className="rounded-full"
           variant={isVerified ? "default" : "outline"}
         >
           {isVerified ? "Verified" : "Not Verified"}
@@ -105,9 +126,27 @@ export const getUsersColumns = (
     },
     size: 150,
     filterFn: (row, id, value) => {
-      // value is array of selected statuses (booleans)
-      // row.getValue(id) is boolean
-      // we check if row value is included in selected values
+      if (!value || value.length === 0) return true;
+      return (value as boolean[]).includes(row.getValue(id) as boolean);
+    },
+  },
+  {
+    accessorKey: "isAdmin",
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title="Role" />
+    ),
+    cell: ({ row }) => {
+      const isAdmin = row.getValue("isAdmin");
+      return (
+        <Badge
+          variant={isAdmin ? "default" : "secondary"}
+        >
+          {isAdmin ? "Admin" : "User"}
+        </Badge>
+      );
+    },
+    size: 100,
+    filterFn: (row, id, value) => {
       if (!value || value.length === 0) return true;
       return (value as boolean[]).includes(row.getValue(id) as boolean);
     },
@@ -123,10 +162,20 @@ export const getUsersColumns = (
       const user = row.original;
       return (
         <div className="text-right flex justify-end gap-2">
+           <Button
+            variant={user.isAdmin ? "default" : "outline"}
+            size="icon"
+            onClick={() => onAdminToggle(user.id, user.isAdmin)}
+            disabled={isPending}
+            title={user.isAdmin ? "Remove Admin" : "Make Admin"}
+          >
+            <ShieldAlert className="h-4 w-4" />
+          </Button>
           <Button
             variant={user.adminVerified ? "outline" : "default"}
             onClick={() => onVerificationToggle(user.id, user.adminVerified)}
             disabled={isPending}
+            size="sm"
           >
             {user.adminVerified ? (
               "Revoke"
@@ -141,8 +190,9 @@ export const getUsersColumns = (
             variant="destructive"
             onClick={() => handleDeleteUser(user.name || "Unknown", user.id)}
             disabled={isPending}
+            size="icon"
           >
-            <Trash className="mr-1 h-4 w-4" /> Delete
+            <Trash /> 
           </Button>
         </div>
       );

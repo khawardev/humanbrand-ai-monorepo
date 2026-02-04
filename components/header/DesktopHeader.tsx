@@ -10,7 +10,7 @@ import MobileHeader from "./MobileHeader";
 
 const DesktopHeader = async () => {
     const user = await getUser();
-    const isAdmin = user?.email ? ADMIN_EMAILS.includes(user.email) : false;
+    const isAdmin = user?.isAdmin || false;
 
     const navLinks = user
         ? AIAGConfig.mainNav.filter((nav: any) => {

@@ -19,7 +19,7 @@ type LeftSidebarProps = {
 	userItem?: React.ReactNode
 	sessionsList?: React.ReactNode
 	adminAlert?: React.ReactNode
-    newTicketStatus?: { hasNewUserTickets: boolean, hasNewAdminTickets: boolean }
+	newTicketStatus?: { user: Record<string, number>; admin: Record<string, number> }
 }
 
 export function LeftSidebar({ user, userItem, sessionsList, adminAlert, newTicketStatus, ...props }: LeftSidebarProps) {

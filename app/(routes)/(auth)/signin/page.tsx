@@ -31,7 +31,7 @@ export default function Page() {
   return (
     <div className='flex flex-col gap-5'>
       <div className="mb-10">
-        <h1 className=' md:text-4xl text-3xl font-bold tracking-tight'>Sign in to your<br /> your account</h1>
+        <h1 className=' md:text-5xl text-3xl font-bold tracking-tight'>Sign in <br /> your account</h1>
       </div>
 
       <SignInForm />

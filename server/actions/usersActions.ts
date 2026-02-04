@@ -98,3 +98,19 @@ export async function deleteUserById(userId: string) {
     return { success: false, error: "Failed to delete user." };
   }
 }
+
+export async function toggleUserAdminStatus(userId: string, isAdmin: boolean) {
+  try {
+    await db
+      .update(user)
+      .set({ isAdmin: isAdmin, updatedAt: new Date() })
+      .where(eq(user.id, userId));
+
+    revalidatePath("/dashboard/admin");
+    revalidatePath("/dashboard", "layout");
+    return { success: true };
+  } catch (error) {
+    console.error("Error updating user admin status:", error);
+    return { success: false, error: "Failed to update user admin status." };
+  }
+}

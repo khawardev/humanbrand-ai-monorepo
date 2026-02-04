@@ -40,6 +40,8 @@ interface DataTableProps<TData, TValue>
   title?: string;
   initialPageSize?: number;
   initialSort?: SortingState;
+  initialColumnFilters?: ColumnFiltersState;
+  initialColumnVisibility?: VisibilityState;
   isLoading?: boolean;
   noResultsMessage?: string;
   containerClassName?: string;
@@ -57,6 +59,8 @@ export function DataTable<TData, TValue>({
   deleteConfirmMessage,
   initialPageSize = 10,
   initialSort = [],
+  initialColumnFilters = [],
+  initialColumnVisibility = {},
   isLoading = false,
   noResultsMessage = "No results.",
   containerClassName,
@@ -65,9 +69,9 @@ export function DataTable<TData, TValue>({
 }: DataTableProps<TData, TValue>) {
   const [rowSelection, setRowSelection] = React.useState({});
   const [columnVisibility, setColumnVisibility] =
-    React.useState<VisibilityState>({});
+    React.useState<VisibilityState>(initialColumnVisibility);
   const [columnFilters, setColumnFilters] =
-    React.useState<ColumnFiltersState>([]);
+    React.useState<ColumnFiltersState>(initialColumnFilters);
   const [sorting, setSorting] = React.useState<SortingState>(initialSort);
   const [pagination, setPagination] = React.useState({
     pageIndex: 0,
@@ -100,7 +104,7 @@ export function DataTable<TData, TValue>({
 
   return (
     <div className={cn("w-full space-y-8", containerClassName)}>
-      <div className="md:space-y-10">
+      <div className="md:space-y-8 mt-8">
         <DataTableToolbar
           table={table}
           searchableColumns={searchableColumns}

@@ -8,6 +8,8 @@ import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import { LineSpinner } from "@/components/shared/Spinner";
 import { PiFile, PiFilePdfFill, PiFileDocFill, PiFileXlsFill, PiFilePptFill, PiFileCsvFill, PiFileFill } from "react-icons/pi";
+import { cn } from "@/lib/utils";
+import { Paperclip } from "lucide-react";
 
 type FileInfo = {
     name: string;
@@ -17,23 +19,24 @@ type FileInfo = {
 type FileDropzoneProps = {
     onFilesChange: (data: { files: File[] | null; parsedText: string | null; fileInfos: FileInfo[] | null }) => void;
     initialFileInfos?: FileInfo[] | null;
+    compact?: boolean;
 };
 
 const fileIcons: { [key: string]: any } = {
-    pdf: <PiFilePdfFill className="h-6 w-6 text-muted-foreground flex-shrink-0" />,
-    doc: <PiFileDocFill className="h-6 w-6 text-muted-foreground flex-shrink-0" />,
-    docx: <PiFileDocFill className="h-6 w-6 text-muted-foreground flex-shrink-0" />,
-    xls: <PiFileXlsFill className="h-6 w-6 text-muted-foreground flex-shrink-0" />,
-    xlsx: <PiFileXlsFill className="h-6 w-6 text-muted-foreground flex-shrink-0" />,
-    ppt: <PiFilePptFill className="h-6 w-6 text-muted-foreground flex-shrink-0" />,
-    pptx: <PiFilePptFill className="h-6 w-6 text-muted-foreground flex-shrink-0" />,
-    csv: <PiFileCsvFill className="h-6 w-6 text-muted-foreground flex-shrink-0" />,
-    txt: <PiFileFill className="h-6 w-6 text-muted-foreground flex-shrink-0" />,
+    pdf: <PiFilePdfFill className="h-6 w-6 text-muted-foreground shrink-0" />,
+    doc: <PiFileDocFill className="h-6 w-6 text-muted-foreground shrink-0" />,
+    docx: <PiFileDocFill className="h-6 w-6 text-muted-foreground shrink-0" />,
+    xls: <PiFileXlsFill className="h-6 w-6 text-muted-foreground shrink-0" />,
+    xlsx: <PiFileXlsFill className="h-6 w-6 text-muted-foreground shrink-0" />,
+    ppt: <PiFilePptFill className="h-6 w-6 text-muted-foreground shrink-0" />,
+    pptx: <PiFilePptFill className="h-6 w-6 text-muted-foreground shrink-0" />,
+    csv: <PiFileCsvFill className="h-6 w-6 text-muted-foreground shrink-0" />,
+    txt: <PiFileFill className="h-6 w-6 text-muted-foreground shrink-0" />,
 };
 
 const getFileIcon = (fileName: string) => {
     const extension = fileName.split('.').pop()?.toLowerCase() || '';
-    return fileIcons[extension] || <PiFile className="h-6 w-6 text-muted-foreground flex-shrink-0" />;
+    return fileIcons[extension] || <PiFile className="h-6 w-6 text-muted-foreground shrink-0" />;
 };
 
 function formatBytes(bytes: number, decimals = 2): string {
@@ -45,7 +48,7 @@ function formatBytes(bytes: number, decimals = 2): string {
     return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + " " + sizes[i];
 }
 
-export function FileDropzone({ onFilesChange, initialFileInfos }: FileDropzoneProps) {
+export function FileDropzone({ onFilesChange, initialFileInfos, compact }: FileDropzoneProps) {
     const [fileInfos, setFileInfos] = useState<FileInfo[] | null>(initialFileInfos || null);
     const [uploadedFiles, setUploadedFiles] = useState<File[]>([]);
     const [isLoading, setIsLoading] = useState(false);
@@ -56,41 +59,6 @@ export function FileDropzone({ onFilesChange, initialFileInfos }: FileDropzonePr
             setUploadedFiles([]);
         }
     }, [initialFileInfos]);
-
-    // const parseFiles = async (files: File[]) => {
-    //     if (files.length === 0) {
-    //         onFilesChange({ files: null, parsedText: null, fileInfos: null });
-    //         setFileInfos(null);
-    //         setUploadedFiles([]);
-    //         return;
-    //     }
-
-    //     setIsLoading(true);
-    //     try {
-    //         const formData = new FormData();
-    //         files.forEach(file => formData.append("files", file));
-
-    //         const response = await fetch("/api/parse-files", { method: "POST", body: formData });
-    //         if (response.ok) {
-    //             const { parsedText } = await response.json();
-
-    //             const newFileInfos = files.map(f => ({ name: f.name, size: f.size }));
-    //             onFilesChange({ files, parsedText, fileInfos: newFileInfos });
-    //             setFileInfos(newFileInfos);
-    //             setUploadedFiles(files);
-    //         } else {
-    //             const errorData = await response.json();
-    //             toast.error(errorData.message || `Failed to parse files.`);
-    //             onFilesChange({ files: null, parsedText: null, fileInfos: null });
-    //         }
-    //     } catch (error) {
-    //         console.error("An error occurred while parsing the files.", error);
-    //         toast.error("An error occurred while parsing the files.");
-    //         onFilesChange({ files: null, parsedText: null, fileInfos: null });
-    //     } finally {
-    //         setIsLoading(false);
-    //     }
-    // };
 
     const MAX_TOKENS = 1_000_000;
 
@@ -175,7 +143,7 @@ export function FileDropzone({ onFilesChange, initialFileInfos }: FileDropzonePr
 
     if (isLoading) {
         return (
-            <div className="flex items-center justify-center w-full h-32 text-sm text-muted-foreground">
+            <div className={cn("flex items-center justify-center w-full text-sm text-muted-foreground", compact ? "h-12" : "h-32")}>
                 <LineSpinner>Parsing... Please wait..</LineSpinner>
             </div>
         );
@@ -184,32 +152,43 @@ export function FileDropzone({ onFilesChange, initialFileInfos }: FileDropzonePr
     if (fileInfos && fileInfos.length > 0) {
         return (
             <div className="flex flex-col gap-2 mt-4 w-full">
-                <div className="flex w-full gap-3">
-
+                <div className="flex w-full gap-3 flex-wrap">
                     {fileInfos.map((info, index) => (
-                        <div key={index} className="relative flex w-full items-center justify-between p-2 pl-4 border rounded-md bg-accent">
-                            <div className="flex items-center gap-4 flex-grow min-w-0">
+                        <div key={index} className="relative flex items-center justify-between p-2 pl-4 border rounded-md bg-accent max-w-sm">
+                            <div className="flex items-center gap-4 grow min-w-0">
                                 {getFileIcon(info.name)}
                                 <div className="flex flex-col min-w-0">
-                                    <span className="text-sm font-medium text-foreground truncate">{info.name}</span>
-                                    <span className="text-xs text-muted-foreground">{formatBytes(info.size)}</span>
+                                    <span className="text-sm font-medium text-foreground truncate max-w-[150px]">{info.name}</span>
+                                    {!compact && <span className="text-xs text-muted-foreground">{formatBytes(info.size)}</span>}
                                 </div>
                             </div>
-                            <Button type="button" variant="ghost" size="icon" className="ml-2 h-7 w-7 flex-shrink-0" onClick={() => handleRemoveFile(index)}>
+                            <Button type="button" variant="ghost" size="icon" className="ml-2 h-7 w-7 shrink-0" onClick={() => handleRemoveFile(index)}>
                                 <IoClose className="h-4 w-4" />
                             </Button>
                         </div>
                     ))}
                 </div>
 
-                <div {...getRootProps()} className={`flex flex-col items-center justify-center w-full p-4 mt-2 border-2 border-dashed rounded-lg cursor-pointer transition-colors ${isDragActive ? "border-primary bg-primary/10" : "border-border hover:border-primary/20 hover:bg-primary/5"}`}>
+                <div {...getRootProps()} className={cn(`flex flex-col items-center justify-center w-full border-2 border-dashed rounded-lg cursor-pointer transition-colors ${isDragActive ? "border-primary bg-primary/10" : "border-border hover:border-primary/20 hover:bg-primary/5"}`, compact ? "p-2 min-h-[40px]" : "p-4 mt-2")}>
                     <input {...getInputProps()} />
-                    <p className="text-sm text-center text-muted-foreground">
-                        Add more files...
-                    </p>
+                     {compact ? (
+                        <p className="text-xs text-center text-muted-foreground">Add more...</p>
+                    ) : (
+                        <p className="text-sm text-center text-muted-foreground">Add more files...</p>
+                    )}
                 </div>
             </div>
         );
+    }
+
+    if (compact) {
+          return (
+             <div {...getRootProps()} className={cn(`flex items-center justify-center gap-2 w-full p-2 border border-dashed rounded-lg cursor-pointer transition-colors ${isDragActive ? "border-primary bg-primary/10" : "border-border hover:border-primary/20 hover:bg-primary/5"}`)}>
+                <input {...getInputProps()} />
+                <Paperclip className="w-4 h-4 text-muted-foreground" />
+                <span className="text-xs text-muted-foreground">Attach files to chat...</span>
+             </div>
+        )
     }
 
     return (

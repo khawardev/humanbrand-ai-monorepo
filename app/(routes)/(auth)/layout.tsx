@@ -13,7 +13,7 @@ export default async function AuthLayout({ children }: { children: React.ReactNo
         <div className="h-320 -translate-y-87.5 absolute left-0 top-0 w-60 -rotate-45 bg-[radial-gradient(50%_50%_at_50%_50%,hsla(0,0%,85%,.04)_0,hsla(0,0%,45%,.02)_80%,transparent_100%)]" />
       </div>
       <FullLogo className="absolute top-4 left-4" />
-      <ContainerSm className="relative h-[90vh] flex gap-44 items-center justify-between w-full mx-auto  max-w-lg px-4 ">
+      <ContainerSm className="relative h-[98vh] flex gap-44 items-center justify-between w-full mx-auto  max-w-lg px-4 ">
         <div className="w-full ">
           {children}
         </div>
