@@ -93,7 +93,7 @@ const AssistantMessage = ({ message, isLastMessage, shouldAnimate = false }: Ass
                 <div className="group flex w-full flex-col gap-0 select-text">
                     <div className="rounded-lg transition-all border-2 border-transparent select-text">
                         <MessageContent
-                            className="w-full space-y-6 flex-1 rounded-lg flex-col [&_p]:text-base! [&_li]:text-base! bg-transparent p-0 select-text"
+                            className="w-full space-y-6 flex-1 rounded-lg flex-col [&_p]:text-base! [&_li]:text-base! [&_h1]:text-xl! [&_h2]:text-xl! [&_h3]:text-xl! [&_h4]:text-xl! [&_h5]:text-xl! [&_h6]:text-xl! [&_h1]:font-semibold [&_h2]:font-semibold [&_h3]:font-semibold bg-transparent p-0 select-text"
                             markdown
                         >
                             {shouldAnimate && isLastMessage ? displayedContent : message.content}
@@ -144,7 +144,7 @@ const UserMessage = ({ user, message }: { user: any, message: any }) => {
             <div className="flex flex-col gap-2 w-full min-w-0 items-end">
                 <div className="group flex flex-col items-end gap-1 w-full relative">
                     <div className="max-w-[85%] rounded-3xl bg-muted px-5 py-2.5 sm:max-w-[75%]">
-                        <MessageContent className="bg-transparent p-0 m-0">
+                        <MessageContent className="bg-transparent p-0 m-0 [&_p]:text-base! [&_li]:text-base! [&_h1]:text-xl! [&_h2]:text-xl! [&_h3]:text-xl! [&_h4]:text-xl! [&_h5]:text-xl! [&_h6]:text-xl! [&_h1]:font-semibold [&_h2]:font-semibold [&_h3]:font-semibold">
                             {message.content}
                         </MessageContent>
                     </div>

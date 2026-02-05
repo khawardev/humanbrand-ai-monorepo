@@ -12,7 +12,7 @@ export function GeneratedPersonaContent({ content }: any) {
             <section>
                 <div>
                     <div className={"flex md:items-center items-end justify-between mb-4"}>
-                        <h4>Hyper-Relevant Persona Version</h4>
+                        <span className="text-2xl font-medium">Hyper-Relevant Persona Version </span>
                         <div className=" flex justify-end ">
                             <PersonaContentActions
                                 content={content}

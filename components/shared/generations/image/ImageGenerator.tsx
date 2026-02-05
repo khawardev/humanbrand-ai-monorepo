@@ -121,6 +121,7 @@ export function ImageGenerator({
     };
 
     const hasUploadedImage = !!imageReferenceFileInfo;
+    const referenceImageSrc = imageReferenceFileInfo?.preview || imageReferenceFileInfo?.reference_image_url;
 
     return (
         <>
@@ -168,6 +169,15 @@ export function ImageGenerator({
                     <p className="text-xs text-muted-foreground px-1">
                         Upload an image to guide the generation or to apply edits.
                     </p>
+                    {hasUploadedImage && referenceImageSrc && (
+                        <div className="relative w-full aspect-square rounded-xl overflow-hidden border bg-muted shadow-sm">
+                            <img
+                                src={referenceImageSrc}
+                                alt="Reference"
+                                className="w-full h-full object-cover"
+                            />
+                        </div>
+                    )}
                     <Button
                         className="w-full h-12 text-base font-medium rounded-xl shadow-sm transition-all hover:shadow-md"
                         onClick={handleGenerateClick}
@@ -192,7 +202,6 @@ export function ImageGenerator({
                 <div className="space-y-4 pt-6 mt-6 border-t">
                     <div className="flex items-center justify-between">
                         <h3 className="text-lg font-semibold flex items-center gap-2">
-                            <ImageIcon className="w-5 h-5 text-muted-foreground" />
                             Recent Creations
                         </h3>
                         <span className="text-sm text-muted-foreground">{reversedUrls.length} images</span>
