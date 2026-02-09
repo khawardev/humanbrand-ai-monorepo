@@ -1,101 +1,149 @@
 import { createClient } from "@supabase/supabase-js";
 import { embed } from "ai";
 import { openai } from "@ai-sdk/openai";
-import { RecursiveCharacterTextSplitter } from "@langchain/textsplitters";
 import { config } from "dotenv";
 import { knowledgeBaseContent } from "../lib/aiag/KnowledgeBase/Knowledge_Base";
 import { AIAG_Website } from "../lib/aiag/KnowledgeBase/AIAG_Website";
+import { RecursiveCharacterTextSplitter } from "@langchain/textsplitters";
+// Load environment variables
+config({ path: ".env.local" });
 
-// Load environment variables from .env.local
-config({ path: ".env.local" }); 
+// Types
+interface Source {
+  name: string;
+  content: string;
+}
 
+// Configuration
+const CHUNK_SIZE = 1000;
+const CHUNK_OVERLAP = 200;
+const BATCH_SIZE = 10;
+const EMBEDDING_MODEL = "text-embedding-3-small";
+
+// Environment validation
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
-const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
 const openaiApiKey = process.env.OPENAI_API_KEY;
 
 if (!supabaseUrl || !supabaseKey || !openaiApiKey) {
-    console.error("Missing environment variables. Please check .env.local");
-    process.exit(1);
+  console.error("Missing environment variables. Please check .env.local");
+  process.exit(1);
 }
 
 const supabase = createClient(supabaseUrl, supabaseKey);
 
-async function seed() {
-    console.log("Seeding knowledge base...");
+// Sources definition
+const sources: Source[] = [
+  { name: "internal-kb", content: knowledgeBaseContent },
+  { name: "aiag-website", content: AIAG_Website },
+];
 
-    // Split text
-    const splitter = new RecursiveCharacterTextSplitter({
-        chunkSize: 1000,
-        chunkOverlap: 200,
-    });
+/**
+ * Checks if a source already exists in the database.
+ */
+async function checkSourceExists(sourceName: string): Promise<boolean> {
+  try {
+    const { count, error } = await supabase
+      .from("chunks")
+      .select("*", { count: "exact", head: true })
+      .eq("url", sourceName);
 
-    // Define sources to process
-    // To add more data, simply add a new object to this array.
-    // The script is idempotent: it will refresh existing sources and add new ones
-    // without affecting data from sources not in this list.
-    const sources = [
-        { name: "internal-kb", content: knowledgeBaseContent },
-        { name: "aiag-website", content: AIAG_Website }
-    ];
-
-    let totalChunks = 0;
-
-    for (const source of sources) {
-        // Check if this source already exists in the DB
-        const { count, error: countError } = await supabase
-            .from("chunks")
-            .select("*", { count: 'exact', head: true })
-            .eq("url", source.name);
-
-        if (countError) {
-            console.error(`Error checking source ${source.name}:`, countError.message);
-            continue;
-        }
-
-        if (count !== null && count > 0) {
-            console.log(`[SKIP] Source "${source.name}" already exists (${count} chunks).`);
-            continue;
-        }
-
-        console.log(`[NEW] Processing source: ${source.name}...`);
-        
-        // No delete needed because we only proceed if it doesn't exist
-        const chunks = await splitter.createDocuments([source.content]);
-        console.log(`Created ${chunks.length} chunks for ${source.name}.`);
-        totalChunks += chunks.length;
-
-        for (const [i, chunk] of chunks.entries()) {
-            const content = chunk.pageContent;
-            
-            try {
-                // Embed
-                const { embedding } = await embed({
-                    model: openai.embedding("text-embedding-3-small"),
-                    value: content,
-                });
-
-                // Insert
-                const { error } = await supabase.from("chunks").insert({
-                    content,
-                    vector: embedding,
-                    url: source.name, // Marker to identify this source
-                    date_updated: new Date().toISOString(),
-                });
-
-                if (error) {
-                    console.error(`Error inserting chunk ${i} for ${source.name}:`, error.message);
-                } else {
-                    if ((i + 1) % 10 === 0) { // Log every 10th chunk to reduce noise
-                         console.log(`Inserted chunk ${i + 1}/${chunks.length} for ${source.name}`);
-                    }
-                }
-            } catch (e) {
-                console.error(`Error processing chunk ${i} for ${source.name}:`, e);
-            }
-        }
+    if (error) {
+      throw error;
     }
-    
-    console.log(`Seeding complete. Total chunks processed: ${totalChunks}`);
+
+    return count !== null && count > 0;
+  } catch (error) {
+    console.error(`Error checking existence for ${sourceName}:`, error);
+    throw error;
+  }
 }
 
-seed().catch(console.error);
+/**
+ * Splits content into chunks and generates embeddings.
+ */
+async function processAndEmbedSource(source: Source) {
+  console.log(`Processing source: ${source.name}...`);
+
+  const splitter = new RecursiveCharacterTextSplitter({
+    chunkSize: CHUNK_SIZE,
+    chunkOverlap: CHUNK_OVERLAP,
+  });
+
+  const chunks = await splitter.createDocuments([source.content]);
+  console.log(`Created ${chunks.length} chunks for ${source.name}.`);
+
+  for (const [i, chunk] of chunks.entries()) {
+    const content = chunk.pageContent;
+
+    try {
+      // Generate embedding
+      const { embedding } = await embed({
+        model: openai.embedding(EMBEDDING_MODEL),
+        value: content,
+      });
+
+      // Insert into Supabase
+      const { error } = await supabase.from("chunks").insert({
+        content,
+        vector: embedding as any, // Cast to any if type mismatch occurs with Supabase types
+        url: source.name,
+        date_updated: new Date().toISOString(),
+      });
+
+      if (error) {
+        console.error(
+          `Error inserting chunk ${i + 1}/${chunks.length} for ${source.name}:`,
+          error.message
+        );
+      } else {
+        // Log progress periodically
+        if ((i + 1) % BATCH_SIZE === 0 || i + 1 === chunks.length) {
+          console.log(
+            `Inserted chunk ${i + 1}/${chunks.length} for ${source.name}`
+          );
+        }
+      }
+    } catch (e) {
+      console.error(
+        `Error processing chunk ${i + 1}/${chunks.length} for ${source.name}:`,
+        e
+      );
+    }
+  }
+}
+
+/**
+ * Main seed function.
+ */
+async function seed() {
+  console.log("Starting knowledge base seeding...");
+  let totalProcessed = 0;
+  let skipped = 0;
+
+  for (const source of sources) {
+    try {
+      const exists = await checkSourceExists(source.name);
+
+      if (exists) {
+        console.log(`Source "${source.name}" already exists. Skipping.`);
+        skipped++;
+        continue;
+      }
+
+      await processAndEmbedSource(source);
+      totalProcessed++;
+    } catch (error) {
+      console.error(`Failed to seed source ${source.name}:`, error);
+    }
+  }
+
+  console.log("\nSeeding complete.");
+  console.log(`Processed: ${totalProcessed}`);
+  console.log(`Skipped: ${skipped}`);
+}
+
+seed().catch((error) => {
+  console.error("Fatal error during seeding:", error);
+  process.exit(1);
+});

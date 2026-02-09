@@ -24,8 +24,8 @@ export async function getRelevantContext(query: string) {
         // RPC call matches the SQL function signature: query_vector, match_threshold, match_count
         const { data, error } = await supabase.rpc("get_relevant_chunks", {
             query_vector: embedding,
-            match_threshold: 0.4, // Lowered slightly to ensure we capture relevant but not exact matches
-            match_count: 7,
+            match_threshold: 0.25, // Lowered to capture broader context match
+            match_count: 10,
         });
 
         if (error) {

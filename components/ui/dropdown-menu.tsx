@@ -10,8 +10,10 @@ import { cn } from '@/lib/utils'
 
 // --- Hover Tracker Logic & Context ---
 
+type HoverVariant = 'default' | 'destructive'
+
 interface HoverTrackerContextType {
-  onHover: (element: HTMLElement) => void
+  onHover: (element: HTMLElement, variant?: HoverVariant) => void
   onLeave: () => void
 }
 
@@ -24,10 +26,11 @@ function useHoverTracker() {
     height: 0,
     width: 0,
     opacity: 0,
+    variant: 'default' as HoverVariant,
   })
   const containerRef = React.useRef<HTMLDivElement>(null)
 
-  const onHover = React.useCallback((element: HTMLElement) => {
+  const onHover = React.useCallback((element: HTMLElement, variant: HoverVariant = 'default') => {
     if (!containerRef.current) return
 
     const containerRect = containerRef.current.getBoundingClientRect()
@@ -39,6 +42,7 @@ function useHoverTracker() {
       height: elementRect.height,
       width: elementRect.width,
       opacity: 1,
+      variant,
     })
   }, [])
 
@@ -52,7 +56,12 @@ function useHoverTracker() {
 function HoverTrackerBackground({ hoverStyle }: { hoverStyle: any }) {
   return (
     <div
-      className="pointer-events-none absolute z-0 rounded-lg bg-accent transition-all duration-300 ease-out dark:bg-border"
+      className={cn(
+        'pointer-events-none absolute z-0 rounded-lg transition-all duration-300 ease-out',
+        hoverStyle.variant === 'destructive'
+          ? 'bg-destructive/10'
+          : 'bg-accent dark:bg-border'
+      )}
       style={{
         top: hoverStyle.top,
         left: hoverStyle.left,
@@ -145,22 +154,19 @@ function DropdownMenuItem({
   const context = React.useContext(HoverTrackerContext)
 
   const handleInteraction = (e: any) => {
-    context?.onHover(e.currentTarget)
+    context?.onHover(e.currentTarget, variant)
   }
 
   return (
     <MotionItem
       className={cn(
-        'relative z-10 flex cursor-pointer select-none items-center gap-3 rounded-lg px-2 py-2  outline-none transition-colors active:scale-[0.98]',
-        // Disabled default focus background to let HoverTracker handle it
+        'relative z-10 flex cursor-pointer select-none items-center gap-3 rounded-lg px-2 py-2 outline-none transition-colors active:scale-[0.98]',
         'focus:bg-transparent focus:text-accent-foreground',
         'data-disabled:pointer-events-none data-disabled:opacity-50',
         'data-inset:pl-8',
-        // Default Icon Styling
         '[&>svg]:size-4 [&>svg]:shrink-0 [&>svg]:text-muted-foreground',
-        // Destructive Variant Styling
         variant === 'destructive' &&
-        'text-destructive focus:bg-destructive/10 focus:text-destructive [&>svg]:text-destructive',
+        'text-destructive focus:text-destructive [&>svg]:text-destructive',
         className
       )}
       data-inset={inset}
