@@ -6,12 +6,13 @@ import { useRouter } from "next/navigation";
 import { upsertKnowledgeBaseChat, rewriteAssistantMessage } from "@/server/actions/knowledgeBaseChatActions";
 import { saveUserMessage, generateChatResponse, rewriteSessionAssistantMessage, deleteSessionMessage, editUserMessage, rateSessionMessage } from "@/server/actions/savedSessionActions";
 
-export function useKnowledgeBaseChat(initialData: { user: any; initialChatHistory: any[]; sessionId?: string }) {
+export function useKnowledgeBaseChat(initialData: { user: any; initialChatHistory: any[]; sessionId?: string; retrievalStrategy?: 'full-context' | 'rag' }) {
     const [user, setUser] = useState<any>(initialData.user);
     const [chatHistory, setChatHistory] = useState<any[]>(initialData.initialChatHistory || []);
     const [sessionId, setSessionId] = useState<string | undefined>(initialData.sessionId);
     const [isResponding, setIsResponding] = useState(false);
     const router = useRouter();
+    const retrievalStrategy = initialData.retrievalStrategy || 'full-context';
 
     useEffect(() => {
         setUser(initialData.user);
@@ -44,12 +45,12 @@ export function useKnowledgeBaseChat(initialData: { user: any; initialChatHistor
                 triggerResponse(sessionId, chatHistory);
             }
         }
-    }, [chatHistory, sessionId, user, isResponding]);
+    }, [chatHistory, sessionId, user, isResponding, retrievalStrategy]);
 
-    const triggerResponse = async (currentSessionId: string, currentHistory: any[]) => {
+    const triggerResponse = useCallback(async (currentSessionId: string, currentHistory: any[]) => {
         setIsResponding(true);
         try {
-            const result = await generateChatResponse(currentSessionId, user.id, currentHistory);
+            const result = await generateChatResponse(currentSessionId, user.id, currentHistory, retrievalStrategy);
             if (result.success && result.newHistory) {
                 setChatHistory(result.newHistory);
             } else {
@@ -60,7 +61,7 @@ export function useKnowledgeBaseChat(initialData: { user: any; initialChatHistor
             toast.error("Error generating response.");
         }
         setIsResponding(false);
-    }
+    }, [user, retrievalStrategy]);
 
     const handleSendMessage = useCallback(async (userInput: string) => {
         if (!user) {
@@ -105,7 +106,7 @@ export function useKnowledgeBaseChat(initialData: { user: any; initialChatHistor
             setChatHistory(chatHistory); // Revert
             setIsResponding(false);
         }
-    }, [user, isResponding, chatHistory, sessionId, router]);
+    }, [user, isResponding, chatHistory, sessionId, router, triggerResponse]);
 
     const handleRewriteMessage = useCallback(async (messageIndex: number, originalContent: string, selectedText: string, rewritePrompt: string) => {
         if (!user) {

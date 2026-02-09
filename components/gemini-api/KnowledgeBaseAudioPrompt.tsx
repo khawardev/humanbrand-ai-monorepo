@@ -8,7 +8,7 @@ import {
     Type,
 } from "@google/genai";
 import { useLiveAPIContext } from "../../contexts/LiveAPIContext";
-import { knowledgeBaseContent } from "@/lib/aiag/knowledgeBase";
+import { knowledgeBaseContent } from "@/lib/aiag/KnowledgeBase/Knowledge_Base";
 
 const knowledgeBaseToolDeclaration: FunctionDeclaration = {
     name: "search_aiag_knowledge_base",
@@ -139,13 +139,13 @@ function KnowledgeBaseAudioPromptComponent() {
 
                     const searchKB = (searchQuery: string, content: string) => {
                         if (!searchQuery) return content.slice(0, 5000); // Return first chunk if no query
-                        
+
                         const terms = searchQuery.toLowerCase().split(/\s+/).filter(t => t.length > 3);
                         if (terms.length === 0) return content.slice(0, 5000);
 
                         // Split by logical sections or paragraphs
                         const chunks = content.split(/\n\n+/);
-                        
+
                         const scoredChunks = chunks.map(chunk => {
                             const lowerChunk = chunk.toLowerCase();
                             let score = 0;

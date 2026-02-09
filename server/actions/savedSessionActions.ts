@@ -6,7 +6,7 @@ import { eq, desc } from "drizzle-orm"
 import { getNewGenerationPrompts, getImageGenerationPrompt, getRevisionPrompts, getHyperRelevancePrompts, getExistingContentPrompts, getCampaignContentPrompts, getKnowledgeBaseSystemPrompt, getRewriteSystemPrompt } from "@/lib/aiag/prompts"
 import { generateNewContent, generateSessionTitle } from "@/server/actions/generateNewContentActions"
 import { cleanAndFlattenBulletsGoogle } from "@/lib/cleanMarkdown"
-import { knowledgeBaseContent } from "@/lib/aiag/knowledgeBase"
+import { knowledgeBaseContent } from "@/lib/aiag/KnowledgeBase/Knowledge_Base"
 import { adjustToneAndCreativityData } from "@/config/formData"
 import { savedSession } from "@/server/db/schema/savedSessionSchema"
 import { knowledgeBaseChat } from "@/server/db/schema/knowledgeBaseChatSchema"
@@ -177,7 +177,7 @@ export async function createCampaignContentSession(data: any) {
             additionalInstructions: data.additionalInstructions,
             referenceFilesData: data.referenceFilesData,
         })
-        
+
         const { cleanedMarkdown, title } = await generateContentWithTitle(
             data.modelAlias,
             data.temperature,
@@ -200,7 +200,7 @@ export async function createCampaignContentSession(data: any) {
 
         const newSession = await db.insert(savedSession).values(sessionPayload).returning({ id: savedSession.id })
         const sessionId = newSession[0].id
-         if (!sessionId) throw new Error("Failed to create campaign content session.")
+        if (!sessionId) throw new Error("Failed to create campaign content session.")
 
         revalidatePath(`/dashboard/session/${sessionId}`)
         revalidatePath("/dashboard", "layout")
@@ -348,7 +348,7 @@ export async function deleteSession(sessionId: string) {
 export async function getSavedSessions() {
     try {
         const session: any = await getSession();
-         if (!session?.user?.id) return []
+        if (!session?.user?.id) return []
 
         // Attempt migration of legacy chat if it exists
         await migrateLegacyChatIfNeeded(session.user.id);
@@ -388,24 +388,24 @@ export async function saveUserMessage(
 ) {
     try {
         const newHistory = [...existingHistory, { role: 'user', content: userInput }];
-        
+
         let finalSessionId = sessionId;
 
         if (!sessionId) {
-             const newSession = await db.insert(savedSession).values({
-                 userId,
-                 sessionType: 'ai_chat',
-                 title: 'New AI Chat',
-                 chatHistory: newHistory,
-                 updatedAt: new Date()
-             }).returning({ id: savedSession.id });
-             
-             finalSessionId = newSession[0].id;
+            const newSession = await db.insert(savedSession).values({
+                userId,
+                sessionType: 'ai_chat',
+                title: 'New AI Chat',
+                chatHistory: newHistory,
+                updatedAt: new Date()
+            }).returning({ id: savedSession.id });
+
+            finalSessionId = newSession[0].id;
         } else {
-             await db.update(savedSession).set({
-                 chatHistory: newHistory,
-                 updatedAt: new Date()
-             }).where(eq(savedSession.id, sessionId));
+            await db.update(savedSession).set({
+                chatHistory: newHistory,
+                updatedAt: new Date()
+            }).where(eq(savedSession.id, sessionId));
         }
 
         if (finalSessionId) {
@@ -423,7 +423,8 @@ export async function saveUserMessage(
 export async function generateChatResponse(
     sessionId: string,
     userId: string,
-    currentHistory: any[]
+    currentHistory: any[],
+    retrievalStrategy: 'full-context' | 'rag' = 'full-context'
 ) {
     try {
         // Construct conversation history for prompt
@@ -442,6 +443,7 @@ export async function generateChatResponse(
             temperature: 0.7,
             conversationHistory,
             userPrompt: lastUserMessage.content || "Continue", // Use last user message
+            retrievalStrategy,
         });
 
         if (!result.generatedText) {
@@ -459,7 +461,7 @@ export async function generateChatResponse(
 
         // Generate title if it's the first exchange (e.g. length is 2: User + AI)
         if (finalHistory.length <= 2) {
-             generateSessionTitle({ modelAlias: 'recomended', temperature: 0.7, userPrompt: currentHistory[0].content })
+            generateSessionTitle({ modelAlias: 'recomended', temperature: 0.7, userPrompt: currentHistory[0].content })
                 .then(async (titleRes) => {
                     const title = titleRes.generatedText || "AI Chat";
                     await db.update(savedSession).set({ title }).where(eq(savedSession.id, sessionId));
@@ -468,7 +470,7 @@ export async function generateChatResponse(
         }
 
 
-        
+
         return { success: true, newHistory: finalHistory };
 
     } catch (error) {
@@ -497,7 +499,7 @@ async function migrateLegacyChatIfNeeded(userId: string) {
 
             // Delete legacy chat
             await db.delete(knowledgeBaseChat).where(eq(knowledgeBaseChat.userId, userId));
-            
+
             return true;
         }
     } catch (error) {
@@ -535,7 +537,7 @@ export async function rewriteSessionAssistantMessage(
         if (!session) throw new Error("Session not found");
 
         const currentHistory: any = session.chatHistory || [];
-        
+
         // Ensure index is valid
         if (messageIndex < 0 || messageIndex >= currentHistory.length) {
             throw new Error("Invalid message index");
@@ -546,7 +548,7 @@ export async function rewriteSessionAssistantMessage(
 
         // Optionally, one could append the rewrite instruction as a user message, but here we just update in place as requested 
         // "rewrite the content in assistant message"
-        
+
         await db.update(savedSession).set({
             chatHistory: updatedHistory,
             updatedAt: new Date()
@@ -590,7 +592,7 @@ export async function editUserMessage(
         // OR call generateChatResponse internally.
         // Calling generateChatResponse is better for single-action flow, 
         // but generateChatResponse expects history to be in DB. We just put it there.
-        
+
         // However, generateChatResponse generates response based on LAST message.
         // So passing the sessionId is enough.
 
@@ -598,8 +600,8 @@ export async function editUserMessage(
         return { success: true, history: newHistory };
 
     } catch (error) {
-         console.error("Error editing user message:", error);
-         return { error: "Could not edit message." };
+        console.error("Error editing user message:", error);
+        return { error: "Could not edit message." };
     }
 }
 
@@ -608,46 +610,46 @@ export async function deleteSessionMessage(
     messageIndex: number
 ) {
     try {
-         const session = await getSessionById(sessionId);
-         if (!session) throw new Error("Session not found");
- 
-         const currentHistory: any = session.chatHistory || [];
-        
-         // If deleting a user message, we likely want to delete the following assistant message too
-         // If deleting an assistant message, just delete that? 
-         // Typically in chat interfaces:
-         // - Delete User Msg -> Delete that msg AND the subsequent assistant response.
-         // - Delete Assistant Msg -> Just delete that msg (or maybe not allowed usually).
-         
-         // Assuming user wants to delete their query and the response.
-         
-         const targetMessage = currentHistory[messageIndex];
-         let newHistory = [...currentHistory];
+        const session = await getSessionById(sessionId);
+        if (!session) throw new Error("Session not found");
 
-         if (targetMessage.role === 'user') {
-             // Check if next is assistant
-             if (messageIndex + 1 < newHistory.length && newHistory[messageIndex + 1].role === 'assistant') {
-                 newHistory.splice(messageIndex, 2); // Remove user msg and next assistant msg
-             } else {
-                 newHistory.splice(messageIndex, 1); // Just remove user msg
-             }
-         } else {
-             // Deleting assistant message
-             newHistory.splice(messageIndex, 1);
-         }
+        const currentHistory: any = session.chatHistory || [];
 
-         await db.update(savedSession).set({
-             chatHistory: newHistory,
-             updatedAt: new Date()
-         }).where(eq(savedSession.id, sessionId));
- 
-         revalidatePath(`/dashboard/ai-chat/${sessionId}`);
- 
-         return { success: true, newHistory };
+        // If deleting a user message, we likely want to delete the following assistant message too
+        // If deleting an assistant message, just delete that? 
+        // Typically in chat interfaces:
+        // - Delete User Msg -> Delete that msg AND the subsequent assistant response.
+        // - Delete Assistant Msg -> Just delete that msg (or maybe not allowed usually).
+
+        // Assuming user wants to delete their query and the response.
+
+        const targetMessage = currentHistory[messageIndex];
+        let newHistory = [...currentHistory];
+
+        if (targetMessage.role === 'user') {
+            // Check if next is assistant
+            if (messageIndex + 1 < newHistory.length && newHistory[messageIndex + 1].role === 'assistant') {
+                newHistory.splice(messageIndex, 2); // Remove user msg and next assistant msg
+            } else {
+                newHistory.splice(messageIndex, 1); // Just remove user msg
+            }
+        } else {
+            // Deleting assistant message
+            newHistory.splice(messageIndex, 1);
+        }
+
+        await db.update(savedSession).set({
+            chatHistory: newHistory,
+            updatedAt: new Date()
+        }).where(eq(savedSession.id, sessionId));
+
+        revalidatePath(`/dashboard/ai-chat/${sessionId}`);
+
+        return { success: true, newHistory };
 
     } catch (error) {
-         console.error("Error deleting message:", error);
-         return { error: "Could not delete message." };
+        console.error("Error deleting message:", error);
+        return { error: "Could not delete message." };
     }
 }
 
@@ -661,7 +663,7 @@ export async function rateSessionMessage(
         if (!session) throw new Error("Session not found");
 
         const currentHistory: any = session.chatHistory || [];
-        
+
         if (messageIndex < 0 || messageIndex >= currentHistory.length) {
             throw new Error("Invalid message index");
         }

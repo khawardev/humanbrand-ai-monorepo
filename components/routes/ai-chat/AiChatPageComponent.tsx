@@ -15,6 +15,7 @@ import { FaStop } from "react-icons/fa6"
 import { useKnowledgeBaseChat } from "@/hooks/aiagHooks/useKnowledgeBaseChat"
 import { useTTS, TTSContent } from "./components/AiTTSView"
 import AiModelSelector from "./components/AiModelSelector"
+import AiStrategySelector from "./components/AiStrategySelector"
 import AiChatList from "./components/AiChatList"
 import GeminiLiveAiag from "@/components/gemini-api/gemini-live-app-shared/GeminiLiveAiag"
 
@@ -28,11 +29,13 @@ type AI_PromptProps = {
 export default function AiChatPageComponent({ user, initialChatHistory, sessionId }: AI_PromptProps) {
     const [value, setValue] = useState("")
     const [selectedModel, setSelectedModel] = useState("AI Chat")
+    const [retrievalStrategy, setRetrievalStrategy] = useState<'full-context' | 'rag'>('rag')
 
     const { chatHistory, isResponding, handleSendMessage, handleRewriteMessage, handleDeleteMessage, handleEditUserMessage, handleRateMessage } = useKnowledgeBaseChat({
         user,
         initialChatHistory,
         sessionId,
+        retrievalStrategy,
     })
 
     const { audioUrl, isTTSLoading, generateAudio } = useTTS(value)
@@ -104,6 +107,15 @@ export default function AiChatPageComponent({ user, initialChatHistory, sessionI
                                         onModelChange={setSelectedModel}
                                         tooltip="Select a Mode"
                                     />
+                                    {/* {selectedModel === "AI Chat" && (
+                                        <div className="flex items-center gap-2  ml-2">
+                                            <AiStrategySelector
+                                                selectedStrategy={retrievalStrategy}
+                                                onStrategyChange={setRetrievalStrategy}
+                                                tooltip="Select Retrieval Strategy"
+                                            />
+                                        </div>
+                                    )} */}
                                 </div>
                                 <div className="flex items-center gap-2">
                                     <Button

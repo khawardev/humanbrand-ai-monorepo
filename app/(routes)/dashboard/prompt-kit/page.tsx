@@ -1,4 +1,4 @@
-import { FullChatApp } from '@/docs/FullChatApp'
+import { FullChatApp } from '@/docs/chat/FullChatApp'
 const page = () => {
     return (
         <FullChatApp/>
