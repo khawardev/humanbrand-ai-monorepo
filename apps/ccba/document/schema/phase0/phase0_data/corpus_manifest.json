@@ -1,0 +1,137 @@
+{
+    "schema_version": "2.0.0",
+    "generated_at": "2023-10-27T14:35:00Z",
+    "run_id": "550e8400-e29b-41d4-a716-446655440000",
+    "collection_window": {
+        "collection_date": "2023-10-27T08:00:00Z",
+        "social_lookback_start": "2023-09-27T00:00:00Z",
+        "social_lookback_end": "2023-10-27T00:00:00Z",
+        "social_lookback_days": 30
+    },
+    "coverage_summary": {
+        "entities_collected": [
+            "AcmeCorp",
+            "CompetitorX"
+        ],
+        "channels_collected": [
+            "website",
+            "linkedin",
+            "x",
+            "instagram",
+            "youtube"
+        ],
+        "website": {
+            "AcmeCorp": {
+                "pages_crawled": 150,
+                "pages_excluded": 12,
+                "total_words": 85000,
+                "total_images": 320,
+                "exclusion_breakdown": {
+                    "robots_txt": 10,
+                    "404_error": 2
+                },
+                "status": "complete"
+            },
+            "CompetitorX": {
+                "pages_crawled": 85,
+                "pages_excluded": 5,
+                "total_words": 42000,
+                "total_images": 150,
+                "exclusion_breakdown": {
+                    "duplicate_content": 5
+                },
+                "status": "partial"
+            }
+        },
+        "social": {
+            "AcmeCorp": {
+                "linkedin": {
+                    "posts_collected": 25,
+                    "comments_collected": 150,
+                    "total_engagement": 4500,
+                    "status": "complete"
+                },
+                "x": {
+                    "posts_collected": 110,
+                    "comments_collected": 300,
+                    "total_engagement": 8900,
+                    "status": "complete"
+                },
+                "tiktok": {
+                    "posts_collected": 0,
+                    "comments_collected": 0,
+                    "total_engagement": 0,
+                    "status": "no_presence"
+                }
+            },
+            "CompetitorX": {
+                "instagram": {
+                    "posts_collected": 40,
+                    "comments_collected": 600,
+                    "total_engagement": 12000,
+                    "status": "complete"
+                },
+                "youtube": {
+                    "posts_collected": 4,
+                    "comments_collected": 45,
+                    "total_engagement": 3000,
+                    "status": "complete"
+                }
+            }
+        }
+    },
+    "coverage_gaps": [
+        {
+            "gap_id": "GAP001",
+            "entity": "CompetitorX",
+            "channel": "website",
+            "description": "Unable to crawl 'pricing' subdomain due to strict firewall rules.",
+            "severity": "significant",
+            "impact": "Missing pricing strategy data for analysis.",
+            "mitigation": "Manual intake of pricing PDF scheduled."
+        },
+        {
+            "gap_id": "GAP002",
+            "entity": "AcmeCorp",
+            "channel": "tiktok",
+            "description": "Brand has no official account or presence.",
+            "severity": "minor",
+            "impact": "Cannot analyze short-form video engagement.",
+            "mitigation": "None required (strategic decision)."
+        }
+    ],
+    "data_quality_flags": [
+        {
+            "flag_id": "FLAG001",
+            "entity": "AcmeCorp",
+            "channel": "x",
+            "issue": "Rate limiting encountered during comment extraction.",
+            "affected_metrics": [
+                "audience_sentiment_depth",
+                "comment_volume"
+            ],
+            "handling": "Capped collection at 300 comments; statistical sampling applied."
+        },
+        {
+            "flag_id": "FLAG002",
+            "entity": "CompetitorX",
+            "channel": "website",
+            "issue": "High ratio of non-text content (images) without alt tags.",
+            "affected_metrics": [
+                "keyword_density",
+                "accessibility_score"
+            ],
+            "handling": "Visual analysis module triggered for image content extraction."
+        }
+    ],
+    "corpus_adequacy": {
+        "overall": "adequate",
+        "notes": "Sufficient data collected across primary channels to support confidence interval of 95%. Website coverage for CompetitorX is partial but core pages are present.",
+        "minimum_thresholds": {
+            "website_pages": 50,
+            "social_posts_per_channel": 10,
+            "comments_per_channel": 50
+        },
+        "entities_below_threshold": []
+    }
+}

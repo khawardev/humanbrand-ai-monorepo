@@ -1,0 +1,478 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "brand_platform.json",
+    "title": "Brand Platform Synthesis",
+    "description": "Synthesized brand platform elements with evidence",
+    "type": "object",
+    "required": [
+        "schema_version",
+        "generated_at",
+        "entity",
+        "synthesis_type",
+        "mission",
+        "vision",
+        "purpose",
+        "values",
+        "positioning",
+        "promise",
+        "key_themes",
+        "tagline"
+    ],
+    "properties": {
+        "schema_version": {
+            "type": "string",
+            "const": "2.0.0"
+        },
+        "generated_at": {
+            "$ref": "#/definitions/iso_datetime"
+        },
+        "entity": {
+            "type": "string"
+        },
+        "synthesis_type": {
+            "type": "string",
+            "const": "brand_platform"
+        },
+        "mission": {
+            "$ref": "#/definitions/platform_element"
+        },
+        "vision": {
+            "$ref": "#/definitions/platform_element"
+        },
+        "purpose": {
+            "$ref": "#/definitions/platform_element"
+        },
+        "values": {
+            "type": "object",
+            "required": [
+                "synthesized",
+                "explicit_values_found",
+                "synthesis_method"
+            ],
+            "properties": {
+                "synthesized": {
+                    "type": "array",
+                    "minItems": 3,
+                    "maxItems": 7,
+                    "items": {
+                        "type": "object",
+                        "required": [
+                            "value",
+                            "description",
+                            "confidence",
+                            "signal_count",
+                            "evidence_ids"
+                        ],
+                        "properties": {
+                            "value": {
+                                "type": "string"
+                            },
+                            "description": {
+                                "type": "string"
+                            },
+                            "confidence": {
+                                "$ref": "#/definitions/confidence_score"
+                            },
+                            "signal_count": {
+                                "type": "integer"
+                            },
+                            "evidence_ids": {
+                                "$ref": "#/definitions/evidence_id_array"
+                            }
+                        }
+                    }
+                },
+                "explicit_values_found": {
+                    "type": "boolean"
+                },
+                "synthesis_method": {
+                    "type": "string"
+                }
+            }
+        },
+        "positioning": {
+            "type": "object",
+            "required": [
+                "synthesized",
+                "confidence",
+                "positioning_type",
+                "differentiation_claim",
+                "supporting_evidence",
+                "competitive_uniqueness"
+            ],
+            "properties": {
+                "synthesized": {
+                    "type": "string"
+                },
+                "confidence": {
+                    "$ref": "#/definitions/confidence_score"
+                },
+                "positioning_type": {
+                    "type": "string"
+                },
+                "differentiation_claim": {
+                    "type": "string"
+                },
+                "supporting_evidence": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "quote": {
+                                "type": "string"
+                            },
+                            "frequency": {
+                                "type": "integer"
+                            },
+                            "evidence_ids": {
+                                "$ref": "#/definitions/evidence_id_array"
+                            }
+                        }
+                    }
+                },
+                "competitive_uniqueness": {
+                    "type": "string",
+                    "enum": [
+                        "high",
+                        "medium",
+                        "low"
+                    ]
+                },
+                "competitive_uniqueness_note": {
+                    "type": "string"
+                }
+            }
+        },
+        "promise": {
+            "type": "object",
+            "required": [
+                "synthesized",
+                "confidence",
+                "promise_type",
+                "functional_benefit",
+                "emotional_benefit",
+                "supporting_evidence"
+            ],
+            "properties": {
+                "synthesized": {
+                    "type": "string"
+                },
+                "confidence": {
+                    "$ref": "#/definitions/confidence_score"
+                },
+                "promise_type": {
+                    "type": "string"
+                },
+                "functional_benefit": {
+                    "type": "string"
+                },
+                "emotional_benefit": {
+                    "type": "string"
+                },
+                "supporting_evidence": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/evidence_reference"
+                    }
+                }
+            }
+        },
+        "key_themes": {
+            "type": "array",
+            "minItems": 3,
+            "maxItems": 7,
+            "items": {
+                "type": "object",
+                "required": [
+                    "theme_id",
+                    "theme_name",
+                    "description",
+                    "share_of_voice_percent",
+                    "channel_distribution",
+                    "keywords",
+                    "strategic_role",
+                    "evidence_ids"
+                ],
+                "properties": {
+                    "theme_id": {
+                        "type": "string",
+                        "pattern": "^TH[0-9]{3}$"
+                    },
+                    "theme_name": {
+                        "type": "string"
+                    },
+                    "description": {
+                        "type": "string"
+                    },
+                    "share_of_voice_percent": {
+                        "$ref": "#/definitions/percentage"
+                    },
+                    "channel_distribution": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "type": "number"
+                        }
+                    },
+                    "keywords": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "strategic_role": {
+                        "type": "string",
+                        "enum": [
+                            "primary_narrative",
+                            "differentiation",
+                            "credibility",
+                            "values_signal",
+                            "relationship_model"
+                        ]
+                    },
+                    "evidence_ids": {
+                        "$ref": "#/definitions/evidence_id_array"
+                    }
+                }
+            }
+        },
+        "tagline": {
+            "type": "object",
+            "required": [
+                "explicit",
+                "tagline_analysis"
+            ],
+            "properties": {
+                "explicit": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "synthesized_alternative": {
+                    "type": "string"
+                },
+                "tagline_analysis": {
+                    "type": "object",
+                    "properties": {
+                        "explicit_usage_count": {
+                            "type": "integer"
+                        },
+                        "explicit_channels": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "explicit_assessment": {
+                            "type": "string"
+                        },
+                        "synthesized_rationale": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "evidence_ids": {
+                    "$ref": "#/definitions/evidence_id_array"
+                }
+            }
+        }
+    },
+    "definitions": {
+        "platform_element": {
+            "type": "object",
+            "required": [
+                "synthesized",
+                "confidence",
+                "confidence_rationale",
+                "evidence_density",
+                "supporting_evidence",
+                "explicit_statement_found",
+                "synthesis_method"
+            ],
+            "properties": {
+                "synthesized": {
+                    "type": "string"
+                },
+                "confidence": {
+                    "$ref": "#/definitions/confidence_score"
+                },
+                "confidence_rationale": {
+                    "type": "string"
+                },
+                "evidence_density": {
+                    "type": "string",
+                    "enum": [
+                        "high",
+                        "medium",
+                        "low"
+                    ]
+                },
+                "supporting_evidence": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/evidence_reference"
+                    }
+                },
+                "explicit_statement_found": {
+                    "type": "boolean"
+                },
+                "synthesis_method": {
+                    "type": "string"
+                }
+            }
+        },
+        "iso_datetime": {
+            "type": "string",
+            "format": "date-time",
+            "description": "ISO 8601 datetime string."
+        },
+        "url": {
+            "type": "string",
+            "format": "uri",
+            "description": "A valid URL (URI)."
+        },
+        "hex_color": {
+            "type": "string",
+            "pattern": "^#[0-9A-Fa-f]{6}$",
+            "description": "Hex color in the form #RRGGBB."
+        },
+        "percentage": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1,
+            "description": "Share or percentage expressed as 0..1."
+        },
+        "confidence_score": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1,
+            "description": "Confidence score 0..1."
+        },
+        "evidence_id": {
+            "type": "string",
+            "pattern": "^(E|VE|EC)[0-9]{5}$",
+            "description": "Evidence ID (E##### for general, VE##### for visual, EC##### for comments)."
+        },
+        "evidence_id_array": {
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/evidence_id"
+            },
+            "description": "Array of evidence IDs."
+        },
+        "channel_enum": {
+            "type": "string",
+            "enum": [
+                "website",
+                "linkedin",
+                "youtube",
+                "x",
+                "instagram",
+                "tiktok",
+                "facebook"
+            ],
+            "description": "Supported owned channels."
+        },
+        "sentiment": {
+            "type": "object",
+            "description": "Structured sentiment and emotional tone (brand-authored content or audience content, depending on context).",
+            "required": [
+                "polarity",
+                "emotional_tone"
+            ],
+            "properties": {
+                "polarity": {
+                    "type": "object",
+                    "required": [
+                        "score",
+                        "label"
+                    ],
+                    "properties": {
+                        "score": {
+                            "type": "number",
+                            "minimum": -1,
+                            "maximum": 1
+                        },
+                        "label": {
+                            "type": "string",
+                            "enum": [
+                                "very_negative",
+                                "negative",
+                                "neutral",
+                                "positive",
+                                "very_positive"
+                            ]
+                        }
+                    }
+                },
+                "emotional_tone": {
+                    "type": "object",
+                    "required": [
+                        "primary",
+                        "intensity"
+                    ],
+                    "properties": {
+                        "primary": {
+                            "type": "string",
+                            "enum": [
+                                "confident",
+                                "enthusiastic",
+                                "professional",
+                                "empathetic",
+                                "urgent",
+                                "frustrated",
+                                "skeptical",
+                                "appreciative",
+                                "neutral"
+                            ]
+                        },
+                        "secondary": {
+                            "type": "string",
+                            "enum": [
+                                "confident",
+                                "enthusiastic",
+                                "professional",
+                                "empathetic",
+                                "urgent",
+                                "frustrated",
+                                "skeptical",
+                                "appreciative",
+                                "neutral"
+                            ]
+                        },
+                        "intensity": {
+                            "type": "string",
+                            "enum": [
+                                "low",
+                                "medium",
+                                "high"
+                            ]
+                        }
+                    }
+                },
+                "subjectivity": {
+                    "type": "object",
+                    "required": [
+                        "score",
+                        "label"
+                    ],
+                    "properties": {
+                        "score": {
+                            "type": "number",
+                            "minimum": 0,
+                            "maximum": 1
+                        },
+                        "label": {
+                            "type": "string",
+                            "enum": [
+                                "objective",
+                                "mixed",
+                                "subjective"
+                            ]
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

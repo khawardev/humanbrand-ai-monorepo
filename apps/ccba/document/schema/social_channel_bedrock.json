@@ -1,0 +1,503 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "https://brandos.ai/schemas/social_channel_bedrock.json",
+    "title": "Social Channel Bedrock",
+    "type": "object",
+    "description": "Compiled signals for an entity on a single social channel.",
+    "properties": {
+        "schema_version": {
+            "type": "string",
+            "const": "2.0.0"
+        },
+        "generated_at": {
+            "$ref": "#/definitions/iso_datetime"
+        },
+        "entity": {
+            "type": "string"
+        },
+        "channel": {
+            "$ref": "#/definitions/channel_enum"
+        },
+        "corpus_summary": {
+            "type": "object",
+            "required": [
+                "post_count"
+            ],
+            "properties": {
+                "post_count": {
+                    "type": "integer",
+                    "minimum": 0
+                },
+                "date_range": {
+                    "type": "object",
+                    "properties": {
+                        "start": {
+                            "$ref": "#/definitions/iso_datetime"
+                        },
+                        "end": {
+                            "$ref": "#/definitions/iso_datetime"
+                        }
+                    }
+                },
+                "notes": {
+                    "type": "string"
+                }
+            }
+        },
+        "cadence_summary": {
+            "type": "object",
+            "description": "Precomputed cadence metrics.",
+            "properties": {
+                "posts_per_week": {
+                    "type": "number",
+                    "minimum": 0
+                },
+                "posting_days_distribution": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "number"
+                    }
+                },
+                "burstiness_notes": {
+                    "type": "string"
+                }
+            }
+        },
+        "content_mix": {
+            "type": "object",
+            "properties": {
+                "by_format": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "required": [
+                            "format",
+                            "share"
+                        ],
+                        "properties": {
+                            "format": {
+                                "type": "string"
+                            },
+                            "share": {
+                                "$ref": "#/definitions/percentage"
+                            }
+                        }
+                    }
+                },
+                "by_purpose": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "required": [
+                            "purpose",
+                            "share"
+                        ],
+                        "properties": {
+                            "purpose": {
+                                "type": "string"
+                            },
+                            "share": {
+                                "$ref": "#/definitions/percentage"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "theme_clusters": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "required": [
+                    "theme",
+                    "description",
+                    "evidence_ids"
+                ],
+                "properties": {
+                    "theme": {
+                        "type": "string"
+                    },
+                    "description": {
+                        "type": "string"
+                    },
+                    "share": {
+                        "$ref": "#/definitions/percentage"
+                    },
+                    "representative_posts": {
+                        "$ref": "#/definitions/evidence_id_array"
+                    },
+                    "evidence_ids": {
+                        "$ref": "#/definitions/evidence_id_array"
+                    }
+                }
+            }
+        },
+        "value_driver_coverage": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "required": [
+                    "value_driver",
+                    "share",
+                    "evidence_ids"
+                ],
+                "properties": {
+                    "value_driver": {
+                        "type": "string"
+                    },
+                    "share": {
+                        "$ref": "#/definitions/percentage"
+                    },
+                    "notes": {
+                        "type": "string"
+                    },
+                    "evidence_ids": {
+                        "$ref": "#/definitions/evidence_id_array"
+                    }
+                }
+            }
+        },
+        "proof_point_patterns": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "required": [
+                    "pattern",
+                    "evidence_ids"
+                ],
+                "properties": {
+                    "pattern": {
+                        "type": "string"
+                    },
+                    "prevalence": {
+                        "$ref": "#/definitions/percentage"
+                    },
+                    "evidence_ids": {
+                        "$ref": "#/definitions/evidence_id_array"
+                    }
+                }
+            }
+        },
+        "voice_profile": {
+            "type": "object",
+            "description": "Linguistic and stylistic patterns on this channel.",
+            "properties": {
+                "formality": {
+                    "type": "string",
+                    "enum": [
+                        "low",
+                        "medium",
+                        "high",
+                        "mixed",
+                        "unknown"
+                    ]
+                },
+                "sentence_length_notes": {
+                    "type": "string"
+                },
+                "jargon_density": {
+                    "type": "string",
+                    "enum": [
+                        "low",
+                        "medium",
+                        "high",
+                        "unknown"
+                    ]
+                },
+                "emoji_usage": {
+                    "type": "string",
+                    "enum": [
+                        "none",
+                        "low",
+                        "medium",
+                        "high",
+                        "unknown"
+                    ]
+                },
+                "lexical_markers": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "evidence_ids": {
+                    "$ref": "#/definitions/evidence_id_array"
+                }
+            }
+        },
+        "sentiment_summary": {
+            "type": "object",
+            "description": "Aggregated sentiment/emotional tone of brand-authored posts on this channel.",
+            "properties": {
+                "avg_polarity_score": {
+                    "type": "number",
+                    "minimum": -1,
+                    "maximum": 1
+                },
+                "polarity_distribution": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "$ref": "#/definitions/percentage"
+                    }
+                },
+                "emotional_tone_distribution": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "$ref": "#/definitions/percentage"
+                    }
+                },
+                "intensity_distribution": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "$ref": "#/definitions/percentage"
+                    }
+                },
+                "subjectivity_summary": {
+                    "type": "object",
+                    "properties": {
+                        "avg_score": {
+                            "type": "number",
+                            "minimum": 0,
+                            "maximum": 1
+                        },
+                        "label_distribution": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "$ref": "#/definitions/percentage"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "channel_characteristics": {
+            "type": "object",
+            "description": "Platform-specific aggregated insights and metrics.",
+            "properties": {
+                "channel_specific_metrics": {
+                    "type": "object",
+                    "description": "Aggregated platform-specific metrics (precomputed).",
+                    "additionalProperties": true
+                },
+                "channel_specific_analysis": {
+                    "type": "object",
+                    "description": "Qualitative platform-specific insights.",
+                    "additionalProperties": true
+                },
+                "evidence_ids": {
+                    "$ref": "#/definitions/evidence_id_array"
+                }
+            }
+        },
+        "top_content_patterns": {
+            "type": "array",
+            "description": "Patterns among top-performing posts (based on provided engagement aggregates).",
+            "items": {
+                "type": "object",
+                "required": [
+                    "pattern",
+                    "evidence_ids"
+                ],
+                "properties": {
+                    "pattern": {
+                        "type": "string"
+                    },
+                    "notes": {
+                        "type": "string"
+                    },
+                    "evidence_ids": {
+                        "$ref": "#/definitions/evidence_id_array"
+                    }
+                }
+            }
+        },
+        "gaps": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "required": [
+                    "gap",
+                    "evidence_ids"
+                ],
+                "properties": {
+                    "gap": {
+                        "type": "string"
+                    },
+                    "severity": {
+                        "type": "string",
+                        "enum": [
+                            "low",
+                            "medium",
+                            "high"
+                        ]
+                    },
+                    "evidence_ids": {
+                        "$ref": "#/definitions/evidence_id_array"
+                    }
+                }
+            }
+        }
+    },
+    "required": [
+        "schema_version",
+        "generated_at",
+        "entity",
+        "channel",
+        "corpus_summary"
+    ],
+    "definitions": {
+        "iso_datetime": {
+            "type": "string",
+            "format": "date-time",
+            "description": "ISO 8601 datetime string."
+        },
+        "url": {
+            "type": "string",
+            "format": "uri",
+            "description": "A valid URL (URI)."
+        },
+        "hex_color": {
+            "type": "string",
+            "pattern": "^#[0-9A-Fa-f]{6}$",
+            "description": "Hex color in the form #RRGGBB."
+        },
+        "percentage": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1,
+            "description": "Share or percentage expressed as 0..1."
+        },
+        "confidence_score": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1,
+            "description": "Confidence score 0..1."
+        },
+        "evidence_id": {
+            "type": "string",
+            "pattern": "^(E|VE|EC)[0-9]{5}$",
+            "description": "Evidence ID (E##### for general, VE##### for visual, EC##### for comments)."
+        },
+        "evidence_id_array": {
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/evidence_id"
+            },
+            "description": "Array of evidence IDs."
+        },
+        "channel_enum": {
+            "type": "string",
+            "enum": [
+                "website",
+                "linkedin",
+                "youtube",
+                "x",
+                "instagram",
+                "tiktok",
+                "facebook"
+            ],
+            "description": "Supported owned channels."
+        },
+        "sentiment": {
+            "type": "object",
+            "description": "Structured sentiment and emotional tone (brand-authored content or audience content, depending on context).",
+            "required": [
+                "polarity",
+                "emotional_tone"
+            ],
+            "properties": {
+                "polarity": {
+                    "type": "object",
+                    "required": [
+                        "score",
+                        "label"
+                    ],
+                    "properties": {
+                        "score": {
+                            "type": "number",
+                            "minimum": -1,
+                            "maximum": 1
+                        },
+                        "label": {
+                            "type": "string",
+                            "enum": [
+                                "very_negative",
+                                "negative",
+                                "neutral",
+                                "positive",
+                                "very_positive"
+                            ]
+                        }
+                    }
+                },
+                "emotional_tone": {
+                    "type": "object",
+                    "required": [
+                        "primary",
+                        "intensity"
+                    ],
+                    "properties": {
+                        "primary": {
+                            "type": "string",
+                            "enum": [
+                                "confident",
+                                "enthusiastic",
+                                "professional",
+                                "empathetic",
+                                "urgent",
+                                "frustrated",
+                                "skeptical",
+                                "appreciative",
+                                "neutral"
+                            ]
+                        },
+                        "secondary": {
+                            "type": "string",
+                            "enum": [
+                                "confident",
+                                "enthusiastic",
+                                "professional",
+                                "empathetic",
+                                "urgent",
+                                "frustrated",
+                                "skeptical",
+                                "appreciative",
+                                "neutral"
+                            ]
+                        },
+                        "intensity": {
+                            "type": "string",
+                            "enum": [
+                                "low",
+                                "medium",
+                                "high"
+                            ]
+                        }
+                    }
+                },
+                "subjectivity": {
+                    "type": "object",
+                    "required": [
+                        "score",
+                        "label"
+                    ],
+                    "properties": {
+                        "score": {
+                            "type": "number",
+                            "minimum": 0,
+                            "maximum": 1
+                        },
+                        "label": {
+                            "type": "string",
+                            "enum": [
+                                "objective",
+                                "mixed",
+                                "subjective"
+                            ]
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

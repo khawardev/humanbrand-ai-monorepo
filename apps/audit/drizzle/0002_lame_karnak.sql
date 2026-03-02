@@ -1,0 +1,1 @@
+ALTER TABLE "audit_schema"."audit" ADD COLUMN "auditGenratedContent" text;

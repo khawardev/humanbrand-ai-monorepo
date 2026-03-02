@@ -1,0 +1,336 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "whitespace_analysis.json",
+    "title": "Whitespace Analysis",
+    "description": "Strategic opportunity mapping",
+    "type": "object",
+    "required": [
+        "schema_version",
+        "generated_at",
+        "whitespace_opportunities",
+        "opportunity_priority_matrix",
+        "recommended_90_day_focus"
+    ],
+    "properties": {
+        "schema_version": {
+            "type": "string",
+            "const": "2.0.0"
+        },
+        "generated_at": {
+            "$ref": "#/definitions/iso_datetime"
+        },
+        "whitespace_opportunities": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "required": [
+                    "opportunity_id",
+                    "opportunity_name",
+                    "type",
+                    "description",
+                    "current_state",
+                    "credibility_assets",
+                    "credibility_gaps",
+                    "recommended_action",
+                    "effort",
+                    "impact",
+                    "priority_score",
+                    "evidence_ids"
+                ],
+                "properties": {
+                    "opportunity_id": {
+                        "type": "string",
+                        "pattern": "^WS[0-9]{3}$"
+                    },
+                    "opportunity_name": {
+                        "type": "string"
+                    },
+                    "type": {
+                        "type": "string",
+                        "enum": [
+                            "topic",
+                            "positioning",
+                            "channel",
+                            "format",
+                            "audience",
+                            "narrative"
+                        ]
+                    },
+                    "description": {
+                        "type": "string"
+                    },
+                    "current_state": {
+                        "type": "object",
+                        "properties": {
+                            "client_coverage": {
+                                "type": "number"
+                            },
+                            "category_leader_coverage": {
+                                "type": "number"
+                            },
+                            "gap_size": {
+                                "type": "string",
+                                "enum": [
+                                    "critical",
+                                    "significant",
+                                    "moderate",
+                                    "opportunity"
+                                ]
+                            },
+                            "any_competitor_owning": {
+                                "type": "boolean"
+                            }
+                        }
+                    },
+                    "credibility_assets": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "credibility_gaps": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "recommended_action": {
+                        "type": "string"
+                    },
+                    "effort": {
+                        "type": "string",
+                        "enum": [
+                            "high",
+                            "medium",
+                            "low"
+                        ]
+                    },
+                    "impact": {
+                        "type": "string",
+                        "enum": [
+                            "high",
+                            "medium",
+                            "low"
+                        ]
+                    },
+                    "priority_score": {
+                        "type": "integer",
+                        "minimum": 0,
+                        "maximum": 100
+                    },
+                    "evidence_ids": {
+                        "$ref": "#/definitions/evidence_id_array"
+                    }
+                }
+            }
+        },
+        "opportunity_priority_matrix": {
+            "type": "object",
+            "properties": {
+                "high_impact_low_effort": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "high_impact_high_effort": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "medium_impact_medium_effort": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "low_priority": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        "recommended_90_day_focus": {
+            "type": "array",
+            "maxItems": 5,
+            "items": {
+                "type": "object",
+                "required": [
+                    "priority",
+                    "opportunity",
+                    "rationale"
+                ],
+                "properties": {
+                    "priority": {
+                        "type": "integer",
+                        "minimum": 1
+                    },
+                    "opportunity": {
+                        "type": "string"
+                    },
+                    "rationale": {
+                        "type": "string"
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "iso_datetime": {
+            "type": "string",
+            "format": "date-time",
+            "description": "ISO 8601 datetime string."
+        },
+        "url": {
+            "type": "string",
+            "format": "uri",
+            "description": "A valid URL (URI)."
+        },
+        "hex_color": {
+            "type": "string",
+            "pattern": "^#[0-9A-Fa-f]{6}$",
+            "description": "Hex color in the form #RRGGBB."
+        },
+        "percentage": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1,
+            "description": "Share or percentage expressed as 0..1."
+        },
+        "confidence_score": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1,
+            "description": "Confidence score 0..1."
+        },
+        "evidence_id": {
+            "type": "string",
+            "pattern": "^(E|VE|EC)[0-9]{5}$",
+            "description": "Evidence ID (E##### for general, VE##### for visual, EC##### for comments)."
+        },
+        "evidence_id_array": {
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/evidence_id"
+            },
+            "description": "Array of evidence IDs."
+        },
+        "channel_enum": {
+            "type": "string",
+            "enum": [
+                "website",
+                "linkedin",
+                "youtube",
+                "x",
+                "instagram",
+                "tiktok",
+                "facebook"
+            ],
+            "description": "Supported owned channels."
+        },
+        "sentiment": {
+            "type": "object",
+            "description": "Structured sentiment and emotional tone (brand-authored content or audience content, depending on context).",
+            "required": [
+                "polarity",
+                "emotional_tone"
+            ],
+            "properties": {
+                "polarity": {
+                    "type": "object",
+                    "required": [
+                        "score",
+                        "label"
+                    ],
+                    "properties": {
+                        "score": {
+                            "type": "number",
+                            "minimum": -1,
+                            "maximum": 1
+                        },
+                        "label": {
+                            "type": "string",
+                            "enum": [
+                                "very_negative",
+                                "negative",
+                                "neutral",
+                                "positive",
+                                "very_positive"
+                            ]
+                        }
+                    }
+                },
+                "emotional_tone": {
+                    "type": "object",
+                    "required": [
+                        "primary",
+                        "intensity"
+                    ],
+                    "properties": {
+                        "primary": {
+                            "type": "string",
+                            "enum": [
+                                "confident",
+                                "enthusiastic",
+                                "professional",
+                                "empathetic",
+                                "urgent",
+                                "frustrated",
+                                "skeptical",
+                                "appreciative",
+                                "neutral"
+                            ]
+                        },
+                        "secondary": {
+                            "type": "string",
+                            "enum": [
+                                "confident",
+                                "enthusiastic",
+                                "professional",
+                                "empathetic",
+                                "urgent",
+                                "frustrated",
+                                "skeptical",
+                                "appreciative",
+                                "neutral"
+                            ]
+                        },
+                        "intensity": {
+                            "type": "string",
+                            "enum": [
+                                "low",
+                                "medium",
+                                "high"
+                            ]
+                        }
+                    }
+                },
+                "subjectivity": {
+                    "type": "object",
+                    "required": [
+                        "score",
+                        "label"
+                    ],
+                    "properties": {
+                        "score": {
+                            "type": "number",
+                            "minimum": 0,
+                            "maximum": 1
+                        },
+                        "label": {
+                            "type": "string",
+                            "enum": [
+                                "objective",
+                                "mixed",
+                                "subjective"
+                            ]
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

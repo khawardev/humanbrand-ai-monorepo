@@ -1,0 +1,36 @@
+{
+    "report_batch_id": "string",
+    "created_at": "string",
+    "entity_type": "string",
+    "brand_id": "string",
+    "client_id": "string",
+    "batch_name": "string",
+    "status": "string",
+    "SK": "string",
+    "brand_extraction": {
+        "response": "string",
+        "status": "string",
+        "extractor_id": "string"
+    },
+    "PK": "string",
+    "brand_synthesizer": {
+        "synthesizor_id": "string",
+        "response": "string",
+        "status": "string"
+    },
+    "competitor_reports": [
+        {
+            "competitor_id": "string",
+            "extraction_report": {
+                "response": "string",
+                "status": "string",
+                "extractor_id": "string"
+            },
+            "synthesizer_report": {
+                "synthesizor_id": "string",
+                "response": "string",
+                "status": "string"
+            }
+        }
+    ]
+}

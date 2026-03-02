@@ -1,0 +1,671 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "voice_of_market.json",
+    "title": "Voice of Market Analysis",
+    "description": "Audience intelligence from comments",
+    "type": "object",
+    "required": [
+        "competitor_mentions",
+        "misperception_hotspots",
+        "audience_sentiment_summary",
+        "schema_version",
+        "content_recommendations",
+        "positive_signals",
+        "entity",
+        "proof_demands",
+        "comment_intent_distribution",
+        "brand_response_behavior",
+        "corpus_summary",
+        "question_bank",
+        "generated_at",
+        "objection_bank"
+    ],
+    "properties": {
+        "schema_version": {
+            "type": "string",
+            "const": "2.0.0"
+        },
+        "generated_at": {
+            "$ref": "#/definitions/iso_datetime"
+        },
+        "entity": {
+            "type": "string"
+        },
+        "corpus_summary": {
+            "type": "object",
+            "required": [
+                "total_comments_analyzed",
+                "by_channel",
+                "language_distribution",
+                "date_range"
+            ],
+            "properties": {
+                "total_comments_analyzed": {
+                    "type": "integer"
+                },
+                "by_channel": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "integer"
+                    }
+                },
+                "language_distribution": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "number"
+                    }
+                },
+                "date_range": {
+                    "type": "object",
+                    "properties": {
+                        "start": {
+                            "type": "string"
+                        },
+                        "end": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "question_bank": {
+            "type": "object",
+            "required": [
+                "description",
+                "questions"
+            ],
+            "properties": {
+                "description": {
+                    "type": "string"
+                },
+                "questions": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "required": [
+                            "question_pattern",
+                            "frequency",
+                            "contexts",
+                            "brand_response_rate",
+                            "strategic_implication",
+                            "content_opportunity",
+                            "sample_evidence_ids"
+                        ],
+                        "properties": {
+                            "question_pattern": {
+                                "type": "string"
+                            },
+                            "frequency": {
+                                "type": "integer"
+                            },
+                            "contexts": {
+                                "type": "array",
+                                "items": {
+                                    "type": "string"
+                                }
+                            },
+                            "competitors_mentioned": {
+                                "type": "array",
+                                "items": {
+                                    "type": "string"
+                                }
+                            },
+                            "brand_response_rate": {
+                                "type": "number",
+                                "minimum": 0,
+                                "maximum": 1
+                            },
+                            "strategic_implication": {
+                                "type": "string"
+                            },
+                            "content_opportunity": {
+                                "type": "string"
+                            },
+                            "sample_evidence_ids": {
+                                "$ref": "#/definitions/evidence_id_array"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "objection_bank": {
+            "type": "object",
+            "required": [
+                "description",
+                "objections"
+            ],
+            "properties": {
+                "description": {
+                    "type": "string"
+                },
+                "objections": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "required": [
+                            "objection_pattern",
+                            "proof_needed",
+                            "contexts",
+                            "frequency",
+                            "comment_sentiment",
+                            "sample_evidence_ids"
+                        ],
+                        "properties": {
+                            "objection_pattern": {
+                                "type": "string"
+                            },
+                            "frequency": {
+                                "type": "integer"
+                            },
+                            "contexts": {
+                                "type": "array",
+                                "items": {
+                                    "type": "string"
+                                }
+                            },
+                            "proof_needed": {
+                                "type": "string"
+                            },
+                            "sample_evidence_ids": {
+                                "$ref": "#/definitions/evidence_id_array"
+                            },
+                            "comment_sentiment": {
+                                "$ref": "#/definitions/sentiment"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "proof_demands": {
+            "type": "object",
+            "required": [
+                "description",
+                "demands"
+            ],
+            "properties": {
+                "description": {
+                    "type": "string"
+                },
+                "demands": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "required": [
+                            "demand",
+                            "frequency",
+                            "current_proof_provided",
+                            "content_gap",
+                            "sample_evidence_ids"
+                        ],
+                        "properties": {
+                            "demand": {
+                                "type": "string"
+                            },
+                            "frequency": {
+                                "type": "integer"
+                            },
+                            "current_proof_provided": {
+                                "type": "string"
+                            },
+                            "content_gap": {
+                                "type": "string"
+                            },
+                            "sample_evidence_ids": {
+                                "$ref": "#/definitions/evidence_id_array"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "misperception_hotspots": {
+            "type": "object",
+            "required": [
+                "description",
+                "misperceptions"
+            ],
+            "properties": {
+                "description": {
+                    "type": "string"
+                },
+                "misperceptions": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "required": [
+                            "misperception",
+                            "frequency",
+                            "correct_reality",
+                            "content_cause",
+                            "correction_needed",
+                            "sample_evidence_ids"
+                        ],
+                        "properties": {
+                            "misperception": {
+                                "type": "string"
+                            },
+                            "frequency": {
+                                "type": "integer"
+                            },
+                            "correct_reality": {
+                                "type": "string"
+                            },
+                            "content_cause": {
+                                "type": "string"
+                            },
+                            "correction_needed": {
+                                "type": "string"
+                            },
+                            "sample_evidence_ids": {
+                                "$ref": "#/definitions/evidence_id_array"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "positive_signals": {
+            "type": "object",
+            "required": [
+                "description",
+                "signals"
+            ],
+            "properties": {
+                "description": {
+                    "type": "string"
+                },
+                "signals": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "required": [
+                            "signal",
+                            "frequency",
+                            "triggering_content",
+                            "sentiment",
+                            "amplification_opportunity",
+                            "sample_evidence_ids"
+                        ],
+                        "properties": {
+                            "signal": {
+                                "type": "string"
+                            },
+                            "frequency": {
+                                "type": "integer"
+                            },
+                            "triggering_content": {
+                                "type": "array",
+                                "items": {
+                                    "type": "string"
+                                }
+                            },
+                            "sentiment": {
+                                "type": "string",
+                                "enum": [
+                                    "positive",
+                                    "strongly_positive"
+                                ]
+                            },
+                            "amplification_opportunity": {
+                                "type": "string"
+                            },
+                            "sample_evidence_ids": {
+                                "$ref": "#/definitions/evidence_id_array"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "competitor_mentions": {
+            "type": "object",
+            "required": [
+                "description",
+                "mentions"
+            ],
+            "properties": {
+                "description": {
+                    "type": "string"
+                },
+                "mentions": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "required": [
+                            "competitor",
+                            "mention_count",
+                            "contexts",
+                            "sentiment_when_mentioned"
+                        ],
+                        "properties": {
+                            "competitor": {
+                                "type": "string"
+                            },
+                            "mention_count": {
+                                "type": "integer"
+                            },
+                            "contexts": {
+                                "type": "array",
+                                "items": {
+                                    "type": "string"
+                                }
+                            },
+                            "sentiment_when_mentioned": {
+                                "type": "string",
+                                "enum": [
+                                    "positive",
+                                    "neutral",
+                                    "negative",
+                                    "mixed"
+                                ]
+                            },
+                            "typical_framing": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "brand_response_behavior": {
+            "type": "object",
+            "required": [
+                "overall_response_rate",
+                "avg_response_time_hours",
+                "response_quality",
+                "response_gaps",
+                "recommendations"
+            ],
+            "properties": {
+                "overall_response_rate": {
+                    "type": "number",
+                    "minimum": 0,
+                    "maximum": 1
+                },
+                "avg_response_time_hours": {
+                    "type": "number"
+                },
+                "response_quality": {
+                    "type": "object",
+                    "properties": {
+                        "helpful_percent": {
+                            "$ref": "#/definitions/percentage"
+                        },
+                        "generic_percent": {
+                            "$ref": "#/definitions/percentage"
+                        },
+                        "promotional_percent": {
+                            "$ref": "#/definitions/percentage"
+                        }
+                    }
+                },
+                "response_gaps": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "recommendations": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        "content_recommendations": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "required": [
+                    "recommendation",
+                    "rationale",
+                    "content_type",
+                    "priority"
+                ],
+                "properties": {
+                    "recommendation": {
+                        "type": "string"
+                    },
+                    "rationale": {
+                        "type": "string"
+                    },
+                    "content_type": {
+                        "type": "string"
+                    },
+                    "priority": {
+                        "type": "string",
+                        "enum": [
+                            "high",
+                            "medium",
+                            "low"
+                        ]
+                    }
+                }
+            }
+        },
+        "audience_sentiment_summary": {
+            "type": "object",
+            "description": "Aggregate sentiment/emotional tone across the audience comment corpus.",
+            "properties": {
+                "polarity_distribution": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "$ref": "#/definitions/percentage"
+                    }
+                },
+                "emotional_tone_distribution": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "$ref": "#/definitions/percentage"
+                    }
+                },
+                "intensity_distribution": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "$ref": "#/definitions/percentage"
+                    }
+                },
+                "avg_polarity_score": {
+                    "type": "number",
+                    "minimum": -1,
+                    "maximum": 1
+                },
+                "subjectivity_summary": {
+                    "type": "object",
+                    "properties": {
+                        "avg_score": {
+                            "type": "number",
+                            "minimum": 0,
+                            "maximum": 1
+                        },
+                        "label_distribution": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "$ref": "#/definitions/percentage"
+                            }
+                        }
+                    }
+                },
+                "notes": {
+                    "type": "string"
+                },
+                "evidence_ids": {
+                    "$ref": "#/definitions/evidence_id_array"
+                }
+            }
+        },
+        "comment_intent_distribution": {
+            "type": "object",
+            "description": "Distribution of comment intents across the corpus.",
+            "properties": {
+                "distribution": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "$ref": "#/definitions/percentage"
+                    }
+                },
+                "notes": {
+                    "type": "string"
+                }
+            }
+        }
+    },
+    "definitions": {
+        "iso_datetime": {
+            "type": "string",
+            "format": "date-time",
+            "description": "ISO 8601 datetime string."
+        },
+        "url": {
+            "type": "string",
+            "format": "uri",
+            "description": "A valid URL (URI)."
+        },
+        "hex_color": {
+            "type": "string",
+            "pattern": "^#[0-9A-Fa-f]{6}$",
+            "description": "Hex color in the form #RRGGBB."
+        },
+        "percentage": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1,
+            "description": "Share or percentage expressed as 0..1."
+        },
+        "confidence_score": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1,
+            "description": "Confidence score 0..1."
+        },
+        "evidence_id": {
+            "type": "string",
+            "pattern": "^(E|VE|EC)[0-9]{5}$",
+            "description": "Evidence ID (E##### for general, VE##### for visual, EC##### for comments)."
+        },
+        "evidence_id_array": {
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/evidence_id"
+            },
+            "description": "Array of evidence IDs."
+        },
+        "channel_enum": {
+            "type": "string",
+            "enum": [
+                "website",
+                "linkedin",
+                "youtube",
+                "x",
+                "instagram",
+                "tiktok",
+                "facebook"
+            ],
+            "description": "Supported owned channels."
+        },
+        "sentiment": {
+            "type": "object",
+            "description": "Structured sentiment and emotional tone (brand-authored content or audience content, depending on context).",
+            "required": [
+                "polarity",
+                "emotional_tone"
+            ],
+            "properties": {
+                "polarity": {
+                    "type": "object",
+                    "required": [
+                        "score",
+                        "label"
+                    ],
+                    "properties": {
+                        "score": {
+                            "type": "number",
+                            "minimum": -1,
+                            "maximum": 1
+                        },
+                        "label": {
+                            "type": "string",
+                            "enum": [
+                                "very_negative",
+                                "negative",
+                                "neutral",
+                                "positive",
+                                "very_positive"
+                            ]
+                        }
+                    }
+                },
+                "emotional_tone": {
+                    "type": "object",
+                    "required": [
+                        "primary",
+                        "intensity"
+                    ],
+                    "properties": {
+                        "primary": {
+                            "type": "string",
+                            "enum": [
+                                "confident",
+                                "enthusiastic",
+                                "professional",
+                                "empathetic",
+                                "urgent",
+                                "frustrated",
+                                "skeptical",
+                                "appreciative",
+                                "neutral"
+                            ]
+                        },
+                        "secondary": {
+                            "type": "string",
+                            "enum": [
+                                "confident",
+                                "enthusiastic",
+                                "professional",
+                                "empathetic",
+                                "urgent",
+                                "frustrated",
+                                "skeptical",
+                                "appreciative",
+                                "neutral"
+                            ]
+                        },
+                        "intensity": {
+                            "type": "string",
+                            "enum": [
+                                "low",
+                                "medium",
+                                "high"
+                            ]
+                        }
+                    }
+                },
+                "subjectivity": {
+                    "type": "object",
+                    "required": [
+                        "score",
+                        "label"
+                    ],
+                    "properties": {
+                        "score": {
+                            "type": "number",
+                            "minimum": 0,
+                            "maximum": 1
+                        },
+                        "label": {
+                            "type": "string",
+                            "enum": [
+                                "objective",
+                                "mixed",
+                                "subjective"
+                            ]
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

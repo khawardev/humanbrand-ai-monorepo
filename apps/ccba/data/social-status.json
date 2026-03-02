@@ -1,0 +1,30 @@
+[
+    {
+        "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765",
+        "batch_id": "0ae18771-ef79-4cf6-864f-b9593dd8aca5",
+        "brand_id": "30104b5e-921d-4fc3-97ba-63bf2ee4a0b4",
+        "client_id": "a9ba7d1d-ca46-493f-a7ef-e61b4d74b765",
+        "created_at": "2026-01-23T14:26:03.543211",
+        "end_date": "2026-01-23",
+        "entity_type": "BATCH_SOCIAL",
+        "error": "An error occurred (ValidationException) when calling the UpdateItem operation: ExpressionAttributeValues contains invalid value: Item size has exceeded the maximum allowed size for key :r",
+        "name": "social_scrape_30104b5e-921d-4fc3-97ba-63bf2ee4a0b4",
+        "start_date": "2025-01-23",
+        "status": "Failed",
+        "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#BATCH_SOCIAL#0ae18771-ef79-4cf6-864f-b9593dd8aca5"
+    },
+    {
+        "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765",
+        "batch_id": "19738f67-172b-4b71-b67b-42877ced6b5a",
+        "brand_id": "30104b5e-921d-4fc3-97ba-63bf2ee4a0b4",
+        "client_id": "a9ba7d1d-ca46-493f-a7ef-e61b4d74b765",
+        "created_at": "2026-01-23T14:55:25.283915",
+        "end_date": "2026-01-23",
+        "entity_type": "BATCH_SOCIAL",
+        "error": "An error occurred (ValidationException) when calling the UpdateItem operation: ExpressionAttributeValues contains invalid value: Item size has exceeded the maximum allowed size for key :r",
+        "name": "social_scrape_30104b5e-921d-4fc3-97ba-63bf2ee4a0b4",
+        "start_date": "2025-01-23",
+        "status": "Failed",
+        "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#BATCH_SOCIAL#19738f67-172b-4b71-b67b-42877ced6b5a"
+    }
+]

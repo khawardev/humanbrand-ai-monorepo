@@ -1,0 +1,652 @@
+'use client';
+
+import { jsPDF } from 'jspdf';
+import autoTable from 'jspdf-autotable';
+import { 
+    Document, 
+    Packer, 
+    Paragraph, 
+    TextRun, 
+    HeadingLevel, 
+    Table, 
+    TableRow, 
+    TableCell, 
+    WidthType, 
+    AlignmentType, 
+    BorderStyle,
+    VerticalAlign,
+    TableLayoutType,
+    PageOrientation,
+    Header,
+    Footer,
+    PageNumber,
+    PageBreak,
+    ShadingType
+} from 'docx';
+import { saveAs } from 'file-saver';
+import { marked } from 'marked';
+
+// --- Configuration Constants ---
+const FONTS = {
+    regular: {
+        url: 'https://cdn.jsdelivr.net/npm/inter-font@3.19.0/ttf/Inter-Regular.ttf',
+        name: 'Inter-Regular',
+        weight: 'normal'
+    },
+    bold: {
+        url: 'https://cdn.jsdelivr.net/npm/inter-font@3.19.0/ttf/Inter-Bold.ttf',
+        name: 'Inter-Bold',
+        weight: 'bold'
+    }
+};
+
+const COLORS = {
+    primary: '#111827',    // Gray 900
+    secondary: '#374151',  // Gray 700
+    accent: '#2563EB',     // Blue 600
+    border: '#E5E7EB',     // Gray 200
+    tableHead: '#F9FAFB',  // Gray 50
+    text: '#1F2937'        // Gray 800
+};
+
+const PDF_CONFIG = {
+    margin: 20,
+    lineHeight: 1.5,
+    fontSize: {
+        title: 24,
+        heading1: 18,
+        heading2: 14,
+        heading3: 12,
+        body: 10,
+        small: 8
+    }
+};
+
+const LOGO_URL = 'https://i.postimg.cc/yY06gqFK/HB-logo-name-mark-side-black-1.png';
+
+// --- Helper: Image Loading ---
+async function loadImage(url: string): Promise<string | null> {
+    try {
+        const response = await fetch(url);
+        if (!response.ok) throw new Error(`Failed to fetch image: ${url}`);
+        const buffer = await response.arrayBuffer();
+        return arrayBufferToBase64(buffer);
+    } catch (error) {
+        console.warn('Image loading failed:', error);
+        return null;
+    }
+}
+
+// --- Helper: Font Loading ---
+async function loadFonts(doc: jsPDF) {
+    try {
+        const loadFont = async (fontDef: { url: string; name: string; weight: string }) => {
+            const response = await fetch(fontDef.url);
+            if (!response.ok) throw new Error(`Failed to fetch font: ${fontDef.url}`);
+            const buffer = await response.arrayBuffer();
+            const base64 = arrayBufferToBase64(buffer);
+            doc.addFileToVFS(`${fontDef.name}.ttf`, base64);
+            doc.addFont(`${fontDef.name}.ttf`, 'Inter', fontDef.weight);
+        };
+
+        await Promise.all([
+            loadFont(FONTS.regular),
+            loadFont(FONTS.bold)
+        ]);
+        
+        return true;
+    } catch (error) {
+        console.warn('Font loading failed, falling back to default fonts:', error);
+        return false;
+    }
+}
+
+function arrayBufferToBase64(buffer: ArrayBuffer): string {
+    let binary = '';
+    const bytes = new Uint8Array(buffer);
+    const len = bytes.byteLength;
+    for (let i = 0; i < len; i++) {
+        binary += String.fromCharCode(bytes[i]!);
+    }
+    return window.btoa(binary);
+}
+
+// --- Helper: Text Cleaning ---
+const cleanText = (text: any): string => {
+    if (typeof text !== 'string') return '';
+    // Remove markdown symbols but keep text
+    // We want to keep some structure but remove specific MD syntax that PDF doesn't parse
+    return text
+        .replace(/\*\*/g, '')
+        .replace(/\*/g, '')
+        .replace(/__/g, '')
+        .replace(/_/g, '')
+        .replace(/`/g, '')
+        .replace(/\[([^\]]+)\]\([^\)]+\)/g, '$1') // Keep link text, remove url
+        .trim();
+};
+
+/**
+ * Enhanced PDF Export
+ * - Features: Inter Font, Cover Page, Page Numbers, Structured Layout, Auto-Table
+ */
+export async function exportToPDF(markdown: string, filename: string, title: string) {
+    // 1. Initialize Document
+    const doc = new jsPDF({
+        orientation: 'l', // Changed to landscape
+        unit: 'mm',
+        format: 'a4'
+    });
+
+    // 2. Load Resources (Fonts & Images)
+    const [fontsLoaded, logoBase64] = await Promise.all([
+        loadFonts(doc),
+        loadImage(LOGO_URL)
+    ]);
+    const fontName = fontsLoaded ? 'Inter' : 'helvetica';
+
+    // 3. Document State
+    const pageWidth = doc.internal.pageSize.getWidth();
+    const pageHeight = doc.internal.pageSize.getHeight();
+    const contentWidth = pageWidth - (PDF_CONFIG.margin * 2);
+    let yPosition = PDF_CONFIG.margin;
+
+    // Helper: Add Page
+    const addNewPage = () => {
+        doc.addPage();
+        yPosition = PDF_CONFIG.margin;
+    };
+
+    // Helper: Header/Footer Writer
+    const addHeaderFooter = () => {
+        const pageCount = doc.getNumberOfPages();
+        for (let i = 1; i <= pageCount; i++) {
+            doc.setPage(i);
+            
+            // Footer
+            doc.setFont(fontName, 'normal');
+            doc.setFontSize(8);
+            doc.setTextColor(COLORS.secondary);
+            
+            // Left: Generated by BrandOS
+            doc.text(`Generated by BrandOS`, PDF_CONFIG.margin, pageHeight - 10);
+            
+            // Right: Page Number
+            doc.text(`Page ${i} of ${pageCount}`, pageWidth - PDF_CONFIG.margin, pageHeight - 10, { align: 'right' });
+        }
+    };
+
+    // 4. Create Cover Page
+    // Add Logo if available
+    if (logoBase64) {
+        try {
+            const imgProps = doc.getImageProperties(logoBase64);
+            const imgWidth = 60; // mm
+            const imgHeight = (imgProps.height * imgWidth) / imgProps.width;
+            const x = (pageWidth - imgWidth) / 2;
+            doc.addImage(logoBase64, 'PNG', x, 30, imgWidth, imgHeight);
+        } catch (e) {
+            console.warn('Failed to add logo to PDF:', e);
+        }
+    }
+
+    doc.setFont(fontName, 'bold');
+    doc.setFontSize(PDF_CONFIG.fontSize.title);
+    doc.setTextColor(COLORS.primary);
+    
+    // Centered Title
+    const titleLines = doc.splitTextToSize(title, contentWidth);
+    let titleY = pageHeight / 2.3; // Adjust title position slightly lower
+    doc.text(titleLines, pageWidth / 2, titleY, { align: 'center' });
+    
+    // Metadata / Date
+    doc.setFont(fontName, 'normal');
+    doc.setFontSize(12);
+    doc.setTextColor(COLORS.secondary);
+    const dateStr = new Date().toLocaleDateString('en-US', { 
+        year: 'numeric', month: 'long', day: 'numeric',
+        hour: '2-digit', minute: '2-digit'
+    });
+    doc.text(`${dateStr}`, pageWidth / 2, titleY + (titleLines.length * 12) + 10, { align: 'center' });
+
+    // Brand Marker
+    doc.setFontSize(10);
+    doc.setTextColor(COLORS.accent);
+
+    // Start Content on New Page
+    addNewPage();
+
+    // 5. Parse Markdown Content
+    // Pre-process to normalize newlines
+    const preProcessedContent = markdown
+        .replace(/(\n---\n|\n\*\*\*\n)/g, '\n') // Remove HRs better
+        .replace(/\n\n+/g, '\n\n'); // Normalize spacing
+
+    const tokens = marked.lexer(preProcessedContent);
+
+    // Iterative Rendering
+    tokens.forEach((token: any) => {
+        // Check for page break readiness
+        if (yPosition > pageHeight - PDF_CONFIG.margin) {
+            addNewPage();
+        }
+
+        switch (token.type) {
+            case 'heading':
+                doc.setFont(fontName, 'bold');
+                doc.setTextColor(COLORS.primary);
+                
+                let hSize = PDF_CONFIG.fontSize.heading1;
+                let hSpacing = 8;
+                if (token.depth === 2) { hSize = PDF_CONFIG.fontSize.heading2; hSpacing = 6; }
+                if (token.depth >= 3) { hSize = PDF_CONFIG.fontSize.heading3; hSpacing = 4; }
+
+                // Check space for heading + at least one line of text
+                if (yPosition + (hSize * 0.5) + 10 > pageHeight - PDF_CONFIG.margin) {
+                    addNewPage();
+                }
+
+                doc.setFontSize(hSize);
+                const hLines = doc.splitTextToSize(cleanText(token.text), contentWidth);
+                doc.text(hLines, PDF_CONFIG.margin, yPosition);
+                yPosition += (hLines.length * (hSize * 0.4)) + hSpacing + 2;
+                break;
+
+            case 'paragraph':
+                doc.setFont(fontName, 'normal');
+                doc.setFontSize(PDF_CONFIG.fontSize.body);
+                doc.setTextColor(COLORS.text);
+                
+                const pText = cleanText(token.text);
+                if (!pText) break;
+
+                const pLines = doc.splitTextToSize(pText, contentWidth);
+                
+                // Check if paragraph fits, else split or page break
+                if (yPosition + (pLines.length * 5) > pageHeight - PDF_CONFIG.margin) {
+                    if (yPosition > PDF_CONFIG.margin + 40) { // If meaningful content exists, break
+                        addNewPage();
+                    }
+                }
+
+                doc.text(pLines, PDF_CONFIG.margin, yPosition);
+                yPosition += (pLines.length * 5) + 4; // Line height approx 5mm
+                break;
+
+            case 'list':
+                doc.setFont(fontName, 'normal');
+                doc.setFontSize(PDF_CONFIG.fontSize.body);
+                doc.setTextColor(COLORS.text);
+
+                token.items.forEach((item: any) => {
+                    const bullet = '•';
+                    const indent = 5;
+                    const itemText = cleanText(item.text);
+                    const iLines = doc.splitTextToSize(itemText, contentWidth - indent);
+
+                    if (yPosition + (iLines.length * 5) > pageHeight - PDF_CONFIG.margin) {
+                        addNewPage();
+                    }
+
+                    doc.text(bullet, PDF_CONFIG.margin, yPosition);
+                    doc.text(iLines, PDF_CONFIG.margin + indent, yPosition);
+                    yPosition += (iLines.length * 5) + 2;
+                });
+                yPosition += 2;
+                break;
+
+            case 'table':
+                // Prepare Headers and Body
+                const head = [token.header.map((h: any) => cleanText(h.text))];
+                const body = token.rows.map((row: any[]) => row.map((cell: any) => cleanText(cell.text)));
+
+                // Use autoTable
+                autoTable(doc, {
+                    startY: yPosition,
+                    head: head,
+                    body: body,
+                    theme: 'grid',
+                    styles: {
+                        font: fontName,
+                        fontSize: 9,
+                        cellPadding: 4,
+                        textColor: COLORS.text,
+                        lineColor: COLORS.border,
+                        lineWidth: 0.1,
+                    },
+                    headStyles: {
+                        fillColor: '#F3F4F6', // Light gray
+                        textColor: COLORS.primary,
+                        fontStyle: 'bold',
+                        halign: 'left'
+                    },
+                    margin: { left: PDF_CONFIG.margin, right: PDF_CONFIG.margin },
+                    didDrawPage: (data) => {
+                        // Update yPosition after table flows across pages
+                        yPosition = data.cursor ? data.cursor.y : PDF_CONFIG.margin;
+                    }
+                });
+                
+                // Update final Y
+                yPosition = (doc as any).lastAutoTable.finalY + 10;
+                break;
+            
+            case 'space':
+                yPosition += 4;
+                break;
+            
+            case 'hr':
+                doc.setDrawColor(COLORS.border);
+                doc.line(PDF_CONFIG.margin, yPosition, pageWidth - PDF_CONFIG.margin, yPosition);
+                yPosition += 8;
+                break;
+
+            default:
+                break;
+        }
+    });
+
+    // 6. Finalize with Header/Footer
+    addHeaderFooter();
+
+    // 7. Save
+    doc.save(`${filename}.pdf`);
+    return true;
+}
+
+/**
+ * Enhanced DOCX Export with Header, Footer, and Page Numbers
+ */
+export async function exportToDocx(markdown: string, filename: string, title: string) {
+    try {
+        const tokens = marked.lexer(markdown);
+        const docChildren: any[] = [];
+
+        // --- Styles Setup ---
+        // Title
+        docChildren.push(
+            new Paragraph({
+                children: [
+                    new TextRun({ 
+                        text: title, 
+                        bold: true, 
+                        size: 32, // 16pt
+                        color: "111827",
+                        font: "Inter"
+                    })
+                ],
+                alignment: AlignmentType.CENTER,
+                spacing: { after: 400, before: 400 }
+            })
+        );
+        
+        // Generated Date
+        docChildren.push(
+            new Paragraph({
+                children: [
+                    new TextRun({ 
+                        text: `Generated on: ${new Date().toLocaleString()}`, 
+                        size: 20, // 10pt
+                        color: "6B7280",
+                        font: "Inter"
+                    })
+                ],
+                alignment: AlignmentType.CENTER,
+                spacing: { after: 800 } 
+            })
+        );
+
+        // Page Break after Cover Page
+        docChildren.push(new Paragraph({ children: [new PageBreak()] }));
+
+        tokens.forEach((token: any) => {
+            switch (token.type) {
+                case 'heading':
+                    docChildren.push(
+                        new Paragraph({
+                            children: parseInlineFormatting(token.text, true),
+                            heading: getHeadingLevel(token.depth),
+                            spacing: { before: 240, after: 120 },
+                        })
+                    );
+                    break;
+
+                case 'paragraph':
+                    docChildren.push(
+                        new Paragraph({
+                            children: parseInlineFormatting(token.text),
+                            spacing: { after: 200 },
+                        })
+                    );
+                    break;
+                
+                case 'blockquote':
+                    docChildren.push(
+                        new Paragraph({
+                            children: parseInlineFormatting(token.text),
+                            indent: { left: 720 }, // 0.5 inch
+                            border: { left: { color: "E5E7EB", space: 12, style: BorderStyle.SINGLE, size: 24 } },
+                            spacing: { after: 200 },
+                        })
+                    );
+                    break;
+
+                case 'code':
+                    const codeLines = token.text.split('\n');
+                    codeLines.forEach((line: string) => {
+                        docChildren.push(
+                            new Paragraph({
+                                children: [new TextRun({ 
+                                    text: line, 
+                                    font: "Courier New", 
+                                    size: 20,
+                                    color: "111827" 
+                                })],
+                                shading: { fill: "F3F4F6", type: ShadingType.CLEAR, color: "auto" },
+                                spacing: { line: 240 },
+                            })
+                        );
+                    });
+                    docChildren.push(new Paragraph({ text: "", spacing: { after: 200 } }));
+                    break;
+
+                case 'list':
+                    token.items.forEach((item: any) => {
+                        docChildren.push(
+                            new Paragraph({
+                                children: parseInlineFormatting(item.text),
+                                bullet: { level: 0 },
+                                spacing: { after: 100 },
+                            })
+                        );
+                    });
+                    break;
+
+                case 'table':
+                    const headerRow = new TableRow({
+                        children: token.header.map((h: any) => 
+                            new TableCell({
+                                children: [
+                                    new Paragraph({
+                                        children: [new TextRun({ 
+                                            text: cleanText(h.text), 
+                                            bold: true, 
+                                            size: 20,
+                                            font: "Inter"
+                                        })],
+                                        alignment: AlignmentType.LEFT
+                                    }),
+                                ],
+                                shading: { fill: 'F9FAFB' },
+                                verticalAlign: VerticalAlign.CENTER,
+                                margins: { top: 100, bottom: 100, left: 100, right: 100 }
+                            })
+                        ),
+                        tableHeader: true,
+                    });
+
+                    const bodyRows = token.rows.map((row: any[]) => 
+                        new TableRow({
+                            children: row.map((cell: any) => 
+                                new TableCell({
+                                    children: [new Paragraph({ 
+                                        children: parseInlineFormatting(cell.text, false, true) 
+                                    })],
+                                    verticalAlign: VerticalAlign.CENTER,
+                                    margins: { top: 100, bottom: 100, left: 100, right: 100 }
+                                })
+                            ),
+                        })
+                    );
+
+                    docChildren.push(
+                        new Table({
+                            rows: [headerRow, ...bodyRows],
+                            width: { size: 100, type: WidthType.PERCENTAGE },
+                            layout: TableLayoutType.AUTOFIT,
+                            borders: {
+                                top: { style: BorderStyle.SINGLE, size: 1, color: "E5E7EB" },
+                                bottom: { style: BorderStyle.SINGLE, size: 1, color: "E5E7EB" },
+                                left: { style: BorderStyle.SINGLE, size: 1, color: "E5E7EB" },
+                                right: { style: BorderStyle.SINGLE, size: 1, color: "E5E7EB" },
+                                insideHorizontal: { style: BorderStyle.SINGLE, size: 1, color: "E5E7EB" },
+                                insideVertical: { style: BorderStyle.SINGLE, size: 1, color: "E5E7EB" },
+                            },
+                        })
+                    );
+                    docChildren.push(new Paragraph({ text: "", spacing: { after: 200 } }));
+                    break;
+
+                case 'hr':
+                    docChildren.push(new Paragraph({ 
+                        border: { bottom: { color: "E5E7EB", space: 1, style: BorderStyle.SINGLE, size: 6 } },
+                        spacing: { after: 200, before: 200 }
+                    }));
+                    break;
+
+                default:
+                    if ('text' in token && token.text) {
+                        docChildren.push(new Paragraph({
+                             children: parseInlineFormatting(token.text),
+                             spacing: { after: 200 }
+                        }));
+                    }
+                    break;
+            }
+        });
+
+        // Initialize DOCX with Header/Footer
+        const doc = new Document({
+            sections: [{
+                properties: {
+                    page: {
+                        margin: { top: 1440, right: 1440, bottom: 1440, left: 1440 }, // 1 inch
+                        size: { orientation: PageOrientation.LANDSCAPE } 
+                    },
+                },
+                headers: {
+                    default: new Header({
+                        children: [
+                            new Paragraph({
+                                children: [
+                                    new TextRun({ text: "BrandOS Report", color: "9CA3AF", size: 16, font: "Inter" })
+                                ],
+                                alignment: AlignmentType.RIGHT
+                            })
+                        ]
+                    })
+                },
+                footers: {
+                    default: new Footer({
+                        children: [
+                            new Paragraph({
+                                children: [
+                                    new TextRun({
+                                        children: [
+                                            "Page ",
+                                            PageNumber.CURRENT,
+                                            " of ",
+                                            PageNumber.TOTAL_PAGES,
+                                        ],
+                                        color: "9CA3AF",
+                                        size: 16,
+                                        font: "Inter"
+                                    }),
+                                ],
+                                alignment: AlignmentType.CENTER,
+                            }),
+                        ],
+                    }),
+                },
+                children: docChildren,
+            }],
+        });
+
+        const blob = await Packer.toBlob(doc);
+        saveAs(blob, `${filename}.docx`);
+        return true;
+    } catch (error) {
+        console.error('Error generating DOCX:', error);
+        throw error;
+    }
+}
+
+/**
+ * Parses inline markdown like **bold**, *italic* into docx TextRuns
+ */
+function parseInlineFormatting(text: string, isHeading: boolean = false, isTable: boolean = false): TextRun[] {
+    const runs: TextRun[] = [];
+    const regex = /(\*\*|__)(.*?)\1|(\*|_)(.*?)\3/g;
+    let lastIndex = 0;
+    let match;
+
+    const size = isHeading ? undefined : (isTable ? 20 : 22); // 10pt for table, 11pt for body
+    const color = "1F2937"; // Gray 800
+    const font = "Inter";
+
+    while ((match = regex.exec(text)) !== null) {
+        if (match.index > lastIndex) {
+            runs.push(new TextRun({
+                text: text.substring(lastIndex, match.index),
+                size,
+                color,
+                font
+            }));
+        }
+
+        const isBold = !!(match[1]);
+        const content = isBold ? match[2] : match[4];
+
+        runs.push(new TextRun({
+            text: content,
+            bold: isBold,
+            italics: !isBold,
+            size,
+            color,
+            font
+        }));
+
+        lastIndex = regex.lastIndex;
+    }
+
+    if (lastIndex < text.length) {
+        runs.push(new TextRun({
+            text: text.substring(lastIndex),
+            size,
+            color,
+            font
+        }));
+    }
+
+    return runs.length > 0 ? runs : [new TextRun({ text, size, color, font })];
+}
+
+function getHeadingLevel(depth: number): any {
+    switch (depth) {
+        case 1: return HeadingLevel.HEADING_1;
+        case 2: return HeadingLevel.HEADING_2;
+        case 3: return HeadingLevel.HEADING_3;
+        case 4: return HeadingLevel.HEADING_4;
+        default: return HeadingLevel.HEADING_5;
+    }
+}

@@ -1,0 +1,2248 @@
+{
+    "clientLedger": {
+        "input": {
+            "pageLimit": 15,
+            "websiteUrl": "https://www.magna.com/",
+            "pagesCaptured": 14
+        },
+        "stats": {
+            "computed": {
+                "hedgingPct": 5,
+                "uniqueTerms": 1420,
+                "activeVoicePct": 75,
+                "totalHumanWords": 4850,
+                "readabilityGrade": 12,
+                "avgSentenceLength": 16,
+                "technicalDensityPct": 32,
+                "lexicalDiversityPer1k": 410
+            },
+            "statsSource": "computed",
+            "analysisStats": null
+        },
+        "lexicon": {
+            "genericTerms": [
+                {
+                    "url": "https://www.magna.com/",
+                    "term": "Mobility",
+                    "context": "advancements in mobility help build a better world"
+                },
+                {
+                    "url": "https://www.magna.com/products/powertrain/hybrid-powertrain",
+                    "term": "Electrification",
+                    "context": "Let's Talk Electrification!"
+                },
+                {
+                    "url": "https://www.magna.com/company/esg",
+                    "term": "Sustainability",
+                    "context": "sustainability efforts we are committed to"
+                }
+            ],
+            "lexiconNotes": "Strong ownership of specific product technologies (trademarked terms) while using broad industry standard terms for high-level narrative.",
+            "distinctiveTerms": [
+                {
+                    "url": "https://www.magna.com/products/powertrain/modules-and-components",
+                    "term": "EtelligentPower",
+                    "context": "Magna's EtelligentPower EV Mechanical Modules & Components",
+                    "freqPct": null,
+                    "ownership": "High"
+                },
+                {
+                    "url": "https://www.magna.com/products/exterior-interior/mechatronics",
+                    "term": "SmartLatch",
+                    "context": "Magna’s first to market SmartLatch™",
+                    "freqPct": null,
+                    "ownership": "High"
+                },
+                {
+                    "url": "https://www.magna.com/products/powertrain/hybrid-powertrain",
+                    "term": "DHD Duo",
+                    "context": "Magna's DHD Duo family is a two e-motor system",
+                    "freqPct": null,
+                    "ownership": "High"
+                },
+                {
+                    "url": "https://www.magna.com/products/exterior-interior/mechatronics",
+                    "term": "LiteFlex",
+                    "context": "LiteFlex™ is a revolutionary door system",
+                    "freqPct": null,
+                    "ownership": "High"
+                }
+            ]
+        },
+        "audiences": [
+            {
+                "name": "Automotive OEMs",
+                "evidence": [
+                    {
+                        "url": "https://www.magna.com/",
+                        "text": "support every major automaker in the world"
+                    },
+                    {
+                        "url": "https://www.magna.com/products/exterior-interior/mechatronics",
+                        "text": "Door modules provide manufacturing savings"
+                    }
+                ],
+                "confidence": "High",
+                "description": "Vehicle manufacturers looking for systems, modules, and manufacturing partners.",
+                "keyPatterns": [
+                    "trusted partner to automakers",
+                    "support every major automaker",
+                    "reduce manufacturing complexity"
+                ]
+            },
+            {
+                "name": "Investors",
+                "evidence": [
+                    {
+                        "url": "https://www.magna.com/",
+                        "text": "reasons why people invest in Magna"
+                    },
+                    {
+                        "url": "https://www.magna.com/company/company-information",
+                        "text": "NYSE MGA: $55.08"
+                    }
+                ],
+                "confidence": "High",
+                "description": "Shareholders and financial analysts interested in stock performance and growth.",
+                "keyPatterns": [
+                    "Stock Information",
+                    "Quarterly Webcasts",
+                    "Annual Report"
+                ]
+            },
+            {
+                "name": "Suppliers",
+                "evidence": [
+                    {
+                        "url": "https://www.magna.com/company/suppliers",
+                        "text": "Quality, integrity, and trust are the foundation"
+                    }
+                ],
+                "confidence": "High",
+                "description": "Companies looking to sell materials or services to Magna.",
+                "keyPatterns": [
+                    "Supplier Code of Conduct",
+                    "Global Supply Chain Requirements"
+                ]
+            }
+        ],
+        "inference": {
+            "brandName": "Magna",
+            "businessModel": "B2B",
+            "confidenceNotes": "High confidence in B2B model due to explicit references to OEMs, automakers, and supplier awards.",
+            "categoryEvidence": [
+                {
+                    "url": "https://www.magna.com/company/company-information",
+                    "text": "Discover Magna, the mobility technology company"
+                },
+                {
+                    "url": "https://www.magna.com/company/company-information",
+                    "text": "Magna is one of the world’s largest automotive suppliers"
+                }
+            ],
+            "brandNameEvidence": [
+                {
+                    "url": "https://www.magna.com/",
+                    "text": "Magna International - Forward. For all."
+                }
+            ],
+            "categoryHypothesis": "Mobility Technology & Automotive Tier 1 Supplier",
+            "businessModelEvidence": [
+                {
+                    "url": "https://www.magna.com/company/company-information",
+                    "text": "trusted partner to automakers in the industry’s most critical markets"
+                },
+                {
+                    "url": "https://www.magna.com/company/company-information/global-reach",
+                    "text": "support every major automaker in the world"
+                }
+            ],
+            "primaryConversionGoal": "B2B Partnership / Investor Confidence",
+            "conversionGoalEvidence": [
+                {
+                    "url": "https://www.magna.com/products/powertrain/modules-and-components",
+                    "text": "Fill out the form to get in touch with us."
+                },
+                {
+                    "url": "https://www.magna.com/",
+                    "text": "Innovation... are just some of the reasons why people invest"
+                }
+            ]
+        },
+        "portfolio": [
+            {
+                "url": "https://www.magna.com/products/powertrain/modules-and-components",
+                "entity": "EtelligentPower",
+                "category": "Solution",
+                "confidence": "High",
+                "positioningExtract": "increase safety, efficiency, and performance of BEVs and Hybrids"
+            },
+            {
+                "url": "https://www.magna.com/products/exterior-interior/mechatronics",
+                "entity": "SmartAccess",
+                "category": "Product",
+                "confidence": "High",
+                "positioningExtract": "complete power door system that reimagines traditional vehicle interactions"
+            },
+            {
+                "url": "https://www.magna.com/products/exterior-interior/greenhouse-surrounds",
+                "entity": "Greenhouse Surrounds",
+                "category": "Product",
+                "confidence": "High",
+                "positioningExtract": "greatly enhance the styling of a vehicle and create a seamless appearance"
+            },
+            {
+                "url": "https://www.magna.com/products/exterior-interior/seating",
+                "entity": "Automotive Seating",
+                "category": "Product",
+                "confidence": "High",
+                "positioningExtract": "centerpiece of the passenger experience"
+            }
+        ],
+        "limitations": [
+            "No direct case study pages captured, though news releases mention specific customer wins.",
+            "Analysis limited to first 14 pages; deeper product catalogs not fully explored."
+        ],
+        "machineView": {
+            "schemaTypes": [],
+            "altTextExamples": [
+                {
+                    "url": "https://www.magna.com/products/exterior-interior/greenhouse-surrounds",
+                    "text": "Black GMC Denali"
+                },
+                {
+                    "url": "https://www.magna.com/company/company-information/global-reach",
+                    "text": "Grey globe with mesh background with black and red wavy lines"
+                },
+                {
+                    "url": "https://www.magna.com/products/powertrain/modules-and-components",
+                    "text": "eLSD unit showcasing compact housing and output shaft design"
+                }
+            ],
+            "urlPatternNotes": [
+                "Clean hierarchy: /company/company-information/global-reach",
+                "Product hierarchy: /products/exterior-interior/mechatronics"
+            ],
+            "humanMachineGaps": [
+                "Some alt text is purely decorative or descriptive of the image file rather than the content context (e.g., 'banner-global-reach')."
+            ],
+            "metaTitleExamples": [
+                {
+                    "url": "https://www.magna.com/",
+                    "text": "Magna International - Forward. For all."
+                },
+                {
+                    "url": "https://www.magna.com/products/exterior-interior/mechatronics",
+                    "text": "Mechatronics - fusion of mechanical and electronic | Magna"
+                }
+            ],
+            "openGraphExamples": [],
+            "metaDescriptionExamples": [
+                {
+                    "url": "https://www.magna.com/",
+                    "text": "Magna. Forward. For all. Explore how Magna´s advancements in mobility help build a better world for everyone and everything."
+                },
+                {
+                    "url": "https://www.magna.com/company/company-information/global-reach",
+                    "text": "View Magna's presence by region and see how Magna's global footprint is prepared to support automakers around the world."
+                }
+            ]
+        },
+        "proofSignals": {
+            "inventory": [
+                {
+                    "url": "https://www.magna.com/",
+                    "type": "MetricClaim",
+                    "evidenceText": "164k+ People, 28 Countries, 337 Manufacturing Facilities",
+                    "nearPrimaryCta": true
+                },
+                {
+                    "url": "https://www.magna.com/products/exterior-interior/seating",
+                    "type": "Award",
+                    "evidenceText": "Magna Wins 2024 Automotive News PACE Award",
+                    "nearPrimaryCta": false
+                },
+                {
+                    "url": "https://www.magna.com/products/exterior-interior/seating",
+                    "type": "Award",
+                    "evidenceText": "Magna Earns Five 2023 Supplier of the Year Award from General Motors",
+                    "nearPrimaryCta": false
+                },
+                {
+                    "url": "https://www.magna.com/",
+                    "type": "Partner",
+                    "evidenceText": "GAC Accelerates European EV Strategy with Magna",
+                    "nearPrimaryCta": false
+                },
+                {
+                    "url": "https://www.magna.com/products/powertrain/modules-and-components",
+                    "type": "Partner",
+                    "evidenceText": "LG Magna e-Powertrain... joint venture between LG Electronics and Magna",
+                    "nearPrimaryCta": false
+                }
+            ],
+            "proofNotes": "Magna relies heavily on scale metrics and prestigious industry awards/partnerships to establish dominance."
+        },
+        "schemaVersion": "hbai-mini-audit-ledger-v7",
+        "coherencePreview": {
+            "notes": "High coherence. The stated mission of being a 'mobility technology company' is strongly supported by the emergent evidence of deep technical capabilities, global scale, and innovation awards.",
+            "evidenceUrls": [
+                "https://www.magna.com/company/company-information",
+                "https://www.magna.com/products"
+            ],
+            "statedVsEmergentScore": 90
+        },
+        "conversionSignals": {
+            "frictions": [
+                "Heavy reliance on 'Learn More' linking to internal pages rather than direct conversion.",
+                "Contact forms are buried deep within product sub-pages."
+            ],
+            "confidence": "High",
+            "topCtaLabels": [
+                {
+                    "count": 15,
+                    "label": "Learn more"
+                },
+                {
+                    "count": 8,
+                    "label": "Read story"
+                },
+                {
+                    "count": 3,
+                    "label": "Contact us"
+                }
+            ],
+            "quickFixIdeas": [
+                "Add direct 'Contact Sales' or 'Partner with Us' CTA to the global navigation.",
+                "Consolidate 'Learn more' links to specific functional outcomes."
+            ]
+        },
+        "outsideInEntryTest": {
+            "whoItsFor": "Automotive OEMs, Investors, and Job Seekers.",
+            "clarity10s": "Clear that it is a major automotive company, but specific offerings require navigation.",
+            "confidence": "High",
+            "primaryCtas": [
+                {
+                    "url": "https://www.magna.com/company/company-information",
+                    "label": "Learn more"
+                },
+                {
+                    "url": "https://www.magna.com/products/powertrain/powertrain-contact-form",
+                    "label": "Contact Us"
+                }
+            ],
+            "evidenceUrls": [
+                "https://www.magna.com/"
+            ],
+            "topConfusions": [
+                "Distinction between 'Mobility Technology' and traditional auto parts might be subtle for non-industry visitors."
+            ],
+            "trustSignalsEarly": [
+                {
+                    "url": "https://www.magna.com/",
+                    "type": "Scale Metrics",
+                    "evidenceText": "164k+ People, 28 Countries, 337 Manufacturing Facilities"
+                },
+                {
+                    "url": "https://www.magna.com/",
+                    "type": "Stock Ticker",
+                    "evidenceText": "NYSE MGA: $55.08"
+                }
+            ]
+        },
+        "brandNarrativeSignals": [
+            {
+                "signal": "Tagline/Hook",
+                "stated": [
+                    {
+                        "url": "https://www.magna.com/",
+                        "text": "Forward. For all."
+                    }
+                ],
+                "implied": {
+                    "evidence": [],
+                    "synthesis": null
+                },
+                "emergent": {
+                    "evidence": [
+                        {
+                            "url": "https://www.magna.com/",
+                            "text": "Magna International - Forward. For all."
+                        }
+                    ],
+                    "pageCount": 1,
+                    "synthesis": "Universal advancement through mobility technology.",
+                    "instanceCount": 3,
+                    "recurrenceTag": "Frequent"
+                },
+                "confidence": "High"
+            },
+            {
+                "signal": "CompanyDescriptor",
+                "stated": [
+                    {
+                        "url": "https://www.magna.com/company/company-information",
+                        "text": "mobility technology company"
+                    }
+                ],
+                "implied": {
+                    "evidence": [
+                        {
+                            "url": "https://www.magna.com/company/company-information",
+                            "text": "At Magna, we don’t just supply the industry, we help build it."
+                        }
+                    ],
+                    "synthesis": "Not just a parts supplier, but an architect of vehicles."
+                },
+                "emergent": {
+                    "evidence": [
+                        {
+                            "url": "https://www.magna.com/",
+                            "text": "complete vehicle expertise uniquely positions us"
+                        },
+                        {
+                            "url": "https://www.magna.com/products",
+                            "text": "full systems approach to innovation"
+                        }
+                    ],
+                    "pageCount": 5,
+                    "synthesis": "Full-stack automotive systems partner.",
+                    "instanceCount": 8,
+                    "recurrenceTag": "Frequent"
+                },
+                "confidence": "High"
+            },
+            {
+                "signal": "Values",
+                "stated": [
+                    {
+                        "url": "https://www.magna.com/company/company-information",
+                        "text": "Think big, Take responsibility, Never settle, Be collaborative"
+                    }
+                ],
+                "implied": {
+                    "evidence": [],
+                    "synthesis": null
+                },
+                "emergent": {
+                    "evidence": [
+                        {
+                            "url": "https://www.magna.com/company/company-information",
+                            "text": "driven by precision, operational excellence"
+                        },
+                        {
+                            "url": "https://www.magna.com/",
+                            "text": "innovation and world-class manufacturing"
+                        }
+                    ],
+                    "pageCount": 6,
+                    "synthesis": "Operational Excellence & Innovation",
+                    "instanceCount": 10,
+                    "recurrenceTag": "Frequent"
+                },
+                "confidence": "High"
+            }
+        ],
+        "contentTypeDistribution": {
+            "types": [
+                {
+                    "type": "Product/Solutions",
+                    "notes": "Deep technical pages on Powertrain, Seating, Mechatronics, Exteriors.",
+                    "pages": 6
+                },
+                {
+                    "type": "Innovation/Technology",
+                    "notes": "Innovation mentions interwoven with product pages and homepage.",
+                    "pages": 2
+                },
+                {
+                    "type": "Company/About",
+                    "notes": "Strong focus on Global Reach, ESG, and Company Information.",
+                    "pages": 4
+                },
+                {
+                    "type": "News/Resources",
+                    "notes": "Stories hub, Investor calendar, and press releases on homepage.",
+                    "pages": 2
+                },
+                {
+                    "type": "Case Studies/Customers",
+                    "notes": "Customer mentions exist (GAC, XPENG) but no dedicated case study pages captured.",
+                    "pages": 0
+                }
+            ],
+            "source": "inferred"
+        },
+        "dominantLinguisticCategories": {
+            "authorityMarkers": {
+                "count": 45,
+                "evidence": [
+                    {
+                        "url": "https://www.magna.com/company/company-information",
+                        "text": "Magna is one of the world’s largest automotive suppliers"
+                    },
+                    {
+                        "url": "https://www.magna.com/products/powertrain/modules-and-components",
+                        "text": "preferred global manufacturer of mechanical components"
+                    }
+                ],
+                "recurrenceTag": "Frequent"
+            },
+            "emotionalLanguage": {
+                "count": 12,
+                "evidence": [
+                    {
+                        "url": "https://www.magna.com/products/exterior-interior/seating",
+                        "text": "Seating is the heart of every journey."
+                    },
+                    {
+                        "url": "https://www.magna.com/products/powertrain/modules-and-components",
+                        "text": "Breathe cleaner, across the globe"
+                    }
+                ],
+                "recurrenceTag": "Rare"
+            },
+            "persuasionMarkers": {
+                "count": 25,
+                "evidence": [
+                    {
+                        "url": "https://www.magna.com/products/powertrain/modules-and-components",
+                        "text": "No matter the challenge, we have the Powertrain Solution"
+                    },
+                    {
+                        "url": "https://www.magna.com/products/exterior-interior/mechatronics",
+                        "text": "Luxury Without Compromising Safety"
+                    }
+                ],
+                "recurrenceTag": "Some"
+            },
+            "technicalLanguage": {
+                "count": 85,
+                "evidence": [
+                    {
+                        "url": "https://www.magna.com/products/powertrain/modules-and-components",
+                        "text": "superior NVH behaviour via integrated powertrain controls"
+                    },
+                    {
+                        "url": "https://www.magna.com/products/exterior-interior/mechatronics",
+                        "text": "uses vehicle input switches and CAN messages"
+                    }
+                ],
+                "recurrenceTag": "Frequent"
+            },
+            "confidenceVsHedging": {
+                "notes": "High confidence. Very little hedging. Statements are factual and assertive regarding capabilities.",
+                "evidence": [
+                    {
+                        "url": "https://www.magna.com/company/company-information",
+                        "text": "We don’t just supply the industry, we help build it."
+                    }
+                ]
+            },
+            "voiceActiveVsPassive": {
+                "notes": "Predominantly active voice when describing company actions ('Magna designs', 'We offer').",
+                "evidence": [
+                    {
+                        "url": "https://www.magna.com/products/exterior-interior/seating",
+                        "text": "Magna transforms the way people interact with their vehicles"
+                    }
+                ]
+            },
+            "distributionNarrative": "The content is heavily weighted towards technical proof and global scale, designed to reassure large automotive clients of capacity and competence."
+        }
+    },
+    "competitorLedgers": [
+        {
+            "input": {
+                "pageLimit": 15,
+                "websiteUrl": "https://www.bosch.com/",
+                "pagesCaptured": 15
+            },
+            "stats": {
+                "computed": {
+                    "hedgingPct": null,
+                    "uniqueTerms": null,
+                    "activeVoicePct": null,
+                    "totalHumanWords": null,
+                    "readabilityGrade": null,
+                    "avgSentenceLength": null,
+                    "technicalDensityPct": null,
+                    "lexicalDiversityPer1k": null
+                },
+                "statsSource": "none",
+                "analysisStats": null
+            },
+            "lexicon": {
+                "genericTerms": [
+                    {
+                        "url": "https://www.bosch.com/sustainability/environment/",
+                        "term": "Sustainability",
+                        "context": "Corporate goal."
+                    },
+                    {
+                        "url": "https://www.bosch.com/research/",
+                        "term": "Electrification",
+                        "context": "Research field."
+                    },
+                    {
+                        "url": "https://www.bosch.com/stories/topics/automated-driving/",
+                        "term": "Automated driving",
+                        "context": "Topic focus."
+                    }
+                ],
+                "lexiconNotes": "Strong ownership of 'Invented for life'. Heavy use of industry standard terms (AI, IoT, Carbon neutral) but branded with specific Bosch 'Research fields' framing.",
+                "distinctiveTerms": [
+                    {
+                        "url": "https://www.bosch.com/",
+                        "term": "Invented for life",
+                        "context": "Brand tagline/philosophy.",
+                        "freqPct": null,
+                        "ownership": "High"
+                    },
+                    {
+                        "url": "https://www.bosch.com/",
+                        "term": "#LikeABosch",
+                        "context": "Employer branding and campaign slogan.",
+                        "freqPct": null,
+                        "ownership": "High"
+                    },
+                    {
+                        "url": "https://www.bosch.com/research/research-fields/electrification/",
+                        "term": "Sector coupling",
+                        "context": "Connecting mobility and building energy systems.",
+                        "freqPct": null,
+                        "ownership": "Medium"
+                    }
+                ]
+            },
+            "audiences": [
+                {
+                    "name": "Consumers (Home)",
+                    "evidence": [
+                        {
+                            "url": "https://www.bosch.com/",
+                            "text": "Our products for your home... Home appliances, Power tools"
+                        }
+                    ],
+                    "confidence": "High",
+                    "description": "Individuals looking for appliances, tools, and smart home tech.",
+                    "keyPatterns": [
+                        "Home appliances",
+                        "Power tools",
+                        "Smart Home",
+                        "Garden tools"
+                    ]
+                },
+                {
+                    "name": "Industrial/B2B Partners",
+                    "evidence": [
+                        {
+                            "url": "https://www.bosch.com/",
+                            "text": "Discover our products and services for industry and trades"
+                        },
+                        {
+                            "url": "https://www.bosch.com/products-and-services/industry-and-trades/",
+                            "text": "Bosch Rexroth is a globally active partner"
+                        }
+                    ],
+                    "confidence": "High",
+                    "description": "Companies needing factory automation, mobility parts, or building tech.",
+                    "keyPatterns": [
+                        "Drive and control technology",
+                        "Mobility solutions",
+                        "Industrial software",
+                        "Fleet management"
+                    ]
+                },
+                {
+                    "name": "Researchers & Talent",
+                    "evidence": [
+                        {
+                            "url": "https://www.bosch.com/stories/topics/automated-driving/",
+                            "text": "We are on the constant lookout for software developers"
+                        },
+                        {
+                            "url": "https://www.bosch.com/research/about-bosch-research/working-at-bosch-research/",
+                            "text": "Working at Bosch Research"
+                        }
+                    ],
+                    "confidence": "High",
+                    "description": "Scientists and engineers to drive R&D.",
+                    "keyPatterns": [
+                        "1,750 experts",
+                        "PhD students",
+                        "Working at Bosch Research",
+                        "Industry Sabbatical"
+                    ]
+                }
+            ],
+            "inference": {
+                "brandName": "Bosch",
+                "businessModel": "Other",
+                "confidenceNotes": "High confidence. The corpus includes a comprehensive 'Facts and Figures' page and explicit company overview.",
+                "categoryEvidence": [
+                    {
+                        "url": "https://www.bosch.com/company/",
+                        "text": "Mobility, Industrial Technology, Consumer Goods, and Energy and Building Technology"
+                    }
+                ],
+                "brandNameEvidence": [
+                    {
+                        "url": "https://www.bosch.com/",
+                        "text": "Invented for life | Bosch Global"
+                    },
+                    {
+                        "url": "https://www.bosch.com/company/leadership/",
+                        "text": "Robert Bosch GmbH"
+                    }
+                ],
+                "categoryHypothesis": "Global Technology & Services Conglomerate",
+                "businessModelEvidence": [
+                    {
+                        "url": "https://www.bosch.com/company/",
+                        "text": "operations are divided into four business sectors: Mobility, Industrial Technology, Consumer Goods"
+                    },
+                    {
+                        "url": "https://www.bosch.com/company/",
+                        "text": "Bosch is a leading global supplier of technology and services"
+                    }
+                ],
+                "primaryConversionGoal": "Brand Engagement / Information Dissemination",
+                "conversionGoalEvidence": [
+                    {
+                        "url": "https://www.bosch.com/",
+                        "text": "Explore our stories"
+                    },
+                    {
+                        "url": "https://www.bosch.com/licenses-and-patents/",
+                        "text": "Submit an innovation proposal"
+                    },
+                    {
+                        "url": "https://www.bosch.com/stories/topics/automated-driving/",
+                        "text": "Find your new job — across the globe!"
+                    }
+                ]
+            },
+            "portfolio": [
+                {
+                    "url": "https://www.bosch.com/",
+                    "entity": "Mobility",
+                    "category": "Solution",
+                    "confidence": "High",
+                    "positioningExtract": "Explore our complete portfolio of mobility solutions"
+                },
+                {
+                    "url": "https://www.bosch.com/",
+                    "entity": "Home Appliances",
+                    "category": "Product",
+                    "confidence": "High",
+                    "positioningExtract": "Home appliances... Power tools... Garden tools"
+                },
+                {
+                    "url": "https://www.bosch.com/products-and-services/industry-and-trades/",
+                    "entity": "Bosch Rexroth",
+                    "category": "Solution",
+                    "confidence": "High",
+                    "positioningExtract": "Drive and control technology... globally active partner"
+                },
+                {
+                    "url": "https://www.bosch.com/research/",
+                    "entity": "Bosch Research",
+                    "category": "Service",
+                    "confidence": "High",
+                    "positioningExtract": "Spearhead of innovation... 1,750 experts"
+                }
+            ],
+            "limitations": [
+                "Analysis limited to the Global corporate site; did not traverse into specific e-commerce sub-domains (e.g., bosch-home.com) where conversion mechanics would differ."
+            ],
+            "machineView": {
+                "schemaTypes": [],
+                "altTextExamples": [
+                    {
+                        "url": "https://www.bosch.com/",
+                        "text": "Robotic hand against a dark background"
+                    },
+                    {
+                        "url": "https://www.bosch.com/stories/topics/automated-driving/",
+                        "text": "A self-driving car equipped with multiple sensors stands in front of a pedestrian crosswalk in a city."
+                    }
+                ],
+                "urlPatternNotes": [
+                    "Clean hierarchy: /research/, /stories/, /company/, /products-and-services/."
+                ],
+                "humanMachineGaps": [
+                    "No significant gaps found; alt text is descriptive and helpful for accessibility/SEO."
+                ],
+                "metaTitleExamples": [
+                    {
+                        "url": "https://www.bosch.com/",
+                        "text": "Invented for life | Bosch Global"
+                    },
+                    {
+                        "url": "https://www.bosch.com/research/",
+                        "text": "Research | Bosch Global"
+                    }
+                ],
+                "openGraphExamples": [],
+                "metaDescriptionExamples": [
+                    {
+                        "url": "https://www.bosch.com/",
+                        "text": "Moving stories and inspiring interviews. Experience the meaning of \"invented for life\" by Bosch completely new..."
+                    },
+                    {
+                        "url": "https://www.bosch.com/research/",
+                        "text": "Research forms the basis of Bosch products and services — searching for answers is a fundamentally important part of what we do."
+                    }
+                ]
+            },
+            "proofSignals": {
+                "inventory": [
+                    {
+                        "url": "https://www.bosch.com/company/facts-and-figures/",
+                        "type": "MetricClaim",
+                        "evidenceText": "Sales of 90.3 billion euros",
+                        "nearPrimaryCta": false
+                    },
+                    {
+                        "url": "https://www.bosch.com/sustainability/environment/",
+                        "type": "MetricClaim",
+                        "evidenceText": "Carbon neutral since 2020",
+                        "nearPrimaryCta": true
+                    },
+                    {
+                        "url": "https://www.bosch.com/company/",
+                        "type": "MetricClaim",
+                        "evidenceText": "417,900 associates worldwide",
+                        "nearPrimaryCta": false
+                    },
+                    {
+                        "url": "https://www.bosch.com/research/",
+                        "type": "Award",
+                        "evidenceText": "Bosch team wins the Deutscher Zukunftspreis",
+                        "nearPrimaryCta": false
+                    }
+                ],
+                "proofNotes": "Bosch relies heavily on massive scale metrics (billions in sales, thousands of employees/researchers) and sustainability achievements (carbon neutrality) to establish trust."
+            },
+            "schemaVersion": "hbai-mini-audit-ledger-v7",
+            "coherencePreview": {
+                "notes": "The stated mission ('Invented for life', 'Sustainability') is perfectly mirrored in the content hierarchy (Research topics, Sustainability reports, Product lines).",
+                "evidenceUrls": [
+                    "https://www.bosch.com/",
+                    "https://www.bosch.com/sustainability/environment/"
+                ],
+                "statedVsEmergentScore": 0.95
+            },
+            "conversionSignals": {
+                "frictions": [
+                    "The site is primarily informational/corporate; actual purchasing often requires navigating to a sub-site or dealer.",
+                    "Vast amount of content can make finding specific B2B solutions slow."
+                ],
+                "confidence": "High",
+                "topCtaLabels": [
+                    {
+                        "count": 15,
+                        "label": "Learn more"
+                    },
+                    {
+                        "count": 5,
+                        "label": "Read more"
+                    },
+                    {
+                        "count": 1,
+                        "label": "Show all products"
+                    }
+                ],
+                "quickFixIdeas": [
+                    "More direct 'Buy' or 'Contact Sales' paths for B2B products on the main pages."
+                ]
+            },
+            "outsideInEntryTest": {
+                "whoItsFor": "Global audience: Consumers (appliances), Business Leaders (industry/mobility), and Talent (researchers).",
+                "clarity10s": "Clear. The tagline 'Invented for life' and the immediate visual segmentation of 'Home', 'Mobility', 'Industry' makes the scope clear.",
+                "confidence": "High",
+                "primaryCtas": [
+                    {
+                        "url": "https://www.bosch.com/products-and-services/at-home/",
+                        "label": "Show all products"
+                    },
+                    {
+                        "url": "https://www.bosch.com/stories/",
+                        "label": "Explore all stories"
+                    },
+                    {
+                        "url": "https://jobs.bosch.com/en/",
+                        "label": "Apply now"
+                    }
+                ],
+                "evidenceUrls": [
+                    "https://www.bosch.com/"
+                ],
+                "topConfusions": [
+                    "The sheer breadth of the portfolio (Toasters to Industrial Boilers) can be overwhelming.",
+                    "Navigating between the corporate 'Global' site and specific product purchasing sites."
+                ],
+                "trustSignalsEarly": [
+                    {
+                        "url": "https://www.bosch.com/",
+                        "type": "Tagline",
+                        "evidenceText": "Invented for life"
+                    },
+                    {
+                        "url": "https://www.bosch.com/",
+                        "type": "Visual Authority",
+                        "evidenceText": "High-quality imagery of robotics and clean tech"
+                    }
+                ]
+            },
+            "brandNarrativeSignals": [
+                {
+                    "signal": "Tagline/Hook",
+                    "stated": [
+                        {
+                            "url": "https://www.bosch.com/",
+                            "text": "Invented for life"
+                        }
+                    ],
+                    "implied": {
+                        "evidence": [],
+                        "synthesis": null
+                    },
+                    "emergent": {
+                        "evidence": [
+                            {
+                                "url": "https://www.bosch.com/research/",
+                                "text": "improve people’s quality of life... conserving natural resources"
+                            }
+                        ],
+                        "pageCount": 15,
+                        "synthesis": "Technology with a human and ecological conscience.",
+                        "instanceCount": 6,
+                        "recurrenceTag": "Frequent"
+                    },
+                    "confidence": "High"
+                },
+                {
+                    "signal": "Purpose/Why",
+                    "stated": [
+                        {
+                            "url": "https://www.bosch.com/company/",
+                            "text": "spark enthusiasm, improve quality of life, and help conserve natural resources"
+                        }
+                    ],
+                    "implied": {
+                        "evidence": [
+                            {
+                                "url": "https://www.bosch.com/research/research-fields/electrification/",
+                                "text": "Electrification is thus an important lever for achieving CO₂ neutrality"
+                            }
+                        ],
+                        "synthesis": "Bosch sees itself as an enabler of the global transition to green energy and automation."
+                    },
+                    "emergent": {
+                        "evidence": [
+                            {
+                                "url": "https://www.bosch.com/research/research-fields/",
+                                "text": "Sustainability and climate action... are trends which are changing both society and industry"
+                            }
+                        ],
+                        "pageCount": null,
+                        "synthesis": "Balancing technological progress with sustainability.",
+                        "instanceCount": null,
+                        "recurrenceTag": "Frequent"
+                    },
+                    "confidence": "High"
+                },
+                {
+                    "signal": "NarrativeTheme",
+                    "stated": [
+                        {
+                            "url": "https://www.bosch.com/company/",
+                            "text": "Be #LikeABosch"
+                        }
+                    ],
+                    "implied": {
+                        "evidence": [],
+                        "synthesis": "A shift from purely 'German engineering' stoicism to a more modern, confident, and slightly playful identity."
+                    },
+                    "emergent": {
+                        "evidence": [
+                            {
+                                "url": "https://www.bosch.com/",
+                                "text": "Work #LikeABosch — Apply now"
+                            }
+                        ],
+                        "pageCount": null,
+                        "synthesis": "Competence, coolness, and responsibility combined.",
+                        "instanceCount": null,
+                        "recurrenceTag": "Some"
+                    },
+                    "confidence": "Medium"
+                }
+            ],
+            "contentTypeDistribution": {
+                "types": [
+                    {
+                        "type": "Product/Solutions",
+                        "notes": "Home/Mobility/Industry product overviews (Page 1, 8, 15).",
+                        "pages": 3
+                    },
+                    {
+                        "type": "Innovation/Technology",
+                        "notes": "Deep dives into Research, Automated Driving, Electrification (Page 2, 3, 6, 10, 13).",
+                        "pages": 5
+                    },
+                    {
+                        "type": "Company/About",
+                        "notes": "Leadership, Facts, Purchasing, Sustainability, Working at Bosch (Page 5, 7, 9, 11, 12, 14).",
+                        "pages": 6
+                    },
+                    {
+                        "type": "News/Resources",
+                        "notes": "Research stories index (Page 4).",
+                        "pages": 1
+                    },
+                    {
+                        "type": "Case Studies/Customers",
+                        "notes": "Stories are integrated into topic pages rather than standalone case study pages in this sample.",
+                        "pages": 0
+                    }
+                ],
+                "source": "inferred"
+            },
+            "dominantLinguisticCategories": {
+                "authorityMarkers": {
+                    "count": null,
+                    "evidence": [
+                        {
+                            "url": "https://www.bosch.com/company/facts-and-figures/",
+                            "text": "Bosch Group generated sales of 90.3 billion euros"
+                        },
+                        {
+                            "url": "https://www.bosch.com/sustainability/environment/",
+                            "text": "Carbon neutral since 2020 (scope 1 & 2)"
+                        },
+                        {
+                            "url": "https://www.bosch.com/research/about-bosch-research/working-at-bosch-research/",
+                            "text": "Bosch Research contributes to around a quarter of all patent applications"
+                        }
+                    ],
+                    "recurrenceTag": "Frequent"
+                },
+                "emotionalLanguage": {
+                    "count": null,
+                    "evidence": [
+                        {
+                            "url": "https://www.bosch.com/company/",
+                            "text": "Spark enthusiasm, improve quality of life"
+                        },
+                        {
+                            "url": "https://www.bosch.com/",
+                            "text": "Moving stories and inspiring interviews"
+                        }
+                    ],
+                    "recurrenceTag": "Some"
+                },
+                "persuasionMarkers": {
+                    "count": null,
+                    "evidence": [
+                        {
+                            "url": "https://www.bosch.com/",
+                            "text": "Work #LikeABosch — Apply now"
+                        },
+                        {
+                            "url": "https://www.bosch.com/products-and-services/industry-and-trades/",
+                            "text": "Discover our products and services"
+                        }
+                    ],
+                    "recurrenceTag": "Some"
+                },
+                "technicalLanguage": {
+                    "count": null,
+                    "evidence": [
+                        {
+                            "url": "https://www.bosch.com/stories/topics/automated-driving/",
+                            "text": "Steer-by-Wire... rack and pinion actuator"
+                        },
+                        {
+                            "url": "https://www.bosch.com/",
+                            "text": "hydrogen electrolysis and stationary fuel cells"
+                        },
+                        {
+                            "url": "https://www.bosch.com/",
+                            "text": "MEMS-sensors... Micro-Electro-Mechanical Systems"
+                        }
+                    ],
+                    "recurrenceTag": "Frequent"
+                },
+                "confidenceVsHedging": {
+                    "notes": "High confidence in technological leadership and sustainability achievements. Minimal hedging.",
+                    "evidence": [
+                        {
+                            "url": "https://www.bosch.com/research/about-bosch-research/working-at-bosch-research/",
+                            "text": "We are pioneers... our research work leads the way"
+                        },
+                        {
+                            "url": "https://www.bosch.com/research/research-fields/electrification/",
+                            "text": "Green hydrogen is the future"
+                        }
+                    ]
+                },
+                "voiceActiveVsPassive": {
+                    "notes": "Active voice used in mission statements ('We want', 'We act'). Passive often used in technical descriptions ('is achieved', 'are generated').",
+                    "evidence": [
+                        {
+                            "url": "https://www.bosch.com/company/",
+                            "text": "We want to deliver top quality and reliability"
+                        },
+                        {
+                            "url": "https://www.bosch.com/sustainability/environment/",
+                            "text": "Electricity is generated from renewable sources"
+                        }
+                    ]
+                },
+                "distributionNarrative": "The content is heavily weighted towards 'Innovation' and 'Responsibility'. It positions Bosch not just as a manufacturer, but as a scientific institution and a steward of the future (Sustainability/Climate)."
+            }
+        },
+        {
+            "input": {
+                "pageLimit": 15,
+                "websiteUrl": "https://www.zf.com/",
+                "pagesCaptured": 15
+            },
+            "stats": {
+                "computed": {
+                    "hedgingPct": null,
+                    "uniqueTerms": null,
+                    "activeVoicePct": null,
+                    "totalHumanWords": null,
+                    "readabilityGrade": null,
+                    "avgSentenceLength": null,
+                    "technicalDensityPct": null,
+                    "lexicalDiversityPer1k": null
+                },
+                "statsSource": "computed",
+                "analysisStats": null
+            },
+            "lexicon": {
+                "genericTerms": [
+                    {
+                        "url": "https://www.zf.com/mobile/en/homepage/homepage.html",
+                        "term": "Mobility",
+                        "context": "General industry descriptor."
+                    },
+                    {
+                        "url": "https://www.zf.com/mobile/en/sustainability/sustainability.html",
+                        "term": "Sustainability",
+                        "context": "Corporate responsibility theme."
+                    },
+                    {
+                        "url": "https://www.zf.com/mobile/en/technologies/digital_twins/stories/modern_production.html",
+                        "term": "Digital Twin",
+                        "context": "Manufacturing and development technology."
+                    }
+                ],
+                "lexiconNotes": "ZF uses highly specific branded terms for its software and hardware platforms (cubiX, ProAI, SELECT) to differentiate in a commoditized market.",
+                "distinctiveTerms": [
+                    {
+                        "url": "https://www.zf.com/products/en/cars/home/cars.html",
+                        "term": "cubiX",
+                        "context": "Vehicle motion control software platform.",
+                        "freqPct": null,
+                        "ownership": "High"
+                    },
+                    {
+                        "url": "https://www.zf.com/mobile/en/careers/careers.html",
+                        "term": "FutureStarter",
+                        "context": "Recruitment branding for new employees.",
+                        "freqPct": null,
+                        "ownership": "High"
+                    },
+                    {
+                        "url": "https://www.zf.com/products/en/cars/home/cars.html",
+                        "term": "ProAI",
+                        "context": "Automotive-grade supercomputer.",
+                        "freqPct": null,
+                        "ownership": "High"
+                    },
+                    {
+                        "url": "https://www.zf.com/mobile/en/technologies/ces/ces.html",
+                        "term": "TherMaS",
+                        "context": "Thermal management system for EVs.",
+                        "freqPct": null,
+                        "ownership": "High"
+                    },
+                    {
+                        "url": "https://www.zf.com/mobile/en/careers/careers.html",
+                        "term": "ZF Way",
+                        "context": "Internal principles and strategy.",
+                        "freqPct": null,
+                        "ownership": "High"
+                    }
+                ]
+            },
+            "audiences": [
+                {
+                    "name": "Vehicle Manufacturers (OEMs)",
+                    "evidence": [
+                        {
+                            "url": "https://www.zf.com/mobile/en/homepage/homepage.html",
+                            "text": "primarily aimed at vehicle manufacturers"
+                        }
+                    ],
+                    "confidence": "High",
+                    "description": "Makers of passenger cars, commercial vehicles, and industrial machinery.",
+                    "keyPatterns": [
+                        "Software-defined vehicle",
+                        "Turnkey solutions",
+                        "System expertise"
+                    ]
+                },
+                {
+                    "name": "Talent / Job Seekers",
+                    "evidence": [
+                        {
+                            "url": "https://www.zf.com/mobile/en/careers/careers.html",
+                            "text": "Become our Next #FutureStarter"
+                        }
+                    ],
+                    "confidence": "High",
+                    "description": "Students, graduates, and professionals in engineering and IT.",
+                    "keyPatterns": [
+                        "#FutureStarter",
+                        "Shape the Future",
+                        "Global technology leader"
+                    ]
+                },
+                {
+                    "name": "Fleet Operators",
+                    "evidence": [
+                        {
+                            "url": "https://www.zf.com/products/en/cv/emea/home/cv.html",
+                            "text": "Understanding Bus and Coach Fleet Operators"
+                        }
+                    ],
+                    "confidence": "Medium",
+                    "description": "Managers of bus, truck, and logistics fleets.",
+                    "keyPatterns": [
+                        "Total Cost of Ownership",
+                        "Fleet management",
+                        "Aftermarket"
+                    ]
+                }
+            ],
+            "inference": {
+                "brandName": "ZF",
+                "businessModel": "B2B",
+                "confidenceNotes": "High confidence in B2B model and category due to explicit company profile statements and product portfolio structure.",
+                "categoryEvidence": [
+                    {
+                        "url": "https://www.zf.com/mobile/en/homepage/homepage.html",
+                        "text": "supplies systems for passenger cars, commercial vehicles and industrial technology"
+                    }
+                ],
+                "brandNameEvidence": [
+                    {
+                        "url": "https://www.zf.com/mobile/en/homepage/homepage.html",
+                        "text": "ZF is a global technology company supplying advanced mobility products"
+                    }
+                ],
+                "categoryHypothesis": "Global Mobility & Industrial Technology Supplier",
+                "businessModelEvidence": [
+                    {
+                        "url": "https://www.zf.com/mobile/en/homepage/homepage.html",
+                        "text": "Its comprehensive product range is primarily aimed at vehicle manufacturers"
+                    },
+                    {
+                        "url": "https://www.zf.com/mobile/en/homepage/homepage.html",
+                        "text": "ZF offers comprehensive product and software solutions for established vehicle manufacturers"
+                    }
+                ],
+                "primaryConversionGoal": "Recruitment & B2B Product Discovery",
+                "conversionGoalEvidence": [
+                    {
+                        "url": "https://www.zf.com/mobile/en/careers/careers.html",
+                        "text": "Find Your Job"
+                    },
+                    {
+                        "url": "https://www.zf.com/products/en/cars/home/cars.html",
+                        "text": "ProductFinder for Cars"
+                    }
+                ]
+            },
+            "portfolio": [
+                {
+                    "url": "https://www.zf.com/products/en/cars/home/cars.html",
+                    "entity": "cubiX",
+                    "category": "Solution",
+                    "confidence": "High",
+                    "positioningExtract": "comprehensive cubiX vehicle motion control platform"
+                },
+                {
+                    "url": "https://www.zf.com/products/en/cars/home/cars.html",
+                    "entity": "ZF ProAI",
+                    "category": "Product",
+                    "confidence": "High",
+                    "positioningExtract": "most flexible, scalable and powerful automotive-grade supercomputer"
+                },
+                {
+                    "url": "https://www.zf.com/products/en/cars/edrive/select.html",
+                    "entity": "SELECT",
+                    "category": "Product",
+                    "confidence": "High",
+                    "positioningExtract": "eDrive Platform SELECT for Efficient E-Vehicles"
+                },
+                {
+                    "url": "https://www.zf.com/mobile/en/technologies/ces/ces.html",
+                    "entity": "Smart Camera 6",
+                    "category": "Product",
+                    "confidence": "High",
+                    "positioningExtract": "120-degree field of view with more than 4x higher image resolution"
+                },
+                {
+                    "url": "https://www.zf.com/mobile/en/company/corporate_governance/compliance_the_right_way/compliance_index.html",
+                    "entity": "ZF Trustline",
+                    "category": "Service",
+                    "confidence": "High",
+                    "positioningExtract": "electronic notification system... available to all employees and business partners"
+                }
+            ],
+            "limitations": [
+                "Analysis limited to 15 pages; deep product catalogs for specific industrial parts were not fully traversed.",
+                "No direct access to schema markup source code, inferred from content structure."
+            ],
+            "machineView": {
+                "schemaTypes": [
+                    "Organization",
+                    "WebPage",
+                    "BreadcrumbList"
+                ],
+                "altTextExamples": [
+                    {
+                        "url": "https://www.zf.com/mobile/en/homepage/homepage.html",
+                        "text": "ZF Group home"
+                    },
+                    {
+                        "url": "https://www.zf.com/mobile/en/homepage/homepage.html",
+                        "text": "ZF_CES26_Key-Visual_Grid_Sml"
+                    }
+                ],
+                "urlPatternNotes": [
+                    "Heavy use of '/mobile/en/' path segment suggests mobile-first or legacy mobile site architecture serving main content."
+                ],
+                "humanMachineGaps": [
+                    "Alt text on some key visuals is just the filename (e.g., ZF_CES26_Key-Visual...), missing opportunity for descriptive SEO."
+                ],
+                "metaTitleExamples": [
+                    {
+                        "url": "https://www.zf.com/mobile/en/homepage/homepage.html",
+                        "text": "Homepage ZF Friedrichshafen AG - ZF"
+                    },
+                    {
+                        "url": "https://www.zf.com/mobile/en/careers/careers.html",
+                        "text": "ZF Careers | Shape the Future of Mobility & Automotive - ZF"
+                    }
+                ],
+                "openGraphExamples": [],
+                "metaDescriptionExamples": [
+                    {
+                        "url": "https://www.zf.com/mobile/en/homepage/homepage.html",
+                        "text": "ZF is a global technology company and supplies systems for passenger cars, commercial vehicles and industrial technology."
+                    },
+                    {
+                        "url": "https://www.zf.com/mobile/en/careers/careers.html",
+                        "text": "Explore exciting career opportunities at ZF, a global leader in automotive technology..."
+                    }
+                ]
+            },
+            "proofSignals": {
+                "inventory": [
+                    {
+                        "url": "https://www.zf.com/mobile/en/homepage/homepage.html",
+                        "type": "MetricClaim",
+                        "evidenceText": "ZF reported sales of €41.4 billion in fiscal year 2024",
+                        "nearPrimaryCta": false
+                    },
+                    {
+                        "url": "https://www.zf.com/mobile/en/sustainability/stories/polymer_recycling.html",
+                        "type": "Partner",
+                        "evidenceText": "ZF and its partner BASF successfully completed a circular economy pilot project",
+                        "nearPrimaryCta": false
+                    },
+                    {
+                        "url": "https://www.zf.com/mobile/en/technologies/electric_mobility/stories/range_extender.html",
+                        "type": "ClientLogo",
+                        "evidenceText": "Lotus Eletre... Onboard is state-of-the-art driveline technology from ZF",
+                        "nearPrimaryCta": false
+                    },
+                    {
+                        "url": "https://www.zf.com/products/en/cars/home/cars.html",
+                        "type": "Award",
+                        "evidenceText": "ZF congratulates Porsche for 75 Years of Sports Cars",
+                        "nearPrimaryCta": false
+                    },
+                    {
+                        "url": "https://www.zf.com/products/en/cars/edrive/select.html",
+                        "type": "MetricClaim",
+                        "evidenceText": "Average WLTC efficiency of over 93 percent for primary drives",
+                        "nearPrimaryCta": true
+                    }
+                ],
+                "proofNotes": "Strong reliance on hard financial metrics and historical partnerships (Porsche, Lotus) to establish authority."
+            },
+            "schemaVersion": "hbai-mini-audit-ledger-v7",
+            "coherencePreview": {
+                "notes": "The stated mission of being a 'Global Technology Company' is strongly supported by the emergent content which is dense with technical details, R&D projects, and software focus.",
+                "evidenceUrls": [
+                    "https://www.zf.com/mobile/en/homepage/homepage.html",
+                    "https://www.zf.com/mobile/en/technologies/ces/ces.html"
+                ],
+                "statedVsEmergentScore": 9
+            },
+            "conversionSignals": {
+                "frictions": [
+                    "Navigation is segmented by 'Mobile' URL structure even on desktop content.",
+                    "Many product pages lead to 'Read more' information loops rather than direct contact forms."
+                ],
+                "confidence": "High",
+                "topCtaLabels": [
+                    {
+                        "count": 4,
+                        "label": "Find Your Job"
+                    },
+                    {
+                        "count": 15,
+                        "label": "Read more"
+                    },
+                    {
+                        "count": 3,
+                        "label": "ProductFinder"
+                    }
+                ],
+                "quickFixIdeas": [
+                    "Consolidate 'Read more' links into direct 'Contact an Engineer' CTAs for B2B products.",
+                    "Remove 'Mobile' from URL structure for cleaner sharing."
+                ]
+            },
+            "outsideInEntryTest": {
+                "whoItsFor": "Vehicle manufacturers, mobility providers, and industrial equipment manufacturers.",
+                "clarity10s": "Clear. The homepage immediately identifies ZF as a global technology company for mobility systems.",
+                "confidence": "High",
+                "primaryCtas": [
+                    {
+                        "url": "https://www.zf.com/mobile/en/technologies/ces/ces.html",
+                        "label": "Explore our latest innovations"
+                    },
+                    {
+                        "url": "https://jobs.zf.com/",
+                        "label": "Find Your Job"
+                    }
+                ],
+                "evidenceUrls": [
+                    "https://www.zf.com/mobile/en/homepage/homepage.html"
+                ],
+                "topConfusions": [
+                    "Navigation between 'Mobile' and desktop URLs in structure.",
+                    "Distinction between 'Products' and 'Technologies' sections overlaps significantly."
+                ],
+                "trustSignalsEarly": [
+                    {
+                        "url": "https://www.zf.com/mobile/en/homepage/homepage.html",
+                        "type": "Financials",
+                        "evidenceText": "ZF reported sales of €41.4 billion in fiscal year 2024"
+                    },
+                    {
+                        "url": "https://www.zf.com/mobile/en/homepage/homepage.html",
+                        "type": "Employee Count",
+                        "evidenceText": "With some 161,600 employees worldwide"
+                    }
+                ]
+            },
+            "brandNarrativeSignals": [
+                {
+                    "signal": "Tagline/Hook",
+                    "stated": [
+                        {
+                            "url": "https://www.zf.com/mobile/en/homepage/homepage.html",
+                            "text": "see. think. act."
+                        }
+                    ],
+                    "implied": {
+                        "evidence": [],
+                        "synthesis": null
+                    },
+                    "emergent": {
+                        "evidence": [
+                            {
+                                "url": "https://www.zf.com/products/en/cars/home/cars.html",
+                                "text": "see. think. act."
+                            }
+                        ],
+                        "pageCount": 12,
+                        "synthesis": "The tagline appears on almost every page, reinforcing the autonomous/intelligent system loop.",
+                        "instanceCount": 12,
+                        "recurrenceTag": "Frequent"
+                    },
+                    "confidence": "High"
+                },
+                {
+                    "signal": "Vision/Future",
+                    "stated": [
+                        {
+                            "url": "https://www.zf.com/mobile/en/homepage/homepage.html",
+                            "text": "Driving Mobility Intelligence Forward"
+                        }
+                    ],
+                    "implied": {
+                        "evidence": [
+                            {
+                                "url": "https://www.zf.com/products/en/cars/stories/software_as_a_product.html",
+                                "text": "Software is becoming a key differentiator in automotive industry."
+                            }
+                        ],
+                        "synthesis": "Transitioning from a hardware/mechanical supplier to a software/digital platform provider."
+                    },
+                    "emergent": {
+                        "evidence": [
+                            {
+                                "url": "https://www.zf.com/mobile/en/homepage/homepage.html",
+                                "text": "ZF unveils key technologies for the software-defined vehicle"
+                            },
+                            {
+                                "url": "https://www.zf.com/mobile/en/careers/careers.html",
+                                "text": "The future drives with software"
+                            }
+                        ],
+                        "pageCount": 5,
+                        "synthesis": "Strong focus on 'Software-Defined Vehicle' (SDV) as the central future narrative.",
+                        "instanceCount": 8,
+                        "recurrenceTag": "Frequent"
+                    },
+                    "confidence": "High"
+                },
+                {
+                    "signal": "Values",
+                    "stated": [
+                        {
+                            "url": "https://www.zf.com/mobile/en/careers/careers.html",
+                            "text": "Passion, Anticipation, Diversity, Empowerment and Accountability"
+                        }
+                    ],
+                    "implied": {
+                        "evidence": [],
+                        "synthesis": null
+                    },
+                    "emergent": {
+                        "evidence": [
+                            {
+                                "url": "https://www.zf.com/mobile/en/sustainability/sustainability.html",
+                                "text": "climate neutrality by 2040"
+                            }
+                        ],
+                        "pageCount": 6,
+                        "synthesis": "Sustainability is treated as a core operational mandate, not just a value.",
+                        "instanceCount": 10,
+                        "recurrenceTag": "Frequent"
+                    },
+                    "confidence": "High"
+                }
+            ],
+            "contentTypeDistribution": {
+                "types": [
+                    {
+                        "type": "Product/Solutions",
+                        "notes": "Extensive coverage of Cars, Commercial Vehicles, and Industrial Technology product lines.",
+                        "pages": 5
+                    },
+                    {
+                        "type": "Innovation/Technology",
+                        "notes": "Deep dives into CES 2026, eDrive, Digital Twins, and R&D.",
+                        "pages": 4
+                    },
+                    {
+                        "type": "Company/About",
+                        "notes": "Corporate structure, Compliance, and general Company profile pages.",
+                        "pages": 3
+                    },
+                    {
+                        "type": "News/Resources",
+                        "notes": "Stories about polymer recycling and range extenders.",
+                        "pages": 2
+                    },
+                    {
+                        "type": "Case Studies/Customers",
+                        "notes": "Customer stories are embedded within product/tech pages rather than standalone.",
+                        "pages": 0
+                    }
+                ],
+                "source": "inferred"
+            },
+            "dominantLinguisticCategories": {
+                "authorityMarkers": {
+                    "count": 12,
+                    "evidence": [
+                        {
+                            "url": "https://www.zf.com/mobile/en/homepage/homepage.html",
+                            "text": "ZF is a global technology leader"
+                        },
+                        {
+                            "url": "https://www.zf.com/products/en/cv/emea/home/cv.html",
+                            "text": "No. 1 supplier of driveline and transmission systems"
+                        }
+                    ],
+                    "recurrenceTag": "Frequent"
+                },
+                "emotionalLanguage": {
+                    "count": 5,
+                    "evidence": [
+                        {
+                            "url": "https://www.zf.com/mobile/en/careers/careers.html",
+                            "text": "Innovation, passion and the goal of sustainability shape our future."
+                        }
+                    ],
+                    "recurrenceTag": "Some"
+                },
+                "persuasionMarkers": {
+                    "count": 8,
+                    "evidence": [
+                        {
+                            "url": "https://www.zf.com/mobile/en/technologies/digital_twins/stories/modern_production.html",
+                            "text": "Maximize their production efficiency with the power of digital twin"
+                        }
+                    ],
+                    "recurrenceTag": "Some"
+                },
+                "technicalLanguage": {
+                    "count": 25,
+                    "evidence": [
+                        {
+                            "url": "https://www.zf.com/products/en/cars/home/cars.html",
+                            "text": "Active Kinematic Control and Continuous Damping Control"
+                        },
+                        {
+                            "url": "https://www.zf.com/products/en/cars/edrive/select.html",
+                            "text": "silicon carbide (SiC) versions, insulated-gate bipolar transistors"
+                        }
+                    ],
+                    "recurrenceTag": "Frequent"
+                },
+                "confidenceVsHedging": {
+                    "notes": "High confidence statements regarding future capabilities and market position.",
+                    "evidence": [
+                        {
+                            "url": "https://www.zf.com/mobile/en/careers/careers.html",
+                            "text": "Technological innovations provide answers... ZF has those answers"
+                        }
+                    ]
+                },
+                "voiceActiveVsPassive": {
+                    "notes": "Predominantly active voice in headlines and value propositions.",
+                    "evidence": [
+                        {
+                            "url": "https://www.zf.com/mobile/en/homepage/homepage.html",
+                            "text": "ZF electrifies a wide range of vehicle types."
+                        }
+                    ]
+                },
+                "distributionNarrative": "Heavy emphasis on technical superiority and future-readiness (SDV, E-Mobility) aimed at engineering stakeholders."
+            }
+        },
+        {
+            "input": {
+                "pageLimit": 15,
+                "websiteUrl": "https://www.aptiv.com/",
+                "pagesCaptured": 15
+            },
+            "stats": {
+                "computed": {
+                    "hedgingPct": 5,
+                    "uniqueTerms": 850,
+                    "activeVoicePct": 65,
+                    "totalHumanWords": 4250,
+                    "readabilityGrade": 12,
+                    "avgSentenceLength": 19,
+                    "technicalDensityPct": 28,
+                    "lexicalDiversityPer1k": 200
+                },
+                "statsSource": "computed",
+                "analysisStats": null
+            },
+            "lexicon": {
+                "genericTerms": [
+                    {
+                        "url": "https://www.aptiv.com/",
+                        "term": "Software-Defined Vehicle",
+                        "context": "transition to a software-defined future"
+                    },
+                    {
+                        "url": "https://www.aptiv.com/",
+                        "term": "Edge-to-Cloud",
+                        "context": "Edge-to-Cloud Solutions... Intelligent Solutions"
+                    },
+                    {
+                        "url": "https://www.aptiv.com/en/solutions/digital-cockpit",
+                        "term": "Digital Cockpit",
+                        "context": "Digital Cockpit | Aptiv"
+                    }
+                ],
+                "lexiconNotes": "Aptiv uses standard industry terms (SDV, ADAS) but brands its architectural approach strongly (Smart Vehicle Architecture™).",
+                "distinctiveTerms": [
+                    {
+                        "url": "https://www.aptiv.com/en/solutions/connectivity-and-security",
+                        "term": "Smart Vehicle Architecture™",
+                        "context": "Aptiv’s answer to delivering a sustainable architecture... simplifies complexity",
+                        "freqPct": null,
+                        "ownership": "High"
+                    },
+                    {
+                        "url": "https://www.aptiv.com/en/solutions/adas",
+                        "term": "Gen 6 ADAS",
+                        "context": "Aptiv’s Gen 6 ADAS platform is open, scalable and optimized",
+                        "freqPct": null,
+                        "ownership": "High"
+                    },
+                    {
+                        "url": "https://www.aptiv.com/en/solutions/adas",
+                        "term": "Satellite Architecture",
+                        "context": "Aptiv’s fifth-generation Satellite Architecture has been deployed by multiple OEMs",
+                        "freqPct": null,
+                        "ownership": "High"
+                    },
+                    {
+                        "url": "https://www.aptiv.com/en/solutions/digital-cockpit",
+                        "term": "Interior Sensing",
+                        "context": "Aptiv has a history of innovation... in driver and cabin monitoring",
+                        "freqPct": null,
+                        "ownership": "Medium"
+                    }
+                ]
+            },
+            "audiences": [
+                {
+                    "name": "Automotive OEMs",
+                    "evidence": [
+                        {
+                            "url": "https://www.aptiv.com/en/solutions/digital-cockpit",
+                            "text": "We collaborate with our OEM partners to delight consumers"
+                        },
+                        {
+                            "url": "https://www.aptiv.com/en/solutions/connection-systems",
+                            "text": "helping OEMs get there faster"
+                        }
+                    ],
+                    "confidence": "High",
+                    "description": "Vehicle manufacturers needing scalable, safe, and modern electrical/software architectures.",
+                    "keyPatterns": [
+                        "OEM partners",
+                        "Scalable and Modular",
+                        "ASIL-D",
+                        "Supply chain flexibility"
+                    ]
+                },
+                {
+                    "name": "Talent / Engineers",
+                    "evidence": [
+                        {
+                            "url": "https://www.aptiv.com/en/jobs",
+                            "text": "Tackle real-world business challenges by developing algorithms"
+                        }
+                    ],
+                    "confidence": "High",
+                    "description": "Prospective employees looking to work on cutting-edge automotive tech.",
+                    "keyPatterns": [
+                        "Impact Every Journey",
+                        "Open positions",
+                        "Inclusive culture",
+                        "Software Engineering"
+                    ]
+                },
+                {
+                    "name": "Commercial Vehicle Manufacturers",
+                    "evidence": [
+                        {
+                            "url": "https://www.aptiv.com/en/solutions/connection-systems",
+                            "text": "leader in connectors for commercial vehicles"
+                        }
+                    ],
+                    "confidence": "Medium",
+                    "description": "Heavy duty and commercial transport builders.",
+                    "keyPatterns": [
+                        "Commercial Vehicles",
+                        "Industrial sectors"
+                    ]
+                }
+            ],
+            "inference": {
+                "brandName": "Aptiv",
+                "businessModel": "B2B",
+                "confidenceNotes": "High confidence in B2B Automotive Tech classification due to explicit mentions of OEMs, architectural solutions, and technical specifications.",
+                "categoryEvidence": [
+                    {
+                        "url": "https://www.aptiv.com/",
+                        "text": "global technology company that develops safer, greener and more connected solutions"
+                    },
+                    {
+                        "url": "https://www.aptiv.com/en/solutions/connectivity-and-security",
+                        "text": "delivering a sustainable architecture... Smart Vehicle Architecture™"
+                    }
+                ],
+                "brandNameEvidence": [
+                    {
+                        "url": "https://www.aptiv.com/",
+                        "text": "Aptiv | Home - Global Technology Company"
+                    }
+                ],
+                "categoryHypothesis": "Automotive Technology & Smart Vehicle Architecture Provider",
+                "businessModelEvidence": [
+                    {
+                        "url": "https://www.aptiv.com/en/solutions/digital-cockpit",
+                        "text": "We collaborate with our OEM partners to delight consumers"
+                    },
+                    {
+                        "url": "https://www.aptiv.com/en/solutions/connection-systems",
+                        "text": "Enable customers in automotive and adjacent markets to search, discover and specify"
+                    }
+                ],
+                "primaryConversionGoal": "Lead Generation / Partnership Inquiry",
+                "conversionGoalEvidence": [
+                    {
+                        "url": "https://www.aptiv.com/en/solutions/adas",
+                        "text": "Contact Sales Team"
+                    },
+                    {
+                        "url": "https://www.aptiv.com/en/solutions/adas",
+                        "text": "Sign Up For Our Newsletter"
+                    }
+                ]
+            },
+            "portfolio": [
+                {
+                    "url": "https://www.aptiv.com/en/solutions/connectivity-and-security",
+                    "entity": "Smart Vehicle Architecture™ (SVA™)",
+                    "category": "Solution",
+                    "confidence": "High",
+                    "positioningExtract": "Simplifies complexity, unites diverse applications, and empowers our customers to control the software."
+                },
+                {
+                    "url": "https://www.aptiv.com/en/solutions/adas",
+                    "entity": "Gen 6 ADAS Platform",
+                    "category": "Product",
+                    "confidence": "High",
+                    "positioningExtract": "Open, scalable and optimized at the system level... democratizing ADAS solutions."
+                },
+                {
+                    "url": "https://www.aptiv.com/en/solutions/connection-systems",
+                    "entity": "Connection Systems",
+                    "category": "Product",
+                    "confidence": "High",
+                    "positioningExtract": "The Key to Architecture Optimization... robust and innovative connection systems."
+                },
+                {
+                    "url": "https://www.aptiv.com/en/solutions/digital-cockpit",
+                    "entity": "Digital Cockpit",
+                    "category": "Solution",
+                    "confidence": "High",
+                    "positioningExtract": "Revolutionizing the in-cabin experience through advanced software and hardware."
+                },
+                {
+                    "url": "https://www.aptiv.com/en/solutions/digital-cockpit",
+                    "entity": "Wind River Software",
+                    "category": "Product",
+                    "confidence": "Medium",
+                    "positioningExtract": "Enables cloud-native software architecture... unlocking value."
+                }
+            ],
+            "limitations": [
+                "Analysis limited to 15 pages; deep technical documentation (white papers) referenced but not fully analyzed.",
+                "Regional pages (Japanese, German, Spanish) were captured but treated as duplicates of the English structure."
+            ],
+            "machineView": {
+                "schemaTypes": [
+                    "Organization",
+                    "WebPage",
+                    "Product"
+                ],
+                "altTextExamples": [
+                    {
+                        "url": "https://www.aptiv.com/",
+                        "text": "Aptiv logo"
+                    },
+                    {
+                        "url": "https://www.aptiv.com/en/solutions/digital-cockpit",
+                        "text": "Digital Cockpit"
+                    },
+                    {
+                        "url": "https://www.aptiv.com/en/solutions/adas",
+                        "text": "Gen 6 ADAS Platform"
+                    }
+                ],
+                "urlPatternNotes": [
+                    "Clean structure: /en/solutions/[category]",
+                    "Uses /en/insights for content marketing."
+                ],
+                "humanMachineGaps": [
+                    "Alt text is generally functional but sometimes minimal ('Digital Cockpit' vs describing the image content)."
+                ],
+                "metaTitleExamples": [
+                    {
+                        "url": "https://www.aptiv.com/",
+                        "text": "Aptiv | Home - Global Technology Company"
+                    },
+                    {
+                        "url": "https://www.aptiv.com/en/solutions/digital-cockpit",
+                        "text": "Digital Cockpit | Aptiv"
+                    }
+                ],
+                "openGraphExamples": [],
+                "metaDescriptionExamples": [
+                    {
+                        "url": "https://www.aptiv.com/",
+                        "text": "Aptiv is a global technology company that develops safer, greener and more connected solutions, which enable the future of mobility."
+                    },
+                    {
+                        "url": "https://www.aptiv.com/en/solutions/digital-cockpit",
+                        "text": "Connected User Experience starts with open platforms, deeply integrated with the sensing, compute and interface devices that support them."
+                    }
+                ]
+            },
+            "proofSignals": {
+                "inventory": [
+                    {
+                        "url": "https://www.aptiv.com/en/solutions/digital-cockpit",
+                        "type": "ClientLogo",
+                        "evidenceText": "Polestar 2... Volvo XC40... Jeep Grand Cherokee",
+                        "nearPrimaryCta": false
+                    },
+                    {
+                        "url": "https://www.aptiv.com/en/solutions/digital-cockpit",
+                        "type": "MetricClaim",
+                        "evidenceText": "deployed our solution on 115 vehicle variants",
+                        "nearPrimaryCta": false
+                    },
+                    {
+                        "url": "https://www.aptiv.com/en/solutions/digital-cockpit",
+                        "type": "MetricClaim",
+                        "evidenceText": "shipped more than 15 million units",
+                        "nearPrimaryCta": false
+                    },
+                    {
+                        "url": "https://www.aptiv.com/en/solutions/adas",
+                        "type": "Award",
+                        "evidenceText": "earn top marks in a recent independent, third-party study (Thatcham Research)",
+                        "nearPrimaryCta": false
+                    },
+                    {
+                        "url": "https://www.aptiv.com/",
+                        "type": "Partner",
+                        "evidenceText": "ServiceNow and Aptiv",
+                        "nearPrimaryCta": false
+                    },
+                    {
+                        "url": "https://www.aptiv.com/en/solutions/digital-cockpit",
+                        "type": "Partner",
+                        "evidenceText": "Google apps and services built-in",
+                        "nearPrimaryCta": false
+                    }
+                ],
+                "proofNotes": "Strong use of specific OEM names (Volvo, Audi, Jeep) and quantitative metrics (115 variants, 15 million units) builds high credibility."
+            },
+            "schemaVersion": "hbai-mini-audit-ledger-v7",
+            "coherencePreview": {
+                "notes": "Extremely high coherence. The stated mission of 'safer, greener, connected' is perfectly mirrored in the product pages (ADAS, High Voltage, Connectivity). The 'Software-Defined' narrative is consistent across all levels.",
+                "evidenceUrls": [
+                    "https://www.aptiv.com/",
+                    "https://www.aptiv.com/en/solutions/adas"
+                ],
+                "statedVsEmergentScore": 95
+            },
+            "conversionSignals": {
+                "frictions": [
+                    "Technical density may overwhelm non-engineer buyers.",
+                    "Multiple regional homepages (JA, DE, ES) captured suggest heavy localization which is good, but navigation back to EN sometimes relies on browser detection."
+                ],
+                "confidence": "High",
+                "topCtaLabels": [
+                    {
+                        "count": 15,
+                        "label": "Learn More / Read More"
+                    },
+                    {
+                        "count": 1,
+                        "label": "Contact Sales Team"
+                    },
+                    {
+                        "count": 4,
+                        "label": "Explore Open Roles / Jobs"
+                    }
+                ],
+                "quickFixIdeas": [
+                    "Add more direct 'Talk to an Expert' CTAs on product pages instead of just 'Learn More'.",
+                    "Highlight the 'Contact Sales' button more prominently in the header."
+                ]
+            },
+            "outsideInEntryTest": {
+                "whoItsFor": "Automotive OEMs and engineers looking for integrated vehicle architecture and software solutions.",
+                "clarity10s": "High. The homepage immediately defines Aptiv as a global tech company for safer, greener, connected mobility.",
+                "confidence": "High",
+                "primaryCtas": [
+                    {
+                        "url": "https://www.aptiv.com/ces",
+                        "label": "Learn More"
+                    },
+                    {
+                        "url": "https://www.aptiv.com/en/contact/adas-inquiries",
+                        "label": "Contact Sales Team"
+                    },
+                    {
+                        "url": "https://www.aptiv.com/en/jobs/search",
+                        "label": "Explore Open Roles"
+                    }
+                ],
+                "evidenceUrls": [
+                    "https://www.aptiv.com/",
+                    "https://www.aptiv.com/en/solutions/connection-systems"
+                ],
+                "topConfusions": [
+                    "Distinction between Aptiv and Wind River (Wind River mentioned as software enabler).",
+                    "Specifics of how 'Smart Vehicle Architecture' is implemented without deep technical reading."
+                ],
+                "trustSignalsEarly": [
+                    {
+                        "url": "https://www.aptiv.com/",
+                        "type": "Logo/Brand",
+                        "evidenceText": "Aptiv logo"
+                    },
+                    {
+                        "url": "https://www.aptiv.com/en/solutions/connection-systems",
+                        "type": "Experience Claim",
+                        "evidenceText": "100 Years of Automotive Engineering Experience"
+                    }
+                ]
+            },
+            "brandNarrativeSignals": [
+                {
+                    "signal": "Tagline/Hook",
+                    "stated": [
+                        {
+                            "url": "https://www.aptiv.com/",
+                            "text": "Safer, greener and more connected"
+                        },
+                        {
+                            "url": "https://www.aptiv.com/",
+                            "text": "Impact Every Journey"
+                        }
+                    ],
+                    "implied": {
+                        "evidence": [
+                            {
+                                "url": "https://www.aptiv.com/en/solutions/connectivity-and-security",
+                                "text": "separates the I/O from the compute inside a vehicle"
+                            }
+                        ],
+                        "synthesis": "We are the brain and nervous system of the modern car."
+                    },
+                    "emergent": {
+                        "evidence": [
+                            {
+                                "url": "https://www.aptiv.com/",
+                                "text": "enabling the transition to a software-defined future"
+                            },
+                            {
+                                "url": "https://www.aptiv.com/en/jobs",
+                                "text": "shaping the software-defined future"
+                            }
+                        ],
+                        "pageCount": 4,
+                        "synthesis": "The Architect of the Software-Defined Future.",
+                        "instanceCount": 6,
+                        "recurrenceTag": "Frequent"
+                    },
+                    "confidence": "High"
+                },
+                {
+                    "signal": "Mission/What",
+                    "stated": [
+                        {
+                            "url": "https://www.aptiv.com/",
+                            "text": "develops safer, greener and more connected solutions, which enable the future of mobility"
+                        }
+                    ],
+                    "implied": {
+                        "evidence": [],
+                        "synthesis": null
+                    },
+                    "emergent": {
+                        "evidence": [],
+                        "pageCount": null,
+                        "synthesis": null,
+                        "instanceCount": null,
+                        "recurrenceTag": "Unclear"
+                    },
+                    "confidence": "High"
+                },
+                {
+                    "signal": "NarrativeTheme",
+                    "stated": [
+                        {
+                            "url": "https://www.aptiv.com/en/solutions/connectivity-and-security",
+                            "text": "Smart Vehicle Architecture™"
+                        }
+                    ],
+                    "implied": {
+                        "evidence": [],
+                        "synthesis": null
+                    },
+                    "emergent": {
+                        "evidence": [
+                            {
+                                "url": "https://www.aptiv.com/en/solutions/connectivity-and-security",
+                                "text": "Simplifying Vehicle Complexity"
+                            },
+                            {
+                                "url": "https://www.aptiv.com/en/solutions/connection-systems",
+                                "text": "The Key to Architecture Optimization"
+                            }
+                        ],
+                        "pageCount": 3,
+                        "synthesis": "Complexity Reduction through Architecture.",
+                        "instanceCount": 4,
+                        "recurrenceTag": "Frequent"
+                    },
+                    "confidence": "High"
+                }
+            ],
+            "contentTypeDistribution": {
+                "types": [
+                    {
+                        "type": "Product/Solutions",
+                        "notes": "Pages covering Digital Cockpit, Connection Systems, ADAS, Connectivity & Security.",
+                        "pages": 6
+                    },
+                    {
+                        "type": "Innovation/Technology",
+                        "notes": "Pages discussing Edge-to-Cloud and general automotive industry innovation.",
+                        "pages": 2
+                    },
+                    {
+                        "type": "Company/About",
+                        "notes": "Includes Homepage, Careers, Newsroom, and regional homepage variants.",
+                        "pages": 4
+                    },
+                    {
+                        "type": "News/Resources",
+                        "notes": "Newsletter, Search, and Newsroom listing.",
+                        "pages": 3
+                    },
+                    {
+                        "type": "Case Studies/Customers",
+                        "notes": "No dedicated page captured, but case studies (Zeekr, Jeep) embedded in product pages.",
+                        "pages": 0
+                    }
+                ],
+                "source": "inferred"
+            },
+            "dominantLinguisticCategories": {
+                "authorityMarkers": {
+                    "count": 18,
+                    "evidence": [
+                        {
+                            "url": "https://www.aptiv.com/en/solutions/connection-systems",
+                            "text": "100 YEARS OF AUTOMOTIVE ENGINEERING EXPERIENCE"
+                        },
+                        {
+                            "url": "https://www.aptiv.com/en/solutions/connectivity-and-security",
+                            "text": "Aptiv is an industry leader in systems that control"
+                        },
+                        {
+                            "url": "https://www.aptiv.com/en/solutions/digital-cockpit",
+                            "text": "Aptiv delivered the world’s first vehicle infotainment solution"
+                        }
+                    ],
+                    "recurrenceTag": "Frequent"
+                },
+                "emotionalLanguage": {
+                    "count": 12,
+                    "evidence": [
+                        {
+                            "url": "https://www.aptiv.com/",
+                            "text": "Impact Every Journey"
+                        },
+                        {
+                            "url": "https://www.aptiv.com/en/solutions/digital-cockpit",
+                            "text": "delight consumers throughout the vehicle lifecycle"
+                        },
+                        {
+                            "url": "https://www.aptiv.com/",
+                            "text": "safer, greener and more connected"
+                        }
+                    ],
+                    "recurrenceTag": "Some"
+                },
+                "persuasionMarkers": {
+                    "count": 15,
+                    "evidence": [
+                        {
+                            "url": "https://www.aptiv.com/en/solutions/connection-systems",
+                            "text": "The Key to Architecture Optimization"
+                        },
+                        {
+                            "url": "https://www.aptiv.com/en/solutions/digital-cockpit",
+                            "text": "Unlock value while enabling new flexible business models"
+                        },
+                        {
+                            "url": "https://www.aptiv.com/en/solutions/adas",
+                            "text": "Democratizing ADAS solutions"
+                        }
+                    ],
+                    "recurrenceTag": "Frequent"
+                },
+                "technicalLanguage": {
+                    "count": 45,
+                    "evidence": [
+                        {
+                            "url": "https://www.aptiv.com/en/solutions/connectivity-and-security",
+                            "text": "ASIL-D regulatory certification"
+                        },
+                        {
+                            "url": "https://www.aptiv.com/en/solutions/digital-cockpit",
+                            "text": "containerization and other tools... enabled by Wind River software"
+                        },
+                        {
+                            "url": "https://www.aptiv.com/en/solutions/adas",
+                            "text": "SoC and architectural configurations"
+                        }
+                    ],
+                    "recurrenceTag": "Frequent"
+                },
+                "confidenceVsHedging": {
+                    "notes": "High confidence. Very little hedging found. Statements are definitive about capabilities and leadership.",
+                    "evidence": [
+                        {
+                            "url": "https://www.aptiv.com/",
+                            "text": "Failure Is Not an Option"
+                        },
+                        {
+                            "url": "https://www.aptiv.com/",
+                            "text": "Aptiv is developing solutions that solve our customers' toughest challenges."
+                        }
+                    ]
+                },
+                "voiceActiveVsPassive": {
+                    "notes": "Predominantly active voice in value propositions, shifting to passive when describing technical architectures.",
+                    "evidence": [
+                        {
+                            "url": "https://www.aptiv.com/en/solutions/connection-systems",
+                            "text": "Aptiv creates connection systems that set the standard"
+                        },
+                        {
+                            "url": "https://www.aptiv.com/",
+                            "text": "supported by electrified and connected architectures"
+                        }
+                    ]
+                },
+                "distributionNarrative": "Aptiv positions itself not just as a supplier, but as the architect of the 'Software-Defined Vehicle', moving from hardware components to full system intelligence."
+            }
+        }
+    ]
+}

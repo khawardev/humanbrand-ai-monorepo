@@ -1,0 +1,1 @@
+ALTER TABLE "audit_schema"."verification" ALTER COLUMN "value" SET DATA TYPE jsonb;

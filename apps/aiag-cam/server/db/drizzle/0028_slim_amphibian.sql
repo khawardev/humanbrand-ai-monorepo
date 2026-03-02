@@ -1,0 +1,1 @@
+ALTER TABLE "aiag_schema"."user" ADD COLUMN "preferredModel" integer DEFAULT 4;

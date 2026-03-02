@@ -1,0 +1,162 @@
+@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap");
+
+.markdown-body {
+  color: var(--color-foreground);
+}
+
+.markdown-body h1 {
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: 0.5em;
+  color: var(--color-foreground);
+}
+
+.markdown-body h2,
+.markdown-body h3,
+.markdown-body h4,
+.markdown-body h5,
+.markdown-body h6 {
+  font-weight: 700;
+  line-height: 1.2;
+  margin-top: 1.5em;
+  margin-bottom: 0.5em;
+  color: var(--color-foreground);
+}
+
+.markdown-body h1 {
+  font-size: 2.5em;
+}
+
+.markdown-body h2 {
+  font-size: 1.5em;
+  padding-bottom: 0.3em;
+}
+
+.markdown-body h3 {
+  font-size: 1.25em;
+}
+
+.markdown-body h4 {
+  font-size: 1em;
+}
+
+.markdown-body p,
+.markdown-body blockquote,
+.markdown-body table {
+  margin-bottom: 1rem;
+  color: var(--color-foreground);
+}
+
+.markdown-body a {
+  color: var(--color-primary);
+  text-decoration: underline;
+  transition: color 0.3s;
+}
+
+
+.markdown-body strong {
+  font-weight: 700;
+  color: var(--color-foreground);
+}
+
+.markdown-body ul,
+.markdown-body ol {
+  padding-left: 2em;
+  margin-bottom: 1rem;
+}
+
+.markdown-body li {
+  margin-bottom: 0.4rem;
+}
+
+.markdown-body ul li:not(:has(input[type="checkbox"])) {
+  list-style-type: disc;
+}
+
+.markdown-body ol {
+  list-style-type: decimal;
+}
+
+.markdown-body li>p {
+  margin-bottom: 0.25rem;
+}
+
+.markdown-body code {
+  border-radius: 0.3rem;
+  background-color: var(--color-border);
+  color: var(--color-border-foreground);
+  padding: 0.15rem 0.375rem;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.875em;
+}
+
+.markdown-body pre {
+  background-color: var(--color-card);
+  color: var(--color-card-foreground);
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border-radius: var(--radius-md);
+  overflow-x: auto;
+  border: 1px solid var(--color-border);
+}
+
+.markdown-body pre code {
+  background-color: transparent;
+  padding: 0;
+  color: var(--color-card-foreground);
+  font-family: "JetBrains Mono", monospace;
+}
+
+.markdown-body blockquote {
+  border-left: 4px solid var(--color-border);
+  padding: 0.5rem 1rem;
+  background-color: var(--color-border);
+  color: var(--color-border-foreground);
+  border-radius: var(--radius-sm);
+}
+
+.markdown-body blockquote p:last-child {
+  margin-bottom: 0;
+}
+
+.markdown-body hr {
+  border: none;
+  border-top: 1px solid var(--color-border);
+  margin: 2rem 0;
+}
+
+.markdown-body table {
+  width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
+  display: block;
+  overflow-x: auto;
+  margin-bottom: 2rem;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+}
+
+.markdown-body table th,
+.markdown-body table td {
+  border-bottom: 1px solid var(--color-border);
+  padding: 0.75rem;
+  text-align: left;
+}
+
+.markdown-body table th {
+  background-color: var(--color-border);
+  color: var(--color-border-foreground);
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.markdown-body table tr:last-child td {
+  border-bottom: none;
+}
+
+.markdown-body img {
+  max-width: 100%;
+  height: auto;
+  border-radius: var(--radius-md);
+  margin: 1.5rem 0;
+}

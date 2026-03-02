@@ -1,0 +1,422 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "corpus_manifest.json",
+    "title": "Corpus Manifest",
+    "description": "Inventory of collected data with quality assessment",
+    "type": "object",
+    "required": [
+        "schema_version",
+        "generated_at",
+        "run_id",
+        "collection_window",
+        "coverage_summary",
+        "coverage_gaps",
+        "data_quality_flags",
+        "corpus_adequacy"
+    ],
+    "properties": {
+        "schema_version": {
+            "type": "string",
+            "const": "2.0.0"
+        },
+        "generated_at": {
+            "$ref": "#/definitions/iso_datetime"
+        },
+        "run_id": {
+            "type": "string",
+            "format": "uuid"
+        },
+        "collection_window": {
+            "type": "object",
+            "required": [
+                "collection_date",
+                "social_lookback_start",
+                "social_lookback_end",
+                "social_lookback_days"
+            ],
+            "properties": {
+                "collection_date": {
+                    "$ref": "#/definitions/iso_datetime"
+                },
+                "social_lookback_start": {
+                    "$ref": "#/definitions/iso_datetime"
+                },
+                "social_lookback_end": {
+                    "$ref": "#/definitions/iso_datetime"
+                },
+                "social_lookback_days": {
+                    "type": "integer"
+                }
+            }
+        },
+        "coverage_summary": {
+            "type": "object",
+            "required": [
+                "entities_collected",
+                "channels_collected",
+                "website",
+                "social"
+            ],
+            "properties": {
+                "entities_collected": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "channels_collected": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "website": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "$ref": "#/definitions/website_coverage"
+                    }
+                },
+                "social": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "$ref": "#/definitions/channel_coverage"
+                        }
+                    }
+                }
+            }
+        },
+        "coverage_gaps": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "required": [
+                    "gap_id",
+                    "entity",
+                    "channel",
+                    "description",
+                    "severity",
+                    "impact",
+                    "mitigation"
+                ],
+                "properties": {
+                    "gap_id": {
+                        "type": "string",
+                        "pattern": "^GAP[0-9]{3}$"
+                    },
+                    "entity": {
+                        "type": "string"
+                    },
+                    "channel": {
+                        "type": "string"
+                    },
+                    "description": {
+                        "type": "string"
+                    },
+                    "severity": {
+                        "type": "string",
+                        "enum": [
+                            "critical",
+                            "significant",
+                            "minor"
+                        ]
+                    },
+                    "impact": {
+                        "type": "string"
+                    },
+                    "mitigation": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        "data_quality_flags": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "required": [
+                    "flag_id",
+                    "entity",
+                    "channel",
+                    "issue",
+                    "affected_metrics",
+                    "handling"
+                ],
+                "properties": {
+                    "flag_id": {
+                        "type": "string",
+                        "pattern": "^FLAG[0-9]{3}$"
+                    },
+                    "entity": {
+                        "type": "string"
+                    },
+                    "channel": {
+                        "type": "string"
+                    },
+                    "issue": {
+                        "type": "string"
+                    },
+                    "affected_metrics": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "handling": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        "corpus_adequacy": {
+            "type": "object",
+            "required": [
+                "overall",
+                "notes",
+                "minimum_thresholds",
+                "entities_below_threshold"
+            ],
+            "properties": {
+                "overall": {
+                    "type": "string",
+                    "enum": [
+                        "adequate",
+                        "marginal",
+                        "inadequate"
+                    ]
+                },
+                "notes": {
+                    "type": "string"
+                },
+                "minimum_thresholds": {
+                    "type": "object",
+                    "properties": {
+                        "website_pages": {
+                            "type": "integer"
+                        },
+                        "social_posts_per_channel": {
+                            "type": "integer"
+                        },
+                        "comments_per_channel": {
+                            "type": "integer"
+                        }
+                    }
+                },
+                "entities_below_threshold": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "website_coverage": {
+            "type": "object",
+            "properties": {
+                "pages_crawled": {
+                    "type": "integer"
+                },
+                "pages_excluded": {
+                    "type": "integer"
+                },
+                "total_words": {
+                    "type": "integer"
+                },
+                "total_images": {
+                    "type": "integer"
+                },
+                "exclusion_breakdown": {
+                    "type": "object"
+                },
+                "status": {
+                    "type": "string",
+                    "enum": [
+                        "complete",
+                        "partial",
+                        "failed"
+                    ]
+                }
+            }
+        },
+        "channel_coverage": {
+            "type": "object",
+            "properties": {
+                "posts_collected": {
+                    "type": "integer"
+                },
+                "comments_collected": {
+                    "type": "integer"
+                },
+                "total_engagement": {
+                    "type": "integer"
+                },
+                "status": {
+                    "type": "string",
+                    "enum": [
+                        "complete",
+                        "partial",
+                        "no_presence",
+                        "private",
+                        "failed"
+                    ]
+                }
+            }
+        },
+        "iso_datetime": {
+            "type": "string",
+            "format": "date-time",
+            "description": "ISO 8601 datetime string."
+        },
+        "url": {
+            "type": "string",
+            "format": "uri",
+            "description": "A valid URL (URI)."
+        },
+        "hex_color": {
+            "type": "string",
+            "pattern": "^#[0-9A-Fa-f]{6}$",
+            "description": "Hex color in the form #RRGGBB."
+        },
+        "percentage": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1,
+            "description": "Share or percentage expressed as 0..1."
+        },
+        "confidence_score": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1,
+            "description": "Confidence score 0..1."
+        },
+        "evidence_id": {
+            "type": "string",
+            "pattern": "^(E|VE|EC)[0-9]{5}$",
+            "description": "Evidence ID (E##### for general, VE##### for visual, EC##### for comments)."
+        },
+        "evidence_id_array": {
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/evidence_id"
+            },
+            "description": "Array of evidence IDs."
+        },
+        "channel_enum": {
+            "type": "string",
+            "enum": [
+                "website",
+                "linkedin",
+                "youtube",
+                "x",
+                "instagram",
+                "tiktok",
+                "facebook"
+            ],
+            "description": "Supported owned channels."
+        },
+        "sentiment": {
+            "type": "object",
+            "description": "Structured sentiment and emotional tone (brand-authored content or audience content, depending on context).",
+            "required": [
+                "polarity",
+                "emotional_tone"
+            ],
+            "properties": {
+                "polarity": {
+                    "type": "object",
+                    "required": [
+                        "score",
+                        "label"
+                    ],
+                    "properties": {
+                        "score": {
+                            "type": "number",
+                            "minimum": -1,
+                            "maximum": 1
+                        },
+                        "label": {
+                            "type": "string",
+                            "enum": [
+                                "very_negative",
+                                "negative",
+                                "neutral",
+                                "positive",
+                                "very_positive"
+                            ]
+                        }
+                    }
+                },
+                "emotional_tone": {
+                    "type": "object",
+                    "required": [
+                        "primary",
+                        "intensity"
+                    ],
+                    "properties": {
+                        "primary": {
+                            "type": "string",
+                            "enum": [
+                                "confident",
+                                "enthusiastic",
+                                "professional",
+                                "empathetic",
+                                "urgent",
+                                "frustrated",
+                                "skeptical",
+                                "appreciative",
+                                "neutral"
+                            ]
+                        },
+                        "secondary": {
+                            "type": "string",
+                            "enum": [
+                                "confident",
+                                "enthusiastic",
+                                "professional",
+                                "empathetic",
+                                "urgent",
+                                "frustrated",
+                                "skeptical",
+                                "appreciative",
+                                "neutral"
+                            ]
+                        },
+                        "intensity": {
+                            "type": "string",
+                            "enum": [
+                                "low",
+                                "medium",
+                                "high"
+                            ]
+                        }
+                    }
+                },
+                "subjectivity": {
+                    "type": "object",
+                    "required": [
+                        "score",
+                        "label"
+                    ],
+                    "properties": {
+                        "score": {
+                            "type": "number",
+                            "minimum": 0,
+                            "maximum": 1
+                        },
+                        "label": {
+                            "type": "string",
+                            "enum": [
+                                "objective",
+                                "mixed",
+                                "subjective"
+                            ]
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

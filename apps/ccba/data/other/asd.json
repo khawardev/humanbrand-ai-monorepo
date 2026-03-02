@@ -1,0 +1,2322 @@
+{
+    "brand": {
+        "brandName": "Magna",
+        "socialMedia": {
+            "platforms": {
+                "x": {
+                    "topDrivers": [
+                        {
+                            "driver": "No Activity",
+                            "lift": "0",
+                            "example": "0 engagements"
+                        },
+                        {
+                            "driver": "No Activity",
+                            "lift": "0",
+                            "example": "0 engagements"
+                        },
+                        {
+                            "driver": "No Activity",
+                            "lift": "0",
+                            "example": "0 engagements"
+                        }
+                    ],
+                    "sentiment": {
+                        "neutral": "0",
+                        "negative": "0",
+                        "mixed": "0",
+                        "positive": "0"
+                    },
+                    "mandatedDrivers": {
+                        "adas": {
+                            "posts": "0",
+                            "percentage": "0"
+                        },
+                        "electrification": {
+                            "posts": "0",
+                            "percentage": "0"
+                        },
+                        "lightweighting": {
+                            "posts": "0",
+                            "percentage": "0"
+                        },
+                        "environmental": {
+                            "posts": "0",
+                            "percentage": "0"
+                        },
+                        "sdvs": {
+                            "posts": "0",
+                            "percentage": "0"
+                        }
+                    },
+                    "avgEngagement": "0",
+                    "PerformanceData": {
+                        "topEngagementDrivers": [
+                            {
+                                "name": "Product Launches",
+                                "value": "0"
+                            },
+                            {
+                                "name": "Community Engagement",
+                                "value": "0"
+                            },
+                            {
+                                "name": "Innovation/Technology Showcases",
+                                "value": "0"
+                            },
+                            {
+                                "name": "Renewable Energy/Sustainability Actions",
+                                "value": "0"
+                            },
+                            {
+                                "name": "Facility Achievements & Milestones",
+                                "value": "0"
+                            }
+                        ],
+                        "brandVoice": [
+                            {
+                                "name": "Celebratory",
+                                "color": "#84cc16",
+                                "value": "0"
+                            },
+                            {
+                                "name": "Forward-looking",
+                                "color": "#3b82f6",
+                                "value": "0"
+                            },
+                            {
+                                "name": "Collaborative",
+                                "color": "#f97316",
+                                "value": "0"
+                            }
+                        ],
+                        "whiteSpaceOpportunities": [
+                            {
+                                "title": "Lightweighting Content Share",
+                                "value": "0"
+                            },
+                            {
+                                "title": "SDVs Content Share",
+                                "value": "0"
+                            }
+                        ],
+                        "homepageVsFeed": [
+                            {
+                                "color": "#84cc16",
+                                "claim": "Innovation Leadership",
+                                "value": "0"
+                            },
+                            {
+                                "color": "#3b82f6",
+                                "claim": "Sustainability Commitment",
+                                "value": "0"
+                            },
+                            {
+                                "color": "#ffffff",
+                                "claim": "People & Culture",
+                                "value": "0"
+                            },
+                            {
+                                "color": "#f97316",
+                                "claim": "Mobility/Automotive",
+                                "value": "0"
+                            }
+                        ],
+                        "contentStrategyGap": [
+                            {
+                                "name": "People & Culture",
+                                "Emergent": "0",
+                                "Mandated": "0"
+                            },
+                            {
+                                "name": "Electrification",
+                                "Emergent": "0",
+                                "Mandated": "0"
+                            },
+                            {
+                                "name": "ADAS",
+                                "Emergent": "0",
+                                "Mandated": "0"
+                            },
+                            {
+                                "name": "Lightweighting",
+                                "Emergent": "0",
+                                "Mandated": "0"
+                            }
+                        ],
+                        "primaryContentThemes": [
+                            {
+                                "name": "Innovation/Technology",
+                                "color": "#0ea5e9",
+                                "value": "0"
+                            },
+                            {
+                                "name": "People/Culture",
+                                "color": "#84cc16",
+                                "value": "0"
+                            },
+                            {
+                                "name": "Mobility/Automotive",
+                                "color": "#f97316",
+                                "value": "0"
+                            }
+                        ],
+                        "audienceEngagement": [
+                            {
+                                "name": "Industry Engineers",
+                                "color": "#7CFC00",
+                                "value": "0"
+                            },
+                            {
+                                "name": "Current Employees",
+                                "color": "#3B82F6",
+                                "value": "0"
+                            },
+                            {
+                                "name": "OEM Decision Makers",
+                                "color": "#E57373",
+                                "value": "0"
+                            },
+                            {
+                                "name": "Students/Early Career",
+                                "color": "#F3F4F6",
+                                "value": "0"
+                            },
+                            {
+                                "name": "Others",
+                                "color": "#9CA3AF",
+                                "value": "0"
+                            }
+                        ],
+                        "strategySnapshot": [
+                            {
+                                "strategy": "Technical",
+                                "color": "text-primary",
+                                "competitor": "Bosch",
+                                "dataPoint": "No data available"
+                            },
+                            {
+                                "strategy": "People-First",
+                                "color": "text-primary",
+                                "competitor": "Lear",
+                                "dataPoint": "No data available"
+                            },
+                            {
+                                "strategy": "Validation",
+                                "color": "text-primary",
+                                "competitor": "Continental",
+                                "dataPoint": "No data available"
+                            },
+                            {
+                                "strategy": "No Activity",
+                                "color": "text-white",
+                                "competitor": "Magna",
+                                "dataPoint": "0 posts in 8.5 months"
+                            }
+                        ],
+                        "magnaPosition": {
+                            "x": "0",
+                            "name": "Magna",
+                            "y": "0",
+                            "strategy": "Inactive"
+                        },
+                        "kpis": {
+                            "metricsMentions": "0",
+                            "thirdPartyCitations": "0",
+                            "positiveSentiment": "0"
+                        },
+                        "competitorPositioning": [
+                            {
+                                "x": "0",
+                                "name": "Continental (Validation)",
+                                "y": "0"
+                            },
+                            {
+                                "x": "0",
+                                "name": "Lear: People-First",
+                                "y": "0"
+                            },
+                            {
+                                "x": "0",
+                                "name": "Bosch (Technical)",
+                                "y": "0"
+                            }
+                        ],
+                        "strategicInitiatives": [
+                            {
+                                "name": "Conduct X Channel Audit",
+                                "current": "0",
+                                "goal": "Verify account status",
+                                "target": "1"
+                            },
+                            {
+                                "name": "Launch Reactivation",
+                                "current": "0",
+                                "goal": "3x weekly posts",
+                                "target": "3"
+                            },
+                            {
+                                "name": "Secure Account",
+                                "current": "0",
+                                "goal": "Prevent impersonation",
+                                "target": "1"
+                            }
+                        ]
+                    },
+                    "nts": "0",
+                    "audienceSegments": [
+                        {
+                            "share": "0",
+                            "followers": "0",
+                            "segment": "X",
+                            "posent": "Unknown - No Activity",
+                            "confidence": "L"
+                        },
+                        {
+                            "share": "0",
+                            "segment": "Unknown",
+                            "confidence": "L"
+                        },
+                        {
+                            "share": "0",
+                            "segment": "Unknown",
+                            "confidence": "L"
+                        },
+                        {
+                            "share": "0",
+                            "segment": "Unknown",
+                            "confidence": "L"
+                        },
+                        {
+                            "share": "0",
+                            "segment": "Unknown",
+                            "confidence": "L"
+                        }
+                    ]
+                },
+                "youtube": {
+                    "topDrivers": [
+                        {
+                            "driver": "Competition/Achievement Narratives",
+                            "lift": "1660",
+                            "example": "361K views Formula Student"
+                        },
+                        {
+                            "driver": "Employee Storytelling",
+                            "lift": "285",
+                            "example": "79 avg engagement"
+                        },
+                        {
+                            "driver": "Behind-the-Scenes Technical",
+                            "lift": "195",
+                            "example": "60.5 avg engagement"
+                        }
+                    ],
+                    "sentiment": {
+                        "neutral": "15",
+                        "negative": "0",
+                        "mixed": "4",
+                        "positive": "81"
+                    },
+                    "mandatedDrivers": {
+                        "adas": {
+                            "posts": "0",
+                            "percentage": "0"
+                        },
+                        "electrification": {
+                            "posts": "3",
+                            "percentage": "5.8"
+                        },
+                        "lightweighting": {
+                            "posts": "0",
+                            "percentage": "0"
+                        },
+                        "environmental": {
+                            "posts": "2",
+                            "percentage": "3.8"
+                        },
+                        "sdvs": {
+                            "posts": "0",
+                            "percentage": "0"
+                        }
+                    },
+                    "avgEngagement": "20.5",
+                    "PerformanceData": {
+                        "topEngagementDrivers": [
+                            {
+                                "name": "Competition/Achievement Narratives",
+                                "value": "1660"
+                            },
+                            {
+                                "name": "Employee Storytelling",
+                                "value": "285"
+                            },
+                            {
+                                "name": "Behind-the-Scenes Technical Content",
+                                "value": "195"
+                            },
+                            {
+                                "name": "Partnership Showcases",
+                                "value": "122"
+                            },
+                            {
+                                "name": "Community Engagement",
+                                "value": "95"
+                            }
+                        ],
+                        "brandVoice": [
+                            {
+                                "name": "Inspirational",
+                                "color": "#84cc16",
+                                "value": "38"
+                            },
+                            {
+                                "name": "Educational",
+                                "color": "#3b82f6",
+                                "value": "44"
+                            },
+                            {
+                                "name": "Authentic",
+                                "color": "#f97316",
+                                "value": "19"
+                            }
+                        ],
+                        "whiteSpaceOpportunities": [
+                            {
+                                "title": "ADAS Content Share",
+                                "value": "0"
+                            },
+                            {
+                                "title": "SDVs Content Share",
+                                "value": "0"
+                            }
+                        ],
+                        "homepageVsFeed": [
+                            {
+                                "color": "#84cc16",
+                                "claim": "Innovation Leadership",
+                                "value": "0"
+                            },
+                            {
+                                "color": "#3b82f6",
+                                "claim": "Sustainability Commitment",
+                                "value": "0"
+                            },
+                            {
+                                "color": "#ffffff",
+                                "claim": "People & Culture",
+                                "value": "0"
+                            },
+                            {
+                                "color": "#f97316",
+                                "claim": "Mobility/Automotive",
+                                "value": "0"
+                            }
+                        ],
+                        "contentStrategyGap": [
+                            {
+                                "name": "Talent Pipeline",
+                                "Emergent": "44",
+                                "Mandated": "0"
+                            },
+                            {
+                                "name": "Electrification",
+                                "Emergent": "5.8",
+                                "Mandated": "40"
+                            },
+                            {
+                                "name": "ADAS",
+                                "Emergent": "0",
+                                "Mandated": "25"
+                            },
+                            {
+                                "name": "Lightweighting",
+                                "Emergent": "0",
+                                "Mandated": "13"
+                            }
+                        ],
+                        "primaryContentThemes": [
+                            {
+                                "name": "STEM Education",
+                                "color": "#0ea5e9",
+                                "value": "44"
+                            },
+                            {
+                                "name": "Employee Stories",
+                                "color": "#84cc16",
+                                "value": "19"
+                            },
+                            {
+                                "name": "Community Partnerships",
+                                "color": "#f97316",
+                                "value": "15"
+                            }
+                        ],
+                        "audienceEngagement": [
+                            {
+                                "name": "STEM Students & Educators",
+                                "color": "#7CFC00",
+                                "value": "42"
+                            },
+                            {
+                                "name": "Current/Prospective Employees",
+                                "color": "#3B82F6",
+                                "value": "31"
+                            },
+                            {
+                                "name": "Skilled Trades Professionals",
+                                "color": "#E57373",
+                                "value": "18"
+                            },
+                            {
+                                "name": "Community/CSR Stakeholders",
+                                "color": "#F3F4F6",
+                                "value": "9"
+                            },
+                            {
+                                "name": "Others",
+                                "color": "#9CA3AF",
+                                "value": "0"
+                            }
+                        ],
+                        "strategySnapshot": [
+                            {
+                                "strategy": "Technical",
+                                "color": "text-primary",
+                                "competitor": "Bosch",
+                                "dataPoint": "65% Technical / Innovation posts"
+                            },
+                            {
+                                "strategy": "People-First",
+                                "color": "text-primary",
+                                "competitor": "Lear",
+                                "dataPoint": "48% Employee & Culture content"
+                            },
+                            {
+                                "strategy": "Validation",
+                                "color": "text-primary",
+                                "competitor": "Continental",
+                                "dataPoint": "70% Third-Party Mentions"
+                            },
+                            {
+                                "strategy": "Talent Pipeline",
+                                "color": "text-white",
+                                "competitor": "Magna",
+                                "dataPoint": "73% STEM/Trades Education"
+                            }
+                        ],
+                        "magnaPosition": {
+                            "x": "0",
+                            "name": "Magna",
+                            "y": "2",
+                            "strategy": "Talent Pipeline"
+                        },
+                        "kpis": {
+                            "metricsMentions": "46.2",
+                            "thirdPartyCitations": "8",
+                            "positiveSentiment": "81"
+                        },
+                        "competitorPositioning": [
+                            {
+                                "x": "2.5",
+                                "name": "Continental (Validation)",
+                                "y": "3.5"
+                            },
+                            {
+                                "x": "-2.5",
+                                "name": "Lear: People-First",
+                                "y": "-2"
+                            },
+                            {
+                                "x": "3.5",
+                                "name": "Bosch (Technical)",
+                                "y": "-3.5"
+                            }
+                        ],
+                        "strategicInitiatives": [
+                            {
+                                "name": "Amplify Electrification",
+                                "current": "5.8",
+                                "goal": "5.8% → 15% (90 days)",
+                                "target": "15"
+                            },
+                            {
+                                "name": "Launch ADAS Series",
+                                "current": "0",
+                                "goal": "0% → 10% (90 days)",
+                                "target": "10"
+                            },
+                            {
+                                "name": "Environmental Leadership",
+                                "current": "3.8",
+                                "goal": "3.8% → 10% (90 days)",
+                                "target": "10"
+                            }
+                        ]
+                    },
+                    "nts": "52",
+                    "audienceSegments": [
+                        {
+                            "share": "42",
+                            "followers": "0",
+                            "segment": "YouTube",
+                            "posent": "STEM Students & Educators",
+                            "confidence": "H"
+                        },
+                        {
+                            "share": "31",
+                            "segment": "Current/Prospective Employees",
+                            "confidence": "H"
+                        },
+                        {
+                            "share": "18",
+                            "segment": "Skilled Trades Professionals",
+                            "confidence": "M"
+                        },
+                        {
+                            "share": "9",
+                            "segment": "Community/CSR Stakeholders",
+                            "confidence": "M"
+                        },
+                        {
+                            "share": "0",
+                            "segment": "General Audience",
+                            "confidence": "L"
+                        }
+                    ]
+                },
+                "linkedin": {
+                    "topDrivers": [
+                        {
+                            "driver": "Facility Achievements & Milestones",
+                            "lift": "1640",
+                            "example": "4,197 engagements"
+                        },
+                        {
+                            "driver": "Renewable Energy/Sustainability",
+                            "lift": "305",
+                            "example": "975 engagements"
+                        },
+                        {
+                            "driver": "Employee Recognition & Culture",
+                            "lift": "43",
+                            "example": "344 engagements"
+                        }
+                    ],
+                    "sentiment": {
+                        "neutral": "18",
+                        "negative": "0",
+                        "mixed": "2",
+                        "positive": "80"
+                    },
+                    "mandatedDrivers": {
+                        "adas": {
+                            "posts": "22",
+                            "percentage": "16"
+                        },
+                        "electrification": {
+                            "posts": "28",
+                            "percentage": "20"
+                        },
+                        "lightweighting": {
+                            "posts": "8",
+                            "percentage": "6"
+                        },
+                        "environmental": {
+                            "posts": "19",
+                            "percentage": "14"
+                        },
+                        "sdvs": {
+                            "posts": "15",
+                            "percentage": "11"
+                        }
+                    },
+                    "avgEngagement": "241",
+                    "PerformanceData": {
+                        "topEngagementDrivers": [
+                            {
+                                "name": "Product Launches",
+                                "value": "-40"
+                            },
+                            {
+                                "name": "Community Engagement",
+                                "value": "95"
+                            },
+                            {
+                                "name": "Innovation/Technology Showcases",
+                                "value": "43"
+                            },
+                            {
+                                "name": "Renewable Energy/Sustainability Actions",
+                                "value": "305"
+                            },
+                            {
+                                "name": "Facility Achievements & Milestones",
+                                "value": "1640"
+                            }
+                        ],
+                        "brandVoice": [
+                            {
+                                "name": "Celebratory",
+                                "color": "#84cc16",
+                                "value": "78"
+                            },
+                            {
+                                "name": "Forward-looking",
+                                "color": "#3b82f6",
+                                "value": "45"
+                            },
+                            {
+                                "name": "Collaborative",
+                                "color": "#f97316",
+                                "value": "30"
+                            }
+                        ],
+                        "whiteSpaceOpportunities": [
+                            {
+                                "title": "Lightweighting Content Share",
+                                "value": "6"
+                            },
+                            {
+                                "title": "SDVs Content Share",
+                                "value": "11"
+                            }
+                        ],
+                        "homepageVsFeed": [
+                            {
+                                "color": "#84cc16",
+                                "claim": "Innovation Leadership",
+                                "value": "45"
+                            },
+                            {
+                                "color": "#3b82f6",
+                                "claim": "Sustainability Commitment",
+                                "value": "25"
+                            },
+                            {
+                                "color": "#ffffff",
+                                "claim": "People & Culture",
+                                "value": "100"
+                            },
+                            {
+                                "color": "#f97316",
+                                "claim": "Mobility/Automotive",
+                                "value": "40"
+                            }
+                        ],
+                        "contentStrategyGap": [
+                            {
+                                "name": "People & Culture",
+                                "Emergent": "30",
+                                "Mandated": "19"
+                            },
+                            {
+                                "name": "Electrification",
+                                "Emergent": "20",
+                                "Mandated": "40"
+                            },
+                            {
+                                "name": "ADAS",
+                                "Emergent": "16",
+                                "Mandated": "25"
+                            },
+                            {
+                                "name": "Lightweighting",
+                                "Emergent": "6",
+                                "Mandated": "13"
+                            }
+                        ],
+                        "primaryContentThemes": [
+                            {
+                                "name": "Innovation/Technology",
+                                "color": "#0ea5e9",
+                                "value": "35"
+                            },
+                            {
+                                "name": "People/Culture",
+                                "color": "#84cc16",
+                                "value": "30"
+                            },
+                            {
+                                "name": "Mobility/Automotive",
+                                "color": "#f97316",
+                                "value": "20"
+                            }
+                        ],
+                        "audienceEngagement": [
+                            {
+                                "name": "Industry Engineers",
+                                "color": "#7CFC00",
+                                "value": "35"
+                            },
+                            {
+                                "name": "Current Employees",
+                                "color": "#3B82F6",
+                                "value": "30"
+                            },
+                            {
+                                "name": "OEM Decision Makers",
+                                "color": "#E57373",
+                                "value": "20"
+                            },
+                            {
+                                "name": "Students/Early Career",
+                                "color": "#F3F4F6",
+                                "value": "15"
+                            },
+                            {
+                                "name": "Others",
+                                "color": "#9CA3AF",
+                                "value": "0"
+                            }
+                        ],
+                        "strategySnapshot": [
+                            {
+                                "strategy": "Technical",
+                                "color": "text-primary",
+                                "competitor": "Bosch",
+                                "dataPoint": "65% Technical / Innovation posts"
+                            },
+                            {
+                                "strategy": "People-First",
+                                "color": "text-primary",
+                                "competitor": "Lear",
+                                "dataPoint": "48% Employee & Culture content"
+                            },
+                            {
+                                "strategy": "Validation",
+                                "color": "text-primary",
+                                "competitor": "Continental",
+                                "dataPoint": "70% Third-Party Mentions"
+                            },
+                            {
+                                "strategy": "Balanced Blend",
+                                "color": "text-white",
+                                "competitor": "Magna",
+                                "dataPoint": "Mix of Technical + People focus"
+                            }
+                        ],
+                        "magnaPosition": {
+                            "x": "0",
+                            "name": "Magna",
+                            "y": "0",
+                            "strategy": "Balanced Blend"
+                        },
+                        "kpis": {
+                            "metricsMentions": "42",
+                            "thirdPartyCitations": "31",
+                            "positiveSentiment": "80"
+                        },
+                        "competitorPositioning": [
+                            {
+                                "x": "2.5",
+                                "name": "Continental (Validation)",
+                                "y": "3.5"
+                            },
+                            {
+                                "x": "-2.5",
+                                "name": "Lear: People-First",
+                                "y": "-2"
+                            },
+                            {
+                                "x": "3.5",
+                                "name": "Bosch (Technical)",
+                                "y": "-3.5"
+                            }
+                        ],
+                        "strategicInitiatives": [
+                            {
+                                "name": "Amplify Lightweighting",
+                                "current": "6",
+                                "goal": "6% → 25% (90 days)",
+                                "target": "25"
+                            },
+                            {
+                                "name": "Launch SDV Leadership",
+                                "current": "11",
+                                "goal": "11% → 20% (now 11%)",
+                                "target": "20"
+                            },
+                            {
+                                "name": "ADAS Expansion",
+                                "current": "16",
+                                "goal": "16% → 25% (now 16%)",
+                                "target": "25"
+                            }
+                        ]
+                    },
+                    "nts": "138",
+                    "audienceSegments": [
+                        {
+                            "share": "35",
+                            "followers": "825000",
+                            "segment": "LinkedIn",
+                            "posent": "Industry Engineers/Technical Talent",
+                            "confidence": "H"
+                        },
+                        {
+                            "share": "30",
+                            "segment": "Current Employees & Alumni",
+                            "confidence": "H"
+                        },
+                        {
+                            "share": "20",
+                            "segment": "Automotive OEM Decision Makers",
+                            "confidence": "M"
+                        },
+                        {
+                            "share": "15",
+                            "segment": "STEM Students/Early Career",
+                            "confidence": "M"
+                        },
+                        {
+                            "share": "0",
+                            "segment": "ESG/Sustainability Advocates",
+                            "confidence": "L"
+                        }
+                    ]
+                },
+                "facebook": {
+                    "topDrivers": [
+                        {
+                            "driver": "Facility Achievements & Milestones",
+                            "lift": "327",
+                            "example": "232 engagements"
+                        },
+                        {
+                            "driver": "Community Impact Stories",
+                            "lift": "291",
+                            "example": "215 engagements"
+                        },
+                        {
+                            "driver": "Women's Empowerment Content",
+                            "lift": "145",
+                            "example": "135 engagements"
+                        }
+                    ],
+                    "sentiment": {
+                        "neutral": "19",
+                        "negative": "1",
+                        "mixed": "2",
+                        "positive": "78"
+                    },
+                    "mandatedDrivers": {
+                        "adas": {
+                            "posts": "5",
+                            "percentage": "6.2"
+                        },
+                        "electrification": {
+                            "posts": "3",
+                            "percentage": "3.7"
+                        },
+                        "lightweighting": {
+                            "posts": "1",
+                            "percentage": "1.2"
+                        },
+                        "environmental": {
+                            "posts": "8",
+                            "percentage": "9.9"
+                        },
+                        "sdvs": {
+                            "posts": "2",
+                            "percentage": "2.5"
+                        }
+                    },
+                    "avgEngagement": "55",
+                    "PerformanceData": {
+                        "topEngagementDrivers": [
+                            {
+                                "name": "Product Launches",
+                                "value": "-40"
+                            },
+                            {
+                                "name": "Community Engagement",
+                                "value": "291"
+                            },
+                            {
+                                "name": "Innovation/Technology Showcases",
+                                "value": "82"
+                            },
+                            {
+                                "name": "Renewable Energy/Sustainability Actions",
+                                "value": "145"
+                            },
+                            {
+                                "name": "Facility Achievements & Milestones",
+                                "value": "327"
+                            }
+                        ],
+                        "brandVoice": [
+                            {
+                                "name": "Celebratory",
+                                "color": "#84cc16",
+                                "value": "85"
+                            },
+                            {
+                                "name": "Forward-looking",
+                                "color": "#3b82f6",
+                                "value": "15"
+                            },
+                            {
+                                "name": "Collaborative",
+                                "color": "#f97316",
+                                "value": "72"
+                            }
+                        ],
+                        "whiteSpaceOpportunities": [
+                            {
+                                "title": "Lightweighting Content Share",
+                                "value": "1.2"
+                            },
+                            {
+                                "title": "SDVs Content Share",
+                                "value": "2.5"
+                            }
+                        ],
+                        "homepageVsFeed": [
+                            {
+                                "color": "#84cc16",
+                                "claim": "Innovation Leadership",
+                                "value": "12"
+                            },
+                            {
+                                "color": "#3b82f6",
+                                "claim": "Sustainability Commitment",
+                                "value": "28"
+                            },
+                            {
+                                "color": "#ffffff",
+                                "claim": "People & Culture",
+                                "value": "31"
+                            },
+                            {
+                                "color": "#f97316",
+                                "claim": "Mobility/Automotive",
+                                "value": "22"
+                            }
+                        ],
+                        "contentStrategyGap": [
+                            {
+                                "name": "People & Culture",
+                                "Emergent": "31",
+                                "Mandated": "19"
+                            },
+                            {
+                                "name": "Electrification",
+                                "Emergent": "3.7",
+                                "Mandated": "40"
+                            },
+                            {
+                                "name": "ADAS",
+                                "Emergent": "6.2",
+                                "Mandated": "25"
+                            },
+                            {
+                                "name": "Lightweighting",
+                                "Emergent": "1.2",
+                                "Mandated": "13"
+                            }
+                        ],
+                        "primaryContentThemes": [
+                            {
+                                "name": "Innovation/Technology",
+                                "color": "#0ea5e9",
+                                "value": "12"
+                            },
+                            {
+                                "name": "People/Culture",
+                                "color": "#84cc16",
+                                "value": "31"
+                            },
+                            {
+                                "name": "Mobility/Automotive",
+                                "color": "#f97316",
+                                "value": "22"
+                            }
+                        ],
+                        "audienceEngagement": [
+                            {
+                                "name": "Industry Engineers",
+                                "color": "#7CFC00",
+                                "value": "12"
+                            },
+                            {
+                                "name": "Current Employees",
+                                "color": "#3B82F6",
+                                "value": "42"
+                            },
+                            {
+                                "name": "OEM Decision Makers",
+                                "color": "#E57373",
+                                "value": "18"
+                            },
+                            {
+                                "name": "Students/Early Career",
+                                "color": "#F3F4F6",
+                                "value": "18"
+                            },
+                            {
+                                "name": "Others",
+                                "color": "#9CA3AF",
+                                "value": "10"
+                            }
+                        ],
+                        "strategySnapshot": [
+                            {
+                                "strategy": "Technical",
+                                "color": "text-primary",
+                                "competitor": "Bosch",
+                                "dataPoint": "65% Technical / Innovation posts"
+                            },
+                            {
+                                "strategy": "People-First",
+                                "color": "text-primary",
+                                "competitor": "Lear",
+                                "dataPoint": "48% Employee & Culture content"
+                            },
+                            {
+                                "strategy": "Validation",
+                                "color": "text-primary",
+                                "competitor": "Continental",
+                                "dataPoint": "70% Third-Party Mentions"
+                            },
+                            {
+                                "strategy": "Balanced Blend",
+                                "color": "text-white",
+                                "competitor": "Magna",
+                                "dataPoint": "Mix of Technical + People focus"
+                            }
+                        ],
+                        "magnaPosition": {
+                            "x": "0",
+                            "name": "Magna",
+                            "y": "0",
+                            "strategy": "Balanced Blend"
+                        },
+                        "kpis": {
+                            "metricsMentions": "42",
+                            "thirdPartyCitations": "31",
+                            "positiveSentiment": "78"
+                        },
+                        "competitorPositioning": [
+                            {
+                                "x": "2.5",
+                                "name": "Continental (Validation)",
+                                "y": "3.5"
+                            },
+                            {
+                                "x": "-2.5",
+                                "name": "Lear: People-First",
+                                "y": "-2"
+                            },
+                            {
+                                "x": "3.5",
+                                "name": "Bosch (Technical)",
+                                "y": "-3.5"
+                            }
+                        ],
+                        "strategicInitiatives": [
+                            {
+                                "name": "Amplify Lightweighting",
+                                "current": "1.2",
+                                "goal": "1.2% → 5% (90 days)",
+                                "target": "5"
+                            },
+                            {
+                                "name": "Launch SDV Leadership",
+                                "current": "2.5",
+                                "goal": "2.5% → 20% (now 2.5%)",
+                                "target": "20"
+                            },
+                            {
+                                "name": "ADAS Expansion",
+                                "current": "6.2",
+                                "goal": "6.2% → 15% (now 6.2%)",
+                                "target": "15"
+                            }
+                        ]
+                    },
+                    "nts": "81",
+                    "audienceSegments": [
+                        {
+                            "share": "42",
+                            "followers": "0",
+                            "segment": "Facebook",
+                            "posent": "Current & Former Employees",
+                            "confidence": "H"
+                        },
+                        {
+                            "share": "28",
+                            "segment": "Local Community Members",
+                            "confidence": "M"
+                        },
+                        {
+                            "share": "18",
+                            "segment": "STEM Students & Educators",
+                            "confidence": "M"
+                        },
+                        {
+                            "share": "12",
+                            "segment": "Industry Professionals",
+                            "confidence": "M"
+                        },
+                        {
+                            "share": "0",
+                            "segment": "ESG/Sustainability Advocates",
+                            "confidence": "L"
+                        }
+                    ]
+                }
+            }
+        },
+        "batch_id": "348bfc72-ee2e-4a9d-8eba-d9d1d79e0fee",
+        "client_id": "763d503f-9d24-42c4-b6d5-0fa2beba5da9",
+        "brand_id": "cb5b9cf6-a363-4c02-b066-ff2c5ab8639c",
+        "strategicRecommendations": {
+            "x": [
+                {
+                    "expectedEffect": "Clear go/no-go decision within 30 days",
+                    "recommendation": "Conduct X Channel Audit",
+                    "action": "Verify account status, ownership, and access; document decision on channel strategy",
+                    "audience": "Internal stakeholders",
+                    "driver": "Channel activation"
+                },
+                {
+                    "expectedEffect": "Establish baseline engagement metrics",
+                    "recommendation": "If Active: Launch Reactivation",
+                    "action": "Post 3x weekly on automotive tech trends; asset: news commentary threads",
+                    "audience": "Industry analysts, tech media",
+                    "driver": "Real-time industry commentary"
+                },
+                {
+                    "expectedEffect": "Prevent brand impersonation",
+                    "recommendation": "If Inactive: Secure Account",
+                    "action": "Claim/secure @MagnaInt handle if unclaimed; set up monitoring",
+                    "audience": "Brand protection",
+                    "driver": "Risk mitigation"
+                },
+                {
+                    "expectedEffect": "Informed channel strategy",
+                    "recommendation": "Competitive Benchmarking",
+                    "action": "Analyze 5 key competitors' X strategies; document engagement benchmarks",
+                    "audience": "Competitor analysis",
+                    "driver": "Market intelligence"
+                },
+                {
+                    "expectedEffect": "Resource allocation decision",
+                    "recommendation": "Cross-Channel Assessment",
+                    "action": "Evaluate if X audience needs are met via LinkedIn/YouTube; document overlap",
+                    "audience": "Multi-channel strategy",
+                    "driver": "Resource optimization"
+                }
+            ],
+            "youtube": [
+                {
+                    "expectedEffect": "+15% engagement on technical content",
+                    "recommendation": "Amplify Electrification Content",
+                    "action": "Shift 20% of monthly posts to e-mobility student projects; publish weekly technical deep-dives on EV systems",
+                    "audience": "Engineering Students",
+                    "driver": "Electrification (Mandated)"
+                },
+                {
+                    "expectedEffect": "+25% views on technical content",
+                    "recommendation": "Scale Employee Technical Tutorials",
+                    "action": "Shift 15% of posts to employee-led technical tutorials; publish bi-weekly Tech Tuesday demos",
+                    "audience": "Skilled Trades Professionals",
+                    "driver": "Technical Innovation"
+                },
+                {
+                    "expectedEffect": "Establish ADAS presence from 0% to 10% coverage",
+                    "recommendation": "Create ADAS Education Series",
+                    "action": "Launch monthly ADAS explainer series featuring student projects; publish case studies from Formula SAE autonomous vehicles",
+                    "audience": "STEM Students",
+                    "driver": "ADAS (Mandated)"
+                },
+                {
+                    "expectedEffect": "+40% engagement on employee content",
+                    "recommendation": "Expand Problem-Solution Narratives",
+                    "action": "Increase problem-solution pairs to 30 per 100 posts; publish weekly Challenge & Solution employee stories",
+                    "audience": "Current/Prospective Employees",
+                    "driver": "Talent Pipeline"
+                },
+                {
+                    "expectedEffect": "+5pp Environmental Leadership coverage",
+                    "recommendation": "Integrate Sustainability Stories",
+                    "action": "Shift 10% of posts to sustainability initiatives; publish monthly green technology showcases",
+                    "audience": "Community Stakeholders",
+                    "driver": "Environmental Leadership"
+                }
+            ],
+            "linkedin": [
+                {
+                    "expectedEffect": "+50% engagement on technical posts",
+                    "recommendation": "Amplify ADAS proof points",
+                    "action": "Shift 15% of monthly posts to ADAS case studies; publish sensor fusion ROI proof weekly; CTA: 'Contact our ADAS team'",
+                    "audience": "Automotive Engineers",
+                    "driver": "ADAS"
+                },
+                {
+                    "expectedEffect": "+200% engagement on culture posts",
+                    "recommendation": "Scale safety milestone program",
+                    "action": "Shift 10% of posts to facility safety achievements; publish monthly safety scoreboard; CTA: 'Share your safety story'",
+                    "audience": "Magna Employees & OEMs",
+                    "driver": "Safety Culture"
+                },
+                {
+                    "expectedEffect": "+30% ESG audience growth",
+                    "recommendation": "Launch sustainability series",
+                    "action": "Shift 20% of posts to sustainability wins; publish bi-weekly renewable materials demos; CTA: 'Learn about our Net-Zero journey'",
+                    "audience": "ESG Advocates",
+                    "driver": "Environmental Leadership"
+                },
+                {
+                    "expectedEffect": "+25% early career engagement",
+                    "recommendation": "Expand talent pipeline content",
+                    "action": "Shift 15% of posts to apprentice/graduate stories; publish weekly career pathway content; CTA: 'Join our talent programs'",
+                    "audience": "Students & Early Career",
+                    "driver": "Talent Development"
+                },
+                {
+                    "expectedEffect": "+40% technical audience engagement",
+                    "recommendation": "Create innovation deep-dives",
+                    "action": "Shift 25% of posts to technical deep-dives; publish weekly #MagnaTechTalk with specs; CTA: 'Download technical brief'",
+                    "audience": "Technical Professionals",
+                    "driver": "Electrification & SDVs"
+                }
+            ],
+            "facebook": [
+                {
+                    "expectedEffect": "+40% engagement on culture posts",
+                    "recommendation": "Amplify Safety Milestone Series",
+                    "action": "Shift 15% of monthly posts to safety celebrations; publish milestone video testimonials weekly",
+                    "audience": "Current & Former Employees",
+                    "driver": "Safety Culture Excellence"
+                },
+                {
+                    "expectedEffect": "+35% local engagement",
+                    "recommendation": "Launch Community Champion Program",
+                    "action": "Dedicate 20% of posts to local impact stories with specific metrics; publish partner testimonial monthly",
+                    "audience": "Local Community Members",
+                    "driver": "Community Investment"
+                },
+                {
+                    "expectedEffect": "+25% youth audience growth",
+                    "recommendation": "Expand STEM Student Spotlights",
+                    "action": "Increase FIRST/Formula SAE content to 30% of posts; publish student journey video bi-weekly",
+                    "audience": "STEM Students & Educators",
+                    "driver": "STEM Pipeline Development"
+                },
+                {
+                    "expectedEffect": "Double mandated driver visibility",
+                    "recommendation": "Create Innovation Impact Series",
+                    "action": "Boost mandated driver coverage to 25% of posts; publish technical case study monthly",
+                    "audience": "Industry Professionals",
+                    "driver": "ADAS/Electrification"
+                },
+                {
+                    "expectedEffect": "+50% engagement on diversity content",
+                    "recommendation": "Institute Women of Magna Wednesdays",
+                    "action": "Weekly women's leadership features (25% of posts); publish career journey posts",
+                    "audience": "All Segments",
+                    "driver": "Employee Recognition + Diversity"
+                }
+            ]
+        }
+    },
+    "competitors": [
+        {
+            "competitor_name": "ZF",
+            "competitor_id": "833c18a1-f21c-484f-a612-4b9f4e37132c",
+            "socialMedia": {
+                "platforms": {
+                    "x": {
+                        "topDrivers": [
+                            {
+                                "driver": "No data available",
+                                "lift": "0",
+                                "example": "0 engagements"
+                            },
+                            {
+                                "driver": "No data available",
+                                "lift": "0",
+                                "example": "0 engagements"
+                            },
+                            {
+                                "driver": "No data available",
+                                "lift": "0",
+                                "example": "0 engagements"
+                            }
+                        ],
+                        "sentiment": {
+                            "neutral": "0",
+                            "negative": "0",
+                            "mixed": "0",
+                            "positive": "0"
+                        },
+                        "mandatedDrivers": {
+                            "adas": {
+                                "posts": "0",
+                                "percentage": "0"
+                            },
+                            "electrification": {
+                                "posts": "0",
+                                "percentage": "0"
+                            },
+                            "lightweighting": {
+                                "posts": "0",
+                                "percentage": "0"
+                            },
+                            "environmental": {
+                                "posts": "0",
+                                "percentage": "0"
+                            },
+                            "sdvs": {
+                                "posts": "0",
+                                "percentage": "0"
+                            }
+                        },
+                        "avgEngagement": "0",
+                        "PerformanceData": {
+                            "topEngagementDrivers": [
+                                {
+                                    "name": "Product Launches",
+                                    "value": "0"
+                                },
+                                {
+                                    "name": "Community Engagement",
+                                    "value": "0"
+                                },
+                                {
+                                    "name": "Innovation/Technology Showcases",
+                                    "value": "0"
+                                },
+                                {
+                                    "name": "Renewable Energy/Sustainability Actions",
+                                    "value": "0"
+                                },
+                                {
+                                    "name": "Facility Achievements & Milestones",
+                                    "value": "0"
+                                }
+                            ],
+                            "brandVoice": [
+                                {
+                                    "name": "Celebratory",
+                                    "color": "#84cc16",
+                                    "value": "0"
+                                },
+                                {
+                                    "name": "Forward-looking",
+                                    "color": "#3b82f6",
+                                    "value": "0"
+                                },
+                                {
+                                    "name": "Collaborative",
+                                    "color": "#f97316",
+                                    "value": "0"
+                                }
+                            ],
+                            "whiteSpaceOpportunities": [
+                                {
+                                    "title": "Lightweighting Content Share",
+                                    "value": "0"
+                                },
+                                {
+                                    "title": "SDVs Content Share",
+                                    "value": "0"
+                                }
+                            ],
+                            "homepageVsFeed": [
+                                {
+                                    "color": "#84cc16",
+                                    "claim": "Innovation Leadership",
+                                    "value": "0"
+                                },
+                                {
+                                    "color": "#3b82f6",
+                                    "claim": "Sustainability Commitment",
+                                    "value": "0"
+                                },
+                                {
+                                    "color": "#ffffff",
+                                    "claim": "People & Culture",
+                                    "value": "0"
+                                },
+                                {
+                                    "color": "#f97316",
+                                    "claim": "Mobility/Automotive",
+                                    "value": "0"
+                                }
+                            ],
+                            "contentStrategyGap": [
+                                {
+                                    "name": "People & Culture",
+                                    "Emergent": "0",
+                                    "Mandated": "0"
+                                },
+                                {
+                                    "name": "Electrification",
+                                    "Emergent": "0",
+                                    "Mandated": "0"
+                                },
+                                {
+                                    "name": "ADAS",
+                                    "Emergent": "0",
+                                    "Mandated": "0"
+                                },
+                                {
+                                    "name": "Lightweighting",
+                                    "Emergent": "0",
+                                    "Mandated": "0"
+                                }
+                            ],
+                            "primaryContentThemes": [
+                                {
+                                    "name": "Innovation/Technology",
+                                    "color": "#0ea5e9",
+                                    "value": "0"
+                                },
+                                {
+                                    "name": "People/Culture",
+                                    "color": "#84cc16",
+                                    "value": "0"
+                                },
+                                {
+                                    "name": "Mobility/Automotive",
+                                    "color": "#f97316",
+                                    "value": "0"
+                                }
+                            ],
+                            "audienceEngagement": [
+                                {
+                                    "name": "Industry Engineers",
+                                    "color": "#7CFC00",
+                                    "value": "0"
+                                },
+                                {
+                                    "name": "Current Employees",
+                                    "color": "#3B82F6",
+                                    "value": "0"
+                                },
+                                {
+                                    "name": "OEM Decision Makers",
+                                    "color": "#E57373",
+                                    "value": "0"
+                                },
+                                {
+                                    "name": "Students/Early Career",
+                                    "color": "#F3F4F6",
+                                    "value": "0"
+                                },
+                                {
+                                    "name": "Others",
+                                    "color": "#9CA3AF",
+                                    "value": "0"
+                                }
+                            ],
+                            "strategySnapshot": [
+                                {
+                                    "strategy": "Technical",
+                                    "color": "text-primary",
+                                    "competitor": "Bosch",
+                                    "dataPoint": "No data available"
+                                },
+                                {
+                                    "strategy": "People-First",
+                                    "color": "text-primary",
+                                    "competitor": "Lear",
+                                    "dataPoint": "No data available"
+                                },
+                                {
+                                    "strategy": "Validation",
+                                    "color": "text-primary",
+                                    "competitor": "Continental",
+                                    "dataPoint": "No data available"
+                                },
+                                {
+                                    "strategy": "Balanced Blend",
+                                    "color": "text-white",
+                                    "competitor": "Magna",
+                                    "dataPoint": "No data available"
+                                }
+                            ],
+                            "magnaPosition": {
+                                "x": "0",
+                                "name": "Magna",
+                                "y": "0",
+                                "strategy": "Balanced Blend"
+                            },
+                            "kpis": {
+                                "metricsMentions": "0",
+                                "thirdPartyCitations": "0",
+                                "positiveSentiment": "0"
+                            },
+                            "competitorPositioning": [
+                                {
+                                    "x": "0",
+                                    "name": "Continental (Validation)",
+                                    "y": "0"
+                                },
+                                {
+                                    "x": "0",
+                                    "name": "Lear: People-First",
+                                    "y": "0"
+                                },
+                                {
+                                    "x": "0",
+                                    "name": "Bosch (Technical)",
+                                    "y": "0"
+                                }
+                            ],
+                            "strategicInitiatives": [
+                                {
+                                    "name": "Amplify Lightweighting",
+                                    "current": "0",
+                                    "goal": "No data available",
+                                    "target": "0"
+                                },
+                                {
+                                    "name": "Launch SDV Leadership",
+                                    "current": "0",
+                                    "goal": "No data available",
+                                    "target": "0"
+                                },
+                                {
+                                    "name": "ADAS Expansion",
+                                    "current": "0",
+                                    "goal": "No data available",
+                                    "target": "0"
+                                }
+                            ]
+                        },
+                        "nts": "0",
+                        "audienceSegments": [
+                            {
+                                "share": "0",
+                                "followers": "0",
+                                "segment": "X",
+                                "posent": "No data available",
+                                "confidence": "L"
+                            },
+                            {
+                                "share": "0",
+                                "segment": "No data available",
+                                "confidence": "L"
+                            },
+                            {
+                                "share": "0",
+                                "segment": "No data available",
+                                "confidence": "L"
+                            },
+                            {
+                                "share": "0",
+                                "segment": "No data available",
+                                "confidence": "L"
+                            },
+                            {
+                                "share": "0",
+                                "segment": "No data available",
+                                "confidence": "L"
+                            }
+                        ]
+                    },
+                    "youtube": {
+                        "topDrivers": [
+                            {
+                                "driver": "No Data Available",
+                                "lift": "0",
+                                "example": "0 engagements"
+                            },
+                            {
+                                "driver": "No Data Available",
+                                "lift": "0",
+                                "example": "0 engagements"
+                            },
+                            {
+                                "driver": "No Data Available",
+                                "lift": "0",
+                                "example": "0 engagements"
+                            }
+                        ],
+                        "sentiment": {
+                            "neutral": "0",
+                            "negative": "0",
+                            "mixed": "0",
+                            "positive": "0"
+                        },
+                        "mandatedDrivers": {
+                            "adas": {
+                                "posts": "0",
+                                "percentage": "0"
+                            },
+                            "electrification": {
+                                "posts": "0",
+                                "percentage": "0"
+                            },
+                            "lightweighting": {
+                                "posts": "0",
+                                "percentage": "0"
+                            },
+                            "environmental": {
+                                "posts": "0",
+                                "percentage": "0"
+                            },
+                            "sdvs": {
+                                "posts": "0",
+                                "percentage": "0"
+                            }
+                        },
+                        "avgEngagement": "0",
+                        "PerformanceData": {
+                            "topEngagementDrivers": [
+                                {
+                                    "name": "No Data Available",
+                                    "value": "0"
+                                },
+                                {
+                                    "name": "No Data Available",
+                                    "value": "0"
+                                },
+                                {
+                                    "name": "No Data Available",
+                                    "value": "0"
+                                },
+                                {
+                                    "name": "No Data Available",
+                                    "value": "0"
+                                },
+                                {
+                                    "name": "No Data Available",
+                                    "value": "0"
+                                }
+                            ],
+                            "brandVoice": [
+                                {
+                                    "name": "No Data",
+                                    "color": "#84cc16",
+                                    "value": "0"
+                                },
+                                {
+                                    "name": "No Data",
+                                    "color": "#3b82f6",
+                                    "value": "0"
+                                },
+                                {
+                                    "name": "No Data",
+                                    "color": "#f97316",
+                                    "value": "0"
+                                }
+                            ],
+                            "whiteSpaceOpportunities": [
+                                {
+                                    "title": "No Data Available",
+                                    "value": "0"
+                                },
+                                {
+                                    "title": "No Data Available",
+                                    "value": "0"
+                                }
+                            ],
+                            "homepageVsFeed": [
+                                {
+                                    "color": "#84cc16",
+                                    "claim": "No Data",
+                                    "value": "0"
+                                },
+                                {
+                                    "color": "#3b82f6",
+                                    "claim": "No Data",
+                                    "value": "0"
+                                },
+                                {
+                                    "color": "#ffffff",
+                                    "claim": "No Data",
+                                    "value": "0"
+                                },
+                                {
+                                    "color": "#f97316",
+                                    "claim": "No Data",
+                                    "value": "0"
+                                }
+                            ],
+                            "contentStrategyGap": [
+                                {
+                                    "name": "No Data",
+                                    "Emergent": "0",
+                                    "Mandated": "0"
+                                },
+                                {
+                                    "name": "No Data",
+                                    "Emergent": "0",
+                                    "Mandated": "0"
+                                },
+                                {
+                                    "name": "No Data",
+                                    "Emergent": "0",
+                                    "Mandated": "0"
+                                },
+                                {
+                                    "name": "No Data",
+                                    "Emergent": "0",
+                                    "Mandated": "0"
+                                }
+                            ],
+                            "primaryContentThemes": [
+                                {
+                                    "name": "No Data",
+                                    "color": "#0ea5e9",
+                                    "value": "0"
+                                },
+                                {
+                                    "name": "No Data",
+                                    "color": "#84cc16",
+                                    "value": "0"
+                                },
+                                {
+                                    "name": "No Data",
+                                    "color": "#f97316",
+                                    "value": "0"
+                                }
+                            ],
+                            "audienceEngagement": [
+                                {
+                                    "name": "No Data",
+                                    "color": "#7CFC00",
+                                    "value": "0"
+                                },
+                                {
+                                    "name": "No Data",
+                                    "color": "#3B82F6",
+                                    "value": "0"
+                                },
+                                {
+                                    "name": "No Data",
+                                    "color": "#E57373",
+                                    "value": "0"
+                                },
+                                {
+                                    "name": "No Data",
+                                    "color": "#F3F4F6",
+                                    "value": "0"
+                                },
+                                {
+                                    "name": "No Data",
+                                    "color": "#9CA3AF",
+                                    "value": "0"
+                                }
+                            ],
+                            "strategySnapshot": [
+                                {
+                                    "strategy": "No Data",
+                                    "color": "text-primary",
+                                    "competitor": "No Data",
+                                    "dataPoint": "No posts found"
+                                },
+                                {
+                                    "strategy": "No Data",
+                                    "color": "text-primary",
+                                    "competitor": "No Data",
+                                    "dataPoint": "No posts found"
+                                },
+                                {
+                                    "strategy": "No Data",
+                                    "color": "text-primary",
+                                    "competitor": "No Data",
+                                    "dataPoint": "No posts found"
+                                },
+                                {
+                                    "strategy": "No Data",
+                                    "color": "text-white",
+                                    "competitor": "No Data",
+                                    "dataPoint": "No posts found"
+                                }
+                            ],
+                            "magnaPosition": {
+                                "x": "0",
+                                "name": "ZF",
+                                "y": "0",
+                                "strategy": "No Data"
+                            },
+                            "kpis": {
+                                "metricsMentions": "0",
+                                "thirdPartyCitations": "0",
+                                "positiveSentiment": "0"
+                            },
+                            "competitorPositioning": [
+                                {
+                                    "x": "0",
+                                    "name": "No Data",
+                                    "y": "0"
+                                },
+                                {
+                                    "x": "0",
+                                    "name": "No Data",
+                                    "y": "0"
+                                },
+                                {
+                                    "x": "0",
+                                    "name": "No Data",
+                                    "y": "0"
+                                }
+                            ],
+                            "strategicInitiatives": [
+                                {
+                                    "name": "No Data",
+                                    "current": "0",
+                                    "goal": "No data available",
+                                    "target": "0"
+                                },
+                                {
+                                    "name": "No Data",
+                                    "current": "0",
+                                    "goal": "No data available",
+                                    "target": "0"
+                                },
+                                {
+                                    "name": "No Data",
+                                    "current": "0",
+                                    "goal": "No data available",
+                                    "target": "0"
+                                }
+                            ]
+                        },
+                        "nts": "0",
+                        "audienceSegments": [
+                            {
+                                "share": "0",
+                                "followers": "0",
+                                "segment": "YouTube",
+                                "posent": "No Data",
+                                "confidence": "L"
+                            },
+                            {
+                                "share": "0",
+                                "segment": "No Data",
+                                "confidence": "L"
+                            },
+                            {
+                                "share": "0",
+                                "segment": "No Data",
+                                "confidence": "L"
+                            },
+                            {
+                                "share": "0",
+                                "segment": "No Data",
+                                "confidence": "L"
+                            },
+                            {
+                                "share": "0",
+                                "segment": "No Data",
+                                "confidence": "L"
+                            }
+                        ]
+                    },
+                    "facebook": {
+                        "topDrivers": [
+                            {
+                                "driver": "No data available",
+                                "lift": "0",
+                                "example": "Dead page"
+                            },
+                            {
+                                "driver": "No data available",
+                                "lift": "0",
+                                "example": "Dead page"
+                            },
+                            {
+                                "driver": "No data available",
+                                "lift": "0",
+                                "example": "Dead page"
+                            }
+                        ],
+                        "sentiment": {
+                            "neutral": "0",
+                            "negative": "0",
+                            "mixed": "0",
+                            "positive": "0"
+                        },
+                        "mandatedDrivers": {
+                            "adas": {
+                                "posts": "0",
+                                "percentage": "0"
+                            },
+                            "electrification": {
+                                "posts": "0",
+                                "percentage": "0"
+                            },
+                            "lightweighting": {
+                                "posts": "0",
+                                "percentage": "0"
+                            },
+                            "environmental": {
+                                "posts": "0",
+                                "percentage": "0"
+                            },
+                            "sdvs": {
+                                "posts": "0",
+                                "percentage": "0"
+                            }
+                        },
+                        "avgEngagement": "0",
+                        "PerformanceData": {
+                            "topEngagementDrivers": [
+                                {
+                                    "name": "Product Launches",
+                                    "value": "0"
+                                },
+                                {
+                                    "name": "Community Engagement",
+                                    "value": "0"
+                                },
+                                {
+                                    "name": "Innovation/Technology Showcases",
+                                    "value": "0"
+                                },
+                                {
+                                    "name": "Renewable Energy/Sustainability Actions",
+                                    "value": "0"
+                                },
+                                {
+                                    "name": "Facility Achievements & Milestones",
+                                    "value": "0"
+                                }
+                            ],
+                            "brandVoice": [
+                                {
+                                    "name": "Celebratory",
+                                    "color": "#84cc16",
+                                    "value": "0"
+                                },
+                                {
+                                    "name": "Forward-looking",
+                                    "color": "#3b82f6",
+                                    "value": "0"
+                                },
+                                {
+                                    "name": "Collaborative",
+                                    "color": "#f97316",
+                                    "value": "0"
+                                }
+                            ],
+                            "whiteSpaceOpportunities": [
+                                {
+                                    "title": "Lightweighting Content Share",
+                                    "value": "0"
+                                },
+                                {
+                                    "title": "SDVs Content Share",
+                                    "value": "0"
+                                }
+                            ],
+                            "homepageVsFeed": [
+                                {
+                                    "color": "#84cc16",
+                                    "claim": "Innovation Leadership",
+                                    "value": "0"
+                                },
+                                {
+                                    "color": "#3b82f6",
+                                    "claim": "Sustainability Commitment",
+                                    "value": "0"
+                                },
+                                {
+                                    "color": "#ffffff",
+                                    "claim": "People & Culture",
+                                    "value": "0"
+                                },
+                                {
+                                    "color": "#f97316",
+                                    "claim": "Mobility/Automotive",
+                                    "value": "0"
+                                }
+                            ],
+                            "contentStrategyGap": [
+                                {
+                                    "name": "People & Culture",
+                                    "Emergent": "0",
+                                    "Mandated": "0"
+                                },
+                                {
+                                    "name": "Electrification",
+                                    "Emergent": "0",
+                                    "Mandated": "0"
+                                },
+                                {
+                                    "name": "ADAS",
+                                    "Emergent": "0",
+                                    "Mandated": "0"
+                                },
+                                {
+                                    "name": "Lightweighting",
+                                    "Emergent": "0",
+                                    "Mandated": "0"
+                                }
+                            ],
+                            "primaryContentThemes": [
+                                {
+                                    "name": "Innovation/Technology",
+                                    "color": "#0ea5e9",
+                                    "value": "0"
+                                },
+                                {
+                                    "name": "People/Culture",
+                                    "color": "#84cc16",
+                                    "value": "0"
+                                },
+                                {
+                                    "name": "Mobility/Automotive",
+                                    "color": "#f97316",
+                                    "value": "0"
+                                }
+                            ],
+                            "audienceEngagement": [
+                                {
+                                    "name": "Industry Engineers",
+                                    "color": "#7CFC00",
+                                    "value": "0"
+                                },
+                                {
+                                    "name": "Current Employees",
+                                    "color": "#3B82F6",
+                                    "value": "0"
+                                },
+                                {
+                                    "name": "OEM Decision Makers",
+                                    "color": "#E57373",
+                                    "value": "0"
+                                },
+                                {
+                                    "name": "Students/Early Career",
+                                    "color": "#F3F4F6",
+                                    "value": "0"
+                                },
+                                {
+                                    "name": "Others",
+                                    "color": "#9CA3AF",
+                                    "value": "0"
+                                }
+                            ],
+                            "strategySnapshot": [
+                                {
+                                    "strategy": "Technical",
+                                    "color": "text-primary",
+                                    "competitor": "Bosch",
+                                    "dataPoint": "No data available"
+                                },
+                                {
+                                    "strategy": "People-First",
+                                    "color": "text-primary",
+                                    "competitor": "Lear",
+                                    "dataPoint": "No data available"
+                                },
+                                {
+                                    "strategy": "Validation",
+                                    "color": "text-primary",
+                                    "competitor": "Continental",
+                                    "dataPoint": "No data available"
+                                },
+                                {
+                                    "strategy": "Balanced Blend",
+                                    "color": "text-white",
+                                    "competitor": "Magna",
+                                    "dataPoint": "No data available"
+                                }
+                            ],
+                            "magnaPosition": {
+                                "x": "0",
+                                "name": "Magna",
+                                "y": "0",
+                                "strategy": "No data"
+                            },
+                            "kpis": {
+                                "metricsMentions": "0",
+                                "thirdPartyCitations": "0",
+                                "positiveSentiment": "0"
+                            },
+                            "competitorPositioning": [
+                                {
+                                    "x": "0",
+                                    "name": "Continental (Validation)",
+                                    "y": "0"
+                                },
+                                {
+                                    "x": "0",
+                                    "name": "Lear: People-First",
+                                    "y": "0"
+                                },
+                                {
+                                    "x": "0",
+                                    "name": "Bosch (Technical)",
+                                    "y": "0"
+                                }
+                            ],
+                            "strategicInitiatives": [
+                                {
+                                    "name": "Amplify Lightweighting",
+                                    "current": "0",
+                                    "goal": "No data",
+                                    "target": "0"
+                                },
+                                {
+                                    "name": "Launch SDV Leadership",
+                                    "current": "0",
+                                    "goal": "No data",
+                                    "target": "0"
+                                },
+                                {
+                                    "name": "ADAS Expansion",
+                                    "current": "0",
+                                    "goal": "No data",
+                                    "target": "0"
+                                }
+                            ]
+                        },
+                        "nts": "0",
+                        "audienceSegments": [
+                            {
+                                "share": "0",
+                                "followers": "0",
+                                "segment": "Facebook",
+                                "posent": "No data available",
+                                "confidence": "L"
+                            },
+                            {
+                                "share": "0",
+                                "segment": "No data available",
+                                "confidence": "L"
+                            },
+                            {
+                                "share": "0",
+                                "segment": "No data available",
+                                "confidence": "L"
+                            },
+                            {
+                                "share": "0",
+                                "segment": "No data available",
+                                "confidence": "L"
+                            },
+                            {
+                                "share": "0",
+                                "segment": "No data available",
+                                "confidence": "L"
+                            }
+                        ]
+                    }
+                }
+            },
+            "strategicRecommendations": {
+                "x": [
+                    {
+                        "expectedEffect": "Enable baseline data collection for strategic analysis",
+                        "recommendation": "Resolve Data Collection Issue",
+                        "action": "Verify @ZF_Group account status, check privacy settings, and confirm API access credentials",
+                        "audience": "Internal Analytics Team",
+                        "driver": "Data Availability"
+                    },
+                    {
+                        "expectedEffect": "Establish minimum viable dataset for audit completion",
+                        "recommendation": "Implement Alternative Collection Methods",
+                        "action": "Deploy manual monitoring or alternative API endpoints to capture X channel activity",
+                        "audience": "Social Media Management",
+                        "driver": "Technical Collection"
+                    },
+                    {
+                        "expectedEffect": "Identify and resolve any account-level barriers to visibility",
+                        "recommendation": "Audit Account Configuration",
+                        "action": "Verify account is public, active, and using correct handle @ZF_Group",
+                        "audience": "Digital Marketing Team",
+                        "driver": "Account Status"
+                    },
+                    {
+                        "expectedEffect": "Capture baseline content for engagement pattern analysis",
+                        "recommendation": "Extend Historical Data Range",
+                        "action": "Expand collection window beyond February 2025 to capture any available historical posts",
+                        "audience": "Data Collection Team",
+                        "driver": "Account Inactivity"
+                    },
+                    {
+                        "expectedEffect": "Complete comprehensive view of ZF's X presence across all handles",
+                        "recommendation": "Map Alternative ZF Channels",
+                        "action": "Identify and audit regional or subsidiary X accounts that may contain ZF Group content",
+                        "audience": "Brand Management",
+                        "driver": "Coverage Gaps"
+                    }
+                ],
+                "youtube": [
+                    {
+                        "expectedEffect": "Enable future analysis and audience development",
+                        "recommendation": "Establish Content Presence",
+                        "action": "Begin publishing content to establish baseline presence on YouTube channel",
+                        "audience": "Unable to identify - no data",
+                        "driver": "Channel Activation"
+                    },
+                    {
+                        "expectedEffect": "Ensure proper data capture for analysis",
+                        "recommendation": "Verify Channel Configuration",
+                        "action": "Confirm correct YouTube channel URL and data collection parameters",
+                        "audience": "Internal stakeholders",
+                        "driver": "Data Collection"
+                    },
+                    {
+                        "expectedEffect": "Establish clear objectives for channel performance",
+                        "recommendation": "Define Content Strategy",
+                        "action": "Develop YouTube content strategy before publishing",
+                        "audience": "Target audience undefined",
+                        "driver": "Strategic Planning"
+                    },
+                    {
+                        "expectedEffect": "Enable proper performance tracking",
+                        "recommendation": "Set Analysis Window",
+                        "action": "Define specific date range for content analysis period",
+                        "audience": "Analytics team",
+                        "driver": "Measurement Framework"
+                    },
+                    {
+                        "expectedEffect": "Generate analyzable engagement data",
+                        "recommendation": "Initiate Content Publishing",
+                        "action": "Start regular content publishing schedule on YouTube",
+                        "audience": "Prospective viewers",
+                        "driver": "Channel Growth"
+                    }
+                ],
+                "facebook": [
+                    {
+                        "expectedEffect": "Clarity on channel status within 7 days",
+                        "recommendation": "Conduct Facebook Channel Audit",
+                        "action": "Investigate page status; determine if deactivation was intentional or technical issue",
+                        "audience": "Internal stakeholders",
+                        "driver": "Channel Strategy"
+                    },
+                    {
+                        "expectedEffect": "Data-driven channel investment decision",
+                        "recommendation": "Evaluate Facebook ROI vs. Other Channels",
+                        "action": "Compare historical Facebook performance (if available) against other active channels",
+                        "audience": "Marketing leadership",
+                        "driver": "Resource Optimization"
+                    },
+                    {
+                        "expectedEffect": "Re-establish presence with 1,000+ followers in 90 days",
+                        "recommendation": "Consider Facebook Reactivation Strategy",
+                        "action": "If reactivating: Launch with 3-month content calendar focused on local community engagement and employee stories",
+                        "audience": "Community segments, Employees",
+                        "driver": "ValuesCommunity, LocalityCues"
+                    },
+                    {
+                        "expectedEffect": "Increase engagement on active channels by 15%",
+                        "recommendation": "Redirect Facebook Budget to Active Channels",
+                        "action": "Reallocate Facebook content budget to channels showing active engagement",
+                        "audience": "Existing audiences on other platforms",
+                        "driver": "All mandated drivers"
+                    },
+                    {
+                        "expectedEffect": "Early detection of channel issues",
+                        "recommendation": "Implement Channel Health Monitoring",
+                        "action": "Establish quarterly channel health checks to prevent future dead pages",
+                        "audience": "All digital channels",
+                        "driver": "Channel Strategy"
+                    }
+                ]
+            }
+        }
+    ]
+}

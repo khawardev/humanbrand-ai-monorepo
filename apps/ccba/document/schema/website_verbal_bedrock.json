@@ -1,0 +1,806 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "website_verbal_bedrock.json",
+    "title": "Website Verbal Bedrock",
+    "description": "Compiled linguistic extraction from entire website",
+    "type": "object",
+    "required": [
+        "schema_version",
+        "generated_at",
+        "entity",
+        "channel",
+        "corpus_summary",
+        "linguistic_metrics",
+        "lexical_frequency",
+        "claim_inventory",
+        "fact_base_summary",
+        "audience_signals",
+        "value_driver_coverage",
+        "positioning_signals",
+        "discovered_tensions"
+    ],
+    "properties": {
+        "schema_version": {
+            "type": "string",
+            "const": "2.0.0"
+        },
+        "generated_at": {
+            "$ref": "#/definitions/iso_datetime"
+        },
+        "entity": {
+            "type": "string"
+        },
+        "channel": {
+            "type": "string",
+            "const": "website"
+        },
+        "corpus_summary": {
+            "type": "object",
+            "required": [
+                "pages_analyzed",
+                "pages_excluded",
+                "total_words",
+                "total_sentences",
+                "unique_urls",
+                "content_distribution"
+            ],
+            "properties": {
+                "pages_analyzed": {
+                    "type": "integer",
+                    "minimum": 0
+                },
+                "pages_excluded": {
+                    "type": "integer",
+                    "minimum": 0
+                },
+                "total_words": {
+                    "type": "integer",
+                    "minimum": 0
+                },
+                "total_sentences": {
+                    "type": "integer",
+                    "minimum": 0
+                },
+                "unique_urls": {
+                    "type": "integer",
+                    "minimum": 0
+                },
+                "content_distribution": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                            "pages": {
+                                "type": "integer"
+                            },
+                            "words": {
+                                "type": "integer"
+                            },
+                            "percent": {
+                                "type": "number"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "linguistic_metrics": {
+            "type": "object",
+            "required": [
+                "avg_sentence_length",
+                "active_voice_percent",
+                "passive_voice_percent",
+                "hedging_language_count",
+                "confidence_language_count",
+                "confidence_to_hedging_ratio",
+                "reading_level_grade",
+                "jargon_density"
+            ],
+            "properties": {
+                "avg_sentence_length": {
+                    "type": "number"
+                },
+                "active_voice_percent": {
+                    "$ref": "#/definitions/percentage"
+                },
+                "passive_voice_percent": {
+                    "$ref": "#/definitions/percentage"
+                },
+                "hedging_language_count": {
+                    "type": "integer"
+                },
+                "confidence_language_count": {
+                    "type": "integer"
+                },
+                "confidence_to_hedging_ratio": {
+                    "type": "number"
+                },
+                "reading_level_grade": {
+                    "type": "number"
+                },
+                "jargon_density": {
+                    "type": "number"
+                }
+            }
+        },
+        "lexical_frequency": {
+            "type": "object",
+            "required": [
+                "top_nouns",
+                "top_verbs",
+                "top_adjectives",
+                "proprietary_terms"
+            ],
+            "properties": {
+                "top_nouns": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "required": [
+                            "word",
+                            "count",
+                            "percent",
+                            "rank"
+                        ],
+                        "properties": {
+                            "word": {
+                                "type": "string"
+                            },
+                            "count": {
+                                "type": "integer"
+                            },
+                            "percent": {
+                                "type": "number"
+                            },
+                            "rank": {
+                                "type": "integer"
+                            }
+                        }
+                    }
+                },
+                "top_verbs": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "required": [
+                            "word",
+                            "count",
+                            "percent",
+                            "voice_split"
+                        ],
+                        "properties": {
+                            "word": {
+                                "type": "string"
+                            },
+                            "count": {
+                                "type": "integer"
+                            },
+                            "percent": {
+                                "type": "number"
+                            },
+                            "voice_split": {
+                                "type": "object",
+                                "properties": {
+                                    "active": {
+                                        "type": "number"
+                                    },
+                                    "passive": {
+                                        "type": "number"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "top_adjectives": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "required": [
+                            "word",
+                            "count",
+                            "percent"
+                        ],
+                        "properties": {
+                            "word": {
+                                "type": "string"
+                            },
+                            "count": {
+                                "type": "integer"
+                            },
+                            "percent": {
+                                "type": "number"
+                            }
+                        }
+                    }
+                },
+                "proprietary_terms": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "required": [
+                            "term",
+                            "count",
+                            "trademarked",
+                            "context"
+                        ],
+                        "properties": {
+                            "term": {
+                                "type": "string"
+                            },
+                            "count": {
+                                "type": "integer"
+                            },
+                            "trademarked": {
+                                "type": "boolean"
+                            },
+                            "context": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "claim_inventory": {
+            "type": "object",
+            "required": [
+                "total_claims",
+                "claims_by_type",
+                "top_claims"
+            ],
+            "properties": {
+                "total_claims": {
+                    "type": "integer"
+                },
+                "claims_by_type": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "integer"
+                    }
+                },
+                "top_claims": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "required": [
+                            "claim_id",
+                            "text",
+                            "claim_type",
+                            "frequency",
+                            "source_pages",
+                            "evidence_ids"
+                        ],
+                        "properties": {
+                            "claim_id": {
+                                "type": "string"
+                            },
+                            "text": {
+                                "type": "string"
+                            },
+                            "claim_type": {
+                                "type": "string"
+                            },
+                            "frequency": {
+                                "type": "integer"
+                            },
+                            "source_pages": {
+                                "type": "integer"
+                            },
+                            "evidence_ids": {
+                                "$ref": "#/definitions/evidence_id_array"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "fact_base_summary": {
+            "type": "object",
+            "required": [
+                "total_facts",
+                "facts_by_type",
+                "verification_summary",
+                "proof_density"
+            ],
+            "properties": {
+                "total_facts": {
+                    "type": "integer"
+                },
+                "facts_by_type": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "integer"
+                    }
+                },
+                "verification_summary": {
+                    "type": "object",
+                    "properties": {
+                        "verified": {
+                            "type": "integer"
+                        },
+                        "stated": {
+                            "type": "integer"
+                        },
+                        "unverifiable": {
+                            "type": "integer"
+                        }
+                    }
+                },
+                "proof_density": {
+                    "type": "object",
+                    "properties": {
+                        "facts_per_100_pages": {
+                            "type": "number"
+                        },
+                        "pages_with_no_facts": {
+                            "type": "integer"
+                        },
+                        "highest_density_section": {
+                            "type": "string"
+                        },
+                        "lowest_density_section": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "audience_signals": {
+            "type": "object",
+            "required": [
+                "explicit_audience_cues",
+                "implicit_audience_signals"
+            ],
+            "properties": {
+                "explicit_audience_cues": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "required": [
+                            "cue",
+                            "count",
+                            "prominence"
+                        ],
+                        "properties": {
+                            "cue": {
+                                "type": "string"
+                            },
+                            "count": {
+                                "type": "integer"
+                            },
+                            "prominence": {
+                                "type": "string",
+                                "enum": [
+                                    "high",
+                                    "medium",
+                                    "low"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "implicit_audience_signals": {
+                    "type": "object",
+                    "properties": {
+                        "technical_depth": {
+                            "type": "string",
+                            "enum": [
+                                "high",
+                                "medium",
+                                "low"
+                            ]
+                        },
+                        "assumes_industry_knowledge": {
+                            "type": "boolean"
+                        },
+                        "b2b_vs_b2c": {
+                            "type": "string",
+                            "enum": [
+                                "strongly_b2b",
+                                "b2b",
+                                "mixed",
+                                "b2c",
+                                "strongly_b2c"
+                            ]
+                        }
+                    }
+                }
+            }
+        },
+        "value_driver_coverage": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "required": [
+                    "driver_id",
+                    "driver_name",
+                    "pages_mentioning",
+                    "coverage_percent",
+                    "signal_density",
+                    "top_keywords",
+                    "evidence_ids"
+                ],
+                "properties": {
+                    "driver_id": {
+                        "type": "string"
+                    },
+                    "driver_name": {
+                        "type": "string"
+                    },
+                    "pages_mentioning": {
+                        "type": "integer"
+                    },
+                    "coverage_percent": {
+                        "type": "number"
+                    },
+                    "signal_density": {
+                        "type": "string",
+                        "enum": [
+                            "high",
+                            "medium",
+                            "low"
+                        ]
+                    },
+                    "top_keywords": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "evidence_ids": {
+                        "$ref": "#/definitions/evidence_id_array"
+                    }
+                }
+            }
+        },
+        "positioning_signals": {
+            "type": "object",
+            "properties": {
+                "explicit_positioning_statements": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "statement": {
+                                "type": "string"
+                            },
+                            "source_url": {
+                                "type": "string"
+                            },
+                            "evidence_id": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                },
+                "explicit_mission": {
+                    "type": "object",
+                    "properties": {
+                        "found": {
+                            "type": "boolean"
+                        },
+                        "verbatim": {
+                            "type": [
+                                "string",
+                                "null"
+                            ]
+                        }
+                    }
+                },
+                "explicit_vision": {
+                    "type": "object",
+                    "properties": {
+                        "found": {
+                            "type": "boolean"
+                        },
+                        "verbatim": {
+                            "type": [
+                                "string",
+                                "null"
+                            ]
+                        }
+                    }
+                },
+                "explicit_tagline": {
+                    "type": "object",
+                    "properties": {
+                        "found": {
+                            "type": "boolean"
+                        },
+                        "verbatim": {
+                            "type": [
+                                "string",
+                                "null"
+                            ]
+                        },
+                        "usage_count": {
+                            "type": "integer"
+                        },
+                        "evidence_id": {
+                            "type": [
+                                "string",
+                                "null"
+                            ]
+                        }
+                    }
+                },
+                "about_page_opening": {
+                    "type": "object",
+                    "properties": {
+                        "verbatim": {
+                            "type": "string"
+                        },
+                        "evidence_id": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "discovered_tensions": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "required": [
+                    "tension_id",
+                    "tension_name",
+                    "description",
+                    "side_a",
+                    "side_b",
+                    "ratio",
+                    "resolution_observed"
+                ],
+                "properties": {
+                    "tension_id": {
+                        "type": "string",
+                        "pattern": "^T[0-9]{3}$"
+                    },
+                    "tension_name": {
+                        "type": "string"
+                    },
+                    "description": {
+                        "type": "string"
+                    },
+                    "side_a": {
+                        "type": "object",
+                        "properties": {
+                            "theme": {
+                                "type": "string"
+                            },
+                            "signal_count": {
+                                "type": "integer"
+                            },
+                            "keywords": {
+                                "type": "array",
+                                "items": {
+                                    "type": "string"
+                                }
+                            },
+                            "evidence_ids": {
+                                "$ref": "#/definitions/evidence_id_array"
+                            }
+                        }
+                    },
+                    "side_b": {
+                        "type": "object",
+                        "properties": {
+                            "theme": {
+                                "type": "string"
+                            },
+                            "signal_count": {
+                                "type": "integer"
+                            },
+                            "keywords": {
+                                "type": "array",
+                                "items": {
+                                    "type": "string"
+                                }
+                            },
+                            "evidence_ids": {
+                                "$ref": "#/definitions/evidence_id_array"
+                            }
+                        }
+                    },
+                    "ratio": {
+                        "type": "number"
+                    },
+                    "resolution_observed": {
+                        "type": "boolean"
+                    }
+                }
+            }
+        },
+        "narrative_patterns": {
+            "type": "object",
+            "properties": {
+                "story_structures": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "pattern": {
+                                "type": "string"
+                            },
+                            "frequency": {
+                                "type": "integer"
+                            },
+                            "example": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                },
+                "recurring_phrases": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "phrase": {
+                                "type": "string"
+                            },
+                            "count": {
+                                "type": "integer"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "iso_datetime": {
+            "type": "string",
+            "format": "date-time",
+            "description": "ISO 8601 datetime string."
+        },
+        "url": {
+            "type": "string",
+            "format": "uri",
+            "description": "A valid URL (URI)."
+        },
+        "hex_color": {
+            "type": "string",
+            "pattern": "^#[0-9A-Fa-f]{6}$",
+            "description": "Hex color in the form #RRGGBB."
+        },
+        "percentage": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1,
+            "description": "Share or percentage expressed as 0..1."
+        },
+        "confidence_score": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1,
+            "description": "Confidence score 0..1."
+        },
+        "evidence_id": {
+            "type": "string",
+            "pattern": "^(E|VE|EC)[0-9]{5}$",
+            "description": "Evidence ID (E##### for general, VE##### for visual, EC##### for comments)."
+        },
+        "evidence_id_array": {
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/evidence_id"
+            },
+            "description": "Array of evidence IDs."
+        },
+        "channel_enum": {
+            "type": "string",
+            "enum": [
+                "website",
+                "linkedin",
+                "youtube",
+                "x",
+                "instagram",
+                "tiktok",
+                "facebook"
+            ],
+            "description": "Supported owned channels."
+        },
+        "sentiment": {
+            "type": "object",
+            "description": "Structured sentiment and emotional tone (brand-authored content or audience content, depending on context).",
+            "required": [
+                "polarity",
+                "emotional_tone"
+            ],
+            "properties": {
+                "polarity": {
+                    "type": "object",
+                    "required": [
+                        "score",
+                        "label"
+                    ],
+                    "properties": {
+                        "score": {
+                            "type": "number",
+                            "minimum": -1,
+                            "maximum": 1
+                        },
+                        "label": {
+                            "type": "string",
+                            "enum": [
+                                "very_negative",
+                                "negative",
+                                "neutral",
+                                "positive",
+                                "very_positive"
+                            ]
+                        }
+                    }
+                },
+                "emotional_tone": {
+                    "type": "object",
+                    "required": [
+                        "primary",
+                        "intensity"
+                    ],
+                    "properties": {
+                        "primary": {
+                            "type": "string",
+                            "enum": [
+                                "confident",
+                                "enthusiastic",
+                                "professional",
+                                "empathetic",
+                                "urgent",
+                                "frustrated",
+                                "skeptical",
+                                "appreciative",
+                                "neutral"
+                            ]
+                        },
+                        "secondary": {
+                            "type": "string",
+                            "enum": [
+                                "confident",
+                                "enthusiastic",
+                                "professional",
+                                "empathetic",
+                                "urgent",
+                                "frustrated",
+                                "skeptical",
+                                "appreciative",
+                                "neutral"
+                            ]
+                        },
+                        "intensity": {
+                            "type": "string",
+                            "enum": [
+                                "low",
+                                "medium",
+                                "high"
+                            ]
+                        }
+                    }
+                },
+                "subjectivity": {
+                    "type": "object",
+                    "required": [
+                        "score",
+                        "label"
+                    ],
+                    "properties": {
+                        "score": {
+                            "type": "number",
+                            "minimum": 0,
+                            "maximum": 1
+                        },
+                        "label": {
+                            "type": "string",
+                            "enum": [
+                                "objective",
+                                "mixed",
+                                "subjective"
+                            ]
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,543 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "url_extraction.json",
+    "title": "Per-URL Extraction",
+    "description": "Linguistic extraction from a single webpage",
+    "type": "object",
+    "required": [
+        "schema_version",
+        "extraction_id",
+        "extracted_at",
+        "source",
+        "content_metrics",
+        "linguistic_extraction",
+        "claims",
+        "facts",
+        "audience_cues",
+        "value_driver_signals",
+        "images_on_page"
+    ],
+    "properties": {
+        "schema_version": {
+            "type": "string",
+            "const": "2.0.0"
+        },
+        "extraction_id": {
+            "type": "string",
+            "format": "uuid"
+        },
+        "extracted_at": {
+            "$ref": "#/definitions/iso_datetime"
+        },
+        "source": {
+            "type": "object",
+            "required": [
+                "entity",
+                "url",
+                "url_id",
+                "page_type",
+                "crawl_timestamp"
+            ],
+            "properties": {
+                "entity": {
+                    "type": "string"
+                },
+                "url": {
+                    "$ref": "#/definitions/url"
+                },
+                "url_id": {
+                    "type": "string",
+                    "pattern": "^URL-[0-9]{5}$"
+                },
+                "page_type": {
+                    "type": "string",
+                    "enum": [
+                        "homepage",
+                        "about",
+                        "product",
+                        "solution",
+                        "technology",
+                        "sustainability",
+                        "news",
+                        "other"
+                    ]
+                },
+                "crawl_timestamp": {
+                    "$ref": "#/definitions/iso_datetime"
+                }
+            }
+        },
+        "content_metrics": {
+            "type": "object",
+            "required": [
+                "word_count",
+                "sentence_count",
+                "paragraph_count",
+                "heading_count",
+                "link_count",
+                "image_count"
+            ],
+            "properties": {
+                "word_count": {
+                    "type": "integer",
+                    "minimum": 0
+                },
+                "sentence_count": {
+                    "type": "integer",
+                    "minimum": 0
+                },
+                "paragraph_count": {
+                    "type": "integer",
+                    "minimum": 0
+                },
+                "heading_count": {
+                    "type": "integer",
+                    "minimum": 0
+                },
+                "link_count": {
+                    "type": "integer",
+                    "minimum": 0
+                },
+                "image_count": {
+                    "type": "integer",
+                    "minimum": 0
+                }
+            }
+        },
+        "linguistic_extraction": {
+            "type": "object",
+            "required": [
+                "nouns",
+                "verbs",
+                "adjectives",
+                "proprietary_terms"
+            ],
+            "properties": {
+                "nouns": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "required": [
+                            "word",
+                            "count",
+                            "contexts"
+                        ],
+                        "properties": {
+                            "word": {
+                                "type": "string"
+                            },
+                            "count": {
+                                "type": "integer",
+                                "minimum": 1
+                            },
+                            "contexts": {
+                                "type": "array",
+                                "items": {
+                                    "type": "string"
+                                },
+                                "maxItems": 5
+                            }
+                        }
+                    }
+                },
+                "verbs": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "required": [
+                            "word",
+                            "count",
+                            "voice",
+                            "contexts"
+                        ],
+                        "properties": {
+                            "word": {
+                                "type": "string"
+                            },
+                            "count": {
+                                "type": "integer",
+                                "minimum": 1
+                            },
+                            "voice": {
+                                "type": "string",
+                                "enum": [
+                                    "active",
+                                    "passive",
+                                    "mixed"
+                                ]
+                            },
+                            "contexts": {
+                                "type": "array",
+                                "items": {
+                                    "type": "string"
+                                },
+                                "maxItems": 5
+                            }
+                        }
+                    }
+                },
+                "adjectives": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "required": [
+                            "word",
+                            "count",
+                            "contexts"
+                        ],
+                        "properties": {
+                            "word": {
+                                "type": "string"
+                            },
+                            "count": {
+                                "type": "integer",
+                                "minimum": 1
+                            },
+                            "contexts": {
+                                "type": "array",
+                                "items": {
+                                    "type": "string"
+                                },
+                                "maxItems": 5
+                            }
+                        }
+                    }
+                },
+                "proprietary_terms": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "required": [
+                            "term",
+                            "count",
+                            "appears_trademarked"
+                        ],
+                        "properties": {
+                            "term": {
+                                "type": "string"
+                            },
+                            "count": {
+                                "type": "integer",
+                                "minimum": 1
+                            },
+                            "appears_trademarked": {
+                                "type": "boolean"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "claims": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "required": [
+                    "claim_id",
+                    "text",
+                    "claim_type",
+                    "verbatim_quote",
+                    "evidence_id"
+                ],
+                "properties": {
+                    "claim_id": {
+                        "type": "string",
+                        "pattern": "^CL-[0-9]{5}-[0-9]{3}$"
+                    },
+                    "text": {
+                        "type": "string"
+                    },
+                    "claim_type": {
+                        "type": "string",
+                        "enum": [
+                            "leadership",
+                            "capability",
+                            "uniqueness",
+                            "quality",
+                            "innovation",
+                            "partnership",
+                            "customer",
+                            "sustainability"
+                        ]
+                    },
+                    "verbatim_quote": {
+                        "type": "string"
+                    },
+                    "evidence_id": {
+                        "type": "string",
+                        "pattern": "^E[0-9]{5}$"
+                    }
+                }
+            }
+        },
+        "facts": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "required": [
+                    "fact_id",
+                    "text",
+                    "fact_type",
+                    "verbatim_quote",
+                    "verification_status",
+                    "evidence_id"
+                ],
+                "properties": {
+                    "fact_id": {
+                        "type": "string",
+                        "pattern": "^F-[0-9]{5}-[0-9]{3}$"
+                    },
+                    "text": {
+                        "type": "string"
+                    },
+                    "fact_type": {
+                        "type": "string",
+                        "enum": [
+                            "quantitative_history",
+                            "quantitative_scale",
+                            "quantitative_performance",
+                            "certification",
+                            "award",
+                            "customer",
+                            "partnership",
+                            "capability_specific",
+                            "sustainability_metric",
+                            "geographic"
+                        ]
+                    },
+                    "verbatim_quote": {
+                        "type": "string"
+                    },
+                    "verification_status": {
+                        "type": "string",
+                        "enum": [
+                            "verified",
+                            "stated",
+                            "unverifiable"
+                        ]
+                    },
+                    "evidence_id": {
+                        "type": "string",
+                        "pattern": "^E[0-9]{5}$"
+                    }
+                }
+            }
+        },
+        "audience_cues": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "required": [
+                    "cue",
+                    "count",
+                    "context"
+                ],
+                "properties": {
+                    "cue": {
+                        "type": "string"
+                    },
+                    "count": {
+                        "type": "integer",
+                        "minimum": 1
+                    },
+                    "context": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        "value_driver_signals": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "required": [
+                    "driver_id",
+                    "driver_name",
+                    "signal_count",
+                    "signal_keywords_found"
+                ],
+                "properties": {
+                    "driver_id": {
+                        "type": "string",
+                        "pattern": "^VD[0-9]{3}$"
+                    },
+                    "driver_name": {
+                        "type": "string"
+                    },
+                    "signal_count": {
+                        "type": "integer",
+                        "minimum": 0
+                    },
+                    "signal_keywords_found": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "images_on_page": {
+            "type": "array",
+            "items": {
+                "type": "string",
+                "pattern": "^IMG-[0-9]{5}$"
+            }
+        }
+    },
+    "definitions": {
+        "iso_datetime": {
+            "type": "string",
+            "format": "date-time",
+            "description": "ISO 8601 datetime string."
+        },
+        "url": {
+            "type": "string",
+            "format": "uri",
+            "description": "A valid URL (URI)."
+        },
+        "hex_color": {
+            "type": "string",
+            "pattern": "^#[0-9A-Fa-f]{6}$",
+            "description": "Hex color in the form #RRGGBB."
+        },
+        "percentage": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1,
+            "description": "Share or percentage expressed as 0..1."
+        },
+        "confidence_score": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1,
+            "description": "Confidence score 0..1."
+        },
+        "evidence_id": {
+            "type": "string",
+            "pattern": "^(E|VE|EC)[0-9]{5}$",
+            "description": "Evidence ID (E##### for general, VE##### for visual, EC##### for comments)."
+        },
+        "evidence_id_array": {
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/evidence_id"
+            },
+            "description": "Array of evidence IDs."
+        },
+        "channel_enum": {
+            "type": "string",
+            "enum": [
+                "website",
+                "linkedin",
+                "youtube",
+                "x",
+                "instagram",
+                "tiktok",
+                "facebook"
+            ],
+            "description": "Supported owned channels."
+        },
+        "sentiment": {
+            "type": "object",
+            "description": "Structured sentiment and emotional tone (brand-authored content or audience content, depending on context).",
+            "required": [
+                "polarity",
+                "emotional_tone"
+            ],
+            "properties": {
+                "polarity": {
+                    "type": "object",
+                    "required": [
+                        "score",
+                        "label"
+                    ],
+                    "properties": {
+                        "score": {
+                            "type": "number",
+                            "minimum": -1,
+                            "maximum": 1
+                        },
+                        "label": {
+                            "type": "string",
+                            "enum": [
+                                "very_negative",
+                                "negative",
+                                "neutral",
+                                "positive",
+                                "very_positive"
+                            ]
+                        }
+                    }
+                },
+                "emotional_tone": {
+                    "type": "object",
+                    "required": [
+                        "primary",
+                        "intensity"
+                    ],
+                    "properties": {
+                        "primary": {
+                            "type": "string",
+                            "enum": [
+                                "confident",
+                                "enthusiastic",
+                                "professional",
+                                "empathetic",
+                                "urgent",
+                                "frustrated",
+                                "skeptical",
+                                "appreciative",
+                                "neutral"
+                            ]
+                        },
+                        "secondary": {
+                            "type": "string",
+                            "enum": [
+                                "confident",
+                                "enthusiastic",
+                                "professional",
+                                "empathetic",
+                                "urgent",
+                                "frustrated",
+                                "skeptical",
+                                "appreciative",
+                                "neutral"
+                            ]
+                        },
+                        "intensity": {
+                            "type": "string",
+                            "enum": [
+                                "low",
+                                "medium",
+                                "high"
+                            ]
+                        }
+                    }
+                },
+                "subjectivity": {
+                    "type": "object",
+                    "required": [
+                        "score",
+                        "label"
+                    ],
+                    "properties": {
+                        "score": {
+                            "type": "number",
+                            "minimum": 0,
+                            "maximum": 1
+                        },
+                        "label": {
+                            "type": "string",
+                            "enum": [
+                                "objective",
+                                "mixed",
+                                "subjective"
+                            ]
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

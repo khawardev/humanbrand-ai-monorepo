@@ -1,0 +1,45 @@
+{
+    "summary": {
+        "totalPosts": 25,
+        "totalLikes": "15.2K",
+        "totalComments": "3.5K",
+        "totalShares": "1.8K",
+        "engagementRate": "5.2%"
+    },
+    "audience": {
+        "followers": "125K",
+        "growth": "12%",
+        "demographics": [
+            { "group": "18-24", "percentage": 25 },
+            { "group": "25-34", "percentage": 45 },
+            { "group": "35-44", "percentage": 20 },
+            { "group": "45+", "percentage": 10 }
+        ]
+    },
+    "performance": {
+        "topPosts": [
+            {
+                "id": "1",
+                "content": "Our new feature is a game-changer for brand management! 🚀",
+                "likes": "2.1K",
+                "comments": 500
+            },
+            {
+                "id": "2",
+                "content": "We're excited to be featured in TechCrunch!",
+                "likes": "1.8K",
+                "comments": 420
+            }
+        ],
+        "sentiment": {
+            "positive": 85,
+            "neutral": 10,
+            "negative": 5
+        }
+    },
+    "recommendations": [
+        "Continue posting about new features and product updates.",
+        "Engage with industry news and publications to increase reach.",
+        "Run a targeted ad campaign to the 25-34 demographic."
+    ]
+}

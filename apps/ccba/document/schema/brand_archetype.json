@@ -1,0 +1,376 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "brand_archetype.json",
+    "title": "Brand Archetype Synthesis",
+    "description": "Jungian archetype analysis with evidence",
+    "type": "object",
+    "required": [
+        "schema_version",
+        "generated_at",
+        "entity",
+        "synthesis_type",
+        "primary_archetype",
+        "secondary_archetype",
+        "archetype_tensions",
+        "archetype_expression_by_channel"
+    ],
+    "properties": {
+        "schema_version": {
+            "type": "string",
+            "const": "2.0.0"
+        },
+        "generated_at": {
+            "$ref": "#/definitions/iso_datetime"
+        },
+        "entity": {
+            "type": "string"
+        },
+        "synthesis_type": {
+            "type": "string",
+            "const": "brand_archetype"
+        },
+        "primary_archetype": {
+            "$ref": "#/definitions/archetype_analysis"
+        },
+        "secondary_archetype": {
+            "$ref": "#/definitions/archetype_analysis"
+        },
+        "archetype_tensions": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "required": [
+                    "tension_id",
+                    "description",
+                    "resolution_status",
+                    "strategic_implication",
+                    "evidence_ids"
+                ],
+                "properties": {
+                    "tension_id": {
+                        "type": "string",
+                        "pattern": "^AT[0-9]{3}$"
+                    },
+                    "description": {
+                        "type": "string"
+                    },
+                    "creator_signals": {
+                        "type": "object",
+                        "properties": {
+                            "count": {
+                                "type": "integer"
+                            },
+                            "examples": {
+                                "type": "array",
+                                "items": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "hero_signals": {
+                        "type": "object",
+                        "properties": {
+                            "count": {
+                                "type": "integer"
+                            },
+                            "examples": {
+                                "type": "array",
+                                "items": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "resolution_status": {
+                        "type": "string",
+                        "enum": [
+                            "resolved",
+                            "unresolved",
+                            "partially_resolved"
+                        ]
+                    },
+                    "strategic_implication": {
+                        "type": "string"
+                    },
+                    "evidence_ids": {
+                        "$ref": "#/definitions/evidence_id_array"
+                    }
+                }
+            }
+        },
+        "archetype_expression_by_channel": {
+            "type": "object",
+            "additionalProperties": {
+                "type": "object",
+                "properties": {
+                    "primary": {
+                        "$ref": "#/definitions/archetype_name"
+                    },
+                    "secondary": {
+                        "$ref": "#/definitions/archetype_name"
+                    },
+                    "consistency": {
+                        "type": "string",
+                        "enum": [
+                            "high",
+                            "medium",
+                            "low"
+                        ]
+                    },
+                    "notes": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        "archetype_comparison_to_competitors": {
+            "type": "object",
+            "additionalProperties": {
+                "type": "object",
+                "properties": {
+                    "primary": {
+                        "$ref": "#/definitions/archetype_name"
+                    },
+                    "secondary": {
+                        "$ref": "#/definitions/archetype_name"
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "archetype_name": {
+            "type": "string",
+            "enum": [
+                "Hero",
+                "Sage",
+                "Creator",
+                "Caregiver",
+                "Explorer",
+                "Rebel",
+                "Magician",
+                "Ruler",
+                "Lover",
+                "Jester",
+                "Everyman",
+                "Innocent"
+            ]
+        },
+        "archetype_analysis": {
+            "type": "object",
+            "required": [
+                "archetype",
+                "confidence",
+                "core_motivation",
+                "brand_expression",
+                "signal_strength",
+                "supporting_patterns"
+            ],
+            "properties": {
+                "archetype": {
+                    "$ref": "#/definitions/archetype_name"
+                },
+                "confidence": {
+                    "$ref": "#/definitions/confidence_score"
+                },
+                "core_motivation": {
+                    "type": "string"
+                },
+                "brand_expression": {
+                    "type": "string"
+                },
+                "signal_strength": {
+                    "type": "string",
+                    "enum": [
+                        "strong",
+                        "moderate",
+                        "weak"
+                    ]
+                },
+                "supporting_patterns": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "required": [
+                            "pattern",
+                            "examples",
+                            "frequency",
+                            "evidence_ids"
+                        ],
+                        "properties": {
+                            "pattern": {
+                                "type": "string"
+                            },
+                            "examples": {
+                                "type": "array",
+                                "items": {
+                                    "type": "string"
+                                }
+                            },
+                            "frequency": {
+                                "type": "integer"
+                            },
+                            "evidence_ids": {
+                                "$ref": "#/definitions/evidence_id_array"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "iso_datetime": {
+            "type": "string",
+            "format": "date-time",
+            "description": "ISO 8601 datetime string."
+        },
+        "url": {
+            "type": "string",
+            "format": "uri",
+            "description": "A valid URL (URI)."
+        },
+        "hex_color": {
+            "type": "string",
+            "pattern": "^#[0-9A-Fa-f]{6}$",
+            "description": "Hex color in the form #RRGGBB."
+        },
+        "percentage": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1,
+            "description": "Share or percentage expressed as 0..1."
+        },
+        "confidence_score": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1,
+            "description": "Confidence score 0..1."
+        },
+        "evidence_id": {
+            "type": "string",
+            "pattern": "^(E|VE|EC)[0-9]{5}$",
+            "description": "Evidence ID (E##### for general, VE##### for visual, EC##### for comments)."
+        },
+        "evidence_id_array": {
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/evidence_id"
+            },
+            "description": "Array of evidence IDs."
+        },
+        "channel_enum": {
+            "type": "string",
+            "enum": [
+                "website",
+                "linkedin",
+                "youtube",
+                "x",
+                "instagram",
+                "tiktok",
+                "facebook"
+            ],
+            "description": "Supported owned channels."
+        },
+        "sentiment": {
+            "type": "object",
+            "description": "Structured sentiment and emotional tone (brand-authored content or audience content, depending on context).",
+            "required": [
+                "polarity",
+                "emotional_tone"
+            ],
+            "properties": {
+                "polarity": {
+                    "type": "object",
+                    "required": [
+                        "score",
+                        "label"
+                    ],
+                    "properties": {
+                        "score": {
+                            "type": "number",
+                            "minimum": -1,
+                            "maximum": 1
+                        },
+                        "label": {
+                            "type": "string",
+                            "enum": [
+                                "very_negative",
+                                "negative",
+                                "neutral",
+                                "positive",
+                                "very_positive"
+                            ]
+                        }
+                    }
+                },
+                "emotional_tone": {
+                    "type": "object",
+                    "required": [
+                        "primary",
+                        "intensity"
+                    ],
+                    "properties": {
+                        "primary": {
+                            "type": "string",
+                            "enum": [
+                                "confident",
+                                "enthusiastic",
+                                "professional",
+                                "empathetic",
+                                "urgent",
+                                "frustrated",
+                                "skeptical",
+                                "appreciative",
+                                "neutral"
+                            ]
+                        },
+                        "secondary": {
+                            "type": "string",
+                            "enum": [
+                                "confident",
+                                "enthusiastic",
+                                "professional",
+                                "empathetic",
+                                "urgent",
+                                "frustrated",
+                                "skeptical",
+                                "appreciative",
+                                "neutral"
+                            ]
+                        },
+                        "intensity": {
+                            "type": "string",
+                            "enum": [
+                                "low",
+                                "medium",
+                                "high"
+                            ]
+                        }
+                    }
+                },
+                "subjectivity": {
+                    "type": "object",
+                    "required": [
+                        "score",
+                        "label"
+                    ],
+                    "properties": {
+                        "score": {
+                            "type": "number",
+                            "minimum": 0,
+                            "maximum": 1
+                        },
+                        "label": {
+                            "type": "string",
+                            "enum": [
+                                "objective",
+                                "mixed",
+                                "subjective"
+                            ]
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

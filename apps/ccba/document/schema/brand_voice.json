@@ -1,0 +1,668 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "brand_voice.json",
+    "title": "Brand Voice Synthesis",
+    "description": "Voice and tone analysis with evidence",
+    "type": "object",
+    "required": [
+        "schema_version",
+        "generated_at",
+        "entity",
+        "synthesis_type",
+        "personality",
+        "voice_attributes",
+        "tonal_range",
+        "lexicon",
+        "rhetorical_style",
+        "voice_consistency"
+    ],
+    "properties": {
+        "schema_version": {
+            "type": "string",
+            "const": "2.0.0"
+        },
+        "generated_at": {
+            "$ref": "#/definitions/iso_datetime"
+        },
+        "entity": {
+            "type": "string"
+        },
+        "synthesis_type": {
+            "type": "string",
+            "const": "brand_voice"
+        },
+        "personality": {
+            "type": "object",
+            "required": [
+                "synthesized_description",
+                "personality_keywords",
+                "confidence",
+                "evidence_ids"
+            ],
+            "properties": {
+                "synthesized_description": {
+                    "type": "string"
+                },
+                "personality_keywords": {
+                    "type": "array",
+                    "minItems": 3,
+                    "maxItems": 7,
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "confidence": {
+                    "$ref": "#/definitions/confidence_score"
+                },
+                "evidence_ids": {
+                    "$ref": "#/definitions/evidence_id_array"
+                }
+            }
+        },
+        "voice_attributes": {
+            "type": "object",
+            "required": [
+                "primary",
+                "secondary",
+                "absent"
+            ],
+            "properties": {
+                "primary": {
+                    "type": "array",
+                    "minItems": 2,
+                    "maxItems": 5,
+                    "items": {
+                        "$ref": "#/definitions/voice_attribute"
+                    }
+                },
+                "secondary": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/voice_attribute"
+                    }
+                },
+                "absent": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "required": [
+                            "attribute",
+                            "absence_note"
+                        ],
+                        "properties": {
+                            "attribute": {
+                                "type": "string"
+                            },
+                            "absence_note": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "tonal_range": {
+            "type": "object",
+            "required": [
+                "formal_casual",
+                "technical_accessible",
+                "confident_humble",
+                "serious_playful"
+            ],
+            "properties": {
+                "formal_casual": {
+                    "$ref": "#/definitions/tonal_dimension"
+                },
+                "technical_accessible": {
+                    "$ref": "#/definitions/tonal_dimension"
+                },
+                "confident_humble": {
+                    "$ref": "#/definitions/tonal_dimension"
+                },
+                "serious_playful": {
+                    "$ref": "#/definitions/tonal_dimension"
+                }
+            }
+        },
+        "lexicon": {
+            "type": "object",
+            "required": [
+                "signature_vocabulary",
+                "proprietary_terms",
+                "overused_terms",
+                "absent_terms",
+                "jargon_density"
+            ],
+            "properties": {
+                "signature_vocabulary": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "term": {
+                                "type": "string"
+                            },
+                            "frequency": {
+                                "type": "string",
+                                "enum": [
+                                    "very_high",
+                                    "high",
+                                    "medium",
+                                    "low"
+                                ]
+                            },
+                            "distinctiveness": {
+                                "type": "string",
+                                "enum": [
+                                    "high",
+                                    "medium",
+                                    "low"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "proprietary_terms": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "term": {
+                                "type": "string"
+                            },
+                            "context": {
+                                "type": "string"
+                            },
+                            "usage": {
+                                "type": "string",
+                                "enum": [
+                                    "consistent",
+                                    "limited",
+                                    "rare"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "overused_terms": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "term": {
+                                "type": "string"
+                            },
+                            "frequency": {
+                                "type": "integer"
+                            },
+                            "assessment": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                },
+                "absent_terms": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "term": {
+                                "type": "string"
+                            },
+                            "note": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                },
+                "jargon_density": {
+                    "type": "object",
+                    "properties": {
+                        "score": {
+                            "type": "number"
+                        },
+                        "assessment": {
+                            "type": "string",
+                            "enum": [
+                                "high",
+                                "moderate",
+                                "low"
+                            ]
+                        },
+                        "accessibility_impact": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "rhetorical_style": {
+            "type": "object",
+            "required": [
+                "persuasion_balance",
+                "proof_patterns",
+                "claim_to_evidence_ratio",
+                "confidence_hedging_ratio"
+            ],
+            "properties": {
+                "persuasion_balance": {
+                    "type": "object",
+                    "properties": {
+                        "logos_percent": {
+                            "$ref": "#/definitions/percentage"
+                        },
+                        "ethos_percent": {
+                            "$ref": "#/definitions/percentage"
+                        },
+                        "pathos_percent": {
+                            "$ref": "#/definitions/percentage"
+                        },
+                        "assessment": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "proof_patterns": {
+                    "type": "object",
+                    "properties": {
+                        "primary_proof_type": {
+                            "type": "string"
+                        },
+                        "secondary_proof_type": {
+                            "type": "string"
+                        },
+                        "quantified_claims_percent": {
+                            "$ref": "#/definitions/percentage"
+                        },
+                        "third_party_validation_percent": {
+                            "$ref": "#/definitions/percentage"
+                        },
+                        "customer_evidence_percent": {
+                            "$ref": "#/definitions/percentage"
+                        },
+                        "proof_density_assessment": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "claim_to_evidence_ratio": {
+                    "type": "object",
+                    "properties": {
+                        "ratio": {
+                            "type": "number"
+                        },
+                        "interpretation": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "confidence_hedging_ratio": {
+                    "type": "object",
+                    "properties": {
+                        "confident_language_count": {
+                            "type": "integer"
+                        },
+                        "hedging_language_count": {
+                            "type": "integer"
+                        },
+                        "ratio": {
+                            "type": "number"
+                        },
+                        "assessment": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "voice_consistency": {
+            "type": "object",
+            "required": [
+                "cross_channel_consistency_score",
+                "assessment",
+                "most_consistent",
+                "least_consistent",
+                "evidence_ids"
+            ],
+            "properties": {
+                "cross_channel_consistency_score": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 100
+                },
+                "assessment": {
+                    "type": "string"
+                },
+                "most_consistent": {
+                    "type": "string"
+                },
+                "least_consistent": {
+                    "type": "string"
+                },
+                "evidence_ids": {
+                    "$ref": "#/definitions/evidence_id_array"
+                }
+            }
+        },
+        "emotional_signature": {
+            "type": "object",
+            "description": "Emotional tone and sentiment patterns typical of the brand's owned content.",
+            "properties": {
+                "dominant_emotional_tones": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "required": [
+                            "tone",
+                            "intensity",
+                            "evidence_ids"
+                        ],
+                        "properties": {
+                            "tone": {
+                                "type": "string",
+                                "enum": [
+                                    "confident",
+                                    "enthusiastic",
+                                    "professional",
+                                    "empathetic",
+                                    "urgent",
+                                    "frustrated",
+                                    "skeptical",
+                                    "appreciative",
+                                    "neutral"
+                                ]
+                            },
+                            "intensity": {
+                                "type": "string",
+                                "enum": [
+                                    "low",
+                                    "medium",
+                                    "high"
+                                ]
+                            },
+                            "contexts": {
+                                "type": "array",
+                                "items": {
+                                    "type": "string"
+                                }
+                            },
+                            "evidence_ids": {
+                                "$ref": "#/definitions/evidence_id_array"
+                            }
+                        }
+                    }
+                },
+                "polarity_profile": {
+                    "type": "object",
+                    "properties": {
+                        "avg_score": {
+                            "type": "number",
+                            "minimum": -1,
+                            "maximum": 1
+                        },
+                        "distribution": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "$ref": "#/definitions/percentage"
+                            }
+                        },
+                        "notes": {
+                            "type": "string"
+                        },
+                        "evidence_ids": {
+                            "$ref": "#/definitions/evidence_id_array"
+                        }
+                    }
+                },
+                "channel_variations": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "required": [
+                            "channel",
+                            "notes"
+                        ],
+                        "properties": {
+                            "channel": {
+                                "$ref": "#/definitions/channel_enum"
+                            },
+                            "notes": {
+                                "type": "string"
+                            },
+                            "evidence_ids": {
+                                "$ref": "#/definitions/evidence_id_array"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "voice_attribute": {
+            "type": "object",
+            "required": [
+                "attribute",
+                "description",
+                "signal_strength",
+                "evidence_count",
+                "evidence_ids"
+            ],
+            "properties": {
+                "attribute": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "signal_strength": {
+                    "type": "string",
+                    "enum": [
+                        "strong",
+                        "medium",
+                        "weak"
+                    ]
+                },
+                "evidence_count": {
+                    "type": "integer"
+                },
+                "evidence_ids": {
+                    "$ref": "#/definitions/evidence_id_array"
+                }
+            }
+        },
+        "tonal_dimension": {
+            "type": "object",
+            "required": [
+                "position",
+                "scale",
+                "channel_variation",
+                "consistency",
+                "evidence_ids"
+            ],
+            "properties": {
+                "position": {
+                    "type": "number",
+                    "minimum": 1,
+                    "maximum": 5
+                },
+                "scale": {
+                    "type": "string"
+                },
+                "channel_variation": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "number"
+                    }
+                },
+                "consistency": {
+                    "type": "string",
+                    "enum": [
+                        "high",
+                        "medium",
+                        "low"
+                    ]
+                },
+                "note": {
+                    "type": "string"
+                },
+                "evidence_ids": {
+                    "$ref": "#/definitions/evidence_id_array"
+                }
+            }
+        },
+        "iso_datetime": {
+            "type": "string",
+            "format": "date-time",
+            "description": "ISO 8601 datetime string."
+        },
+        "url": {
+            "type": "string",
+            "format": "uri",
+            "description": "A valid URL (URI)."
+        },
+        "hex_color": {
+            "type": "string",
+            "pattern": "^#[0-9A-Fa-f]{6}$",
+            "description": "Hex color in the form #RRGGBB."
+        },
+        "percentage": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1,
+            "description": "Share or percentage expressed as 0..1."
+        },
+        "confidence_score": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1,
+            "description": "Confidence score 0..1."
+        },
+        "evidence_id": {
+            "type": "string",
+            "pattern": "^(E|VE|EC)[0-9]{5}$",
+            "description": "Evidence ID (E##### for general, VE##### for visual, EC##### for comments)."
+        },
+        "evidence_id_array": {
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/evidence_id"
+            },
+            "description": "Array of evidence IDs."
+        },
+        "channel_enum": {
+            "type": "string",
+            "enum": [
+                "website",
+                "linkedin",
+                "youtube",
+                "x",
+                "instagram",
+                "tiktok",
+                "facebook"
+            ],
+            "description": "Supported owned channels."
+        },
+        "sentiment": {
+            "type": "object",
+            "description": "Structured sentiment and emotional tone (brand-authored content or audience content, depending on context).",
+            "required": [
+                "polarity",
+                "emotional_tone"
+            ],
+            "properties": {
+                "polarity": {
+                    "type": "object",
+                    "required": [
+                        "score",
+                        "label"
+                    ],
+                    "properties": {
+                        "score": {
+                            "type": "number",
+                            "minimum": -1,
+                            "maximum": 1
+                        },
+                        "label": {
+                            "type": "string",
+                            "enum": [
+                                "very_negative",
+                                "negative",
+                                "neutral",
+                                "positive",
+                                "very_positive"
+                            ]
+                        }
+                    }
+                },
+                "emotional_tone": {
+                    "type": "object",
+                    "required": [
+                        "primary",
+                        "intensity"
+                    ],
+                    "properties": {
+                        "primary": {
+                            "type": "string",
+                            "enum": [
+                                "confident",
+                                "enthusiastic",
+                                "professional",
+                                "empathetic",
+                                "urgent",
+                                "frustrated",
+                                "skeptical",
+                                "appreciative",
+                                "neutral"
+                            ]
+                        },
+                        "secondary": {
+                            "type": "string",
+                            "enum": [
+                                "confident",
+                                "enthusiastic",
+                                "professional",
+                                "empathetic",
+                                "urgent",
+                                "frustrated",
+                                "skeptical",
+                                "appreciative",
+                                "neutral"
+                            ]
+                        },
+                        "intensity": {
+                            "type": "string",
+                            "enum": [
+                                "low",
+                                "medium",
+                                "high"
+                            ]
+                        }
+                    }
+                },
+                "subjectivity": {
+                    "type": "object",
+                    "required": [
+                        "score",
+                        "label"
+                    ],
+                    "properties": {
+                        "score": {
+                            "type": "number",
+                            "minimum": 0,
+                            "maximum": 1
+                        },
+                        "label": {
+                            "type": "string",
+                            "enum": [
+                                "objective",
+                                "mixed",
+                                "subjective"
+                            ]
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,48 @@
+{
+    "profile": {
+        "name": "BrandOS",
+        "handle": "@brandos",
+        "avatar": "/placeholder.svg",
+        "banner": "/placeholder.svg",
+        "bio": "The ultimate brand monitoring and intelligence platform. We help you track your brand and competitors effortlessly. #brandmonitoring #saas",
+        "following": 500,
+        "followers": "10.2K",
+        "location": "San Francisco, CA",
+        "website": "brandos.ai"
+    },
+    "posts": [
+        {
+            "id": "1",
+            "author": "BrandOS",
+            "handle": "@brandos",
+            "avatar": "/placeholder.svg",
+            "content": "Just launched our new feature! Now you can track your brand's social media presence with ease. #brandmonitoring #socialmedia",
+            "timestamp": "2h",
+            "likes": 120,
+            "retweets": 45,
+            "comments": 12
+        },
+        {
+            "id": "2",
+            "author": "TechCrunch",
+            "handle": "@TechCrunch",
+            "avatar": "/placeholder.svg",
+            "content": "BrandOS is changing the game for brand management. Their new social media tracking tool is a must-have for marketers.",
+            "timestamp": "5h",
+            "likes": 340,
+            "retweets": 120,
+            "comments": 34
+        },
+        {
+            "id": "3",
+            "author": "Marketing Weekly",
+            "handle": "@marketingweekly",
+            "avatar": "/placeholder.svg",
+            "content": "We've been using BrandOS for a week now and the insights are incredible. Highly recommend!",
+            "timestamp": "1d",
+            "likes": 210,
+            "retweets": 80,
+            "comments": 22
+        }
+    ]
+}

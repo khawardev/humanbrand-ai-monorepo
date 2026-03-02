@@ -1,0 +1,18 @@
+{
+  "extends": "../typescript-config/react-library.json",
+  "compilerOptions": {
+    "outDir": "dist",
+    "strict": true,
+    "baseUrl": ".",
+    "paths": {
+      "@/components/ui/*": ["./components/*"],
+      "@/components/shared/*": ["./components/shared/*"],
+      "@/hooks/*": ["./hooks/*"],
+      "@/lib/*": ["./lib/*"],
+      "@repo/lib": ["../lib/index.ts"],
+      "@repo/lib/*": ["../lib/*"]
+    }
+  },
+  "include": ["."],
+  "exclude": ["node_modules", "dist"]
+}

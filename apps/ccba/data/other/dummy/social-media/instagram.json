@@ -1,0 +1,44 @@
+{
+    "profile": {
+        "username": "BrandOS",
+        "avatar": "/placeholder.svg",
+        "posts": 120,
+        "followers": "25.5K",
+        "following": 300,
+        "name": "BrandOS Official",
+        "bio": "The #1 platform for brand intelligence. ✨\nHelping you monitor your brand and competitors.\n👇 Join us!",
+        "website": "brandos.ai"
+    },
+    "posts": [
+        {
+            "id": "1",
+            "author": "BrandOS",
+            "avatar": "/placeholder.svg",
+            "image": "/placeholder.svg",
+            "caption": "Our new social media tracking feature is live! Monitor your brand's performance with our intuitive dashboard. #BrandMonitoring #SocialMedia",
+            "likes": 1200,
+            "comments": 150,
+            "timestamp": "4h"
+        },
+        {
+            "id": "2",
+            "author": "Marketing Gurus",
+            "avatar": "/placeholder.svg",
+            "image": "/placeholder.svg",
+            "caption": "Just tried out the new feature from BrandOS. It's a must-have for any social media manager. #marketingtools #tech",
+            "likes": 2300,
+            "comments": 340,
+            "timestamp": "1d"
+        },
+        {
+            "id": "3",
+            "author": "Tech Influencer",
+            "avatar": "/placeholder.svg",
+            "image": "/placeholder.svg",
+            "caption": "BrandOS is making waves in the marketing world. Their new tool is a game-changer. #ad #brandos",
+            "likes": 3400,
+            "comments": 450,
+            "timestamp": "2d"
+        }
+    ]
+}

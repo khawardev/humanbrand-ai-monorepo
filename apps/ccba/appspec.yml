@@ -1,0 +1,44 @@
+version: 0.0
+
+os: linux
+
+files:
+  - source: /
+    destination: /opt/app/brandos-frontend
+    overwrite: yes
+
+permissions:
+  - object: /opt/app/brandos-frontend
+    owner: ubuntu
+    group: ubuntu
+    mode: 755
+    type:
+      - directory
+
+  - object: /opt/app/brandos-frontend
+    owner: ubuntu
+    group: ubuntu
+    mode: 644
+    type:
+      - file
+
+hooks:
+  BeforeInstall:
+    - location: scripts/stop_application.sh
+      timeout: 300
+      runas: ubuntu
+
+  AfterInstall:
+    - location: scripts/install_dependencies.sh
+      timeout: 600
+      runas: ubuntu
+
+  ApplicationStart:
+    - location: scripts/start_application.sh
+      timeout: 300
+      runas: ubuntu
+
+  ApplicationStop:
+    - location: scripts/stop_application.sh
+      timeout: 300
+      runas: ubuntu

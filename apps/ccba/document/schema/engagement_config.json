@@ -1,0 +1,425 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "engagement_config.json",
+    "title": "Engagement Configuration",
+    "description": "Defines scope, competitors, and analysis parameters for a Brand OS engagement",
+    "type": "object",
+    "required": [
+        "schema_version",
+        "engagement_id",
+        "created_at",
+        "client",
+        "competitors",
+        "analysis_parameters",
+        "value_drivers"
+    ],
+    "properties": {
+        "schema_version": {
+            "type": "string",
+            "const": "2.0.0"
+        },
+        "engagement_id": {
+            "type": "string",
+            "format": "uuid"
+        },
+        "created_at": {
+            "$ref": "#/definitions/iso_datetime"
+        },
+        "client": {
+            "type": "object",
+            "required": [
+                "name",
+                "website_domain",
+                "social_handles"
+            ],
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "description": "Client company name"
+                },
+                "website_domain": {
+                    "type": "string",
+                    "description": "Primary website domain without protocol"
+                },
+                "social_handles": {
+                    "$ref": "#/definitions/social_handles"
+                }
+            }
+        },
+        "competitors": {
+            "type": "array",
+            "minItems": 1,
+            "maxItems": 10,
+            "items": {
+                "type": "object",
+                "required": [
+                    "name",
+                    "website_domain",
+                    "social_handles"
+                ],
+                "properties": {
+                    "name": {
+                        "type": "string"
+                    },
+                    "website_domain": {
+                        "type": "string"
+                    },
+                    "social_handles": {
+                        "$ref": "#/definitions/social_handles"
+                    }
+                }
+            }
+        },
+        "analysis_parameters": {
+            "type": "object",
+            "required": [
+                "website",
+                "social"
+            ],
+            "properties": {
+                "website": {
+                    "type": "object",
+                    "properties": {
+                        "max_pages": {
+                            "type": "integer",
+                            "minimum": 50,
+                            "maximum": 1000
+                        },
+                        "include_patterns": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "exclude_patterns": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "depth": {
+                            "type": "integer",
+                            "minimum": 1,
+                            "maximum": 5
+                        }
+                    }
+                },
+                "social": {
+                    "type": "object",
+                    "properties": {
+                        "channels_in_scope": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/social_channel"
+                            }
+                        },
+                        "lookback_days": {
+                            "type": "integer",
+                            "minimum": 30,
+                            "maximum": 730
+                        },
+                        "max_posts_per_channel": {
+                            "type": "integer",
+                            "minimum": 50,
+                            "maximum": 1000
+                        },
+                        "include_comments": {
+                            "type": "boolean"
+                        },
+                        "max_comments_per_post": {
+                            "type": "integer",
+                            "minimum": 10,
+                            "maximum": 500
+                        }
+                    }
+                }
+            }
+        },
+        "value_drivers": {
+            "type": "object",
+            "required": [
+                "source",
+                "drivers"
+            ],
+            "properties": {
+                "source": {
+                    "type": "string",
+                    "enum": [
+                        "client_provided",
+                        "industry_standard",
+                        "custom"
+                    ]
+                },
+                "note": {
+                    "type": "string"
+                },
+                "drivers": {
+                    "type": "array",
+                    "minItems": 3,
+                    "maxItems": 10,
+                    "items": {
+                        "type": "object",
+                        "required": [
+                            "driver_id",
+                            "name",
+                            "description",
+                            "keywords",
+                            "priority"
+                        ],
+                        "properties": {
+                            "driver_id": {
+                                "type": "string",
+                                "pattern": "^VD[0-9]{3}$"
+                            },
+                            "name": {
+                                "type": "string"
+                            },
+                            "description": {
+                                "type": "string"
+                            },
+                            "keywords": {
+                                "type": "array",
+                                "items": {
+                                    "type": "string"
+                                },
+                                "minItems": 3
+                            },
+                            "priority": {
+                                "type": "string",
+                                "enum": [
+                                    "primary",
+                                    "secondary",
+                                    "tertiary"
+                                ]
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "intended_brand": {
+            "type": "object",
+            "properties": {
+                "provided": {
+                    "type": "boolean"
+                },
+                "note": {
+                    "type": "string"
+                },
+                "source_documents": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "social_handles": {
+            "type": "object",
+            "properties": {
+                "linkedin": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "youtube": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "x": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "instagram": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "tiktok": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "facebook": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                }
+            }
+        },
+        "social_channel": {
+            "type": "string",
+            "enum": [
+                "linkedin",
+                "youtube",
+                "x",
+                "instagram",
+                "tiktok",
+                "facebook"
+            ]
+        },
+        "iso_datetime": {
+            "type": "string",
+            "format": "date-time",
+            "description": "ISO 8601 datetime string."
+        },
+        "url": {
+            "type": "string",
+            "format": "uri",
+            "description": "A valid URL (URI)."
+        },
+        "hex_color": {
+            "type": "string",
+            "pattern": "^#[0-9A-Fa-f]{6}$",
+            "description": "Hex color in the form #RRGGBB."
+        },
+        "percentage": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1,
+            "description": "Share or percentage expressed as 0..1."
+        },
+        "confidence_score": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1,
+            "description": "Confidence score 0..1."
+        },
+        "evidence_id": {
+            "type": "string",
+            "pattern": "^(E|VE|EC)[0-9]{5}$",
+            "description": "Evidence ID (E##### for general, VE##### for visual, EC##### for comments)."
+        },
+        "evidence_id_array": {
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/evidence_id"
+            },
+            "description": "Array of evidence IDs."
+        },
+        "channel_enum": {
+            "type": "string",
+            "enum": [
+                "website",
+                "linkedin",
+                "youtube",
+                "x",
+                "instagram",
+                "tiktok",
+                "facebook"
+            ],
+            "description": "Supported owned channels."
+        },
+        "sentiment": {
+            "type": "object",
+            "description": "Structured sentiment and emotional tone (brand-authored content or audience content, depending on context).",
+            "required": [
+                "polarity",
+                "emotional_tone"
+            ],
+            "properties": {
+                "polarity": {
+                    "type": "object",
+                    "required": [
+                        "score",
+                        "label"
+                    ],
+                    "properties": {
+                        "score": {
+                            "type": "number",
+                            "minimum": -1,
+                            "maximum": 1
+                        },
+                        "label": {
+                            "type": "string",
+                            "enum": [
+                                "very_negative",
+                                "negative",
+                                "neutral",
+                                "positive",
+                                "very_positive"
+                            ]
+                        }
+                    }
+                },
+                "emotional_tone": {
+                    "type": "object",
+                    "required": [
+                        "primary",
+                        "intensity"
+                    ],
+                    "properties": {
+                        "primary": {
+                            "type": "string",
+                            "enum": [
+                                "confident",
+                                "enthusiastic",
+                                "professional",
+                                "empathetic",
+                                "urgent",
+                                "frustrated",
+                                "skeptical",
+                                "appreciative",
+                                "neutral"
+                            ]
+                        },
+                        "secondary": {
+                            "type": "string",
+                            "enum": [
+                                "confident",
+                                "enthusiastic",
+                                "professional",
+                                "empathetic",
+                                "urgent",
+                                "frustrated",
+                                "skeptical",
+                                "appreciative",
+                                "neutral"
+                            ]
+                        },
+                        "intensity": {
+                            "type": "string",
+                            "enum": [
+                                "low",
+                                "medium",
+                                "high"
+                            ]
+                        }
+                    }
+                },
+                "subjectivity": {
+                    "type": "object",
+                    "required": [
+                        "score",
+                        "label"
+                    ],
+                    "properties": {
+                        "score": {
+                            "type": "number",
+                            "minimum": 0,
+                            "maximum": 1
+                        },
+                        "label": {
+                            "type": "string",
+                            "enum": [
+                                "objective",
+                                "mixed",
+                                "subjective"
+                            ]
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

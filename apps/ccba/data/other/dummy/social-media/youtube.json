@@ -1,0 +1,37 @@
+{
+    "profile": {
+        "name": "BrandOS",
+        "avatar": "/placeholder.svg",
+        "banner": "/placeholder.svg",
+        "handle": "@brandos",
+        "subscribers": "1.5M",
+        "videos": 150,
+        "description": "Welcome to the official BrandOS YouTube channel! Here you'll find tutorials, feature updates, and industry insights to help you master brand management."
+    },
+    "videos": [
+        {
+            "id": "1",
+            "title": "Introducing BrandOS: The Future of Brand Management",
+            "thumbnail": "/placeholder.svg",
+            "channel": "BrandOS",
+            "views": "1.2M",
+            "timestamp": "1 month ago"
+        },
+        {
+            "id": "2",
+            "title": "How to Track Your Competitors' Social Media Performance",
+            "thumbnail": "/placeholder.svg",
+            "channel": "BrandOS",
+            "views": "800K",
+            "timestamp": "2 weeks ago"
+        },
+        {
+            "id": "3",
+            "title": "BrandOS Tutorial: Getting Started with Social Media Tracking",
+            "thumbnail": "/placeholder.svg",
+            "channel": "BrandOS",
+            "views": "500K",
+            "timestamp": "1 week ago"
+        }
+    ]
+}

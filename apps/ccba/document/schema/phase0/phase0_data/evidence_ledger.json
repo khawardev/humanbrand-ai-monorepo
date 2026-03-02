@@ -1,0 +1,174 @@
+{
+    "schema_version": "2.0.0",
+    "generated_at": "2023-10-27T14:30:00Z",
+    "run_id": "550e8400-e29b-41d4-a716-446655440000",
+    "tenant_id": "123e4567-e89b-12d3-a456-426614174000",
+    "evidence_count": 5,
+    "evidence_by_type": {
+        "webpage": 1,
+        "social_post": 2,
+        "comment": 1,
+        "image": 1
+    },
+    "evidence_by_entity": {
+        "TechCrunch": 1,
+        "OfficialBrandAccount": 1,
+        "JohnDoe_Analyst": 1,
+        "AngryCustomer99": 1,
+        "LifestyleInfluencer": 1
+    },
+    "evidence": [
+        {
+            "evidence_id": "E00101",
+            "source_type": "webpage",
+            "source_channel": "website",
+            "source_entity": "TechCrunch",
+            "source_url": "https://techcrunch.com/2023/10/new-product-launch",
+            "source_timestamp": "2023-10-26T09:00:00Z",
+            "content_type": "text",
+            "excerpt": "The new AI-driven platform promises to revolutionize how enterprises handle data security, with a 99.9% reduction in false positives observed during the beta phase.",
+            "full_content_uri": "s3://evidence-bucket/runs/550e8400/E00101.html",
+            "extraction_date": "2023-10-27T10:05:00Z",
+            "metadata": {
+                "author": "Sarah Miller",
+                "word_count": 1200,
+                "sentiment": {
+                    "polarity": {
+                        "score": 0.85,
+                        "label": "positive"
+                    },
+                    "emotional_tone": {
+                        "primary": "professional",
+                        "intensity": "high"
+                    },
+                    "subjectivity": {
+                        "score": 0.2,
+                        "label": "objective"
+                    }
+                }
+            }
+        },
+        {
+            "evidence_id": "E00205",
+            "source_type": "social_post",
+            "source_channel": "linkedin",
+            "source_entity": "OfficialBrandAccount",
+            "source_url": "https://www.linkedin.com/posts/brand-update-12345",
+            "source_timestamp": "2023-10-26T14:15:00Z",
+            "content_type": "mixed",
+            "excerpt": "We are thrilled to announce our Q3 results! Revenue is up 20% YoY. A huge thank you to our dedicated team and loyal customers. #Growth #Innovation",
+            "full_content_uri": "s3://evidence-bucket/runs/550e8400/E00205.json",
+            "extraction_date": "2023-10-27T10:06:00Z",
+            "metadata": {
+                "likes": 4500,
+                "shares": 320,
+                "sentiment": {
+                    "polarity": {
+                        "score": 0.95,
+                        "label": "very_positive"
+                    },
+                    "emotional_tone": {
+                        "primary": "enthusiastic",
+                        "intensity": "high"
+                    },
+                    "subjectivity": {
+                        "score": 0.8,
+                        "label": "subjective"
+                    }
+                }
+            }
+        },
+        {
+            "evidence_id": "E00310",
+            "source_type": "social_post",
+            "source_channel": "x",
+            "source_entity": "JohnDoe_Analyst",
+            "source_url": "https://twitter.com/johndoe/status/1717555555",
+            "source_timestamp": "2023-10-26T16:20:00Z",
+            "content_type": "text",
+            "excerpt": "Skeptical about the latest claims regarding battery life. Real-world tests usually show a 15% drop compared to lab results. Waiting for benchmarks.",
+            "full_content_uri": "s3://evidence-bucket/runs/550e8400/E00310.json",
+            "extraction_date": "2023-10-27T10:07:00Z",
+            "metadata": {
+                "retweets": 45,
+                "sentiment": {
+                    "polarity": {
+                        "score": -0.3,
+                        "label": "negative"
+                    },
+                    "emotional_tone": {
+                        "primary": "skeptical",
+                        "intensity": "medium"
+                    },
+                    "subjectivity": {
+                        "score": 0.6,
+                        "label": "mixed"
+                    }
+                }
+            }
+        },
+        {
+            "evidence_id": "EC04001",
+            "source_type": "comment",
+            "source_channel": "facebook",
+            "source_entity": "AngryCustomer99",
+            "source_url": "https://facebook.com/brand/posts/123?comment_id=987",
+            "source_timestamp": "2023-10-26T18:00:00Z",
+            "content_type": "text",
+            "excerpt": "I've been waiting for support to email me back for 3 weeks. This is unacceptable service.",
+            "full_content_uri": "s3://evidence-bucket/runs/550e8400/EC04001.json",
+            "extraction_date": "2023-10-27T10:08:00Z",
+            "metadata": {
+                "parent_post_id": "888222111",
+                "sentiment": {
+                    "polarity": {
+                        "score": -0.9,
+                        "label": "very_negative"
+                    },
+                    "emotional_tone": {
+                        "primary": "frustrated",
+                        "intensity": "high"
+                    },
+                    "subjectivity": {
+                        "score": 0.9,
+                        "label": "subjective"
+                    }
+                }
+            }
+        },
+        {
+            "evidence_id": "VE05002",
+            "source_type": "image",
+            "source_channel": "instagram",
+            "source_entity": "LifestyleInfluencer",
+            "source_url": "https://instagram.com/p/CwXyZ123",
+            "source_timestamp": "2023-10-27T08:30:00Z",
+            "content_type": "image",
+            "excerpt": "[Visual Content Analysis]: Image contains the product placed on a marble table next to a coffee cup. Lighting is bright/morning sun. Logo is clearly visible.",
+            "full_content_uri": "s3://evidence-bucket/runs/550e8400/VE05002.jpg",
+            "extraction_date": "2023-10-27T10:09:00Z",
+            "metadata": {
+                "visual_tags": [
+                    "coffee",
+                    "morning",
+                    "lifestyle",
+                    "product_placement"
+                ],
+                "sentiment": {
+                    "polarity": {
+                        "score": 0.5,
+                        "label": "positive"
+                    },
+                    "emotional_tone": {
+                        "primary": "neutral",
+                        "intensity": "low"
+                    },
+                    "subjectivity": {
+                        "score": 0.1,
+                        "label": "objective"
+                    }
+                }
+            }
+        }
+    ]
+}

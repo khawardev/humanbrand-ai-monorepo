@@ -1,0 +1,43 @@
+{
+    "profile": {
+        "name": "BrandOS",
+        "avatar": "/placeholder.svg",
+        "banner": "/placeholder.svg",
+        "category": "Software Company",
+        "likes": "15K",
+        "followers": "18K",
+        "about": "BrandOS is the leading platform for brand monitoring and competitive analysis. Join us to stay ahead of the curve."
+    },
+    "posts": [
+        {
+            "id": "1",
+            "author": "BrandOS",
+            "avatar": "/placeholder.svg",
+            "content": "We're excited to announce our new social media tracking feature! Keep an eye on your brand's performance across all major platforms. #BrandOS #SocialMediaMarketing",
+            "timestamp": "3h",
+            "likes": 230,
+            "comments": 45,
+            "shares": 12
+        },
+        {
+            "id": "2",
+            "author": "Digital Marketing World",
+            "avatar": "/placeholder.svg",
+            "content": "BrandOS has done it again! Their new tool is a game-changer for social media managers. #marketing #tech",
+            "timestamp": "8h",
+            "likes": 450,
+            "comments": 120,
+            "shares": 34
+        },
+        {
+            "id": "3",
+            "author": "Startup News",
+            "avatar": "/placeholder.svg",
+            "content": "We're featuring BrandOS in our latest article on innovative marketing tools. Check it out!",
+            "timestamp": "2d",
+            "likes": 310,
+            "comments": 80,
+            "shares": 22
+        }
+    ]
+}

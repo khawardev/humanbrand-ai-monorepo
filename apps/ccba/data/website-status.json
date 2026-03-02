@@ -1,0 +1,923 @@
+[
+    {
+        "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765",
+        "batch_id": "0f8548fd-a27e-427e-b1ca-fc0265e0e8cd",
+        "brand_id": "30104b5e-921d-4fc3-97ba-63bf2ee4a0b4",
+        "client_id": "a9ba7d1d-ca46-493f-a7ef-e61b4d74b765",
+        "created_at": "2026-01-23T14:26:02.469639",
+        "entity_type": "BATCH_WEBSITE",
+        "errors": [],
+        "name": "30104b5e-921d-4fc3-97ba-63bf2ee4a0b4 - website Capture",
+        "result_keys": [
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#WEBSITE_CRAWL#81ca767b-e15d-44f4-a65c-babe2a4e42f9",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#WEBSITE_CRAWL#813f7180-5d45-4172-abe3-35acd1bfb91c",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#WEBSITE_CRAWL#99bfcf65-061f-457b-85dc-671ac01c25ee",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#WEBSITE_CRAWL#77ab5338-5c74-4106-896e-f4d3b46d6cc7",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#WEBSITE_CRAWL#ea09879d-f518-468e-8798-b4771f9acaf5",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#WEBSITE_CRAWL#84e98e14-677c-4438-a481-ff5c2de36892",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#WEBSITE_CRAWL#011179c6-8597-44b7-a5d7-f1dd2b02b66f",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#WEBSITE_CRAWL#d21da3d7-3b58-4ef2-92ca-faf71d3e49e6",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#WEBSITE_CRAWL#04918b9e-a588-486a-be57-c9385ade763a",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#WEBSITE_CRAWL#65f8842a-f295-4cac-b14a-7c853045aba9",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#COMPETITOR#0194993e-ffd8-4ed9-b33f-76420021cf8b#WEBSITE_CRAWL#5466a3d3-e205-4909-97b6-8b6bedd16574",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#COMPETITOR#0194993e-ffd8-4ed9-b33f-76420021cf8b#WEBSITE_CRAWL#29dd5fb0-cc40-4a43-98ed-c376d580c7bf",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#COMPETITOR#0194993e-ffd8-4ed9-b33f-76420021cf8b#WEBSITE_CRAWL#bb24a3c7-8fa9-4516-87aa-438d6a3edc7f",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#COMPETITOR#0194993e-ffd8-4ed9-b33f-76420021cf8b#WEBSITE_CRAWL#158668db-ffec-40af-93a2-874f1368e218",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#COMPETITOR#0194993e-ffd8-4ed9-b33f-76420021cf8b#WEBSITE_CRAWL#aa8eebf5-7134-428b-88df-796b05b373cb",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#COMPETITOR#0194993e-ffd8-4ed9-b33f-76420021cf8b#WEBSITE_CRAWL#401a1024-6c90-4a59-82e9-be875edbab68",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#COMPETITOR#0194993e-ffd8-4ed9-b33f-76420021cf8b#WEBSITE_CRAWL#a14c0ee9-66e1-4672-ae4c-e73dae3c4f1f",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#COMPETITOR#0194993e-ffd8-4ed9-b33f-76420021cf8b#WEBSITE_CRAWL#a9940f5f-d273-4bf0-a7e7-7f2543582c71",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#COMPETITOR#0194993e-ffd8-4ed9-b33f-76420021cf8b#WEBSITE_CRAWL#8e88b9ab-da6e-4b2d-a119-54a70e5e18c7",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#COMPETITOR#0194993e-ffd8-4ed9-b33f-76420021cf8b#WEBSITE_CRAWL#335eb7da-ffef-4a9d-9aa2-1ab98ac5e60f",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#COMPETITOR#18866e1e-ef54-4435-b216-b8ce02401ddc#WEBSITE_CRAWL#28487924-0d17-4f17-bee7-970931eef97f",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#COMPETITOR#18866e1e-ef54-4435-b216-b8ce02401ddc#WEBSITE_CRAWL#27e9aecd-e1ee-43c5-bb7c-9f8163ce21e3",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#COMPETITOR#18866e1e-ef54-4435-b216-b8ce02401ddc#WEBSITE_CRAWL#e98cca28-68c2-4b48-ab81-f7a0d4cc2027",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#COMPETITOR#18866e1e-ef54-4435-b216-b8ce02401ddc#WEBSITE_CRAWL#64b75e53-d445-4b99-a21f-6f7f2f2a8da5",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#COMPETITOR#18866e1e-ef54-4435-b216-b8ce02401ddc#WEBSITE_CRAWL#815c8c75-cd4a-4342-8ffc-4d66536f6873",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#COMPETITOR#18866e1e-ef54-4435-b216-b8ce02401ddc#WEBSITE_CRAWL#c94ac64e-c68f-48b7-bed5-2025c90c38d9",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#COMPETITOR#18866e1e-ef54-4435-b216-b8ce02401ddc#WEBSITE_CRAWL#22ee2f29-023b-46ab-ad68-842572cdb653",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#COMPETITOR#18866e1e-ef54-4435-b216-b8ce02401ddc#WEBSITE_CRAWL#88337af5-7ac5-4450-8be5-e2b28925bc82",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#COMPETITOR#18866e1e-ef54-4435-b216-b8ce02401ddc#WEBSITE_CRAWL#b480fa83-3f5b-4eb8-bc97-39bc720adaed",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#COMPETITOR#18866e1e-ef54-4435-b216-b8ce02401ddc#WEBSITE_CRAWL#57a90d9d-bd40-4100-af6b-399ed6ab721d",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#COMPETITOR#5985d2c8-44c0-4f94-8716-48018717ca20#WEBSITE_CRAWL#596622c2-2a54-427e-bce1-89445b935ca6",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#COMPETITOR#5985d2c8-44c0-4f94-8716-48018717ca20#WEBSITE_CRAWL#688bc603-4991-48b8-8135-091e98aef990",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#COMPETITOR#5985d2c8-44c0-4f94-8716-48018717ca20#WEBSITE_CRAWL#ece79560-e7d4-4a7c-aa07-b856c0ff705d",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#COMPETITOR#5985d2c8-44c0-4f94-8716-48018717ca20#WEBSITE_CRAWL#c478fa2a-93d8-4c58-a7a3-9a4aca148e69",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#COMPETITOR#5985d2c8-44c0-4f94-8716-48018717ca20#WEBSITE_CRAWL#4772a698-ea3a-4200-9b94-9f1377bc87f8",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#COMPETITOR#5985d2c8-44c0-4f94-8716-48018717ca20#WEBSITE_CRAWL#a553bd3f-5073-4f04-8c03-28ee1485f85b",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#COMPETITOR#5985d2c8-44c0-4f94-8716-48018717ca20#WEBSITE_CRAWL#1a1bafef-be7b-4f04-9c37-33367b6da6b3",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#COMPETITOR#5985d2c8-44c0-4f94-8716-48018717ca20#WEBSITE_CRAWL#aa6c8ae0-5de4-4056-91b3-bc9848e6b0e8",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#COMPETITOR#5985d2c8-44c0-4f94-8716-48018717ca20#WEBSITE_CRAWL#613353fc-8c83-45df-bcf3-641e4f34b987",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#COMPETITOR#5985d2c8-44c0-4f94-8716-48018717ca20#WEBSITE_CRAWL#ebeb9ade-ce3e-436b-8597-25dc2f82d78b",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#COMPETITOR#6fa1da55-c71a-4b91-b461-7af407648a99#WEBSITE_CRAWL#dc12f683-0775-4907-a7e4-2742705cfb26",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#COMPETITOR#6fa1da55-c71a-4b91-b461-7af407648a99#WEBSITE_CRAWL#585c3c10-e42a-4cf6-80ed-9bbb5176bec9",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#COMPETITOR#6fa1da55-c71a-4b91-b461-7af407648a99#WEBSITE_CRAWL#9e66087c-a93b-4f46-82ff-b94e57214f9b",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#COMPETITOR#6fa1da55-c71a-4b91-b461-7af407648a99#WEBSITE_CRAWL#d2823d9c-f887-4aa3-93ce-04c034865f6b",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#COMPETITOR#6fa1da55-c71a-4b91-b461-7af407648a99#WEBSITE_CRAWL#442d1ccd-ccae-426c-8425-e8583ddae386",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#COMPETITOR#6fa1da55-c71a-4b91-b461-7af407648a99#WEBSITE_CRAWL#a281544e-86f5-4d6e-bd1d-f6561a131721",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#COMPETITOR#6fa1da55-c71a-4b91-b461-7af407648a99#WEBSITE_CRAWL#44aaa03e-c196-4ea3-b0ee-7b781ec718d4",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#COMPETITOR#6fa1da55-c71a-4b91-b461-7af407648a99#WEBSITE_CRAWL#dd2c4c97-b4d5-494e-92d4-fee391bbe6d1",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#COMPETITOR#6fa1da55-c71a-4b91-b461-7af407648a99#WEBSITE_CRAWL#1a66bb27-0f1b-4dd2-b584-efc2f2b701bf",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#COMPETITOR#6fa1da55-c71a-4b91-b461-7af407648a99#WEBSITE_CRAWL#116bb9d8-010c-4cad-8470-f310123fbef3",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#COMPETITOR#760ff023-c26d-45d7-aa82-6482a28265c0#WEBSITE_CRAWL#2802be0b-d3e9-4012-9124-b17346751455",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#COMPETITOR#760ff023-c26d-45d7-aa82-6482a28265c0#WEBSITE_CRAWL#b1632798-1cfc-4d13-a73e-b094d50cf1e9",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#COMPETITOR#760ff023-c26d-45d7-aa82-6482a28265c0#WEBSITE_CRAWL#dbd704eb-96fe-44eb-9991-e91edcaeb045",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#COMPETITOR#760ff023-c26d-45d7-aa82-6482a28265c0#WEBSITE_CRAWL#552a40a3-8a46-44c1-97b6-f01475cf7c44",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#COMPETITOR#760ff023-c26d-45d7-aa82-6482a28265c0#WEBSITE_CRAWL#c79edd21-1341-4785-8f84-cfaf8404a3f6",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#COMPETITOR#760ff023-c26d-45d7-aa82-6482a28265c0#WEBSITE_CRAWL#c73bc694-7bb4-4f3a-9cb0-d5900e8ac0de",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#COMPETITOR#760ff023-c26d-45d7-aa82-6482a28265c0#WEBSITE_CRAWL#bc414f58-8c56-4f96-8743-490df4135a6c",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#COMPETITOR#760ff023-c26d-45d7-aa82-6482a28265c0#WEBSITE_CRAWL#cab1c112-7efc-44fc-97af-c0f040b7f70d",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#COMPETITOR#760ff023-c26d-45d7-aa82-6482a28265c0#WEBSITE_CRAWL#f7548f41-b524-40ff-9cc1-f3111743a20a",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#COMPETITOR#760ff023-c26d-45d7-aa82-6482a28265c0#WEBSITE_CRAWL#71d1b740-53bc-4fd1-92d7-6de2bc7fa568",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#COMPETITOR#8a71c50b-a959-4709-b9b0-943865d8bcc7#WEBSITE_CRAWL#24e2e0c8-6246-45eb-b37e-eb5115c2f8b6",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#COMPETITOR#8a71c50b-a959-4709-b9b0-943865d8bcc7#WEBSITE_CRAWL#25c94d8b-9bf8-4c3e-bdf5-655974352188",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#COMPETITOR#8a71c50b-a959-4709-b9b0-943865d8bcc7#WEBSITE_CRAWL#b7e64089-5093-4675-be9b-5af93e068df4",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#COMPETITOR#8a71c50b-a959-4709-b9b0-943865d8bcc7#WEBSITE_CRAWL#2bbd4ea6-c9a4-4151-90f7-7d351d6daa9a",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#COMPETITOR#8a71c50b-a959-4709-b9b0-943865d8bcc7#WEBSITE_CRAWL#e7ac1f3e-23a4-4027-a4b3-4024419d4194",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#COMPETITOR#8a71c50b-a959-4709-b9b0-943865d8bcc7#WEBSITE_CRAWL#6cab175d-8ccf-4ba9-b205-68390bbf1f8f",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#COMPETITOR#8a71c50b-a959-4709-b9b0-943865d8bcc7#WEBSITE_CRAWL#db1df6fe-130b-4527-a450-f660687696c2",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#COMPETITOR#8a71c50b-a959-4709-b9b0-943865d8bcc7#WEBSITE_CRAWL#b9252175-4d99-49a6-a326-10e131afa8a7",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#COMPETITOR#8a71c50b-a959-4709-b9b0-943865d8bcc7#WEBSITE_CRAWL#2c128713-539a-4fbc-b0fe-446edd9845a9",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#COMPETITOR#8a71c50b-a959-4709-b9b0-943865d8bcc7#WEBSITE_CRAWL#d938f53a-01ca-4b97-9d92-8c8b9f0ac504",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#COMPETITOR#b8c1e5e4-469e-44e3-a9ec-292a11ae5bd1#WEBSITE_CRAWL#6784076f-7e15-4b5d-ba96-1624cafd9188",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#COMPETITOR#b8c1e5e4-469e-44e3-a9ec-292a11ae5bd1#WEBSITE_CRAWL#ad4145ba-85e2-4092-ae6a-9fe0ab7deaa7",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#COMPETITOR#b8c1e5e4-469e-44e3-a9ec-292a11ae5bd1#WEBSITE_CRAWL#de9127fd-e1d7-4512-a043-3bacb03a454b",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#COMPETITOR#b8c1e5e4-469e-44e3-a9ec-292a11ae5bd1#WEBSITE_CRAWL#0a9f1240-3828-45d1-a182-209669d00466",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#COMPETITOR#b8c1e5e4-469e-44e3-a9ec-292a11ae5bd1#WEBSITE_CRAWL#e1210773-71e6-4d18-b20e-0cf9a9e7f888",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#COMPETITOR#b8c1e5e4-469e-44e3-a9ec-292a11ae5bd1#WEBSITE_CRAWL#9d2d8f84-2b04-4a62-9c01-3c3b188551de",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#COMPETITOR#b8c1e5e4-469e-44e3-a9ec-292a11ae5bd1#WEBSITE_CRAWL#bf72fe2e-38bd-42a4-a2b7-81b0ac50ffb9",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#COMPETITOR#b8c1e5e4-469e-44e3-a9ec-292a11ae5bd1#WEBSITE_CRAWL#d68a2a1c-8a13-43ed-89db-df0186727522",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#COMPETITOR#b8c1e5e4-469e-44e3-a9ec-292a11ae5bd1#WEBSITE_CRAWL#af79f45d-dd2e-4d4a-9720-548d85866880",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#COMPETITOR#b8c1e5e4-469e-44e3-a9ec-292a11ae5bd1#WEBSITE_CRAWL#b006cb67-af62-4992-b51f-17dfbb86ded2",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#COMPETITOR#ef29fc0b-a0ab-4015-8ed5-310044a1a0e9#WEBSITE_CRAWL#5c639a58-941d-47bc-8c94-3e3117fcbe1e",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#COMPETITOR#ef29fc0b-a0ab-4015-8ed5-310044a1a0e9#WEBSITE_CRAWL#d1ca3774-6f63-4f03-a6fd-facfeb3db418",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#COMPETITOR#ef29fc0b-a0ab-4015-8ed5-310044a1a0e9#WEBSITE_CRAWL#136a9e98-2fe5-4492-b45e-0b5156cb30ee",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#COMPETITOR#ef29fc0b-a0ab-4015-8ed5-310044a1a0e9#WEBSITE_CRAWL#34b8f22c-248a-43c3-a7c3-2fde6a3e4997",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#COMPETITOR#ef29fc0b-a0ab-4015-8ed5-310044a1a0e9#WEBSITE_CRAWL#0a8e9f28-1f94-4027-a30d-51f7fb6e9c33",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#COMPETITOR#ef29fc0b-a0ab-4015-8ed5-310044a1a0e9#WEBSITE_CRAWL#4ff6bfee-85bb-4b2e-b3f4-147ebdb338dc",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#COMPETITOR#ef29fc0b-a0ab-4015-8ed5-310044a1a0e9#WEBSITE_CRAWL#0a253e9d-36a3-4a93-ba05-b0653973f407",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#COMPETITOR#ef29fc0b-a0ab-4015-8ed5-310044a1a0e9#WEBSITE_CRAWL#76eb4a31-3552-4caf-8721-2817001e94a1",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#COMPETITOR#ef29fc0b-a0ab-4015-8ed5-310044a1a0e9#WEBSITE_CRAWL#def347dd-2891-43f8-a087-a271f9654605",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#COMPETITOR#ef29fc0b-a0ab-4015-8ed5-310044a1a0e9#WEBSITE_CRAWL#08a45915-18c3-4855-869b-ff3c2383c980",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#COMPETITOR#f0b7b29d-9c00-41a0-80a8-5649e9a13257#WEBSITE_CRAWL#a4162661-1afa-44ad-8921-46b9dfd45572",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#COMPETITOR#f0b7b29d-9c00-41a0-80a8-5649e9a13257#WEBSITE_CRAWL#17f4e2b6-9501-4253-9ece-54f3fc6a7826",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#COMPETITOR#f0b7b29d-9c00-41a0-80a8-5649e9a13257#WEBSITE_CRAWL#69d5df40-f705-4fe0-8f3b-3f9f944726c5",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#COMPETITOR#f0b7b29d-9c00-41a0-80a8-5649e9a13257#WEBSITE_CRAWL#ccd6d536-1497-4f48-9e26-a63bc58323c9",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#COMPETITOR#f0b7b29d-9c00-41a0-80a8-5649e9a13257#WEBSITE_CRAWL#30f091bc-143c-4450-9bf9-ca63e01d3568",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#COMPETITOR#f0b7b29d-9c00-41a0-80a8-5649e9a13257#WEBSITE_CRAWL#674aeb1b-a9ed-4f15-916f-7f8dcd989404",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#COMPETITOR#f0b7b29d-9c00-41a0-80a8-5649e9a13257#WEBSITE_CRAWL#45e19f18-9cad-4dc4-a9dc-20e6bbb19aeb",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#COMPETITOR#f0b7b29d-9c00-41a0-80a8-5649e9a13257#WEBSITE_CRAWL#fdc89aa0-ab12-4d2a-92d6-8615c5565935",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#COMPETITOR#f0b7b29d-9c00-41a0-80a8-5649e9a13257#WEBSITE_CRAWL#f06d9fe5-2fde-49f6-9646-af201203c020",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#COMPETITOR#f0b7b29d-9c00-41a0-80a8-5649e9a13257#WEBSITE_CRAWL#5518472b-9efc-4d46-94bd-426edd3857e9",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#COMPETITOR#f4523b52-beb3-41a3-b5c4-66ae35ac0875#WEBSITE_CRAWL#3d5621f1-f343-487c-8a53-480e08027ab5",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#COMPETITOR#f4523b52-beb3-41a3-b5c4-66ae35ac0875#WEBSITE_CRAWL#fb91771c-409f-4008-9d69-199b82a596fd",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#COMPETITOR#f4523b52-beb3-41a3-b5c4-66ae35ac0875#WEBSITE_CRAWL#2e966f73-4106-4a3a-ad3d-b215b9f0cac4",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#COMPETITOR#f4523b52-beb3-41a3-b5c4-66ae35ac0875#WEBSITE_CRAWL#74fd7b54-f160-45e7-9b6a-ef203f08875c",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#COMPETITOR#f4523b52-beb3-41a3-b5c4-66ae35ac0875#WEBSITE_CRAWL#8c3b993e-09fc-43af-8921-5c1630a3b156",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#COMPETITOR#f4523b52-beb3-41a3-b5c4-66ae35ac0875#WEBSITE_CRAWL#a0c9e142-1635-4e92-ad4c-3b774460251d",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#COMPETITOR#f4523b52-beb3-41a3-b5c4-66ae35ac0875#WEBSITE_CRAWL#effe4212-0b59-4c7a-9f67-fae3c80978fb",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#COMPETITOR#f4523b52-beb3-41a3-b5c4-66ae35ac0875#WEBSITE_CRAWL#1272eea9-5374-49d2-8cc6-c7d94b322ad1",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#COMPETITOR#f4523b52-beb3-41a3-b5c4-66ae35ac0875#WEBSITE_CRAWL#101c5fc7-045b-4879-b176-e12fd56a1d5f",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#COMPETITOR#f4523b52-beb3-41a3-b5c4-66ae35ac0875#WEBSITE_CRAWL#b6599a08-bddf-401b-b4b2-daf49835ae71",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            }
+        ],
+        "scraped_pages": 110,
+        "status": "Completed",
+        "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#BATCH_WEBSITE#0f8548fd-a27e-427e-b1ca-fc0265e0e8cd"
+    },
+    {
+        "entity_type": "BATCH_WEBSITE",
+        "created_at": "2026-01-23T17:13:40.912347",
+        "client_id": "a9ba7d1d-ca46-493f-a7ef-e61b4d74b765",
+        "brand_id": "30104b5e-921d-4fc3-97ba-63bf2ee4a0b4",
+        "status": "Processing",
+        "batch_id": "c87aa473-ac87-4bb1-9c50-e46d1a3fc930",
+        "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765",
+        "name": "30104b5e-921d-4fc3-97ba-63bf2ee4a0b4 - website Capture",
+        "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#BATCH_WEBSITE#c87aa473-ac87-4bb1-9c50-e46d1a3fc930"
+    },
+    {
+        "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765",
+        "batch_id": "ca8a9ac7-a5c8-4d7f-84db-f70f0139ec7f",
+        "brand_id": "30104b5e-921d-4fc3-97ba-63bf2ee4a0b4",
+        "client_id": "a9ba7d1d-ca46-493f-a7ef-e61b4d74b765",
+        "created_at": "2026-01-23T14:55:24.543159",
+        "entity_type": "BATCH_WEBSITE",
+        "errors": [],
+        "name": "30104b5e-921d-4fc3-97ba-63bf2ee4a0b4 - website Capture",
+        "result_keys": [
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#WEBSITE_CRAWL#d6f79693-c640-47bf-a25c-d6340d217777",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#WEBSITE_CRAWL#6f90f53c-f831-4ee8-9312-9b9dbdc11e8d",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#WEBSITE_CRAWL#4edad268-a588-4519-aae6-de1f3f81803e",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#WEBSITE_CRAWL#044f3216-5f69-4e89-a334-26b934f20bd3",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#WEBSITE_CRAWL#251d3b99-95d5-479c-aea6-c5e187133846",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#WEBSITE_CRAWL#8bf2595b-77a4-4036-8daa-30c22248fd4f",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#WEBSITE_CRAWL#51b585f2-2a8d-417f-9db7-37e17621a2de",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#WEBSITE_CRAWL#459c7753-3989-4f7d-9fa4-1d6af37d5d7d",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#WEBSITE_CRAWL#91275b16-cf87-4912-ad62-02f9fc786067",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#WEBSITE_CRAWL#dafff064-c7a6-40a7-bb2f-3322801bdf54",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#COMPETITOR#0194993e-ffd8-4ed9-b33f-76420021cf8b#WEBSITE_CRAWL#1291c159-745a-4f73-98c1-c041b4edf91b",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#COMPETITOR#0194993e-ffd8-4ed9-b33f-76420021cf8b#WEBSITE_CRAWL#f2418e4c-af4b-4fa3-9b96-e456a0019911",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#COMPETITOR#0194993e-ffd8-4ed9-b33f-76420021cf8b#WEBSITE_CRAWL#17a5d0c8-cb62-4cbe-8ead-3db25830d78c",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#COMPETITOR#0194993e-ffd8-4ed9-b33f-76420021cf8b#WEBSITE_CRAWL#05722ac3-df51-4085-a115-e65f42e5b022",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#COMPETITOR#0194993e-ffd8-4ed9-b33f-76420021cf8b#WEBSITE_CRAWL#88a63044-a376-4548-8d7d-44a942197a5c",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#COMPETITOR#0194993e-ffd8-4ed9-b33f-76420021cf8b#WEBSITE_CRAWL#3ef3bd3f-5b2a-4734-9eb5-c9218c93078f",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#COMPETITOR#0194993e-ffd8-4ed9-b33f-76420021cf8b#WEBSITE_CRAWL#8655c07f-e7da-4a68-87bd-b073bdea8a99",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#COMPETITOR#0194993e-ffd8-4ed9-b33f-76420021cf8b#WEBSITE_CRAWL#c39db3de-50e3-43a0-99e7-f6dd0500b8ab",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#COMPETITOR#0194993e-ffd8-4ed9-b33f-76420021cf8b#WEBSITE_CRAWL#48b80d15-7fde-4ffe-bfce-5da3a735022e",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#COMPETITOR#0194993e-ffd8-4ed9-b33f-76420021cf8b#WEBSITE_CRAWL#1c834718-0f69-4bb5-b838-9a10e525d91c",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#COMPETITOR#18866e1e-ef54-4435-b216-b8ce02401ddc#WEBSITE_CRAWL#29cffc5f-b9b2-497d-af8c-44c6f212babd",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#COMPETITOR#18866e1e-ef54-4435-b216-b8ce02401ddc#WEBSITE_CRAWL#39564626-ea9c-40d3-8f43-46636416247a",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#COMPETITOR#18866e1e-ef54-4435-b216-b8ce02401ddc#WEBSITE_CRAWL#8c681c0c-8b80-4cae-8bfe-9f2b39f68930",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#COMPETITOR#18866e1e-ef54-4435-b216-b8ce02401ddc#WEBSITE_CRAWL#56c7b1d3-ab49-4520-a97d-8a99775663ff",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#COMPETITOR#18866e1e-ef54-4435-b216-b8ce02401ddc#WEBSITE_CRAWL#52e995d6-fca2-466a-bca8-f334fcb1a679",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#COMPETITOR#18866e1e-ef54-4435-b216-b8ce02401ddc#WEBSITE_CRAWL#a8536eb7-e94d-417b-ae0d-a80e3db4230e",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#COMPETITOR#18866e1e-ef54-4435-b216-b8ce02401ddc#WEBSITE_CRAWL#89238350-9419-4470-8de5-98b33555940b",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#COMPETITOR#18866e1e-ef54-4435-b216-b8ce02401ddc#WEBSITE_CRAWL#bcbfcb10-c51c-40dc-87a7-aa4f1b5825a0",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#COMPETITOR#18866e1e-ef54-4435-b216-b8ce02401ddc#WEBSITE_CRAWL#5858825c-4de5-4cd5-81d1-71199364bdaf",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#COMPETITOR#18866e1e-ef54-4435-b216-b8ce02401ddc#WEBSITE_CRAWL#af100e38-6b73-4167-990c-6fda050e145e",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#COMPETITOR#5985d2c8-44c0-4f94-8716-48018717ca20#WEBSITE_CRAWL#2b0b8667-2344-4d18-9f06-0a0de8a83e67",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#COMPETITOR#5985d2c8-44c0-4f94-8716-48018717ca20#WEBSITE_CRAWL#027b2419-d178-4d63-88d3-b06f5e818625",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#COMPETITOR#5985d2c8-44c0-4f94-8716-48018717ca20#WEBSITE_CRAWL#669b20d7-cf1c-4f70-822f-027bdaefe032",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#COMPETITOR#5985d2c8-44c0-4f94-8716-48018717ca20#WEBSITE_CRAWL#e73295ba-33b9-485d-a6b8-0f855dd5dd2b",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#COMPETITOR#5985d2c8-44c0-4f94-8716-48018717ca20#WEBSITE_CRAWL#7eb5ba9c-12fd-405e-b43f-a3588cada88c",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#COMPETITOR#5985d2c8-44c0-4f94-8716-48018717ca20#WEBSITE_CRAWL#843a9a30-3bfa-440e-b6b9-94db21cd10a6",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#COMPETITOR#5985d2c8-44c0-4f94-8716-48018717ca20#WEBSITE_CRAWL#f21f2e5f-7e0d-4ccb-bc3a-42ffbede0e1b",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#COMPETITOR#5985d2c8-44c0-4f94-8716-48018717ca20#WEBSITE_CRAWL#ca6e1400-7830-4c85-a7e6-d2879bf983f4",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#COMPETITOR#5985d2c8-44c0-4f94-8716-48018717ca20#WEBSITE_CRAWL#74e232c3-ea6f-4ad3-9f72-339fb3369423",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#COMPETITOR#5985d2c8-44c0-4f94-8716-48018717ca20#WEBSITE_CRAWL#d5f47ee2-d562-469a-a9e0-bbfe79ba0d3f",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#COMPETITOR#6fa1da55-c71a-4b91-b461-7af407648a99#WEBSITE_CRAWL#e492548e-5ab2-4ea8-bcb4-67cb3f14db5d",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#COMPETITOR#6fa1da55-c71a-4b91-b461-7af407648a99#WEBSITE_CRAWL#f6f83de8-ce89-4663-a82e-8179b982d7e7",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#COMPETITOR#6fa1da55-c71a-4b91-b461-7af407648a99#WEBSITE_CRAWL#5856ec86-3461-4887-bd32-cb78d365c562",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#COMPETITOR#6fa1da55-c71a-4b91-b461-7af407648a99#WEBSITE_CRAWL#0c9fbefe-2775-4e6d-a2f1-055bdac06e20",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#COMPETITOR#6fa1da55-c71a-4b91-b461-7af407648a99#WEBSITE_CRAWL#77928e8b-54b6-4778-b2d6-24f0f7223f56",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#COMPETITOR#6fa1da55-c71a-4b91-b461-7af407648a99#WEBSITE_CRAWL#e19fc55f-ef95-4c37-aaec-43ab9fec0020",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#COMPETITOR#6fa1da55-c71a-4b91-b461-7af407648a99#WEBSITE_CRAWL#eaa1934b-9360-4b93-b8b4-ad58b4728d42",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#COMPETITOR#6fa1da55-c71a-4b91-b461-7af407648a99#WEBSITE_CRAWL#088bfc93-a3dd-4de9-abf8-52a5bb7adf99",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#COMPETITOR#6fa1da55-c71a-4b91-b461-7af407648a99#WEBSITE_CRAWL#cf6ffca3-1493-4d6c-9720-6fcf26a28b41",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#COMPETITOR#6fa1da55-c71a-4b91-b461-7af407648a99#WEBSITE_CRAWL#d2f62abb-a320-4a65-804a-c57871e35378",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#COMPETITOR#760ff023-c26d-45d7-aa82-6482a28265c0#WEBSITE_CRAWL#6428dd38-616c-4d1c-acdc-e4e100e95877",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#COMPETITOR#760ff023-c26d-45d7-aa82-6482a28265c0#WEBSITE_CRAWL#5c8b2f7e-19ed-414e-b707-892ce9390786",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#COMPETITOR#760ff023-c26d-45d7-aa82-6482a28265c0#WEBSITE_CRAWL#7f451b02-2d25-471f-a1a3-4791a9a19a88",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#COMPETITOR#760ff023-c26d-45d7-aa82-6482a28265c0#WEBSITE_CRAWL#ccbc23c0-f164-44f3-9857-02a6fd7e63c7",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#COMPETITOR#760ff023-c26d-45d7-aa82-6482a28265c0#WEBSITE_CRAWL#2c764633-5263-47ff-b690-439e77b9c763",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#COMPETITOR#760ff023-c26d-45d7-aa82-6482a28265c0#WEBSITE_CRAWL#f8f79241-a642-46a5-8470-83309d242dd7",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#COMPETITOR#760ff023-c26d-45d7-aa82-6482a28265c0#WEBSITE_CRAWL#012fe29c-a9fa-455b-8f66-15f7feab0279",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#COMPETITOR#760ff023-c26d-45d7-aa82-6482a28265c0#WEBSITE_CRAWL#cd6a8b47-4159-4106-8473-465f47ba8005",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#COMPETITOR#760ff023-c26d-45d7-aa82-6482a28265c0#WEBSITE_CRAWL#20b57934-754d-4b2a-94d6-12e5a0b07b01",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#COMPETITOR#760ff023-c26d-45d7-aa82-6482a28265c0#WEBSITE_CRAWL#1052933a-38b5-4cf1-bb74-ae5c535cf971",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#COMPETITOR#8a71c50b-a959-4709-b9b0-943865d8bcc7#WEBSITE_CRAWL#fdb5632e-ce55-4d43-aa96-13fb0d459ebd",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#COMPETITOR#8a71c50b-a959-4709-b9b0-943865d8bcc7#WEBSITE_CRAWL#7814c0a5-42f9-4bce-bd48-fb98e6c068d4",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#COMPETITOR#8a71c50b-a959-4709-b9b0-943865d8bcc7#WEBSITE_CRAWL#d275c2a0-7481-4132-9995-537bafd179d8",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#COMPETITOR#8a71c50b-a959-4709-b9b0-943865d8bcc7#WEBSITE_CRAWL#0602f63e-01ce-4760-bb77-05a533a879cf",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#COMPETITOR#8a71c50b-a959-4709-b9b0-943865d8bcc7#WEBSITE_CRAWL#5e9d3c08-2481-4b5f-aba5-f45ca2d9c44b",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#COMPETITOR#8a71c50b-a959-4709-b9b0-943865d8bcc7#WEBSITE_CRAWL#5fbc469f-6a76-42b0-bb38-1534dc4db805",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#COMPETITOR#8a71c50b-a959-4709-b9b0-943865d8bcc7#WEBSITE_CRAWL#fc5ce72f-5c27-4b25-acd8-d894e6e6ad1f",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#COMPETITOR#8a71c50b-a959-4709-b9b0-943865d8bcc7#WEBSITE_CRAWL#5ed810d4-969a-4856-b011-be1a55624126",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#COMPETITOR#8a71c50b-a959-4709-b9b0-943865d8bcc7#WEBSITE_CRAWL#8aed14a7-ee30-400b-bd20-428b20a87e0b",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#COMPETITOR#8a71c50b-a959-4709-b9b0-943865d8bcc7#WEBSITE_CRAWL#60db5ab6-43ab-41a5-b0b0-1e6adc07ee6f",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#COMPETITOR#b8c1e5e4-469e-44e3-a9ec-292a11ae5bd1#WEBSITE_CRAWL#4f86c557-b74f-44e9-be13-bfa1bbdd26da",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#COMPETITOR#b8c1e5e4-469e-44e3-a9ec-292a11ae5bd1#WEBSITE_CRAWL#9cdd1cce-33d0-4e0a-a619-9a7323b9df2c",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#COMPETITOR#b8c1e5e4-469e-44e3-a9ec-292a11ae5bd1#WEBSITE_CRAWL#bdf5c8c2-e335-4130-859e-3608949b486c",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#COMPETITOR#b8c1e5e4-469e-44e3-a9ec-292a11ae5bd1#WEBSITE_CRAWL#c11ba287-b2f0-417b-ba62-75b0d38bee65",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#COMPETITOR#b8c1e5e4-469e-44e3-a9ec-292a11ae5bd1#WEBSITE_CRAWL#4b352845-975b-4d52-bc27-f15f0bd4f17c",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#COMPETITOR#b8c1e5e4-469e-44e3-a9ec-292a11ae5bd1#WEBSITE_CRAWL#3edbdc34-fa91-4e6b-b8d0-30c08d545ded",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#COMPETITOR#b8c1e5e4-469e-44e3-a9ec-292a11ae5bd1#WEBSITE_CRAWL#5f2839b2-326b-42e3-a2db-f838d0243fbb",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#COMPETITOR#b8c1e5e4-469e-44e3-a9ec-292a11ae5bd1#WEBSITE_CRAWL#0058e411-4d58-4b54-9d38-ff91d020715e",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#COMPETITOR#b8c1e5e4-469e-44e3-a9ec-292a11ae5bd1#WEBSITE_CRAWL#785922de-fcc1-469d-8dbd-3cf844081d6a",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#COMPETITOR#b8c1e5e4-469e-44e3-a9ec-292a11ae5bd1#WEBSITE_CRAWL#dd193529-2838-47c7-9905-640e436b9442",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#COMPETITOR#ef29fc0b-a0ab-4015-8ed5-310044a1a0e9#WEBSITE_CRAWL#fb52a85f-2781-4b5e-8bbf-e5dda879419d",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#COMPETITOR#ef29fc0b-a0ab-4015-8ed5-310044a1a0e9#WEBSITE_CRAWL#21775443-edbb-413b-9139-e27f66544c4e",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#COMPETITOR#ef29fc0b-a0ab-4015-8ed5-310044a1a0e9#WEBSITE_CRAWL#376eacf3-1d5e-4d4a-ae5d-751f4ad50644",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#COMPETITOR#ef29fc0b-a0ab-4015-8ed5-310044a1a0e9#WEBSITE_CRAWL#1cfed354-c6e4-4fb3-94c2-cd9380289ebc",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#COMPETITOR#ef29fc0b-a0ab-4015-8ed5-310044a1a0e9#WEBSITE_CRAWL#1c9b64f5-bed2-4f7c-ab47-747ab71fb5e7",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#COMPETITOR#ef29fc0b-a0ab-4015-8ed5-310044a1a0e9#WEBSITE_CRAWL#c3e9a8ae-5ac1-4afc-ac44-8fb1d9e9ef3a",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#COMPETITOR#ef29fc0b-a0ab-4015-8ed5-310044a1a0e9#WEBSITE_CRAWL#74078873-42d4-4d28-b0b7-a037f7e908f2",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#COMPETITOR#ef29fc0b-a0ab-4015-8ed5-310044a1a0e9#WEBSITE_CRAWL#e753a9ea-7206-441e-bc04-347fc2aeddce",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#COMPETITOR#ef29fc0b-a0ab-4015-8ed5-310044a1a0e9#WEBSITE_CRAWL#c0dcd7c5-f057-41fc-9659-455c4b3eacae",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#COMPETITOR#ef29fc0b-a0ab-4015-8ed5-310044a1a0e9#WEBSITE_CRAWL#c75be6c0-817a-4912-87b4-cfd38a83ae6d",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#COMPETITOR#f0b7b29d-9c00-41a0-80a8-5649e9a13257#WEBSITE_CRAWL#57314e19-c5a9-4ffb-be41-d292fd098d4d",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#COMPETITOR#f0b7b29d-9c00-41a0-80a8-5649e9a13257#WEBSITE_CRAWL#efc84652-ed11-4444-9cc7-3bf862b6edfb",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#COMPETITOR#f0b7b29d-9c00-41a0-80a8-5649e9a13257#WEBSITE_CRAWL#2ecabc99-1700-45c3-8345-456664608ca0",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#COMPETITOR#f0b7b29d-9c00-41a0-80a8-5649e9a13257#WEBSITE_CRAWL#7d5b8744-d22f-499e-baa8-15eb687df870",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#COMPETITOR#f0b7b29d-9c00-41a0-80a8-5649e9a13257#WEBSITE_CRAWL#dbecff1c-a8a4-40f5-a411-ae8cc879c3b9",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#COMPETITOR#f0b7b29d-9c00-41a0-80a8-5649e9a13257#WEBSITE_CRAWL#d6ba881f-61e4-49eb-a335-2be1cb74886e",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#COMPETITOR#f0b7b29d-9c00-41a0-80a8-5649e9a13257#WEBSITE_CRAWL#7d12aeb1-7959-47b5-bf87-d4ab111af3b0",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#COMPETITOR#f0b7b29d-9c00-41a0-80a8-5649e9a13257#WEBSITE_CRAWL#9e7f2b99-f3a1-4d5d-a1b3-49de5933a951",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#COMPETITOR#f0b7b29d-9c00-41a0-80a8-5649e9a13257#WEBSITE_CRAWL#16430945-b129-418c-967b-c793f57e7d49",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#COMPETITOR#f0b7b29d-9c00-41a0-80a8-5649e9a13257#WEBSITE_CRAWL#0f5783dd-7142-4ea3-9024-5f01c12063c2",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#COMPETITOR#f4523b52-beb3-41a3-b5c4-66ae35ac0875#WEBSITE_CRAWL#96d00a96-11e5-475c-b717-85c817179a2b",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#COMPETITOR#f4523b52-beb3-41a3-b5c4-66ae35ac0875#WEBSITE_CRAWL#0d8f2c0f-3800-45fb-83dc-11bf80e4d9fe",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#COMPETITOR#f4523b52-beb3-41a3-b5c4-66ae35ac0875#WEBSITE_CRAWL#80dc5415-24ac-4f19-9682-1ce39df20f1c",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#COMPETITOR#f4523b52-beb3-41a3-b5c4-66ae35ac0875#WEBSITE_CRAWL#eb3fcd28-f4b4-41ac-a334-b68a0a554bef",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#COMPETITOR#f4523b52-beb3-41a3-b5c4-66ae35ac0875#WEBSITE_CRAWL#01317e3c-1b06-4810-a64d-2482d40f3582",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#COMPETITOR#f4523b52-beb3-41a3-b5c4-66ae35ac0875#WEBSITE_CRAWL#0f86d9ff-dfed-4483-8eb5-a38936dbaf14",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#COMPETITOR#f4523b52-beb3-41a3-b5c4-66ae35ac0875#WEBSITE_CRAWL#9edda902-b800-4db2-8330-e692c7e30ea5",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#COMPETITOR#f4523b52-beb3-41a3-b5c4-66ae35ac0875#WEBSITE_CRAWL#4372904e-3bd9-45c5-a4ed-64e24448da22",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#COMPETITOR#f4523b52-beb3-41a3-b5c4-66ae35ac0875#WEBSITE_CRAWL#c938568f-cb5c-4427-ad9e-886750a6f1f1",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            },
+            {
+                "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#COMPETITOR#f4523b52-beb3-41a3-b5c4-66ae35ac0875#WEBSITE_CRAWL#f5f123ea-6322-4e4b-8114-46a22dc0f574",
+                "PK": "CLIENT#a9ba7d1d-ca46-493f-a7ef-e61b4d74b765"
+            }
+        ],
+        "scraped_pages": 110,
+        "status": "Completed",
+        "SK": "BRAND#30104b5e-921d-4fc3-97ba-63bf2ee4a0b4#BATCH_WEBSITE#ca8a9ac7-a5c8-4d7f-84db-f70f0139ec7f"
+    }
+]

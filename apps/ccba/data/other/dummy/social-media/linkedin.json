@@ -1,0 +1,39 @@
+{
+    "profile": {
+        "name": "BrandOS",
+        "avatar": "/placeholder.svg",
+        "banner": "/placeholder.svg",
+        "tagline": "Brand Monitoring & Competitive Analysis Platform",
+        "followers": "8,500",
+        "about": "BrandOS provides a comprehensive suite of tools to help businesses track their brand's online presence, analyze competitors, and gain actionable insights from web and social media data."
+    },
+    "posts": [
+        {
+            "id": "1",
+            "author": "BrandOS",
+            "avatar": "/placeholder.svg",
+            "content": "We're thrilled to launch our new social media tracking feature, designed to help businesses monitor their brand's presence and performance on key platforms. #BrandManagement #SocialMediaMarketing",
+            "timestamp": "1d",
+            "likes": 150,
+            "comments": 30
+        },
+        {
+            "id": "2",
+            "author": "B2B Marketing Pro",
+            "avatar": "/placeholder.svg",
+            "content": "BrandOS's new tool is a powerful addition to any marketer's toolkit. The ability to track competitors' social media activity is a huge advantage. #marketing #business",
+            "timestamp": "2d",
+            "likes": 250,
+            "comments": 60
+        },
+        {
+            "id": "3",
+            "author": "Corporate Strategy Insights",
+            "avatar": "/placeholder.svg",
+            "content": "Effective brand management requires data-driven insights. BrandOS is providing just that with their new social media tracking feature. #strategy #data",
+            "timestamp": "3d",
+            "likes": 180,
+            "comments": 45
+        }
+    ]
+}

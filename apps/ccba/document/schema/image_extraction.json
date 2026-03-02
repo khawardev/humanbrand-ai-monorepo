@@ -1,0 +1,667 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "image_extraction.json",
+    "title": "Per-Image Extraction",
+    "description": "Visual analysis of a single image",
+    "type": "object",
+    "required": [
+        "schema_version",
+        "extraction_id",
+        "extracted_at",
+        "source",
+        "technical",
+        "color_analysis",
+        "subject_classification",
+        "subject_details",
+        "photography_analysis",
+        "brand_elements",
+        "evidence_id"
+    ],
+    "properties": {
+        "schema_version": {
+            "type": "string",
+            "const": "2.0.0"
+        },
+        "extraction_id": {
+            "type": "string",
+            "format": "uuid"
+        },
+        "extracted_at": {
+            "$ref": "#/definitions/iso_datetime"
+        },
+        "source": {
+            "type": "object",
+            "required": [
+                "entity",
+                "channel",
+                "image_id",
+                "source_url",
+                "image_uri"
+            ],
+            "properties": {
+                "entity": {
+                    "type": "string"
+                },
+                "channel": {
+                    "type": "string"
+                },
+                "image_id": {
+                    "type": "string",
+                    "pattern": "^IMG(-[A-Z]{2})?-[0-9]{5}$"
+                },
+                "source_url": {
+                    "$ref": "#/definitions/url"
+                },
+                "image_uri": {
+                    "type": "string"
+                }
+            }
+        },
+        "technical": {
+            "type": "object",
+            "required": [
+                "dimensions",
+                "aspect_ratio",
+                "file_size_kb",
+                "format"
+            ],
+            "properties": {
+                "dimensions": {
+                    "type": "object",
+                    "required": [
+                        "width",
+                        "height"
+                    ],
+                    "properties": {
+                        "width": {
+                            "type": "integer",
+                            "minimum": 1
+                        },
+                        "height": {
+                            "type": "integer",
+                            "minimum": 1
+                        }
+                    }
+                },
+                "aspect_ratio": {
+                    "type": "string"
+                },
+                "file_size_kb": {
+                    "type": "integer",
+                    "minimum": 0
+                },
+                "format": {
+                    "type": "string",
+                    "enum": [
+                        "jpeg",
+                        "png",
+                        "gif",
+                        "webp",
+                        "svg",
+                        "other"
+                    ]
+                }
+            }
+        },
+        "color_analysis": {
+            "type": "object",
+            "required": [
+                "dominant_colors",
+                "color_temperature",
+                "brightness",
+                "contrast"
+            ],
+            "properties": {
+                "dominant_colors": {
+                    "type": "array",
+                    "maxItems": 5,
+                    "items": {
+                        "type": "object",
+                        "required": [
+                            "hex",
+                            "percent",
+                            "name"
+                        ],
+                        "properties": {
+                            "hex": {
+                                "$ref": "#/definitions/hex_color"
+                            },
+                            "percent": {
+                                "$ref": "#/definitions/percentage"
+                            },
+                            "name": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                },
+                "color_temperature": {
+                    "type": "string",
+                    "enum": [
+                        "warm",
+                        "cool",
+                        "neutral",
+                        "mixed"
+                    ]
+                },
+                "brightness": {
+                    "type": "string",
+                    "enum": [
+                        "bright",
+                        "medium",
+                        "dark"
+                    ]
+                },
+                "contrast": {
+                    "type": "string",
+                    "enum": [
+                        "high",
+                        "medium",
+                        "low"
+                    ]
+                }
+            }
+        },
+        "subject_classification": {
+            "type": "object",
+            "required": [
+                "primary_subject",
+                "secondary_subjects",
+                "confidence"
+            ],
+            "properties": {
+                "primary_subject": {
+                    "type": "string",
+                    "enum": [
+                        "people",
+                        "product",
+                        "facility",
+                        "equipment",
+                        "abstract_graphic",
+                        "text_heavy",
+                        "nature",
+                        "vehicle",
+                        "other"
+                    ]
+                },
+                "secondary_subjects": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "confidence": {
+                    "$ref": "#/definitions/confidence_score"
+                }
+            }
+        },
+        "subject_details": {
+            "type": "object",
+            "properties": {
+                "people": {
+                    "type": "object",
+                    "properties": {
+                        "present": {
+                            "type": "boolean"
+                        },
+                        "count": {
+                            "type": "integer",
+                            "minimum": 0
+                        },
+                        "apparent_roles": {
+                            "type": "array",
+                            "items": {
+                                "type": "string",
+                                "enum": [
+                                    "factory_worker",
+                                    "engineer",
+                                    "executive",
+                                    "sales",
+                                    "customer",
+                                    "generic_professional",
+                                    "other"
+                                ]
+                            }
+                        },
+                        "context": {
+                            "type": "string",
+                            "enum": [
+                                "working",
+                                "posed_professional",
+                                "candid",
+                                "presenting",
+                                "celebrating",
+                                "meeting",
+                                "other"
+                            ]
+                        },
+                        "attire": {
+                            "type": "string",
+                            "enum": [
+                                "business_formal",
+                                "business_casual",
+                                "safety_gear_industrial",
+                                "casual",
+                                "mixed"
+                            ]
+                        },
+                        "gender_representation": {
+                            "type": "string",
+                            "enum": [
+                                "male_dominated",
+                                "female_dominated",
+                                "balanced",
+                                "mixed",
+                                "unclear"
+                            ]
+                        },
+                        "apparent_diversity": {
+                            "type": "string",
+                            "enum": [
+                                "visible",
+                                "limited",
+                                "unclear"
+                            ]
+                        }
+                    }
+                },
+                "products": {
+                    "type": "object",
+                    "properties": {
+                        "present": {
+                            "type": "boolean"
+                        },
+                        "product_types": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "presentation": {
+                            "type": "string",
+                            "enum": [
+                                "in_context",
+                                "isolated_hero",
+                                "detailed_closeup",
+                                "comparison",
+                                "demo"
+                            ]
+                        }
+                    }
+                },
+                "facility": {
+                    "type": "object",
+                    "properties": {
+                        "present": {
+                            "type": "boolean"
+                        },
+                        "facility_type": {
+                            "type": "string",
+                            "enum": [
+                                "manufacturing_floor",
+                                "lab_rd",
+                                "office",
+                                "exterior",
+                                "warehouse",
+                                "showroom",
+                                "other"
+                            ]
+                        },
+                        "modernity": {
+                            "type": "string",
+                            "enum": [
+                                "modern",
+                                "traditional",
+                                "mixed"
+                            ]
+                        },
+                        "cleanliness": {
+                            "type": "string",
+                            "enum": [
+                                "very_clean",
+                                "clean",
+                                "working",
+                                "cluttered"
+                            ]
+                        },
+                        "scale_impression": {
+                            "type": "string",
+                            "enum": [
+                                "large",
+                                "medium",
+                                "small"
+                            ]
+                        }
+                    }
+                },
+                "equipment": {
+                    "type": "object",
+                    "properties": {
+                        "present": {
+                            "type": "boolean"
+                        },
+                        "equipment_types": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "photography_analysis": {
+            "type": "object",
+            "required": [
+                "style",
+                "treatment",
+                "lighting",
+                "composition",
+                "quality",
+                "stock_likelihood"
+            ],
+            "properties": {
+                "style": {
+                    "type": "string",
+                    "enum": [
+                        "industrial",
+                        "corporate",
+                        "lifestyle",
+                        "editorial",
+                        "documentary",
+                        "stock",
+                        "artistic",
+                        "technical"
+                    ]
+                },
+                "treatment": {
+                    "type": "string",
+                    "enum": [
+                        "natural",
+                        "filtered",
+                        "high_contrast",
+                        "muted",
+                        "stylized",
+                        "black_white"
+                    ]
+                },
+                "lighting": {
+                    "type": "string",
+                    "enum": [
+                        "bright_clean",
+                        "dramatic",
+                        "natural",
+                        "studio",
+                        "mixed",
+                        "dark_moody"
+                    ]
+                },
+                "composition": {
+                    "type": "string",
+                    "enum": [
+                        "wide_establishing",
+                        "medium",
+                        "closeup",
+                        "macro",
+                        "rule_of_thirds",
+                        "centered",
+                        "asymmetric"
+                    ]
+                },
+                "quality": {
+                    "type": "string",
+                    "enum": [
+                        "professional",
+                        "semi_professional",
+                        "amateur",
+                        "stock"
+                    ]
+                },
+                "stock_likelihood": {
+                    "type": "string",
+                    "enum": [
+                        "likely_stock",
+                        "possibly_stock",
+                        "likely_custom"
+                    ]
+                }
+            }
+        },
+        "brand_elements": {
+            "type": "object",
+            "required": [
+                "logo_present"
+            ],
+            "properties": {
+                "logo_present": {
+                    "type": "boolean"
+                },
+                "logo_placement": {
+                    "type": [
+                        "string",
+                        "null"
+                    ],
+                    "enum": [
+                        "top_left",
+                        "top_center",
+                        "top_right",
+                        "bottom_left",
+                        "bottom_center",
+                        "bottom_right",
+                        "centered",
+                        "watermark",
+                        null
+                    ]
+                },
+                "logo_version": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "brand_colors_present": {
+                    "type": "boolean"
+                },
+                "branded_signage": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "mood_signals": {
+            "type": "object",
+            "properties": {
+                "professionalism": {
+                    "type": "string",
+                    "enum": [
+                        "high",
+                        "medium",
+                        "low"
+                    ]
+                },
+                "innovation": {
+                    "type": "string",
+                    "enum": [
+                        "high",
+                        "medium",
+                        "low"
+                    ]
+                },
+                "human_warmth": {
+                    "type": "string",
+                    "enum": [
+                        "high",
+                        "medium",
+                        "low"
+                    ]
+                },
+                "technical_precision": {
+                    "type": "string",
+                    "enum": [
+                        "high",
+                        "medium",
+                        "low"
+                    ]
+                }
+            }
+        },
+        "evidence_id": {
+            "type": "string",
+            "pattern": "^VE[0-9]{5}$"
+        }
+    },
+    "definitions": {
+        "iso_datetime": {
+            "type": "string",
+            "format": "date-time",
+            "description": "ISO 8601 datetime string."
+        },
+        "url": {
+            "type": "string",
+            "format": "uri",
+            "description": "A valid URL (URI)."
+        },
+        "hex_color": {
+            "type": "string",
+            "pattern": "^#[0-9A-Fa-f]{6}$",
+            "description": "Hex color in the form #RRGGBB."
+        },
+        "percentage": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1,
+            "description": "Share or percentage expressed as 0..1."
+        },
+        "confidence_score": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1,
+            "description": "Confidence score 0..1."
+        },
+        "evidence_id": {
+            "type": "string",
+            "pattern": "^(E|VE|EC)[0-9]{5}$",
+            "description": "Evidence ID (E##### for general, VE##### for visual, EC##### for comments)."
+        },
+        "evidence_id_array": {
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/evidence_id"
+            },
+            "description": "Array of evidence IDs."
+        },
+        "channel_enum": {
+            "type": "string",
+            "enum": [
+                "website",
+                "linkedin",
+                "youtube",
+                "x",
+                "instagram",
+                "tiktok",
+                "facebook"
+            ],
+            "description": "Supported owned channels."
+        },
+        "sentiment": {
+            "type": "object",
+            "description": "Structured sentiment and emotional tone (brand-authored content or audience content, depending on context).",
+            "required": [
+                "polarity",
+                "emotional_tone"
+            ],
+            "properties": {
+                "polarity": {
+                    "type": "object",
+                    "required": [
+                        "score",
+                        "label"
+                    ],
+                    "properties": {
+                        "score": {
+                            "type": "number",
+                            "minimum": -1,
+                            "maximum": 1
+                        },
+                        "label": {
+                            "type": "string",
+                            "enum": [
+                                "very_negative",
+                                "negative",
+                                "neutral",
+                                "positive",
+                                "very_positive"
+                            ]
+                        }
+                    }
+                },
+                "emotional_tone": {
+                    "type": "object",
+                    "required": [
+                        "primary",
+                        "intensity"
+                    ],
+                    "properties": {
+                        "primary": {
+                            "type": "string",
+                            "enum": [
+                                "confident",
+                                "enthusiastic",
+                                "professional",
+                                "empathetic",
+                                "urgent",
+                                "frustrated",
+                                "skeptical",
+                                "appreciative",
+                                "neutral"
+                            ]
+                        },
+                        "secondary": {
+                            "type": "string",
+                            "enum": [
+                                "confident",
+                                "enthusiastic",
+                                "professional",
+                                "empathetic",
+                                "urgent",
+                                "frustrated",
+                                "skeptical",
+                                "appreciative",
+                                "neutral"
+                            ]
+                        },
+                        "intensity": {
+                            "type": "string",
+                            "enum": [
+                                "low",
+                                "medium",
+                                "high"
+                            ]
+                        }
+                    }
+                },
+                "subjectivity": {
+                    "type": "object",
+                    "required": [
+                        "score",
+                        "label"
+                    ],
+                    "properties": {
+                        "score": {
+                            "type": "number",
+                            "minimum": 0,
+                            "maximum": 1
+                        },
+                        "label": {
+                            "type": "string",
+                            "enum": [
+                                "objective",
+                                "mixed",
+                                "subjective"
+                            ]
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

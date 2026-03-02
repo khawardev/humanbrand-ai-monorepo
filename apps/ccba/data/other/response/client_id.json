@@ -1,0 +1,70 @@
+{
+    "success": true,
+    "data": {
+        "client_id": "763d503f-9d24-42c4-b6d5-0fa2beba5da9",
+        "brand": {
+            "id": "4d7ca7b3-8b46-4a3c-aa18-448517b7a312",
+            "name": "magna",
+            "website": "https://magna.com/",
+            "socials": {
+                "linkedin": "https://magnalin.com/",
+                "twitter": "https://twitter.com/MagnaInt",
+                "instagram": "https://INvercel.com/",
+                "youtube": "https://YTvercel.com/",
+                "facebook": "https://magnafb.com/"
+            },
+            "website-batches": [
+                {
+                    "id": "1969f698-33dc-4cd9-915c-73c513bbe792",
+                    "name": "vercel_scrape",
+                    "created_at": "2025-10-07T07:55:36.368161",
+                    "scraped_pages": "10",
+                    "status": "Completed"
+                }
+            ],
+            "reports": {
+                "extractor": [],
+                "synthesiser": [],
+                "social": []
+            }
+        },
+        "competitors": [
+            {
+                "id": "13c3ece5-e1fb-4001-b2a8-20773e5a1d2e",
+                "name": "ZF",
+                "website": "https://www.zf.com/",
+                "socials": {
+                    "linkedin": "https://linkedin.com/company/zf-group",
+                    "twitter": "https://twitter.com/zf_group",
+                    "instagram": "https://instagram.com/zf_group",
+                    "youtube": "https://youtube.com/user/ZFChannel",
+                    "facebook": "https://facebook.com/ZFGroup"
+                },
+                "website-batches": [],
+                "reports": {
+                    "extractor": [],
+                    "synthesiser": [],
+                    "social": []
+                }
+            },
+            {
+                "id": "697bcb94-949d-4e69-b888-891c9b69c4c4",
+                "name": "NEXT.JS",
+                "website": "https://nextjs.org/",
+                "socials": {
+                    "linkedin": "https://LNnextjs.org/",
+                    "twitter": "https://XCnextjs.org/",
+                    "instagram": "https://INnextjs.org/",
+                    "youtube": "https://YTnextjs.org/",
+                    "facebook": "https://FBnextjs.org/"
+                },
+                "website-batches": [],
+                "reports": {
+                    "extractor": [],
+                    "synthesiser": [],
+                    "social": []
+                }
+            }
+        ]
+    }
+}
